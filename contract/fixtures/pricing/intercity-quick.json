@@ -1,0 +1,412 @@
+{
+  "name": "intercity-quick",
+  "configVersion": "2026-10-06.1+2026-10-06.1+2026-10-06.1+2026-10-06.1",
+  "input": {
+    "v": 1,
+    "mode": "quick",
+    "taskType": "apartment",
+    "size": {
+      "presetId": "apartament-1-camera"
+    },
+    "from": {
+      "floor": 1,
+      "elevator": "none"
+    },
+    "to": {
+      "floor": 0
+    },
+    "route": "intercity"
+  },
+  "expected": {
+    "configVersion": "2026-10-06.1+2026-10-06.1+2026-10-06.1+2026-10-06.1",
+    "rulesVersion": "2026-10-06.1",
+    "price": {
+      "kind": "range",
+      "base": 255000,
+      "low": 165000,
+      "high": 310000,
+      "worst": 340000,
+      "vat": 44256,
+      "reasons": [
+        {
+          "key": "range.volumePreset",
+          "params": {
+            "min": 9.9,
+            "max": 18.7
+          }
+        },
+        {
+          "key": "range.assumption",
+          "params": {
+            "path": "from.parking",
+            "assumed": "nearby",
+            "spreadLei": 220
+          }
+        },
+        {
+          "key": "range.assumption",
+          "params": {
+            "path": "to.parking",
+            "assumed": "nearby",
+            "spreadLei": 220
+          }
+        }
+      ]
+    },
+    "volume": {
+      "m3": 13.2,
+      "low": 9.9,
+      "high": 18.7,
+      "weightKg": 1080,
+      "source": "preset",
+      "boxes": 25
+    },
+    "vehicle": {
+      "id": "van-12",
+      "count": 2,
+      "trips": 1,
+      "fillPct": 52,
+      "parkedAway": [],
+      "explain": {
+        "key": "vehicle.reasonVolume",
+        "params": {
+          "vehicle": "van-12",
+          "m3": 13.2,
+          "usable": 12.6,
+          "kg": 1080,
+          "payload": 1087,
+          "fill": 52,
+          "trips": 1,
+          "count": 2
+        }
+      }
+    },
+    "crew": {
+      "size": 3,
+      "alternatives": [
+        {
+          "size": 2,
+          "total": 256000,
+          "windowH": 9
+        },
+        {
+          "size": 3,
+          "total": 255000,
+          "windowH": 7
+        },
+        {
+          "size": 4,
+          "total": 265000,
+          "windowH": 6
+        }
+      ],
+      "explain": {
+        "key": "crew.reason",
+        "params": {
+          "crew": 3,
+          "windowH": 7,
+          "min": 2
+        }
+      }
+    },
+    "time": {
+      "expectedH": 5,
+      "windowH": 7,
+      "billedH": 5,
+      "breakdown": [
+        {
+          "key": "time.load",
+          "params": {
+            "hours": 1.71,
+            "m3": 13.2,
+            "floors": 1,
+            "lift": "none",
+            "fLift": 1,
+            "fStairs": 1.1,
+            "fCarry": 1.15,
+            "crew": 3
+          }
+        },
+        {
+          "key": "time.unload",
+          "params": {
+            "hours": 1.21,
+            "m3": 13.2,
+            "floors": 0,
+            "lift": "none",
+            "fLift": 1,
+            "fStairs": 1,
+            "fCarry": 1.15,
+            "crew": 3
+          }
+        },
+        {
+          "key": "time.drive",
+          "params": {
+            "hours": 1.33
+          }
+        },
+        {
+          "key": "time.fixed",
+          "params": {
+            "hours": 0.5
+          }
+        }
+      ]
+    },
+    "overtime": {
+      "perHour": 43000,
+      "stepMin": 30
+    },
+    "lines": [
+      {
+        "id": "transport",
+        "amount": 110000,
+        "explain": {
+          "key": "lines.transport",
+          "params": {
+            "vehicle": "van-12",
+            "count": 2,
+            "rate": 110,
+            "hours": 5
+          }
+        },
+        "step": "items"
+      },
+      {
+        "id": "crew",
+        "amount": 105000,
+        "explain": {
+          "key": "lines.crew",
+          "params": {
+            "crew": 3,
+            "rate": 70,
+            "hours": 5
+          }
+        },
+        "step": "access"
+      },
+      {
+        "id": "dispatch",
+        "amount": 12000,
+        "explain": {
+          "key": "lines.dispatch",
+          "params": {
+            "zoneClass": "intercity"
+          }
+        },
+        "step": "access"
+      },
+      {
+        "id": "intercity",
+        "amount": 28000,
+        "explain": {
+          "key": "lines.intercity",
+          "params": {
+            "km": 80,
+            "rate": 3.5
+          }
+        },
+        "step": "access"
+      }
+    ],
+    "included": [
+      "tape",
+      "stretchFilm",
+      "blankets",
+      "dollies",
+      "floorProtection",
+      "doorProtection",
+      "liftProtection",
+      "basicTools"
+    ],
+    "assumptions": [
+      {
+        "path": "from.stairs",
+        "value": "normal",
+        "explain": {
+          "key": "assume.stairsNormal",
+          "params": {
+            "path": "from.stairs",
+            "value": "normal"
+          }
+        }
+      },
+      {
+        "path": "from.carry",
+        "value": "10to30",
+        "explain": {
+          "key": "assume.carry",
+          "params": {
+            "path": "from.carry",
+            "value": "10to30"
+          }
+        }
+      },
+      {
+        "path": "to.carry",
+        "value": "10to30",
+        "explain": {
+          "key": "assume.carry",
+          "params": {
+            "path": "to.carry",
+            "value": "10to30"
+          }
+        }
+      },
+      {
+        "path": "from.parking",
+        "value": "nearby",
+        "explain": {
+          "key": "assume.parking",
+          "params": {
+            "path": "from.parking",
+            "value": "nearby"
+          }
+        }
+      },
+      {
+        "path": "to.parking",
+        "value": "nearby",
+        "explain": {
+          "key": "assume.parking",
+          "params": {
+            "path": "to.parking",
+            "value": "nearby"
+          }
+        }
+      }
+    ],
+    "scenarios": [
+      {
+        "path": "from.stairs",
+        "assumed": "normal",
+        "options": [
+          {
+            "value": "normal",
+            "total": 255000,
+            "delta": 0
+          },
+          {
+            "value": "narrow",
+            "total": 255000,
+            "delta": 0
+          },
+          {
+            "value": "winding",
+            "total": 255000,
+            "delta": 0
+          }
+        ]
+      },
+      {
+        "path": "from.carry",
+        "assumed": "10to30",
+        "options": [
+          {
+            "value": "lt10",
+            "total": 255000,
+            "delta": 0
+          },
+          {
+            "value": "10to30",
+            "total": 255000,
+            "delta": 0
+          },
+          {
+            "value": "gt30",
+            "total": 255000,
+            "delta": 0
+          }
+        ]
+      },
+      {
+        "path": "to.carry",
+        "assumed": "10to30",
+        "options": [
+          {
+            "value": "lt10",
+            "total": 255000,
+            "delta": 0
+          },
+          {
+            "value": "10to30",
+            "total": 255000,
+            "delta": 0
+          },
+          {
+            "value": "gt30",
+            "total": 255000,
+            "delta": 0
+          }
+        ]
+      },
+      {
+        "path": "from.parking",
+        "assumed": "nearby",
+        "options": [
+          {
+            "value": "atEntrance",
+            "total": 255000,
+            "delta": 0
+          },
+          {
+            "value": "nearby",
+            "total": 255000,
+            "delta": 0
+          },
+          {
+            "value": "far",
+            "total": 277000,
+            "delta": 22000
+          }
+        ]
+      },
+      {
+        "path": "to.parking",
+        "assumed": "nearby",
+        "options": [
+          {
+            "value": "atEntrance",
+            "total": 255000,
+            "delta": 0
+          },
+          {
+            "value": "nearby",
+            "total": 255000,
+            "delta": 0
+          },
+          {
+            "value": "far",
+            "total": 277000,
+            "delta": 22000
+          }
+        ]
+      }
+    ],
+    "tasks": [
+      {
+        "code": "CONFIRM_INTERCITY"
+      }
+    ],
+    "warnings": [
+      {
+        "key": "warn.intercityDistanceAssumed",
+        "params": {
+          "km": 80
+        }
+      }
+    ],
+    "hints": [
+      {
+        "key": "rules.intercity"
+      }
+    ],
+    "timeline": [
+      {
+        "kind": "move",
+        "dayOffset": 0
+      }
+    ]
+  }
+}

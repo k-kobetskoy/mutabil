@@ -8,7 +8,7 @@ import { Estimate } from './estimate';
 export const Locale = z.enum(['ro', 'en']).meta({ id: 'Locale' });
 
 export const AddressDetails = z
-  .object({
+  .strictObject({
     street: z.string().max(120).optional(),
     number: z.string().max(20).optional(),
     block: z.string().max(20).optional(),
@@ -17,18 +17,19 @@ export const AddressDetails = z
   })
   .meta({ id: 'AddressDetails', description: 'Personal data: never put into share links' });
 
-export const Point = z.tuple([z.number().min(0).max(1), z.number().min(0).max(1), z.number().min(0).max(1)]);
+// [x, y, pressure] normalised to 0..1. An array (not a tuple): kin-openapi/oapi-codegen reject `items: false`.
+export const Point = z.array(z.number().min(0).max(1)).length(3).meta({ id: 'Point' });
 
 export const MarkIntent = z
   .enum(['move', 'stay', 'careful'])
   .meta({ id: 'MarkIntent', description: 'green = we move it, red = it stays, yellow = careful/fragile/disassemble' });
 
 export const Annotation = z
-  .object({
-    strokes: z.array(z.object({ intent: MarkIntent, width: z.number().min(1).max(40), points: z.array(Point).max(2000) })).max(200),
+  .strictObject({
+    strokes: z.array(z.strictObject({ intent: MarkIntent, width: z.number().min(1).max(40), points: z.array(Point).max(2000) })).max(200),
     pins: z
       .array(
-        z.object({
+        z.strictObject({
           n: z.int().min(1).max(99),
           x: z.number().min(0).max(1),
           y: z.number().min(0).max(1),
@@ -42,7 +43,7 @@ export const Annotation = z
   .meta({ id: 'Annotation', description: 'Vector layer over a photo; coordinates normalised to 0..1' });
 
 export const MediaRef = z
-  .object({
+  .strictObject({
     id: z.string().max(64),
     kind: z.enum(['photo', 'video', 'elevatorPlate', 'access']),
     annotation: Annotation.optional(),
@@ -50,7 +51,7 @@ export const MediaRef = z
   .meta({ id: 'MediaRef' });
 
 export const Contact = z
-  .object({
+  .strictObject({
     name: z.string().min(1).max(80),
     phone: z.string().max(30).optional(),
     email: z.email().max(120).optional(),
@@ -59,13 +60,13 @@ export const Contact = z
   .meta({ id: 'Contact', description: 'Phone or email is required (checked by the server)' });
 
 export const OrderRequest = z
-  .object({
+  .strictObject({
     order: OrderInput,
     contact: Contact,
-    addresses: z.object({ from: AddressDetails.optional(), to: AddressDetails.optional() }),
+    addresses: z.strictObject({ from: AddressDetails.optional(), to: AddressDetails.optional() }),
     comment: z.string().max(2000).optional(),
     media: z.array(MediaRef).max(30).optional(),
-    consents: z.object({
+    consents: z.strictObject({
       estimateTerms: z.literal(true).meta({ description: 'Acknowledged: before survey the price is a range' }),
       marketing: z.boolean(),
     }),
@@ -82,7 +83,9 @@ export const SubmitResult = z
   })
   .meta({ id: 'SubmitResult' });
 
-export const SlotQuery = z.object({ from: z.iso.date(), to: z.iso.date(), windowH: z.number().min(1).max(14) }).meta({ id: 'SlotQuery' });
+export const SlotQuery = z
+  .strictObject({ from: z.iso.date(), to: z.iso.date(), windowH: z.number().min(1).max(14) })
+  .meta({ id: 'SlotQuery' });
 
 export const Slot = z
   .object({
@@ -114,3 +117,19 @@ export type Annotation = z.infer<typeof Annotation>;
 export type MediaRef = z.infer<typeof MediaRef>;
 export type AddressDetails = z.infer<typeof AddressDetails>;
 export type Contact = z.infer<typeof Contact>;
+
+export const AddressRecord = z
+  .strictObject({
+    key: z.string().max(200).meta({ description: 'Normalised: street|number|block|stair (see normalizeAddressKey)' }),
+    elevator: z.enum(['none', 'small', 'medium', 'large']).optional(),
+    doorWidthCm: z.int().min(40).max(200).optional(),
+    plateLoadKg: z.int().min(100).max(5000).optional(),
+    platePersons: z.int().min(1).max(60).optional(),
+    furnitureInLift: z.enum(['yes', 'no']).optional(),
+    raisedEntrance: z.boolean().optional(),
+    confirmedBy: z.enum(['client', 'crew', 'administrator']),
+    confirmedAt: z.iso.datetime(),
+  })
+  .meta({ id: 'AddressRecord', description: 'Building facts remembered for the next client from the same entrance' });
+
+export type AddressRecord = z.infer<typeof AddressRecord>;

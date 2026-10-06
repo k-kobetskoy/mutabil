@@ -1,0 +1,146 @@
+{
+  "name": "two-rooms-lift-crates",
+  "rulesVersion": "2026-10-06.1",
+  "input": {
+    "v": 1,
+    "mode": "detailed",
+    "taskType": "apartment",
+    "size": {
+      "presetId": "apartament-2-camere"
+    },
+    "from": {
+      "zoneId": "gheorgheni",
+      "floor": 4,
+      "elevator": "medium",
+      "furnitureInLift": "yes",
+      "carry": "lt10",
+      "parking": "atEntrance",
+      "stairs": "normal"
+    },
+    "to": {
+      "zoneId": "zorilor",
+      "floor": 6,
+      "elevator": "large",
+      "furnitureInLift": "yes",
+      "carry": "10to30",
+      "parking": "nearby",
+      "stairs": "normal"
+    },
+    "inventory": {
+      "mode": "list",
+      "items": {
+        "wardrobe-2-door": 1,
+        "bed-double-frame": 1,
+        "mattress-double": 1,
+        "sofa-3-seat": 1,
+        "dining-table": 1,
+        "dining-chair": 4,
+        "tv": 1,
+        "washing-machine": 1,
+        "fridge-standard": 1,
+        "desk": 1,
+        "kallax-2x4": 2
+      },
+      "boxes": 35,
+      "kallaxInserts": 8
+    },
+    "packing": {
+      "who": "self",
+      "containers": "crates",
+      "mattressBagsDouble": 1,
+      "tvProtection": 1
+    },
+    "assembly": {
+      "items": {
+        "wardrobe-2-door": 1,
+        "bed-double-frame": 1
+      }
+    },
+    "protection": {
+      "level": "basic"
+    },
+    "survey": {
+      "method": "onsite"
+    },
+    "schedule": {
+      "date": "2026-11-05",
+      "slot": "morning"
+    }
+  },
+  "expected": {
+    "order": {
+      "v": 1,
+      "mode": "detailed",
+      "taskType": "apartment",
+      "size": {
+        "presetId": "apartament-2-camere"
+      },
+      "from": {
+        "zoneId": "gheorgheni",
+        "floor": 4,
+        "elevator": "medium",
+        "furnitureInLift": "yes",
+        "carry": "lt10",
+        "parking": "atEntrance",
+        "stairs": "normal"
+      },
+      "to": {
+        "zoneId": "zorilor",
+        "floor": 6,
+        "elevator": "large",
+        "furnitureInLift": "yes",
+        "carry": "10to30",
+        "parking": "nearby",
+        "stairs": "normal"
+      },
+      "inventory": {
+        "mode": "list",
+        "items": {
+          "wardrobe-2-door": 1,
+          "bed-double-frame": 1,
+          "mattress-double": 1,
+          "sofa-3-seat": 1,
+          "dining-table": 1,
+          "dining-chair": 4,
+          "tv": 1,
+          "washing-machine": 1,
+          "fridge-standard": 1,
+          "desk": 1,
+          "kallax-2x4": 2
+        },
+        "boxes": 35,
+        "kallaxInserts": 8
+      },
+      "packing": {
+        "who": "self",
+        "containers": "crates",
+        "mattressBagsDouble": 1,
+        "tvProtection": 1
+      },
+      "assembly": {
+        "items": {
+          "wardrobe-2-door": 1,
+          "bed-double-frame": 1
+        }
+      },
+      "protection": {
+        "level": "basic"
+      },
+      "survey": {
+        "method": "onsite"
+      },
+      "schedule": {
+        "date": "2026-11-05",
+        "slot": "morning"
+      }
+    },
+    "fired": [
+      "crates-onsite-survey"
+    ],
+    "tasks": [],
+    "hints": [
+      "rules.cratesOnsiteOnly"
+    ],
+    "assumptions": []
+  }
+}

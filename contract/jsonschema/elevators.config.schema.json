@@ -1,0 +1,228 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "classes": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "cabinCm": {
+            "additionalProperties": false,
+            "properties": {
+              "d": {
+                "minimum": 0,
+                "type": "number"
+              },
+              "h": {
+                "minimum": 0,
+                "type": "number"
+              },
+              "w": {
+                "minimum": 0,
+                "type": "number"
+              }
+            },
+            "required": [
+              "w",
+              "d",
+              "h"
+            ],
+            "type": "object"
+          },
+          "cabinLoadSec": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "doorCm": {
+            "additionalProperties": false,
+            "properties": {
+              "h": {
+                "minimum": 0,
+                "type": "number"
+              },
+              "w": {
+                "minimum": 0,
+                "type": "number"
+              }
+            },
+            "required": [
+              "w",
+              "h"
+            ],
+            "type": "object"
+          },
+          "id": {
+            "enum": [
+              "small",
+              "medium",
+              "large"
+            ],
+            "type": "string"
+          },
+          "m3PerTrip": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "maxLongThinItemCm": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "note": {
+            "type": "string"
+          },
+          "persons": {
+            "maximum": 9007199254740991,
+            "minimum": -9007199254740991,
+            "type": "integer"
+          },
+          "ratedLoadKg": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "source": {
+            "type": "string"
+          },
+          "timeFactor": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "verified": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "ratedLoadKg",
+          "persons",
+          "cabinCm",
+          "doorCm",
+          "timeFactor",
+          "m3PerTrip",
+          "cabinLoadSec",
+          "maxLongThinItemCm",
+          "source",
+          "verified"
+        ],
+        "type": "object"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array"
+    },
+    "fitMarginsCm": {
+      "additionalProperties": false,
+      "properties": {
+        "door": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "floor": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "height": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "door",
+        "height",
+        "floor"
+      ],
+      "type": "object"
+    },
+    "flexibleExtraLength": {
+      "maximum": 1,
+      "minimum": 0,
+      "type": "number"
+    },
+    "longThinMaxThicknessCm": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "longThinMaxWidthCm": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "presetFurnitureShare": {
+      "maximum": 1,
+      "minimum": 0,
+      "type": "number"
+    },
+    "presetNoFitShare": {
+      "additionalProperties": false,
+      "properties": {
+        "large": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "medium": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "small": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "type": "object"
+    },
+    "throughput": {
+      "additionalProperties": false,
+      "properties": {
+        "doorCycleSec": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "floorHeightM": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "liftSpeedMs": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "floorHeightM",
+        "liftSpeedMs",
+        "doorCycleSec"
+      ],
+      "type": "object"
+    },
+    "unknownFallback": {
+      "enum": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "unknownFallback",
+    "fitMarginsCm",
+    "longThinMaxThicknessCm",
+    "longThinMaxWidthCm",
+    "flexibleExtraLength",
+    "presetNoFitShare",
+    "presetFurnitureShare",
+    "classes",
+    "throughput"
+  ],
+  "title": "elevators config (after unwrap)",
+  "type": "object"
+}

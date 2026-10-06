@@ -1,0 +1,326 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "access": {
+      "additionalProperties": false,
+      "properties": {
+        "bulkyStairsExtraManMinPerFloor": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "carryDistanceM": {
+          "additionalProperties": false,
+          "properties": {
+            "10to30": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "gt30": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "lt10": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "lt10",
+            "10to30",
+            "gt30"
+          ],
+          "type": "object"
+        },
+        "carryPenaltyPer10m": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "floorPenaltyNoLift": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "freeCarryM": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "liftPerFloorPenalty": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "progressiveFromFloor": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "progressiveMultiplier": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "raisedEntranceFloors": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "stairTypeFactor": {
+          "additionalProperties": false,
+          "properties": {
+            "narrow": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "normal": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "winding": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "normal",
+            "narrow",
+            "winding"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "floorPenaltyNoLift",
+        "progressiveFromFloor",
+        "progressiveMultiplier",
+        "stairTypeFactor",
+        "raisedEntranceFloors",
+        "liftPerFloorPenalty",
+        "freeCarryM",
+        "carryPenaltyPer10m",
+        "carryDistanceM",
+        "bulkyStairsExtraManMinPerFloor"
+      ],
+      "type": "object"
+    },
+    "assembly": {
+      "additionalProperties": false,
+      "properties": {
+        "maxParallelMasters": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "maxParallelMasters"
+      ],
+      "type": "object"
+    },
+    "buffer": {
+      "additionalProperties": false,
+      "properties": {
+        "estimateRoundingH": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "minBufferH": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "quantileZ": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "sigmaAdders": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "propertyNames": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "sigmaLn": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "windowRoundingH": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "workdayMaxH": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "sigmaLn",
+        "quantileZ",
+        "sigmaAdders",
+        "minBufferH",
+        "estimateRoundingH",
+        "windowRoundingH",
+        "workdayMaxH"
+      ],
+      "type": "object"
+    },
+    "drive": {
+      "additionalProperties": false,
+      "properties": {
+        "avgUrbanSpeedKmh": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "detourFactor": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "intercitySpeedKmh": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "minDriveMin": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "peakFactor": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "tripSecuringMin": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "avgUrbanSpeedKmh",
+        "intercitySpeedKmh",
+        "detourFactor",
+        "peakFactor",
+        "minDriveMin",
+        "tripSecuringMin"
+      ],
+      "type": "object"
+    },
+    "fixed": {
+      "additionalProperties": false,
+      "properties": {
+        "liftProtectionMinPerLiftEnd": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "setupMin": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "teardownMin": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "setupMin",
+        "teardownMin",
+        "liftProtectionMinPerLiftEnd"
+      ],
+      "type": "object"
+    },
+    "parking": {
+      "additionalProperties": false,
+      "properties": {
+        "extraCarryM": {
+          "additionalProperties": false,
+          "properties": {
+            "atEntrance": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "far": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "nearby": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "atEntrance",
+            "nearby",
+            "far"
+          ],
+          "type": "object"
+        },
+        "fixedMinutes": {
+          "additionalProperties": false,
+          "properties": {
+            "atEntrance": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "far": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "nearby": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "atEntrance",
+            "nearby",
+            "far"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "fixedMinutes",
+        "extraCarryM"
+      ],
+      "type": "object"
+    },
+    "productivity": {
+      "additionalProperties": false,
+      "properties": {
+        "crewEfficiency": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "propertyNames": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "loadRatePerMover": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "unloadRatePerMover": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "loadRatePerMover",
+        "unloadRatePerMover",
+        "crewEfficiency"
+      ],
+      "type": "object"
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "productivity",
+    "access",
+    "parking",
+    "drive",
+    "fixed",
+    "buffer",
+    "assembly"
+  ],
+  "title": "time config (after unwrap)",
+  "type": "object"
+}

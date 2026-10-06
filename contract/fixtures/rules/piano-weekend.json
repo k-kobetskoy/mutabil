@@ -1,0 +1,90 @@
+{
+  "name": "piano-weekend",
+  "rulesVersion": "2026-10-06.1",
+  "input": {
+    "v": 1,
+    "mode": "detailed",
+    "taskType": "items",
+    "from": {
+      "zoneId": "zorilor",
+      "floor": 1,
+      "elevator": "none",
+      "carry": "lt10",
+      "parking": "atEntrance",
+      "stairs": "normal"
+    },
+    "to": {
+      "zoneId": "marasti",
+      "floor": 0,
+      "carry": "lt10",
+      "parking": "atEntrance"
+    },
+    "inventory": {
+      "mode": "list",
+      "items": {
+        "piano-upright": 1
+      }
+    },
+    "protection": {
+      "level": "basic"
+    },
+    "survey": {
+      "method": "none"
+    },
+    "schedule": {
+      "date": "2026-11-07",
+      "slot": "morning"
+    }
+  },
+  "expected": {
+    "order": {
+      "v": 1,
+      "mode": "detailed",
+      "taskType": "items",
+      "from": {
+        "zoneId": "zorilor",
+        "floor": 1,
+        "elevator": "none",
+        "carry": "lt10",
+        "parking": "atEntrance",
+        "stairs": "normal"
+      },
+      "to": {
+        "zoneId": "marasti",
+        "floor": 0,
+        "carry": "lt10",
+        "parking": "atEntrance"
+      },
+      "inventory": {
+        "mode": "list",
+        "items": {
+          "piano-upright": 1
+        }
+      },
+      "protection": {
+        "level": "basic"
+      },
+      "survey": {
+        "method": "none"
+      },
+      "schedule": {
+        "date": "2026-11-07",
+        "slot": "morning"
+      }
+    },
+    "fired": [
+      "piano-survey",
+      "no-survey-range"
+    ],
+    "tasks": [
+      {
+        "code": "SURVEY_PIANO"
+      }
+    ],
+    "hints": [
+      "rules.pianoSurveyRecommended",
+      "rules.noSurveyRangeOnly"
+    ],
+    "assumptions": []
+  }
+}

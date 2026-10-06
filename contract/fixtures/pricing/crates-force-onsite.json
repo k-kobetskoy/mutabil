@@ -1,0 +1,413 @@
+{
+  "name": "crates-force-onsite",
+  "configVersion": "2026-10-06.1+2026-10-06.1+2026-10-06.1+2026-10-06.1",
+  "input": {
+    "v": 1,
+    "mode": "detailed",
+    "taskType": "apartment",
+    "size": {
+      "presetId": "apartament-2-camere"
+    },
+    "from": {
+      "zoneId": "gheorgheni",
+      "floor": 4,
+      "elevator": "medium",
+      "furnitureInLift": "yes",
+      "carry": "lt10",
+      "parking": "atEntrance",
+      "stairs": "normal"
+    },
+    "to": {
+      "zoneId": "zorilor",
+      "floor": 6,
+      "elevator": "large",
+      "furnitureInLift": "yes",
+      "carry": "10to30",
+      "parking": "nearby",
+      "stairs": "normal"
+    },
+    "inventory": {
+      "mode": "list",
+      "items": {
+        "wardrobe-2-door": 1,
+        "bed-double-frame": 1,
+        "mattress-double": 1,
+        "sofa-3-seat": 1,
+        "dining-table": 1,
+        "dining-chair": 4,
+        "tv": 1,
+        "washing-machine": 1,
+        "fridge-standard": 1,
+        "desk": 1,
+        "kallax-2x4": 2
+      },
+      "boxes": 35,
+      "kallaxInserts": 8
+    },
+    "packing": {
+      "who": "self",
+      "containers": "crates",
+      "mattressBagsDouble": 1,
+      "tvProtection": 1
+    },
+    "assembly": {
+      "items": {
+        "wardrobe-2-door": 1,
+        "bed-double-frame": 1
+      }
+    },
+    "protection": {
+      "level": "basic"
+    },
+    "survey": {
+      "method": "remote"
+    },
+    "schedule": {
+      "date": "2026-11-05",
+      "slot": "morning"
+    }
+  },
+  "expected": {
+    "configVersion": "2026-10-06.1+2026-10-06.1+2026-10-06.1+2026-10-06.1",
+    "rulesVersion": "2026-10-06.1",
+    "price": {
+      "kind": "range",
+      "base": 291000,
+      "low": 275000,
+      "high": 310000,
+      "worst": 310000,
+      "vat": 50504,
+      "afterSurvey": {
+        "capTolerance": 0.05,
+        "method": "onsite"
+      },
+      "reasons": [
+        {
+          "key": "range.volumeList.onsite",
+          "params": {
+            "lowPct": 7,
+            "highPct": 15
+          }
+        }
+      ]
+    },
+    "volume": {
+      "m3": 17.3,
+      "low": 16.1,
+      "high": 19.9,
+      "weightKg": 1355,
+      "source": "list",
+      "boxes": 35
+    },
+    "vehicle": {
+      "id": "van-12",
+      "count": 1,
+      "trips": 2,
+      "fillPct": 69,
+      "parkedAway": [],
+      "explain": {
+        "key": "vehicle.reasonVolume",
+        "params": {
+          "vehicle": "van-12",
+          "m3": 17.3,
+          "usable": 12.6,
+          "kg": 1355,
+          "payload": 1087,
+          "fill": 69,
+          "trips": 2,
+          "count": 1
+        }
+      }
+    },
+    "crew": {
+      "size": 3,
+      "alternatives": [
+        {
+          "size": 2,
+          "total": 283000,
+          "windowH": 10
+        },
+        {
+          "size": 3,
+          "total": 291000,
+          "windowH": 8
+        },
+        {
+          "size": 4,
+          "total": 297000,
+          "windowH": 7
+        }
+      ],
+      "explain": {
+        "key": "crew.reason",
+        "params": {
+          "crew": 3,
+          "windowH": 8,
+          "min": 2
+        }
+      }
+    },
+    "time": {
+      "expectedH": 6.5,
+      "windowH": 8,
+      "billedH": 6.5,
+      "breakdown": [
+        {
+          "key": "time.load",
+          "params": {
+            "hours": 2.22,
+            "m3": 17.29,
+            "floors": 4,
+            "lift": "medium",
+            "fLift": 1.14,
+            "fStairs": 1.4,
+            "fCarry": 1,
+            "crew": 3
+          }
+        },
+        {
+          "key": "time.unload",
+          "params": {
+            "hours": 1.95,
+            "m3": 17.29,
+            "floors": 6,
+            "lift": "large",
+            "fLift": 1.11,
+            "fStairs": 1.7,
+            "fCarry": 1.15,
+            "crew": 3
+          }
+        },
+        {
+          "key": "time.drive",
+          "params": {
+            "hours": 0.25
+          }
+        },
+        {
+          "key": "time.fixed",
+          "params": {
+            "hours": 0.83
+          }
+        },
+        {
+          "key": "time.extraTrips",
+          "params": {
+            "hours": 0.75,
+            "trips": 2
+          }
+        },
+        {
+          "key": "time.masterAssembly",
+          "params": {
+            "hours": 1.25
+          }
+        }
+      ]
+    },
+    "overtime": {
+      "perHour": 32000,
+      "stepMin": 30
+    },
+    "lines": [
+      {
+        "id": "transport",
+        "amount": 71500,
+        "explain": {
+          "key": "lines.transport",
+          "params": {
+            "vehicle": "van-12",
+            "count": 1,
+            "rate": 110,
+            "hours": 6.5
+          }
+        },
+        "step": "items"
+      },
+      {
+        "id": "crew",
+        "amount": 136500,
+        "explain": {
+          "key": "lines.crew",
+          "params": {
+            "crew": 3,
+            "rate": 70,
+            "hours": 6.5
+          }
+        },
+        "step": "access"
+      },
+      {
+        "id": "dispatch",
+        "amount": 8000,
+        "explain": {
+          "key": "lines.dispatch",
+          "params": {
+            "zoneClass": "city"
+          }
+        },
+        "step": "access"
+      },
+      {
+        "id": "materials",
+        "amount": 10500,
+        "explain": {
+          "key": "lines.materials"
+        },
+        "details": [
+          {
+            "key": "materials.mattressBagDouble",
+            "params": {
+              "qty": 1,
+              "rate": 45
+            }
+          },
+          {
+            "key": "materials.tv",
+            "params": {
+              "qty": 1,
+              "rate": 60
+            }
+          }
+        ],
+        "step": "services"
+      },
+      {
+        "id": "crates",
+        "amount": 42000,
+        "explain": {
+          "key": "lines.crates",
+          "params": {
+            "crates": 35,
+            "rate": 12,
+            "includedDays": 7,
+            "extraDays": 0,
+            "extraRate": 1
+          }
+        },
+        "step": "services"
+      },
+      {
+        "id": "assembly",
+        "amount": 22000,
+        "explain": {
+          "key": "lines.assembly",
+          "params": {
+            "items": 2
+          }
+        },
+        "details": [
+          {
+            "key": "assembly.item",
+            "params": {
+              "item": "wardrobe-2-door",
+              "qty": 1,
+              "rate": 120
+            }
+          },
+          {
+            "key": "assembly.item",
+            "params": {
+              "item": "bed-double-frame",
+              "qty": 1,
+              "rate": 100
+            }
+          }
+        ],
+        "step": "services"
+      },
+      {
+        "id": "survey",
+        "amount": 15000,
+        "explain": {
+          "key": "lines.survey.onsite",
+          "params": {
+            "rate": 150
+          }
+        },
+        "step": "protection"
+      },
+      {
+        "id": "surveyCredit",
+        "amount": -15000,
+        "explain": {
+          "key": "lines.surveyCredit",
+          "params": {
+            "days": 30
+          }
+        },
+        "step": "protection"
+      }
+    ],
+    "included": [
+      "tape",
+      "stretchFilm",
+      "blankets",
+      "dollies",
+      "floorProtection",
+      "doorProtection",
+      "liftProtection",
+      "basicTools"
+    ],
+    "assumptions": [],
+    "scenarios": [],
+    "tasks": [],
+    "warnings": [
+      {
+        "key": "warn.noFitLift.cabin",
+        "params": {
+          "item": "mattress-double",
+          "end": "from",
+          "lift": "medium"
+        }
+      },
+      {
+        "key": "warn.noFitLift.door",
+        "params": {
+          "item": "sofa-3-seat",
+          "end": "from",
+          "lift": "medium"
+        }
+      },
+      {
+        "key": "warn.noFitLift.cabin",
+        "params": {
+          "item": "sofa-3-seat",
+          "end": "to",
+          "lift": "large"
+        }
+      },
+      {
+        "key": "warn.forcedOption",
+        "params": {
+          "path": "survey.method",
+          "from": "remote",
+          "to": "onsite",
+          "rule": "crates-onsite-survey"
+        }
+      }
+    ],
+    "hints": [
+      {
+        "key": "rules.cratesOnsiteOnly"
+      }
+    ],
+    "timeline": [
+      {
+        "kind": "cratesDelivery",
+        "dayOffset": -3,
+        "date": "2026-11-02"
+      },
+      {
+        "kind": "move",
+        "dayOffset": 0,
+        "date": "2026-11-05"
+      },
+      {
+        "kind": "cratesPickup",
+        "dayOffset": 7,
+        "date": "2026-11-12"
+      }
+    ]
+  }
+}

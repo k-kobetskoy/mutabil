@@ -1,0 +1,379 @@
+{
+  "name": "zona0-house",
+  "configVersion": "2026-10-06.1+2026-10-06.1+2026-10-06.1+2026-10-06.1",
+  "input": {
+    "v": 1,
+    "mode": "detailed",
+    "taskType": "house",
+    "size": {
+      "presetId": "casa"
+    },
+    "from": {
+      "zoneId": "centru",
+      "floor": 2,
+      "elevator": "none",
+      "carry": "10to30",
+      "parking": "nearby",
+      "stairs": "normal"
+    },
+    "to": {
+      "zoneId": "floresti",
+      "floor": 3,
+      "elevator": "large",
+      "furnitureInLift": "yes",
+      "carry": "lt10",
+      "parking": "atEntrance",
+      "stairs": "normal"
+    },
+    "inventory": {
+      "mode": "preset"
+    },
+    "packing": {
+      "who": "full",
+      "containers": "cardboard",
+      "wardrobeBoxes": 4,
+      "tvProtection": 1,
+      "mirrorProtection": 2
+    },
+    "protection": {
+      "level": "full",
+      "declaredValueLei": 60000
+    },
+    "special": [
+      {
+        "kind": "fragile",
+        "label": "vase"
+      },
+      {
+        "kind": "pristine",
+        "declaredValueLei": 8000
+      }
+    ],
+    "survey": {
+      "method": "remote"
+    },
+    "schedule": {
+      "date": "2026-11-06",
+      "slot": "morning"
+    }
+  },
+  "expected": {
+    "configVersion": "2026-10-06.1+2026-10-06.1+2026-10-06.1+2026-10-06.1",
+    "rulesVersion": "2026-10-06.1",
+    "price": {
+      "kind": "range",
+      "base": 1415000,
+      "low": 1090000,
+      "high": 1955000,
+      "worst": 1955000,
+      "vat": 245579,
+      "afterSurvey": {
+        "capTolerance": 0.1,
+        "method": "remote"
+      },
+      "reasons": [
+        {
+          "key": "range.volumePreset",
+          "params": {
+            "min": 38.5,
+            "max": 88
+          }
+        }
+      ]
+    },
+    "volume": {
+      "m3": 55,
+      "low": 38.5,
+      "high": 88,
+      "weightKg": 4500,
+      "source": "preset",
+      "boxes": 90
+    },
+    "vehicle": {
+      "id": "truck-30",
+      "count": 2,
+      "trips": 2,
+      "fillPct": 48,
+      "parkedAway": [
+        "from"
+      ],
+      "explain": {
+        "key": "vehicle.reasonAccess",
+        "params": {
+          "vehicle": "truck-30",
+          "m3": 55,
+          "usable": 28.5,
+          "kg": 4500,
+          "payload": 2500,
+          "fill": 48,
+          "trips": 2,
+          "count": 2
+        }
+      }
+    },
+    "crew": {
+      "size": 4,
+      "alternatives": [
+        {
+          "size": 2,
+          "total": 1712000,
+          "windowH": 31
+        },
+        {
+          "size": 3,
+          "total": 1512000,
+          "windowH": 23
+        },
+        {
+          "size": 4,
+          "total": 1415000,
+          "windowH": 19
+        }
+      ],
+      "explain": {
+        "key": "crew.reason",
+        "params": {
+          "crew": 4,
+          "windowH": 19,
+          "min": 2
+        }
+      }
+    },
+    "time": {
+      "expectedH": 14,
+      "windowH": 19,
+      "billedH": 14,
+      "breakdown": [
+        {
+          "key": "time.load",
+          "params": {
+            "hours": 7.49,
+            "m3": 55,
+            "floors": 2,
+            "lift": "none",
+            "fLift": 1,
+            "fStairs": 1.2,
+            "fCarry": 1.39,
+            "crew": 4
+          }
+        },
+        {
+          "key": "time.unload",
+          "params": {
+            "hours": 3.88,
+            "m3": 55,
+            "floors": 3,
+            "lift": "large",
+            "fLift": 1.08,
+            "fStairs": 1.3,
+            "fCarry": 1,
+            "crew": 4
+          }
+        },
+        {
+          "key": "time.drive",
+          "params": {
+            "hours": 0.54
+          }
+        },
+        {
+          "key": "time.fixed",
+          "params": {
+            "hours": 0.67
+          }
+        },
+        {
+          "key": "time.extraTrips",
+          "params": {
+            "hours": 1.33,
+            "trips": 2
+          }
+        }
+      ]
+    },
+    "overtime": {
+      "perHour": 72000,
+      "stepMin": 30
+    },
+    "lines": [
+      {
+        "id": "transport",
+        "amount": 616000,
+        "explain": {
+          "key": "lines.transport",
+          "params": {
+            "vehicle": "truck-30",
+            "count": 2,
+            "rate": 220,
+            "hours": 14
+          }
+        },
+        "step": "items"
+      },
+      {
+        "id": "crew",
+        "amount": 392000,
+        "explain": {
+          "key": "lines.crew",
+          "params": {
+            "crew": 4,
+            "rate": 70,
+            "hours": 14
+          }
+        },
+        "step": "access"
+      },
+      {
+        "id": "dispatch",
+        "amount": 12000,
+        "explain": {
+          "key": "lines.dispatch",
+          "params": {
+            "zoneClass": "suburb"
+          }
+        },
+        "step": "access"
+      },
+      {
+        "id": "packing",
+        "amount": 135000,
+        "explain": {
+          "key": "lines.packing",
+          "params": {
+            "boxes": 90,
+            "rate": 15,
+            "who": "full"
+          }
+        },
+        "step": "services"
+      },
+      {
+        "id": "materials",
+        "amount": 163000,
+        "explain": {
+          "key": "lines.materials"
+        },
+        "details": [
+          {
+            "key": "materials.cardboard",
+            "params": {
+              "qty": 90,
+              "rate": 15
+            }
+          },
+          {
+            "key": "materials.wardrobeBox",
+            "params": {
+              "qty": 4,
+              "rate": 35
+            }
+          },
+          {
+            "key": "materials.tv",
+            "params": {
+              "qty": 1,
+              "rate": 60
+            }
+          },
+          {
+            "key": "materials.mirror",
+            "params": {
+              "qty": 2,
+              "rate": 40
+            }
+          }
+        ],
+        "step": "services"
+      },
+      {
+        "id": "special",
+        "amount": 25000,
+        "explain": {
+          "key": "lines.special",
+          "params": {
+            "qty": 2
+          }
+        },
+        "details": [
+          {
+            "key": "special.fragile",
+            "params": {
+              "rate": 100,
+              "declared": 0
+            }
+          },
+          {
+            "key": "special.pristine",
+            "params": {
+              "rate": 150,
+              "declared": 8000
+            }
+          }
+        ],
+        "step": "items"
+      },
+      {
+        "id": "protection",
+        "amount": 72000,
+        "explain": {
+          "key": "lines.protection",
+          "params": {
+            "declared": 60000,
+            "ratePct": 1.2,
+            "deductible": 0,
+            "minFee": 150
+          }
+        },
+        "step": "protection"
+      }
+    ],
+    "included": [
+      "tape",
+      "stretchFilm",
+      "blankets",
+      "dollies",
+      "floorProtection",
+      "doorProtection",
+      "liftProtection",
+      "basicTools"
+    ],
+    "assumptions": [],
+    "scenarios": [],
+    "tasks": [],
+    "warnings": [
+      {
+        "key": "warn.parkedAway",
+        "params": {
+          "end": "from",
+          "vehicle": "truck-30",
+          "meters": 40,
+          "maxT": 3.5
+        }
+      },
+      {
+        "key": "warn.exceedsWorkday",
+        "params": {
+          "windowH": 19,
+          "max": 10
+        }
+      }
+    ],
+    "hints": [
+      {
+        "key": "rules.houseSurveyRecommended"
+      }
+    ],
+    "timeline": [
+      {
+        "kind": "packing",
+        "dayOffset": -1,
+        "date": "2026-11-05"
+      },
+      {
+        "kind": "move",
+        "dayOffset": 0,
+        "date": "2026-11-06"
+      }
+    ]
+  }
+}

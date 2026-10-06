@@ -1,0 +1,528 @@
+{
+  "name": "quick-two-rooms-unknown-lift",
+  "configVersion": "2026-10-06.1+2026-10-06.1+2026-10-06.1+2026-10-06.1",
+  "input": {
+    "v": 1,
+    "mode": "quick",
+    "taskType": "apartment",
+    "size": {
+      "presetId": "apartament-2-camere"
+    },
+    "from": {
+      "floor": 4,
+      "elevator": "unknown"
+    },
+    "to": {
+      "floor": 3,
+      "elevator": "none"
+    },
+    "route": "city"
+  },
+  "expected": {
+    "configVersion": "2026-10-06.1+2026-10-06.1+2026-10-06.1+2026-10-06.1",
+    "rulesVersion": "2026-10-06.1",
+    "price": {
+      "kind": "range",
+      "base": 262000,
+      "low": 205000,
+      "high": 355000,
+      "worst": 425000,
+      "vat": 45471,
+      "reasons": [
+        {
+          "key": "range.volumePreset",
+          "params": {
+            "min": 15.4,
+            "max": 27.5
+          }
+        },
+        {
+          "key": "range.assumption",
+          "params": {
+            "path": "from.elevator",
+            "assumed": "small",
+            "spreadLei": 300
+          }
+        },
+        {
+          "key": "range.assumption",
+          "params": {
+            "path": "from.carry",
+            "assumed": "10to30",
+            "spreadLei": 190
+          }
+        },
+        {
+          "key": "range.assumption",
+          "params": {
+            "path": "to.carry",
+            "assumed": "10to30",
+            "spreadLei": 190
+          }
+        },
+        {
+          "key": "range.assumption",
+          "params": {
+            "path": "from.parking",
+            "assumed": "nearby",
+            "spreadLei": 190
+          }
+        },
+        {
+          "key": "range.assumption",
+          "params": {
+            "path": "to.parking",
+            "assumed": "nearby",
+            "spreadLei": 190
+          }
+        },
+        {
+          "key": "range.assumption",
+          "params": {
+            "path": "from.furnitureInLift",
+            "assumed": "yes",
+            "spreadLei": 190
+          }
+        }
+      ]
+    },
+    "volume": {
+      "m3": 19.8,
+      "low": 15.4,
+      "high": 27.5,
+      "weightKg": 1620,
+      "source": "preset",
+      "boxes": 35
+    },
+    "vehicle": {
+      "id": "van-12",
+      "count": 1,
+      "trips": 2,
+      "fillPct": 79,
+      "parkedAway": [],
+      "explain": {
+        "key": "vehicle.reasonVolume",
+        "params": {
+          "vehicle": "van-12",
+          "m3": 19.8,
+          "usable": 12.6,
+          "kg": 1620,
+          "payload": 1087,
+          "fill": 79,
+          "trips": 2,
+          "count": 1
+        }
+      }
+    },
+    "crew": {
+      "size": 4,
+      "alternatives": [
+        {
+          "size": 2,
+          "total": 258000,
+          "windowH": 14
+        },
+        {
+          "size": 3,
+          "total": 248000,
+          "windowH": 11
+        },
+        {
+          "size": 4,
+          "total": 262000,
+          "windowH": 9
+        }
+      ],
+      "explain": {
+        "key": "crew.reason",
+        "params": {
+          "crew": 4,
+          "windowH": 9,
+          "min": 2
+        }
+      }
+    },
+    "time": {
+      "expectedH": 6.5,
+      "windowH": 9,
+      "billedH": 6.5,
+      "breakdown": [
+        {
+          "key": "time.load",
+          "params": {
+            "hours": 2.59,
+            "m3": 19.8,
+            "floors": 4,
+            "lift": "small",
+            "fLift": 1.24,
+            "fStairs": 1.4,
+            "fCarry": 1.15,
+            "crew": 4
+          }
+        },
+        {
+          "key": "time.unload",
+          "params": {
+            "hours": 1.88,
+            "m3": 19.8,
+            "floors": 3,
+            "lift": "none",
+            "fLift": 1,
+            "fStairs": 1.3,
+            "fCarry": 1.15,
+            "crew": 4
+          }
+        },
+        {
+          "key": "time.drive",
+          "params": {
+            "hours": 0.3
+          }
+        },
+        {
+          "key": "time.fixed",
+          "params": {
+            "hours": 0.67
+          }
+        },
+        {
+          "key": "time.extraTrips",
+          "params": {
+            "hours": 0.85,
+            "trips": 2
+          }
+        }
+      ]
+    },
+    "overtime": {
+      "perHour": 39000,
+      "stepMin": 30
+    },
+    "lines": [
+      {
+        "id": "transport",
+        "amount": 71500,
+        "explain": {
+          "key": "lines.transport",
+          "params": {
+            "vehicle": "van-12",
+            "count": 1,
+            "rate": 110,
+            "hours": 6.5
+          }
+        },
+        "step": "items"
+      },
+      {
+        "id": "crew",
+        "amount": 182000,
+        "explain": {
+          "key": "lines.crew",
+          "params": {
+            "crew": 4,
+            "rate": 70,
+            "hours": 6.5
+          }
+        },
+        "step": "access"
+      },
+      {
+        "id": "dispatch",
+        "amount": 8000,
+        "explain": {
+          "key": "lines.dispatch",
+          "params": {
+            "zoneClass": "city"
+          }
+        },
+        "step": "access"
+      }
+    ],
+    "included": [
+      "tape",
+      "stretchFilm",
+      "blankets",
+      "dollies",
+      "floorProtection",
+      "doorProtection",
+      "liftProtection",
+      "basicTools"
+    ],
+    "assumptions": [
+      {
+        "path": "from.elevator",
+        "value": "small",
+        "explain": {
+          "key": "assume.elevatorSmall",
+          "params": {
+            "path": "from.elevator",
+            "value": "small"
+          }
+        }
+      },
+      {
+        "path": "from.stairs",
+        "value": "normal",
+        "explain": {
+          "key": "assume.stairsNormal",
+          "params": {
+            "path": "from.stairs",
+            "value": "normal"
+          }
+        }
+      },
+      {
+        "path": "to.stairs",
+        "value": "normal",
+        "explain": {
+          "key": "assume.stairsNormal",
+          "params": {
+            "path": "to.stairs",
+            "value": "normal"
+          }
+        }
+      },
+      {
+        "path": "from.carry",
+        "value": "10to30",
+        "explain": {
+          "key": "assume.carry",
+          "params": {
+            "path": "from.carry",
+            "value": "10to30"
+          }
+        }
+      },
+      {
+        "path": "to.carry",
+        "value": "10to30",
+        "explain": {
+          "key": "assume.carry",
+          "params": {
+            "path": "to.carry",
+            "value": "10to30"
+          }
+        }
+      },
+      {
+        "path": "from.parking",
+        "value": "nearby",
+        "explain": {
+          "key": "assume.parking",
+          "params": {
+            "path": "from.parking",
+            "value": "nearby"
+          }
+        }
+      },
+      {
+        "path": "to.parking",
+        "value": "nearby",
+        "explain": {
+          "key": "assume.parking",
+          "params": {
+            "path": "to.parking",
+            "value": "nearby"
+          }
+        }
+      },
+      {
+        "path": "from.furnitureInLift",
+        "value": "yes",
+        "explain": {
+          "key": "assume.furnitureInLift",
+          "params": {
+            "path": "from.furnitureInLift",
+            "value": "yes"
+          }
+        }
+      }
+    ],
+    "scenarios": [
+      {
+        "path": "from.elevator",
+        "assumed": "small",
+        "options": [
+          {
+            "value": "none",
+            "total": 262000,
+            "delta": 0
+          },
+          {
+            "value": "small",
+            "total": 262000,
+            "delta": 0
+          },
+          {
+            "value": "medium",
+            "total": 242000,
+            "delta": -20000
+          },
+          {
+            "value": "large",
+            "total": 232000,
+            "delta": -30000
+          }
+        ]
+      },
+      {
+        "path": "from.stairs",
+        "assumed": "normal",
+        "options": [
+          {
+            "value": "normal",
+            "total": 262000,
+            "delta": 0
+          },
+          {
+            "value": "narrow",
+            "total": 262000,
+            "delta": 0
+          },
+          {
+            "value": "winding",
+            "total": 262000,
+            "delta": 0
+          }
+        ]
+      },
+      {
+        "path": "to.stairs",
+        "assumed": "normal",
+        "options": [
+          {
+            "value": "normal",
+            "total": 262000,
+            "delta": 0
+          },
+          {
+            "value": "narrow",
+            "total": 262000,
+            "delta": 0
+          },
+          {
+            "value": "winding",
+            "total": 262000,
+            "delta": 0
+          }
+        ]
+      },
+      {
+        "path": "from.carry",
+        "assumed": "10to30",
+        "options": [
+          {
+            "value": "lt10",
+            "total": 262000,
+            "delta": 0
+          },
+          {
+            "value": "10to30",
+            "total": 262000,
+            "delta": 0
+          },
+          {
+            "value": "gt30",
+            "total": 281000,
+            "delta": 19000
+          }
+        ]
+      },
+      {
+        "path": "to.carry",
+        "assumed": "10to30",
+        "options": [
+          {
+            "value": "lt10",
+            "total": 262000,
+            "delta": 0
+          },
+          {
+            "value": "10to30",
+            "total": 262000,
+            "delta": 0
+          },
+          {
+            "value": "gt30",
+            "total": 281000,
+            "delta": 19000
+          }
+        ]
+      },
+      {
+        "path": "from.parking",
+        "assumed": "nearby",
+        "options": [
+          {
+            "value": "atEntrance",
+            "total": 262000,
+            "delta": 0
+          },
+          {
+            "value": "nearby",
+            "total": 262000,
+            "delta": 0
+          },
+          {
+            "value": "far",
+            "total": 281000,
+            "delta": 19000
+          }
+        ]
+      },
+      {
+        "path": "to.parking",
+        "assumed": "nearby",
+        "options": [
+          {
+            "value": "atEntrance",
+            "total": 262000,
+            "delta": 0
+          },
+          {
+            "value": "nearby",
+            "total": 262000,
+            "delta": 0
+          },
+          {
+            "value": "far",
+            "total": 281000,
+            "delta": 19000
+          }
+        ]
+      },
+      {
+        "path": "from.furnitureInLift",
+        "assumed": "yes",
+        "options": [
+          {
+            "value": "yes",
+            "total": 262000,
+            "delta": 0
+          },
+          {
+            "value": "no",
+            "total": 281000,
+            "delta": 19000
+          }
+        ]
+      }
+    ],
+    "tasks": [
+      {
+        "code": "CLARIFY_ELEVATOR",
+        "params": {
+          "end": "from"
+        }
+      }
+    ],
+    "warnings": [],
+    "hints": [],
+    "timeline": [
+      {
+        "kind": "move",
+        "dayOffset": 0
+      }
+    ]
+  }
+}

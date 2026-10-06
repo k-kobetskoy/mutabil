@@ -1,0 +1,81 @@
+{
+  "name": "intercity-quick",
+  "rulesVersion": "2026-10-06.1",
+  "input": {
+    "v": 1,
+    "mode": "quick",
+    "taskType": "apartment",
+    "size": {
+      "presetId": "apartament-1-camera"
+    },
+    "from": {
+      "floor": 1,
+      "elevator": "none"
+    },
+    "to": {
+      "floor": 0
+    },
+    "route": "intercity"
+  },
+  "expected": {
+    "order": {
+      "v": 1,
+      "mode": "quick",
+      "taskType": "apartment",
+      "size": {
+        "presetId": "apartament-1-camera"
+      },
+      "from": {
+        "floor": 1,
+        "elevator": "none",
+        "stairs": "normal",
+        "carry": "10to30",
+        "parking": "nearby"
+      },
+      "to": {
+        "floor": 0,
+        "carry": "10to30",
+        "parking": "nearby"
+      },
+      "route": "intercity"
+    },
+    "fired": [
+      "stairs-unknown:from",
+      "carry-unknown:from",
+      "carry-unknown:to",
+      "parking-unknown:from",
+      "parking-unknown:to",
+      "intercity"
+    ],
+    "tasks": [
+      {
+        "code": "CONFIRM_INTERCITY"
+      }
+    ],
+    "hints": [
+      "rules.intercity"
+    ],
+    "assumptions": [
+      {
+        "path": "from.stairs",
+        "value": "normal"
+      },
+      {
+        "path": "from.carry",
+        "value": "10to30"
+      },
+      {
+        "path": "to.carry",
+        "value": "10to30"
+      },
+      {
+        "path": "from.parking",
+        "value": "nearby"
+      },
+      {
+        "path": "to.parking",
+        "value": "nearby"
+      }
+    ]
+  }
+}

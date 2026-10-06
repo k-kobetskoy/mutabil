@@ -1,0 +1,100 @@
+{
+  "name": "quick-two-rooms-unknown-lift",
+  "rulesVersion": "2026-10-06.1",
+  "input": {
+    "v": 1,
+    "mode": "quick",
+    "taskType": "apartment",
+    "size": {
+      "presetId": "apartament-2-camere"
+    },
+    "from": {
+      "floor": 4,
+      "elevator": "unknown"
+    },
+    "to": {
+      "floor": 3,
+      "elevator": "none"
+    },
+    "route": "city"
+  },
+  "expected": {
+    "order": {
+      "v": 1,
+      "mode": "quick",
+      "taskType": "apartment",
+      "size": {
+        "presetId": "apartament-2-camere"
+      },
+      "from": {
+        "floor": 4,
+        "elevator": "small",
+        "stairs": "normal",
+        "carry": "10to30",
+        "parking": "nearby",
+        "furnitureInLift": "yes"
+      },
+      "to": {
+        "floor": 3,
+        "elevator": "none",
+        "stairs": "normal",
+        "carry": "10to30",
+        "parking": "nearby"
+      },
+      "route": "city"
+    },
+    "fired": [
+      "elevator-unknown:from",
+      "stairs-unknown:from",
+      "stairs-unknown:to",
+      "carry-unknown:from",
+      "carry-unknown:to",
+      "parking-unknown:from",
+      "parking-unknown:to",
+      "furniture-in-lift-unknown:from"
+    ],
+    "tasks": [
+      {
+        "code": "CLARIFY_ELEVATOR",
+        "params": {
+          "end": "from"
+        }
+      }
+    ],
+    "hints": [],
+    "assumptions": [
+      {
+        "path": "from.elevator",
+        "value": "small"
+      },
+      {
+        "path": "from.stairs",
+        "value": "normal"
+      },
+      {
+        "path": "to.stairs",
+        "value": "normal"
+      },
+      {
+        "path": "from.carry",
+        "value": "10to30"
+      },
+      {
+        "path": "to.carry",
+        "value": "10to30"
+      },
+      {
+        "path": "from.parking",
+        "value": "nearby"
+      },
+      {
+        "path": "to.parking",
+        "value": "nearby"
+      },
+      {
+        "path": "from.furnitureInLift",
+        "value": "yes"
+      }
+    ]
+  }
+}

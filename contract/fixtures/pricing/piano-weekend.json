@@ -1,0 +1,244 @@
+{
+  "name": "piano-weekend",
+  "configVersion": "2026-10-06.1+2026-10-06.1+2026-10-06.1+2026-10-06.1",
+  "input": {
+    "v": 1,
+    "mode": "detailed",
+    "taskType": "items",
+    "from": {
+      "zoneId": "zorilor",
+      "floor": 1,
+      "elevator": "none",
+      "carry": "lt10",
+      "parking": "atEntrance",
+      "stairs": "normal"
+    },
+    "to": {
+      "zoneId": "marasti",
+      "floor": 0,
+      "carry": "lt10",
+      "parking": "atEntrance"
+    },
+    "inventory": {
+      "mode": "list",
+      "items": {
+        "piano-upright": 1
+      }
+    },
+    "protection": {
+      "level": "basic"
+    },
+    "survey": {
+      "method": "none"
+    },
+    "schedule": {
+      "date": "2026-11-07",
+      "slot": "morning"
+    }
+  },
+  "expected": {
+    "configVersion": "2026-10-06.1+2026-10-06.1+2026-10-06.1+2026-10-06.1",
+    "rulesVersion": "2026-10-06.1",
+    "price": {
+      "kind": "range",
+      "base": 77000,
+      "low": 75000,
+      "high": 80000,
+      "worst": 80000,
+      "vat": 13364,
+      "reasons": [
+        {
+          "key": "range.volumeList.none",
+          "params": {
+            "lowPct": 15,
+            "highPct": 35
+          }
+        }
+      ]
+    },
+    "volume": {
+      "m3": 1.7,
+      "low": 1.4,
+      "high": 2.2,
+      "weightKg": 230,
+      "source": "list",
+      "boxes": 0
+    },
+    "vehicle": {
+      "id": "van-6",
+      "count": 1,
+      "trips": 1,
+      "fillPct": 31,
+      "parkedAway": [],
+      "explain": {
+        "key": "vehicle.reasonVolume",
+        "params": {
+          "vehicle": "van-6",
+          "m3": 1.7,
+          "usable": 5.4,
+          "kg": 230,
+          "payload": 1000,
+          "fill": 31,
+          "trips": 1,
+          "count": 1
+        }
+      }
+    },
+    "crew": {
+      "size": 3,
+      "alternatives": [
+        {
+          "size": 3,
+          "total": 77000,
+          "windowH": 2
+        },
+        {
+          "size": 4,
+          "total": 94000,
+          "windowH": 2
+        }
+      ],
+      "explain": {
+        "key": "crew.reason",
+        "params": {
+          "crew": 3,
+          "windowH": 2,
+          "min": 3
+        }
+      }
+    },
+    "time": {
+      "expectedH": 1.5,
+      "windowH": 2,
+      "billedH": 2,
+      "breakdown": [
+        {
+          "key": "time.load",
+          "params": {
+            "hours": 0.19,
+            "m3": 1.65,
+            "floors": 1,
+            "lift": "none",
+            "fLift": 1,
+            "fStairs": 1.1,
+            "fCarry": 1,
+            "crew": 3
+          }
+        },
+        {
+          "key": "time.unload",
+          "params": {
+            "hours": 0.13,
+            "m3": 1.65,
+            "floors": 0,
+            "lift": "none",
+            "fLift": 1,
+            "fStairs": 1,
+            "fCarry": 1,
+            "crew": 3
+          }
+        },
+        {
+          "key": "time.drive",
+          "params": {
+            "hours": 0.28
+          }
+        },
+        {
+          "key": "time.fixed",
+          "params": {
+            "hours": 0.5
+          }
+        }
+      ]
+    },
+    "overtime": {
+      "perHour": 34500,
+      "stepMin": 30
+    },
+    "lines": [
+      {
+        "id": "transport",
+        "amount": 18000,
+        "explain": {
+          "key": "lines.transport",
+          "params": {
+            "vehicle": "van-6",
+            "count": 1,
+            "rate": 90,
+            "hours": 2
+          }
+        },
+        "step": "items"
+      },
+      {
+        "id": "crew",
+        "amount": 42000,
+        "explain": {
+          "key": "lines.crew",
+          "params": {
+            "crew": 3,
+            "rate": 70,
+            "hours": 2
+          }
+        },
+        "step": "access"
+      },
+      {
+        "id": "weekend",
+        "amount": 9000,
+        "explain": {
+          "key": "lines.weekend",
+          "params": {
+            "pct": 15
+          }
+        },
+        "step": "when"
+      },
+      {
+        "id": "dispatch",
+        "amount": 8000,
+        "explain": {
+          "key": "lines.dispatch",
+          "params": {
+            "zoneClass": "city"
+          }
+        },
+        "step": "access"
+      }
+    ],
+    "included": [
+      "tape",
+      "stretchFilm",
+      "blankets",
+      "dollies",
+      "floorProtection",
+      "doorProtection",
+      "liftProtection",
+      "basicTools"
+    ],
+    "assumptions": [],
+    "scenarios": [],
+    "tasks": [
+      {
+        "code": "SURVEY_PIANO"
+      }
+    ],
+    "warnings": [],
+    "hints": [
+      {
+        "key": "rules.pianoSurveyRecommended"
+      },
+      {
+        "key": "rules.noSurveyRangeOnly"
+      }
+    ],
+    "timeline": [
+      {
+        "kind": "move",
+        "dayOffset": 0,
+        "date": "2026-11-07"
+      }
+    ]
+  }
+}

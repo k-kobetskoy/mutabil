@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bookingHorizonDays": {
+      "maximum": 9007199254740991,
+      "minimum": -9007199254740991,
+      "type": "integer"
+    },
+    "dayEndHour": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "draftTtlDays": {
+      "maximum": 9007199254740991,
+      "minimum": -9007199254740991,
+      "type": "integer"
+    },
+    "media": {
+      "additionalProperties": false,
+      "properties": {
+        "maxPhotos": {
+          "maximum": 9007199254740991,
+          "minimum": -9007199254740991,
+          "type": "integer"
+        },
+        "maxVideoTotalMb": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "maxVideos": {
+          "maximum": 9007199254740991,
+          "minimum": -9007199254740991,
+          "type": "integer"
+        },
+        "photoJpegQuality": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "photoMaxSidePx": {
+          "maximum": 9007199254740991,
+          "minimum": -9007199254740991,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "maxPhotos",
+        "maxVideos",
+        "maxVideoTotalMb",
+        "photoMaxSidePx",
+        "photoJpegQuality"
+      ],
+      "type": "object"
+    },
+    "slots": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "enum": [
+              "morning",
+              "midday",
+              "afternoon"
+            ],
+            "type": "string"
+          },
+          "peak": {
+            "type": "boolean"
+          },
+          "start": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "start",
+          "peak"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "ui": {
+      "additionalProperties": false,
+      "properties": {
+        "maxConditionalLines": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "pricingPresentation": {
+          "enum": [
+            "range",
+            "conditional"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "pricingPresentation",
+        "maxConditionalLines"
+      ],
+      "type": "object"
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "ui",
+    "media",
+    "slots",
+    "dayEndHour",
+    "bookingHorizonDays",
+    "draftTtlDays"
+  ],
+  "title": "app config (after unwrap)",
+  "type": "object"
+}

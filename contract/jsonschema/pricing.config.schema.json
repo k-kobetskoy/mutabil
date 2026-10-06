@@ -1,0 +1,562 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "assembly": {
+      "additionalProperties": false,
+      "properties": {
+        "masterOnMovingDayLei": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "perClassLei": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "propertyNames": {
+            "type": "string"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "masterOnMovingDayLei",
+        "perClassLei"
+      ],
+      "type": "object"
+    },
+    "billing": {
+      "additionalProperties": false,
+      "properties": {
+        "minimumBillableH": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "stepH": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "minimumBillableH",
+        "stepH"
+      ],
+      "type": "object"
+    },
+    "crates": {
+      "additionalProperties": false,
+      "properties": {
+        "deliveryDaysBeforeMove": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "extraPerCratePerDayLei": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "includedDays": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "lostOrDamagedLei": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "minCrates": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "perCrateIncludedLei": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "includedDays",
+        "perCrateIncludedLei",
+        "extraPerCratePerDayLei",
+        "minCrates",
+        "lostOrDamagedLei",
+        "deliveryDaysBeforeMove"
+      ],
+      "type": "object"
+    },
+    "crew": {
+      "additionalProperties": false,
+      "properties": {
+        "maxMovers": {
+          "maximum": 9007199254740991,
+          "minimum": 2,
+          "type": "integer"
+        },
+        "minMovers": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "moverHourlyLei": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "moverHourlyLei",
+        "minMovers",
+        "maxMovers"
+      ],
+      "type": "object"
+    },
+    "currency": {
+      "const": "RON",
+      "type": "string"
+    },
+    "dispatch": {
+      "additionalProperties": false,
+      "properties": {
+        "feeByZoneClassLei": {
+          "additionalProperties": false,
+          "properties": {
+            "city": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "intercity": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "suburb": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "city",
+            "suburb",
+            "intercity"
+          ],
+          "type": "object"
+        },
+        "perKmIntercityLei": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "feeByZoneClassLei",
+        "perKmIntercityLei"
+      ],
+      "type": "object"
+    },
+    "fullDay": {
+      "additionalProperties": false,
+      "properties": {
+        "discount": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "hours": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "hours",
+        "discount"
+      ],
+      "type": "object"
+    },
+    "includedFree": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "materials": {
+      "additionalProperties": false,
+      "properties": {
+        "cardboardBoxLei": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "mattressBagDoubleLei": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "mattressBagSingleLei": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "mirrorProtectionLei": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "tvProtectionLei": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "wardrobeBoxRentalLei": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "cardboardBoxLei",
+        "wardrobeBoxRentalLei",
+        "mattressBagDoubleLei",
+        "mattressBagSingleLei",
+        "tvProtectionLei",
+        "mirrorProtectionLei"
+      ],
+      "type": "object"
+    },
+    "minimumOrderLei": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "overtime": {
+      "additionalProperties": false,
+      "properties": {
+        "multiplier": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "multiplier"
+      ],
+      "type": "object"
+    },
+    "packing": {
+      "additionalProperties": false,
+      "properties": {
+        "partialShare": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "perBoxLei": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "perBoxLei",
+        "partialShare"
+      ],
+      "type": "object"
+    },
+    "protection": {
+      "additionalProperties": false,
+      "properties": {
+        "deductibleLei": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "fullRate": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "fullRateWithDeductible": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "highValueItemLei": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "minDeclaredLei": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "minDeclaredPerM3Lei": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "minFeeLei": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "fullRate",
+        "fullRateWithDeductible",
+        "deductibleLei",
+        "minFeeLei",
+        "minDeclaredLei",
+        "minDeclaredPerM3Lei",
+        "highValueItemLei"
+      ],
+      "type": "object"
+    },
+    "range": {
+      "additionalProperties": false,
+      "properties": {
+        "volumeHigh": {
+          "additionalProperties": false,
+          "properties": {
+            "none": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "onsite": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "remote": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "none",
+            "remote",
+            "onsite"
+          ],
+          "type": "object"
+        },
+        "volumeLow": {
+          "additionalProperties": false,
+          "properties": {
+            "none": {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            "onsite": {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            "remote": {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "none",
+            "remote",
+            "onsite"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "volumeLow",
+        "volumeHigh"
+      ],
+      "type": "object"
+    },
+    "rounding": {
+      "additionalProperties": false,
+      "properties": {
+        "lineLei": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "rangeLei": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "totalLei": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "lineLei",
+        "totalLei",
+        "rangeLei"
+      ],
+      "type": "object"
+    },
+    "special": {
+      "additionalProperties": false,
+      "properties": {
+        "reinforcedPackingLei": {
+          "additionalProperties": false,
+          "properties": {
+            "fragile": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "piano": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "pristine": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "valuable": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "fragile",
+            "valuable",
+            "pristine",
+            "piano"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "reinforcedPackingLei"
+      ],
+      "type": "object"
+    },
+    "surcharges": {
+      "additionalProperties": false,
+      "properties": {
+        "weekend": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "weekend"
+      ],
+      "type": "object"
+    },
+    "survey": {
+      "additionalProperties": false,
+      "properties": {
+        "none": {
+          "additionalProperties": false,
+          "properties": {
+            "capTolerance": {
+              "type": "null"
+            },
+            "deductibleFromOrder": {
+              "type": "boolean"
+            },
+            "priceLei": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "priceLei",
+            "deductibleFromOrder",
+            "capTolerance"
+          ],
+          "type": "object"
+        },
+        "onsite": {
+          "additionalProperties": false,
+          "properties": {
+            "capTolerance": {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            "deductibleFromOrder": {
+              "type": "boolean"
+            },
+            "deductibleValidDays": {
+              "maximum": 9007199254740991,
+              "minimum": -9007199254740991,
+              "type": "integer"
+            },
+            "priceLei": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "priceLei",
+            "deductibleFromOrder",
+            "deductibleValidDays",
+            "capTolerance"
+          ],
+          "type": "object"
+        },
+        "remote": {
+          "additionalProperties": false,
+          "properties": {
+            "capTolerance": {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            "deductibleFromOrder": {
+              "type": "boolean"
+            },
+            "priceLei": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "priceLei",
+            "deductibleFromOrder",
+            "capTolerance"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "onsite",
+        "remote",
+        "none"
+      ],
+      "type": "object"
+    },
+    "vat": {
+      "additionalProperties": false,
+      "properties": {
+        "pricesIncludeVat": {
+          "const": true,
+          "type": "boolean"
+        },
+        "rate": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "rate",
+        "pricesIncludeVat"
+      ],
+      "type": "object"
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "currency",
+    "vat",
+    "rounding",
+    "crew",
+    "billing",
+    "minimumOrderLei",
+    "dispatch",
+    "surcharges",
+    "fullDay",
+    "overtime",
+    "packing",
+    "materials",
+    "crates",
+    "assembly",
+    "special",
+    "protection",
+    "includedFree",
+    "survey",
+    "range"
+  ],
+  "title": "pricing config (after unwrap)",
+  "type": "object"
+}

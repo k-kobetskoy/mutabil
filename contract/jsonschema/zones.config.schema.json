@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "accessRules": {
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "extraCarryM": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "maxGrossWeightT": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "note": {
+            "type": "string"
+          },
+          "permitAboveT": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "permitRequired": {
+            "type": "boolean"
+          },
+          "source": {
+            "type": "string"
+          },
+          "verified": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "maxGrossWeightT",
+          "source",
+          "verified"
+        ],
+        "type": "object"
+      },
+      "propertyNames": {
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "cityAccessRule": {
+      "type": "string"
+    },
+    "depot": {
+      "additionalProperties": false,
+      "properties": {
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "lat",
+        "lng"
+      ],
+      "type": "object"
+    },
+    "intercityDefaultKm": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "quickRouteKm": {
+      "additionalProperties": false,
+      "properties": {
+        "city": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "intercity": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "suburb": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "city",
+        "suburb",
+        "intercity"
+      ],
+      "type": "object"
+    },
+    "sameZoneKm": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "source": {
+      "type": "string"
+    },
+    "verified": {
+      "type": "boolean"
+    },
+    "version": {
+      "type": "string"
+    },
+    "zones": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "access": {
+            "type": "string"
+          },
+          "class": {
+            "enum": [
+              "city",
+              "suburb",
+              "intercity"
+            ],
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "lat": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "lng": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "name": {
+            "additionalProperties": false,
+            "properties": {
+              "en": {
+                "type": "string"
+              },
+              "ro": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "ro",
+              "en"
+            ],
+            "type": "object"
+          },
+          "uncertainAccess": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "class",
+          "lat",
+          "lng"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "version",
+    "depot",
+    "sameZoneKm",
+    "intercityDefaultKm",
+    "quickRouteKm",
+    "accessRules",
+    "zones",
+    "source",
+    "verified"
+  ],
+  "title": "zones config (after unwrap)",
+  "type": "object"
+}

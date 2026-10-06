@@ -4,12 +4,15 @@
  */
 import * as z from 'zod';
 
+/** string | number | boolean (rendered as anyOf for oapi-codegen, see scripts/gen-contract.ts). */
+export const Scalar = z.union([z.string(), z.number(), z.boolean()]).meta({ id: 'Scalar' });
+
 export const Bani = z.int().meta({ id: 'Bani', description: 'Money in bani (1 leu = 100 bani), VAT included' });
 
 export const Explain = z
   .object({
     key: z.string(),
-    params: z.record(z.string(), z.union([z.string(), z.number()])).optional(),
+    params: z.record(z.string(), Scalar).optional(),
   })
   .meta({ id: 'Explain', description: 'i18n key + params; texts live in messages/*.json' });
 
@@ -46,14 +49,14 @@ export const EstimateLine = z
 export const Assumption = z
   .object({
     path: z.string(),
-    value: z.union([z.string(), z.number(), z.boolean()]),
+    value: Scalar,
     explain: Explain,
   })
   .meta({ id: 'Assumption' });
 
 export const ScenarioOption = z
   .object({
-    value: z.union([z.string(), z.number(), z.boolean()]),
+    value: Scalar,
     total: Bani,
     delta: Bani,
   })
@@ -62,7 +65,7 @@ export const ScenarioOption = z
 export const Scenario = z
   .object({
     path: z.string(),
-    assumed: z.union([z.string(), z.number(), z.boolean()]),
+    assumed: Scalar,
     options: z.array(ScenarioOption),
   })
   .meta({ id: 'Scenario', description: 'Price for each possible answer of an unknown field (pricing variant B)' });

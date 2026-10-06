@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "steps": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "modes": {
+            "items": {
+              "enum": [
+                "quick",
+                "detailed"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "required": {
+            "additionalProperties": false,
+            "properties": {
+              "detailed": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "quick": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "slug": {
+            "additionalProperties": false,
+            "properties": {
+              "en": {
+                "type": "string"
+              },
+              "ro": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "ro",
+              "en"
+            ],
+            "type": "object"
+          },
+          "visibleIf": {}
+        },
+        "required": [
+          "id",
+          "slug",
+          "modes",
+          "required"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "steps"
+  ],
+  "title": "steps config (after unwrap)",
+  "type": "object"
+}

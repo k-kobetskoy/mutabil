@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "rules": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "each": {
+            "items": {
+              "enum": [
+                "from",
+                "to"
+              ],
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "id": {
+            "type": "string"
+          },
+          "then": {
+            "items": {
+              "oneOf": [
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "explain": {
+                      "type": "string"
+                    },
+                    "options": {
+                      "items": {
+                        "type": [
+                          "string",
+                          "number",
+                          "boolean"
+                        ]
+                      },
+                      "minItems": 2,
+                      "type": "array"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "sigma": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "const": "assume",
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "path",
+                    "value",
+                    "options",
+                    "explain"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "params": {
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "propertyNames": {
+                        "type": "string"
+                      },
+                      "type": "object"
+                    },
+                    "type": {
+                      "const": "addTask",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "code"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "allow": {
+                      "items": {
+                        "type": [
+                          "string",
+                          "number",
+                          "boolean"
+                        ]
+                      },
+                      "minItems": 1,
+                      "type": "array"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "const": "restrictOptions",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "path",
+                    "allow"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "const": "setDefault",
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "key": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "const": "hint",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "key"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "key": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "const": "explain",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "key"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "step": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "const": "hideStep",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "step"
+                  ],
+                  "type": "object"
+                }
+              ]
+            },
+            "type": "array"
+          },
+          "when": {}
+        },
+        "required": [
+          "id",
+          "when",
+          "then"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "rules"
+  ],
+  "title": "rules config (after unwrap)",
+  "type": "object"
+}

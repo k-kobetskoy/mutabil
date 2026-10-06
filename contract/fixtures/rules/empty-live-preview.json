@@ -1,0 +1,117 @@
+{
+  "name": "empty-live-preview",
+  "rulesVersion": "2026-10-06.1",
+  "input": {
+    "v": 1,
+    "mode": "quick",
+    "taskType": "apartment",
+    "size": {
+      "presetId": "garsoniera"
+    }
+  },
+  "expected": {
+    "order": {
+      "v": 1,
+      "mode": "quick",
+      "taskType": "apartment",
+      "size": {
+        "presetId": "garsoniera"
+      },
+      "from": {
+        "floor": 3,
+        "elevator": "small",
+        "stairs": "normal",
+        "carry": "10to30",
+        "parking": "nearby",
+        "furnitureInLift": "yes"
+      },
+      "to": {
+        "floor": 3,
+        "elevator": "small",
+        "stairs": "normal",
+        "carry": "10to30",
+        "parking": "nearby",
+        "furnitureInLift": "yes"
+      }
+    },
+    "fired": [
+      "floor-unanswered:from",
+      "floor-unanswered:to",
+      "elevator-unknown:from",
+      "elevator-unknown:to",
+      "stairs-unknown:from",
+      "stairs-unknown:to",
+      "carry-unknown:from",
+      "carry-unknown:to",
+      "parking-unknown:from",
+      "parking-unknown:to",
+      "furniture-in-lift-unknown:from",
+      "furniture-in-lift-unknown:to"
+    ],
+    "tasks": [
+      {
+        "code": "CLARIFY_ELEVATOR",
+        "params": {
+          "end": "from"
+        }
+      },
+      {
+        "code": "CLARIFY_ELEVATOR",
+        "params": {
+          "end": "to"
+        }
+      }
+    ],
+    "hints": [],
+    "assumptions": [
+      {
+        "path": "from.floor",
+        "value": 3
+      },
+      {
+        "path": "to.floor",
+        "value": 3
+      },
+      {
+        "path": "from.elevator",
+        "value": "small"
+      },
+      {
+        "path": "to.elevator",
+        "value": "small"
+      },
+      {
+        "path": "from.stairs",
+        "value": "normal"
+      },
+      {
+        "path": "to.stairs",
+        "value": "normal"
+      },
+      {
+        "path": "from.carry",
+        "value": "10to30"
+      },
+      {
+        "path": "to.carry",
+        "value": "10to30"
+      },
+      {
+        "path": "from.parking",
+        "value": "nearby"
+      },
+      {
+        "path": "to.parking",
+        "value": "nearby"
+      },
+      {
+        "path": "from.furnitureInLift",
+        "value": "yes"
+      },
+      {
+        "path": "to.furnitureInLift",
+        "value": "yes"
+      }
+    ]
+  }
+}

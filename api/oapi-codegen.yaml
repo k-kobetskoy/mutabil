@@ -1,0 +1,8 @@
+# Go types + std net/http strict server, generated from the committed spec (decisions D22).
+package: gen
+output: api.gen.go
+generate:
+  models: true
+  std-http-server: true
+  strict-server: true
+  embedded-spec: true

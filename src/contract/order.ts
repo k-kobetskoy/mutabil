@@ -23,7 +23,7 @@ export const ParkingChoice = z.enum(['atEntrance', 'nearby', 'far', 'unknown']).
 export const StairsChoice = z.enum(['normal', 'narrow', 'winding', 'unknown']).meta({ id: 'StairsChoice' });
 
 export const Endpoint = z
-  .object({
+  .strictObject({
     zoneId: z.string().min(1).max(40).optional().meta({ description: 'Zone id from config/zones.json' }),
     floor: z.int().min(0).max(30).optional().meta({ description: 'Romanian count: parter = 0' }),
     elevator: ElevatorChoice.optional(),
@@ -41,7 +41,7 @@ export const Qty = z.int().min(1).max(99);
 export const Count = z.int().min(0).max(400);
 
 export const CustomItem = z
-  .object({
+  .strictObject({
     label: z.string().max(60).optional(),
     wCm: z.int().min(1).max(400),
     dCm: z.int().min(1).max(400),
@@ -52,7 +52,7 @@ export const CustomItem = z
   .meta({ id: 'CustomItem' });
 
 export const SpecialItem = z
-  .object({
+  .strictObject({
     kind: z.enum(['fragile', 'valuable', 'pristine', 'piano']),
     label: z.string().max(60).optional(),
     declaredValueLei: z.int().min(0).max(10_000_000).optional(),
@@ -60,12 +60,12 @@ export const SpecialItem = z
   .meta({ id: 'SpecialItem' });
 
 export const OrderInput = z
-  .object({
+  .strictObject({
     v: z.literal(1),
     mode: z.enum(['quick', 'detailed']),
     taskType: TaskType.optional(),
     size: z
-      .object({
+      .strictObject({
         presetId: z.string().max(40).optional(),
         amount: z.enum(['light', 'normal', 'heavy']).optional(),
         storage: z.boolean().optional(),
@@ -80,7 +80,7 @@ export const OrderInput = z
     from: Endpoint.optional(),
     to: Endpoint.optional(),
     inventory: z
-      .object({
+      .strictObject({
         mode: z.enum(['preset', 'list', 'atSurvey']),
         items: z.record(z.string().max(40), Qty).optional(),
         custom: z.array(CustomItem).max(20).optional(),
@@ -90,7 +90,7 @@ export const OrderInput = z
       .optional(),
     special: z.array(SpecialItem).max(20).optional(),
     packing: z
-      .object({
+      .strictObject({
         who: z.enum(['self', 'partial', 'full']).optional(),
         containers: z.enum(['crates', 'cardboard', 'own']).optional(),
         wardrobeBoxes: z.int().min(0).max(50).optional(),
@@ -102,21 +102,21 @@ export const OrderInput = z
       })
       .optional(),
     assembly: z
-      .object({
+      .strictObject({
         items: z.record(z.string().max(40), Qty).optional(),
         disassembleOnMovingDay: z.boolean().optional(),
       })
       .optional(),
     protection: z
-      .object({
+      .strictObject({
         level: z.enum(['basic', 'full']),
         declaredValueLei: z.int().min(0).max(10_000_000).optional(),
         deductible: z.boolean().optional(),
       })
       .optional(),
-    survey: z.object({ method: z.enum(['onsite', 'remote', 'none']) }).optional(),
+    survey: z.strictObject({ method: z.enum(['onsite', 'remote', 'none']) }).optional(),
     schedule: z
-      .object({
+      .strictObject({
         date: z.iso.date().optional(),
         slot: z.enum(['morning', 'midday', 'afternoon']).optional(),
         fullDay: z.boolean().optional(),

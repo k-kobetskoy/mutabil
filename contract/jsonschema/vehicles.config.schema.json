@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "selection": {
+      "additionalProperties": false,
+      "properties": {
+        "maxTrips": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "payloadMargin": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "secondTripMaxDriveMin": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "volumeMargin": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "volumeMargin",
+        "payloadMargin",
+        "secondTripMaxDriveMin",
+        "maxTrips"
+      ],
+      "type": "object"
+    },
+    "vehicles": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "cargoCm": {
+            "additionalProperties": false,
+            "properties": {
+              "h": {
+                "minimum": 0,
+                "type": "number"
+              },
+              "l": {
+                "minimum": 0,
+                "type": "number"
+              },
+              "w": {
+                "minimum": 0,
+                "type": "number"
+              }
+            },
+            "required": [
+              "l",
+              "w",
+              "h"
+            ],
+            "type": "object"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "example": {
+            "type": "string"
+          },
+          "grossWeightT": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "hourlyLei": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "id": {
+            "type": "string"
+          },
+          "licence": {
+            "enum": [
+              "B",
+              "C1",
+              "C"
+            ],
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "payloadKg": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "source": {
+            "type": "string"
+          },
+          "usableM3": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "verified": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "enabled",
+          "grossWeightT",
+          "licence",
+          "usableM3",
+          "payloadKg",
+          "cargoCm",
+          "hourlyLei",
+          "example",
+          "source",
+          "verified"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "selection",
+    "vehicles"
+  ],
+  "title": "vehicles config (after unwrap)",
+  "type": "object"
+}

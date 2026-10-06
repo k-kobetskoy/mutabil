@@ -1,0 +1,547 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "amountModifiers": {
+      "additionalProperties": false,
+      "properties": {
+        "heavy": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "light": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "normal": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "light",
+        "normal",
+        "heavy"
+      ],
+      "type": "object"
+    },
+    "densityFallbackKgM3": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "geometricVolumeFactor": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "items": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "assemblyClass": {
+            "type": "string"
+          },
+          "assemblyMin": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "canStandOnEnd": {
+            "enum": [
+              "yes",
+              "no",
+              "caution"
+            ],
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "common": {
+            "type": "boolean"
+          },
+          "dimensionsCm": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "d": {
+                    "minimum": 0,
+                    "type": "number"
+                  },
+                  "h": {
+                    "minimum": 0,
+                    "type": "number"
+                  },
+                  "w": {
+                    "minimum": 0,
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "w",
+                  "d",
+                  "h"
+                ],
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "disassembly": {
+            "enum": [
+              "no",
+              "optional",
+              "required"
+            ],
+            "type": "string"
+          },
+          "disassemblyMin": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "flexible": {
+            "type": "boolean"
+          },
+          "fragile": {
+            "type": "boolean"
+          },
+          "heavy": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string"
+          },
+          "minMovers": {
+            "maximum": 9007199254740991,
+            "minimum": -9007199254740991,
+            "type": "integer"
+          },
+          "name": {
+            "additionalProperties": false,
+            "properties": {
+              "en": {
+                "type": "string"
+              },
+              "ro": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "ro",
+              "en"
+            ],
+            "type": "object"
+          },
+          "note": {
+            "type": "string"
+          },
+          "packaging": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "source": {
+            "type": "string"
+          },
+          "surveyRecommended": {
+            "type": "boolean"
+          },
+          "verified": {
+            "type": "boolean"
+          },
+          "volumeM3": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "weightKg": {
+            "minimum": 0,
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "category",
+          "name",
+          "volumeM3",
+          "dimensionsCm",
+          "weightKg",
+          "disassembly",
+          "disassemblyMin",
+          "assemblyMin",
+          "heavy",
+          "fragile",
+          "canStandOnEnd",
+          "packaging",
+          "source",
+          "verified"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "listSmallItemsShare": {
+      "maximum": 1,
+      "minimum": 0,
+      "type": "number"
+    },
+    "loadFactor": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "packaging": {
+      "additionalProperties": false,
+      "properties": {
+        "box": {
+          "additionalProperties": false,
+          "properties": {
+            "dimensionsCm": {
+              "additionalProperties": false,
+              "properties": {
+                "d": {
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "h": {
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "w": {
+                  "minimum": 0,
+                  "type": "number"
+                }
+              },
+              "required": [
+                "w",
+                "d",
+                "h"
+              ],
+              "type": "object"
+            },
+            "note": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            },
+            "verified": {
+              "type": "boolean"
+            },
+            "volumeM3": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "weightKg": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "volumeM3",
+            "weightKg",
+            "dimensionsCm",
+            "source",
+            "verified"
+          ],
+          "type": "object"
+        },
+        "crate": {
+          "additionalProperties": false,
+          "properties": {
+            "dimensionsCm": {
+              "additionalProperties": false,
+              "properties": {
+                "d": {
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "h": {
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "w": {
+                  "minimum": 0,
+                  "type": "number"
+                }
+              },
+              "required": [
+                "w",
+                "d",
+                "h"
+              ],
+              "type": "object"
+            },
+            "note": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            },
+            "verified": {
+              "type": "boolean"
+            },
+            "volumeM3": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "weightKg": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "volumeM3",
+            "weightKg",
+            "dimensionsCm",
+            "source",
+            "verified"
+          ],
+          "type": "object"
+        },
+        "kallaxInsert": {
+          "additionalProperties": false,
+          "properties": {
+            "dimensionsCm": {
+              "additionalProperties": false,
+              "properties": {
+                "d": {
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "h": {
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "w": {
+                  "minimum": 0,
+                  "type": "number"
+                }
+              },
+              "required": [
+                "w",
+                "d",
+                "h"
+              ],
+              "type": "object"
+            },
+            "note": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            },
+            "verified": {
+              "type": "boolean"
+            },
+            "volumeM3": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "weightKg": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "volumeM3",
+            "weightKg",
+            "dimensionsCm",
+            "source",
+            "verified"
+          ],
+          "type": "object"
+        },
+        "wardrobeBox": {
+          "additionalProperties": false,
+          "properties": {
+            "dimensionsCm": {
+              "additionalProperties": false,
+              "properties": {
+                "d": {
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "h": {
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "w": {
+                  "minimum": 0,
+                  "type": "number"
+                }
+              },
+              "required": [
+                "w",
+                "d",
+                "h"
+              ],
+              "type": "object"
+            },
+            "note": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            },
+            "verified": {
+              "type": "boolean"
+            },
+            "volumeM3": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "weightKg": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "volumeM3",
+            "weightKg",
+            "dimensionsCm",
+            "source",
+            "verified"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "box",
+        "crate",
+        "wardrobeBox",
+        "kallaxInsert"
+      ],
+      "type": "object"
+    },
+    "presets": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "boxes": {
+            "additionalProperties": false,
+            "properties": {
+              "max": {
+                "minimum": 0,
+                "type": "number"
+              },
+              "min": {
+                "minimum": 0,
+                "type": "number"
+              },
+              "typical": {
+                "minimum": 0,
+                "type": "number"
+              }
+            },
+            "required": [
+              "min",
+              "typical",
+              "max"
+            ],
+            "type": "object"
+          },
+          "description": {
+            "additionalProperties": false,
+            "properties": {
+              "en": {
+                "type": "string"
+              },
+              "ro": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "ro",
+              "en"
+            ],
+            "type": "object"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "additionalProperties": false,
+            "properties": {
+              "en": {
+                "type": "string"
+              },
+              "ro": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "ro",
+              "en"
+            ],
+            "type": "object"
+          },
+          "note": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "verified": {
+            "type": "boolean"
+          },
+          "volumeM3": {
+            "additionalProperties": false,
+            "properties": {
+              "max": {
+                "minimum": 0,
+                "type": "number"
+              },
+              "min": {
+                "minimum": 0,
+                "type": "number"
+              },
+              "typical": {
+                "minimum": 0,
+                "type": "number"
+              }
+            },
+            "required": [
+              "min",
+              "typical",
+              "max"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "description",
+          "volumeM3",
+          "boxes",
+          "source",
+          "verified"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "storageExtraM3": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "loadFactor",
+    "geometricVolumeFactor",
+    "densityFallbackKgM3",
+    "listSmallItemsShare",
+    "packaging",
+    "presets",
+    "amountModifiers",
+    "storageExtraM3",
+    "items"
+  ],
+  "title": "catalog config (after unwrap)",
+  "type": "object"
+}

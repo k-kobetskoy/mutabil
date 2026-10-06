@@ -1,0 +1,126 @@
+{
+  "name": "zona0-house",
+  "rulesVersion": "2026-10-06.1",
+  "input": {
+    "v": 1,
+    "mode": "detailed",
+    "taskType": "house",
+    "size": {
+      "presetId": "casa"
+    },
+    "from": {
+      "zoneId": "centru",
+      "floor": 2,
+      "elevator": "none",
+      "carry": "10to30",
+      "parking": "nearby",
+      "stairs": "normal"
+    },
+    "to": {
+      "zoneId": "floresti",
+      "floor": 3,
+      "elevator": "large",
+      "furnitureInLift": "yes",
+      "carry": "lt10",
+      "parking": "atEntrance",
+      "stairs": "normal"
+    },
+    "inventory": {
+      "mode": "preset"
+    },
+    "packing": {
+      "who": "full",
+      "containers": "cardboard",
+      "wardrobeBoxes": 4,
+      "tvProtection": 1,
+      "mirrorProtection": 2
+    },
+    "protection": {
+      "level": "full",
+      "declaredValueLei": 60000
+    },
+    "special": [
+      {
+        "kind": "fragile",
+        "label": "vase"
+      },
+      {
+        "kind": "pristine",
+        "declaredValueLei": 8000
+      }
+    ],
+    "survey": {
+      "method": "remote"
+    },
+    "schedule": {
+      "date": "2026-11-06",
+      "slot": "morning"
+    }
+  },
+  "expected": {
+    "order": {
+      "v": 1,
+      "mode": "detailed",
+      "taskType": "house",
+      "size": {
+        "presetId": "casa"
+      },
+      "from": {
+        "zoneId": "centru",
+        "floor": 2,
+        "elevator": "none",
+        "carry": "10to30",
+        "parking": "nearby",
+        "stairs": "normal"
+      },
+      "to": {
+        "zoneId": "floresti",
+        "floor": 3,
+        "elevator": "large",
+        "furnitureInLift": "yes",
+        "carry": "lt10",
+        "parking": "atEntrance",
+        "stairs": "normal"
+      },
+      "inventory": {
+        "mode": "preset"
+      },
+      "packing": {
+        "who": "full",
+        "containers": "cardboard",
+        "wardrobeBoxes": 4,
+        "tvProtection": 1,
+        "mirrorProtection": 2
+      },
+      "protection": {
+        "level": "full",
+        "declaredValueLei": 60000
+      },
+      "special": [
+        {
+          "kind": "fragile",
+          "label": "vase"
+        },
+        {
+          "kind": "pristine",
+          "declaredValueLei": 8000
+        }
+      ],
+      "survey": {
+        "method": "remote"
+      },
+      "schedule": {
+        "date": "2026-11-06",
+        "slot": "morning"
+      }
+    },
+    "fired": [
+      "house-survey"
+    ],
+    "tasks": [],
+    "hints": [
+      "rules.houseSurveyRecommended"
+    ],
+    "assumptions": []
+  }
+}

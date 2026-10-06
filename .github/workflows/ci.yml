@@ -1,0 +1,44 @@
+name: ci
+on:
+  push:
+  pull_request:
+
+jobs:
+  web:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - name: Contract and golden vectors are up to date
+        run: |
+          pnpm contract:check
+          pnpm vectors:check
+          git diff --exit-code -- contract/
+      - run: pnpm dlx @redocly/cli@2 lint contract/openapi.yaml
+      - run: pnpm build
+
+  go-contract:
+    needs: web
+    strategy:
+      matrix:
+        os: [ubuntu-24.04, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with: { go-version-file: api/go.mod }
+      - name: Generated Go code matches the committed spec
+        run: |
+          go generate ./...
+          git diff --exit-code -- .
+      - run: go vet ./...
+      - run: go test ./...
