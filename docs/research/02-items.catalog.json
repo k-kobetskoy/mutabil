@@ -1,0 +1,774 @@
+{
+  "schemaVersion": 1,
+  "id": "items-catalog",
+  "status": "draft",
+  "updated": "2026-10-06",
+  "meta": {
+    "description": "Catalog of movable items with loaded volume (m3), dimensions, weight and handling flags; apartment-type volume presets; vehicle list. Research draft R2. Every value is a placeholder until checked by the company (verified:false).",
+    "units": { "volume": "m3", "dimensions": "cm (w = width, d = depth, h = height, as the item normally stands)", "weight": "kg", "time": "minutes" },
+    "volumeConvention": "volumeM3 = space the item takes in the cargo area, following cube-sheet / Umzugsgutliste convention (already includes typical air around the item). NOT the geometric WxDxH product. Apply loadFactor on top (see docs/research/02-volume.md).",
+    "loadFactor": { "default": 1.10, "min": 1.05, "max": 1.20, "geometricVolumeFactor": 1.25, "source": { "url": "https://www.ditytruck.com/blog/how-to-calculate-moving-truck-capacity-a-2026-guide-for-stress-free-loading/", "note": "Average packing 70-80% efficient, professional 90-95%. German movers advise +10-15% reserve (askotrans-umzug.de / sanier.de, search-result summaries). Default 1.10 is an assumption for a professional crew applied to cube-sheet values." }, "verified": false },
+    "densityFallbackKgPerM3": { "value": 112, "source": { "url": "https://moveblueprint.com/guide/cube-sheet", "note": "US industry convention 7 lb per cubic foot = 112 kg/m3, average over a whole shipment of household goods, not per item." }, "verified": false },
+    "conversion": { "cubicFootToM3": 0.0283168, "raumeinheitToM3": 0.1, "note": "German Umzugsgutliste: 1 RE (Raumeinheit) = 0.1 m3." },
+    "enums": {
+      "needsDisassembly": ["no", "optional", "required"],
+      "canStandOnEnd": {
+        "yes": "can be carried/placed vertically (on its short side) in an elevator or on stairs without risk",
+        "no": "must stay in its normal orientation (or must not be stood on end)",
+        "caution": "possible for a short time with care; see notes"
+      }
+    },
+    "heavyRule": "heavy = true when weightKg >= 50 or the item needs 2+ people / special equipment. Assumption.",
+    "researchCaveat": "WebFetch was blocked in the research environment; values were taken from web-search result summaries of the cited pages. Each value must be checked against the source (or measured by the company) before setting verified:true."
+  },
+  "items": [
+    {
+      "id": "wardrobe-2-door", "category": "bedroom",
+      "name": { "ro": "Dulap haine 2 uși", "en": "Wardrobe, 2 doors" },
+      "volumeM3": 1.5, "dimensionsCm": { "w": 100, "d": 58, "h": 201 }, "weightKg": 70,
+      "needsDisassembly": "required", "disassemblyMinutes": 30, "assemblyMinutes": 45,
+      "heavy": true, "fragile": false, "canStandOnEnd": "no",
+      "packaging": ["stretch-film", "blankets"],
+      "notes": "Assembled height ~2 m: usually does not fit an elevator; carried as flat panels after disassembly. Dimensions typical of IKEA PAX module (assumption).",
+      "source": { "url": "https://www.extra.formularservice.niedersachsen.de/cdmextra/cfs/eject/pdf/242.pdf?print=yes&MANDANTID=5&FORMUID=035_035", "note": "Umzugsgutliste: 2-door wardrobe ~1.5 m3 (search summary). Dimensions, weight and minutes: assumption." },
+      "verified": false
+    },
+    {
+      "id": "wardrobe-3-door", "category": "bedroom",
+      "name": { "ro": "Dulap haine 3-4 uși", "en": "Wardrobe, 3-4 doors" },
+      "volumeM3": 2.4, "dimensionsCm": { "w": 150, "d": 58, "h": 201 }, "weightKg": 110,
+      "needsDisassembly": "required", "disassemblyMinutes": 45, "assemblyMinutes": 75,
+      "heavy": true, "fragile": false, "canStandOnEnd": "no",
+      "packaging": ["stretch-film", "blankets"],
+      "notes": "Sliding-door wardrobes take longer (+30 min, assumption). Mirror doors: fragile panels.",
+      "source": { "url": "https://www.extra.formularservice.niedersachsen.de/cdmextra/cfs/eject/pdf/242.pdf?print=yes&MANDANTID=5&FORMUID=035_035", "note": "Umzugsgutliste: 3-door or larger ~2.4 m3 (search summary). Rest: assumption." },
+      "verified": false
+    },
+    {
+      "id": "wardrobe-per-meter", "category": "bedroom",
+      "name": { "ro": "Dulap / corp mobilier modular (per metru lățime)", "en": "Wardrobe / cabinet wall, per metre of width" },
+      "volumeM3": 0.8, "dimensionsCm": { "w": 100, "d": 60, "h": 220 }, "weightKg": 60,
+      "needsDisassembly": "required", "disassemblyMinutes": 25, "assemblyMinutes": 40,
+      "heavy": true, "fragile": false, "canStandOnEnd": "no",
+      "packaging": ["stretch-film", "blankets"],
+      "notes": "Use for custom/built wardrobes and living-room wall units: quantity = metres of width, rounded up ('je angefangenen Meter').",
+      "source": { "url": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf", "note": "RLAU Umzugsgutliste: dismountable cabinet per started metre = 8 RE = 0.8 m3 (search summary). Weight/minutes: assumption." },
+      "verified": false
+    },
+    {
+      "id": "bed-double-frame", "category": "bedroom",
+      "name": { "ro": "Pat dublu (cadru + somieră, fără saltea)", "en": "Double bed frame with slats (no mattress)" },
+      "volumeM3": 1.2, "dimensionsCm": { "w": 170, "d": 210, "h": 100 }, "weightKg": 60,
+      "needsDisassembly": "required", "disassemblyMinutes": 20, "assemblyMinutes": 30,
+      "heavy": true, "fragile": false, "canStandOnEnd": "no",
+      "packaging": ["stretch-film", "blankets"],
+      "notes": "Dimensions for a 160x200 bed assembled (h = headboard). Bed with storage box/lift mechanism: +15 min each way, heavier (assumption). Mattress is a separate line.",
+      "source": { "url": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf", "note": "RLAU: double bed complete = 20 RE = 2.0 m3; split here as frame 1.2 + mattress 0.7 (split is an assumption). US cube sheets: double bed 60 cu ft = 1.7 m3, queen 65 cu ft = 1.84 m3 (moveblueprint.com)." },
+      "verified": false
+    },
+    {
+      "id": "bed-single-frame", "category": "bedroom",
+      "name": { "ro": "Pat single (cadru + somieră, fără saltea)", "en": "Single bed frame with slats (no mattress)" },
+      "volumeM3": 0.6, "dimensionsCm": { "w": 100, "d": 210, "h": 90 }, "weightKg": 30,
+      "needsDisassembly": "optional", "disassemblyMinutes": 15, "assemblyMinutes": 20,
+      "heavy": false, "fragile": false, "canStandOnEnd": "caution",
+      "packaging": ["stretch-film"],
+      "notes": "Some single beds fit an elevator standing on end if assembled; usually disassembled.",
+      "source": { "url": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf", "note": "RLAU: single bed complete = 10 RE = 1.0 m3; split frame 0.6 + mattress 0.35 (assumption)." },
+      "verified": false
+    },
+    {
+      "id": "mattress-double", "category": "bedroom",
+      "name": { "ro": "Saltea dublă 160×200", "en": "Double mattress 160x200" },
+      "volumeM3": 0.7, "dimensionsCm": { "w": 160, "d": 22, "h": 200 }, "weightKg": 35,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["mattress-bag"],
+      "notes": "Dimensions given as carried on edge (w x thickness x length). Foam mattresses can be bent slightly in an elevator; pocket-spring ones should not be folded (assumption). 180x200 / 200x200: +15-25% volume.",
+      "source": { "url": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf", "note": "Derived: RLAU double bed complete 2.0 m3 minus frame. Geometric 1.6x2.0x0.22 = 0.70 m3." },
+      "verified": false
+    },
+    {
+      "id": "mattress-single", "category": "bedroom",
+      "name": { "ro": "Saltea single 90×200", "en": "Single mattress 90x200" },
+      "volumeM3": 0.35, "dimensionsCm": { "w": 90, "d": 20, "h": 200 }, "weightKg": 18,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["mattress-bag"],
+      "notes": "",
+      "source": { "url": "assumption", "note": "Geometric 0.9x2.0x0.2 = 0.36 m3; consistent with RLAU single bed complete 1.0 m3." },
+      "verified": false
+    },
+    {
+      "id": "nightstand", "category": "bedroom",
+      "name": { "ro": "Noptieră", "en": "Nightstand" },
+      "volumeM3": 0.2, "dimensionsCm": { "w": 45, "d": 40, "h": 55 }, "weightKg": 10,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["stretch-film"],
+      "notes": "",
+      "source": { "url": "assumption", "note": "Typical German lists put small cabinets at ~2 RE; not confirmed in search results." },
+      "verified": false
+    },
+    {
+      "id": "chest-of-drawers", "category": "bedroom",
+      "name": { "ro": "Comodă", "en": "Chest of drawers" },
+      "volumeM3": 0.7, "dimensionsCm": { "w": 80, "d": 48, "h": 100 }, "weightKg": 45,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "caution",
+      "packaging": ["stretch-film", "blankets"],
+      "notes": "Drawers are taped/filmed shut; contents can stay if light (clothes). Remove drawers if heavy.",
+      "source": { "url": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf", "note": "RLAU: Kommode = 7 RE = 0.7 m3. US cube sheets: single dresser 30 cu ft = 0.85 m3 (moveblueprint.com)." },
+      "verified": false
+    },
+    {
+      "id": "sofa-2-seat", "category": "living",
+      "name": { "ro": "Canapea 2 locuri", "en": "Sofa, 2-seat" },
+      "volumeM3": 1.0, "dimensionsCm": { "w": 160, "d": 90, "h": 85 }, "weightKg": 45,
+      "needsDisassembly": "optional", "disassemblyMinutes": 10, "assemblyMinutes": 10,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["stretch-film", "sofa-cover"],
+      "notes": "Disassembly = removing legs/armrests if possible. Usually can stand on end in an elevator (protect the armrest).",
+      "source": { "url": "https://moveblueprint.com/research/cube-sheet-comparison-2026", "note": "US cube sheets: love seat 35 cu ft = 0.99 m3. RLAU: sofa per seat 4 RE = 0.4 m3/seat -> 0.8 m3." },
+      "verified": false
+    },
+    {
+      "id": "sofa-3-seat", "category": "living",
+      "name": { "ro": "Canapea 3 locuri", "en": "Sofa, 3-seat" },
+      "volumeM3": 1.4, "dimensionsCm": { "w": 210, "d": 95, "h": 85 }, "weightKg": 60,
+      "needsDisassembly": "optional", "disassemblyMinutes": 10, "assemblyMinutes": 10,
+      "heavy": true, "fragile": false, "canStandOnEnd": "caution",
+      "packaging": ["stretch-film", "sofa-cover"],
+      "notes": "Length 2.1 m standing on end needs elevator cabin height/diagonal >= ~2.1 m: often goes by stairs in Romanian blocks (to be checked in elevator research). Sofa-beds are heavier (~80-100 kg).",
+      "source": { "url": "https://moveblueprint.com/research/cube-sheet-comparison-2026", "note": "US consensus: sofa three cushion 50 cu ft = 1.42 m3. RLAU 0.4 m3/seat -> 1.2 m3; Sirelo UK 3-seater ~1.8 m3; Hamburg bulky-waste list 'Sofa gerade' 1.0 m3." },
+      "verified": false
+    },
+    {
+      "id": "sofa-corner", "category": "living",
+      "name": { "ro": "Colțar (canapea de colț)", "en": "Corner sofa (L-shaped)" },
+      "volumeM3": 2.5, "dimensionsCm": { "w": 250, "d": 170, "h": 85 }, "weightKg": 100,
+      "needsDisassembly": "optional", "disassemblyMinutes": 15, "assemblyMinutes": 15,
+      "heavy": true, "fragile": false, "canStandOnEnd": "caution",
+      "packaging": ["stretch-film", "sofa-cover"],
+      "notes": "Most corner sofas split into 2-3 modules; dimensions are assembled. Modules ~170-250 cm long each.",
+      "source": { "url": "https://aws.state.ak.us/OnlinePublicNotices/Notices/Attachment.aspx?id=157736", "note": "US cube sheet: sectional per section 30 cu ft = 0.85 m3; 3 sections = 2.55 m3. RLAU lists 'Couch L-Form' separately (value not captured)." },
+      "verified": false
+    },
+    {
+      "id": "armchair", "category": "living",
+      "name": { "ro": "Fotoliu", "en": "Armchair" },
+      "volumeM3": 0.7, "dimensionsCm": { "w": 80, "d": 85, "h": 90 }, "weightKg": 25,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["stretch-film"],
+      "notes": "Recliner/massage chair: heavier (40-60 kg), treat as heavy.",
+      "source": { "url": "http://nordsee-umzuege.de/wp-content/uploads/2017/08/Nordsee_Umzuege_Umzugsgutliste_Final-1.pdf", "note": "Umzugsgutliste: armchair with armrests 8 RE = 0.8 m3, without 4 RE = 0.4 m3; Hamburg bulky waste 'Sessel' 0.4 m3. Chosen 0.7 (assumption)." },
+      "verified": false
+    },
+    {
+      "id": "coffee-table", "category": "living",
+      "name": { "ro": "Măsuță de cafea", "en": "Coffee table" },
+      "volumeM3": 0.3, "dimensionsCm": { "w": 110, "d": 60, "h": 45 }, "weightKg": 15,
+      "needsDisassembly": "optional", "disassemblyMinutes": 5, "assemblyMinutes": 5,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["blankets"],
+      "notes": "Glass top: fragile = true, use glass protection.",
+      "source": { "url": "https://aws.state.ak.us/OnlinePublicNotices/Notices/Attachment.aspx?id=157736", "note": "US cube sheet: coffee table 10 cu ft = 0.28 m3." },
+      "verified": false
+    },
+    {
+      "id": "dining-table", "category": "living",
+      "name": { "ro": "Masă dining (4-6 persoane)", "en": "Dining table (4-6 seats)" },
+      "volumeM3": 0.8, "dimensionsCm": { "w": 160, "d": 90, "h": 75 }, "weightKg": 35,
+      "needsDisassembly": "optional", "disassemblyMinutes": 10, "assemblyMinutes": 15,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["blankets", "stretch-film"],
+      "notes": "Removing legs makes it fit any elevator. Solid wood / stone top: heavy.",
+      "source": { "url": "https://aws.state.ak.us/OnlinePublicNotices/Notices/Attachment.aspx?id=157736", "note": "US cube sheet: dining table 4-6 seats 25 cu ft = 0.71 m3; German calculators ~0.8 m3 (search summary, solide-umzuege.de / askotrans-umzug.de)." },
+      "verified": false
+    },
+    {
+      "id": "dining-chair", "category": "living",
+      "name": { "ro": "Scaun", "en": "Dining chair" },
+      "volumeM3": 0.2, "dimensionsCm": { "w": 45, "d": 50, "h": 90 }, "weightKg": 5,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["stretch-film"],
+      "notes": "Stackable chairs: count 0.1 m3 each (assumption).",
+      "source": { "url": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf", "note": "RLAU: Stuhl = 2 RE = 0.2 m3." },
+      "verified": false
+    },
+    {
+      "id": "tv-stand", "category": "living",
+      "name": { "ro": "Comodă TV", "en": "TV stand" },
+      "volumeM3": 0.4, "dimensionsCm": { "w": 160, "d": 40, "h": 50 }, "weightKg": 30,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["stretch-film", "blankets"],
+      "notes": "",
+      "source": { "url": "assumption", "note": "Geometric 0.32 m3 + air." },
+      "verified": false
+    },
+    {
+      "id": "tv", "category": "electronics",
+      "name": { "ro": "Televizor (până la 65\")", "en": "TV (up to 65\")" },
+      "volumeM3": 0.3, "dimensionsCm": { "w": 125, "d": 10, "h": 75 }, "weightKg": 18,
+      "needsDisassembly": "optional", "disassemblyMinutes": 15, "assemblyMinutes": 20,
+      "heavy": false, "fragile": true, "canStandOnEnd": "no",
+      "packaging": ["tv-protection"],
+      "notes": "Dimensions for a 55\" panel. Transport upright, never flat on the screen. Disassembly = removing wall mount/stand; wall mounting on arrival is a separate service.",
+      "source": { "url": "http://nordsee-umzuege.de/wp-content/uploads/2017/08/Nordsee_Umzuege_Umzugsgutliste_Final-1.pdf", "note": "Umzugsgutliste: Fernseher 3 RE = 0.3 m3 (search summary)." },
+      "verified": false
+    },
+    {
+      "id": "bookshelf", "category": "living",
+      "name": { "ro": "Bibliotecă / raft (≈80 cm lățime)", "en": "Bookshelf (~80 cm wide)" },
+      "volumeM3": 0.5, "dimensionsCm": { "w": 80, "d": 30, "h": 200 }, "weightKg": 35,
+      "needsDisassembly": "optional", "disassemblyMinutes": 15, "assemblyMinutes": 20,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["stretch-film"],
+      "notes": "Transported empty; books go into small boxes (heavy). Height 2 m: check elevator.",
+      "source": { "url": "http://nordsee-umzuege.de/wp-content/uploads/2017/08/Nordsee_Umzuege_Umzugsgutliste_Final-1.pdf", "note": "Umzugsgutliste: dismountable bookshelf per metre 4 RE = 0.4 m3; assembled geometric 0.8x0.3x2.0 = 0.48 m3." },
+      "verified": false
+    },
+    {
+      "id": "kallax-2x4", "category": "living",
+      "name": { "ro": "IKEA KALLAX 2×4", "en": "IKEA KALLAX 2x4" },
+      "volumeM3": 0.45, "dimensionsCm": { "w": 77, "d": 39, "h": 147 }, "weightKg": 25,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["stretch-film"],
+      "notes": "Unit transported empty and assembled. Inserts (drawers/boxes) count as ready boxes: add 'kallax-insert' lines, no packing time. Open cells without inserts need ~1 standard box per 2 cells (assumption).",
+      "source": { "url": "https://www.dimensions.com/element/ikea-kallax-shelf-unit-4x4", "note": "Dimensions 77x39x147 cm, ~25 kg (search summary of dimensions.com / itemfits.com). Volume = geometric 0.44 m3 (no extra air: rectangular, stacks well)." },
+      "verified": false
+    },
+    {
+      "id": "kallax-4x4", "category": "living",
+      "name": { "ro": "IKEA KALLAX 4×4", "en": "IKEA KALLAX 4x4" },
+      "volumeM3": 0.85, "dimensionsCm": { "w": 147, "d": 39, "h": 147 }, "weightKg": 40,
+      "needsDisassembly": "optional", "disassemblyMinutes": 25, "assemblyMinutes": 40,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["stretch-film"],
+      "notes": "147x147 cm: fits most elevators only lying diagonally/on side; otherwise carried by stairs (2 people) or disassembled. Inserts as for 2x4.",
+      "source": { "url": "https://www.dimensions.com/element/ikea-kallax-shelf-unit-4x4", "note": "Dimensions 147x39x147 cm, ~40 kg (search summary). Volume = geometric 0.84 m3." },
+      "verified": false
+    },
+    {
+      "id": "kallax-insert", "category": "boxes",
+      "name": { "ro": "Cutie/sertar KALLAX (insert)", "en": "KALLAX insert box/drawer" },
+      "volumeM3": 0.04, "dimensionsCm": { "w": 33, "d": 38, "h": 33 }, "weightKg": 5,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": [],
+      "notes": "Counts as a ready-packed box: no packing material, no packing time, only carrying. Lid/closure: contents secured with film if open (assumption).",
+      "source": { "url": "assumption", "note": "Typical DRONA-type insert ~33x38x33 cm (from memory, not verified)." },
+      "verified": false
+    },
+    {
+      "id": "desk", "category": "office",
+      "name": { "ro": "Birou (până la 160 cm)", "en": "Desk (up to 160 cm)" },
+      "volumeM3": 1.2, "dimensionsCm": { "w": 140, "d": 70, "h": 75 }, "weightKg": 35,
+      "needsDisassembly": "optional", "disassemblyMinutes": 15, "assemblyMinutes": 20,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["blankets"],
+      "notes": "Desk over 160 cm or corner desk: use 1.7 m3. Electric sit-stand desk: heavy (50-60 kg), disassembly recommended.",
+      "source": { "url": "http://nordsee-umzuege.de/wp-content/uploads/2017/08/Nordsee_Umzuege_Umzugsgutliste_Final-1.pdf", "note": "Umzugsgutliste: Schreibtisch up to 1.6 m = 12 RE = 1.2 m3; over 1.6 m = 17 RE = 1.7 m3." },
+      "verified": false
+    },
+    {
+      "id": "office-chair", "category": "office",
+      "name": { "ro": "Scaun de birou", "en": "Office chair" },
+      "volumeM3": 0.4, "dimensionsCm": { "w": 65, "d": 65, "h": 110 }, "weightKg": 15,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["stretch-film"],
+      "notes": "",
+      "source": { "url": "assumption", "note": "Geometric 0.46 m3; chairs nest partially in the van." },
+      "verified": false
+    },
+    {
+      "id": "filing-cabinet", "category": "office",
+      "name": { "ro": "Fișet metalic / dulap documente", "en": "Filing cabinet (metal)" },
+      "volumeM3": 0.5, "dimensionsCm": { "w": 47, "d": 62, "h": 132 }, "weightKg": 55,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": true, "fragile": false, "canStandOnEnd": "no",
+      "packaging": ["blankets"],
+      "notes": "Must be emptied (documents into boxes); weight is empty.",
+      "source": { "url": "assumption", "note": "" },
+      "verified": false
+    },
+    {
+      "id": "pc-monitor-set", "category": "office",
+      "name": { "ro": "Calculator + monitor (ambalate)", "en": "PC + monitor (packed)" },
+      "volumeM3": 0.15, "dimensionsCm": null, "weightKg": 15,
+      "needsDisassembly": "optional", "disassemblyMinutes": 10, "assemblyMinutes": 15,
+      "heavy": false, "fragile": true, "canStandOnEnd": "no",
+      "packaging": ["bubble-wrap", "box-standard"],
+      "notes": "Disconnect/reconnect cables only; no IT setup.",
+      "source": { "url": "assumption", "note": "" },
+      "verified": false
+    },
+    {
+      "id": "printer-mfp", "category": "office",
+      "name": { "ro": "Imprimantă multifuncțională de birou", "en": "Office multifunction printer" },
+      "volumeM3": 0.4, "dimensionsCm": { "w": 60, "d": 65, "h": 75 }, "weightKg": 60,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": true, "fragile": true, "canStandOnEnd": "no",
+      "packaging": ["stretch-film", "blankets"],
+      "notes": "Floor-standing office MFP. Desktop printer: use 0.1 m3, 10 kg.",
+      "source": { "url": "assumption", "note": "" },
+      "verified": false
+    },
+    {
+      "id": "washing-machine", "category": "appliances",
+      "name": { "ro": "Mașină de spălat rufe", "en": "Washing machine" },
+      "volumeM3": 0.5, "dimensionsCm": { "w": 60, "d": 60, "h": 85 }, "weightKg": 70,
+      "needsDisassembly": "optional", "disassemblyMinutes": 15, "assemblyMinutes": 20,
+      "heavy": true, "fragile": false, "canStandOnEnd": "caution",
+      "packaging": ["blankets", "stretch-film"],
+      "notes": "Disassembly = disconnect water/drain + fit transport bolts (client must have them). Transport upright. Reconnection on arrival only to existing hookups (assumption).",
+      "source": { "url": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf", "note": "Umzugsgutliste: washing machine/dryer 5 RE = 0.5 m3. US cube sheets: washer 25 cu ft = 0.71 m3 (moveblueprint.com). Weight: assumption." },
+      "verified": false
+    },
+    {
+      "id": "dryer", "category": "appliances",
+      "name": { "ro": "Uscător de rufe", "en": "Tumble dryer" },
+      "volumeM3": 0.5, "dimensionsCm": { "w": 60, "d": 60, "h": 85 }, "weightKg": 45,
+      "needsDisassembly": "optional", "disassemblyMinutes": 10, "assemblyMinutes": 15,
+      "heavy": false, "fragile": false, "canStandOnEnd": "caution",
+      "packaging": ["blankets", "stretch-film"],
+      "notes": "Heat-pump dryers contain refrigerant: transport upright, wait before switching on (manufacturer manual).",
+      "source": { "url": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf", "note": "Umzugsgutliste: washing machine/dryer 5 RE = 0.5 m3." },
+      "verified": false
+    },
+    {
+      "id": "dishwasher", "category": "appliances",
+      "name": { "ro": "Mașină de spălat vase (independentă)", "en": "Dishwasher (freestanding)" },
+      "volumeM3": 0.5, "dimensionsCm": { "w": 60, "d": 60, "h": 85 }, "weightKg": 45,
+      "needsDisassembly": "optional", "disassemblyMinutes": 15, "assemblyMinutes": 20,
+      "heavy": false, "fragile": false, "canStandOnEnd": "caution",
+      "packaging": ["blankets", "stretch-film"],
+      "notes": "Built-in units: removal from kitchen cabinetry is a separate, longer job (assumption 30-45 min).",
+      "source": { "url": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf", "note": "RLAU: Geschirrspülmaschine 5 RE = 0.5 m3." },
+      "verified": false
+    },
+    {
+      "id": "fridge-small", "category": "appliances",
+      "name": { "ro": "Frigider mic (sub blat, ≤120 l)", "en": "Small fridge (under-counter, <=120 l)" },
+      "volumeM3": 0.5, "dimensionsCm": { "w": 55, "d": 57, "h": 85 }, "weightKg": 30,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "caution",
+      "packaging": ["blankets", "stretch-film"],
+      "notes": "Defrost and empty before the move.",
+      "source": { "url": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf", "note": "RLAU: fridge/chest freezer up to 120 l = 5 RE = 0.5 m3." },
+      "verified": false
+    },
+    {
+      "id": "fridge-standard", "category": "appliances",
+      "name": { "ro": "Combină frigorifică standard (60 cm)", "en": "Fridge-freezer, standard 60 cm" },
+      "volumeM3": 0.8, "dimensionsCm": { "w": 60, "d": 65, "h": 185 }, "weightKg": 70,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": true, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["blankets", "stretch-film"],
+      "notes": "Transport upright (normal orientation = standing). Lying down only on its side as last resort; then stand upright before switching on (LG: up to 24 h; common rule 2x time lying, max 24 h). Must be defrosted/empty.",
+      "source": { "url": "https://sirelo.co.uk/removal-volume-calculator/", "note": "Sirelo UK: fridge/freezer ~0.8 m3. RLAU: fridge >120 l = 1.0 m3; Hamburg bulky waste 0.4 m3. Handling: lg.com transport guide." },
+      "verified": false
+    },
+    {
+      "id": "fridge-side-by-side", "category": "appliances",
+      "name": { "ro": "Frigider side-by-side / american", "en": "Side-by-side (American) fridge" },
+      "volumeM3": 1.7, "dimensionsCm": { "w": 91, "d": 72, "h": 178 }, "weightKg": 120,
+      "needsDisassembly": "optional", "disassemblyMinutes": 20, "assemblyMinutes": 30,
+      "heavy": true, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["blankets", "stretch-film"],
+      "notes": "Depth with doors ~72 cm; often doors must be removed to pass 80 cm door frames (disassembly 'optional'). Water line disconnect. Needs 3 people or a stair trolley (assumption).",
+      "source": { "url": "https://moveblueprint.com/research/cube-sheet-comparison-2026", "note": "US cube sheets: refrigerator side-by-side 60 cu ft = 1.70 m3. Dimensions/weight: assumption." },
+      "verified": false
+    },
+    {
+      "id": "freezer", "category": "appliances",
+      "name": { "ro": "Congelator (vertical sau ladă, >120 l)", "en": "Freezer (upright or chest, >120 l)" },
+      "volumeM3": 1.0, "dimensionsCm": { "w": 60, "d": 65, "h": 155 }, "weightKg": 60,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": true, "fragile": false, "canStandOnEnd": "caution",
+      "packaging": ["blankets", "stretch-film"],
+      "notes": "Chest freezer must stay horizontal (normal orientation); upright freezer as fridge.",
+      "source": { "url": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf", "note": "RLAU: fridge/Truhe >120 l = 10 RE = 1.0 m3 (search summary)." },
+      "verified": false
+    },
+    {
+      "id": "cooker", "category": "appliances",
+      "name": { "ro": "Aragaz / cuptor independent", "en": "Freestanding cooker / oven" },
+      "volumeM3": 0.5, "dimensionsCm": { "w": 60, "d": 60, "h": 85 }, "weightKg": 45,
+      "needsDisassembly": "optional", "disassemblyMinutes": 10, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "caution",
+      "packaging": ["blankets", "stretch-film"],
+      "notes": "Gas disconnection/connection must be done by an authorised technician (ISCIR / gas distributor rules) - not by movers (assumption, check). Disassembly = electrical disconnect only.",
+      "source": { "url": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf", "note": "RLAU: Herd 5 RE = 0.5 m3." },
+      "verified": false
+    },
+    {
+      "id": "microwave", "category": "appliances",
+      "name": { "ro": "Cuptor cu microunde", "en": "Microwave" },
+      "volumeM3": 0.1, "dimensionsCm": { "w": 50, "d": 40, "h": 30 }, "weightKg": 13,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": true, "canStandOnEnd": "no",
+      "packaging": ["bubble-wrap"],
+      "notes": "Remove glass turntable and pack separately.",
+      "source": { "url": "assumption", "note": "Geometric 0.06 m3 + wrapping." },
+      "verified": false
+    },
+    {
+      "id": "piano-upright", "category": "special",
+      "name": { "ro": "Pianină (pian vertical)", "en": "Upright piano" },
+      "volumeM3": 1.5, "dimensionsCm": { "w": 151, "d": 61, "h": 121 }, "weightKg": 230,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": true, "fragile": true, "canStandOnEnd": "no",
+      "packaging": ["blankets", "piano-board"],
+      "notes": "Special handling: 3-4 people, piano board/straps; check elevator rated load and floor. Tuning after move is the client's responsibility. Recommend manual quote ('price at survey').",
+      "source": { "url": "https://daynesmusic.com/boston-up-118e-vertical-piano", "note": "Boston UP-118E: 151x60x118 cm, 255 kg; Yamaha U1: ~150x61x121 cm, ~217-230 kg (search summary). Volume: Umzugsgutliste Klavier 15 RE = 1.5 m3; US cube sheets 60 cu ft = 1.7 m3." },
+      "verified": false
+    },
+    {
+      "id": "bicycle", "category": "misc",
+      "name": { "ro": "Bicicletă", "en": "Bicycle" },
+      "volumeM3": 0.5, "dimensionsCm": { "w": 175, "d": 60, "h": 105 }, "weightKg": 15,
+      "needsDisassembly": "optional", "disassemblyMinutes": 5, "assemblyMinutes": 5,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["stretch-film"],
+      "notes": "Disassembly = turn handlebar, remove pedals. E-bike: 25-30 kg.",
+      "source": { "url": "http://nordsee-umzuege.de/wp-content/uploads/2017/08/Nordsee_Umzuege_Umzugsgutliste_Final-1.pdf", "note": "Umzugsgutliste: Fahrrad/Moped 5 RE = 0.5 m3." },
+      "verified": false
+    },
+    {
+      "id": "plant-small", "category": "misc",
+      "name": { "ro": "Plantă mică (ghiveci ≤30 cm)", "en": "Small plant (pot <=30 cm)" },
+      "volumeM3": 0.05, "dimensionsCm": { "w": 30, "d": 30, "h": 50 }, "weightKg": 5,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": true, "canStandOnEnd": "no",
+      "packaging": ["box-standard"],
+      "notes": "Several small plants can share an open crate.",
+      "source": { "url": "assumption", "note": "" },
+      "verified": false
+    },
+    {
+      "id": "plant-large", "category": "misc",
+      "name": { "ro": "Plantă mare (de podea)", "en": "Large floor plant" },
+      "volumeM3": 0.3, "dimensionsCm": { "w": 60, "d": 60, "h": 150 }, "weightKg": 25,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": true, "canStandOnEnd": "no",
+      "packaging": ["stretch-film"],
+      "notes": "Cannot be stacked on; loaded last. Cold season: damage risk (assumption).",
+      "source": { "url": "assumption", "note": "" },
+      "verified": false
+    },
+    {
+      "id": "mirror-large", "category": "misc",
+      "name": { "ro": "Oglindă mare / tablou mare (>80 cm)", "en": "Large mirror / picture (>80 cm)" },
+      "volumeM3": 0.1, "dimensionsCm": { "w": 80, "d": 5, "h": 180 }, "weightKg": 15,
+      "needsDisassembly": "optional", "disassemblyMinutes": 10, "assemblyMinutes": 15,
+      "heavy": false, "fragile": true, "canStandOnEnd": "yes",
+      "packaging": ["mirror-protection"],
+      "notes": "Transport on edge, never flat. Disassembly = taking off the wall; hanging on arrival is a separate service. German calculators also show 0.2 m3 for a mirror cabinet.",
+      "source": { "url": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf", "note": "RLAU: Spiegel over 0.8 m = 1 RE = 0.1 m3." },
+      "verified": false
+    },
+    {
+      "id": "carpet-roll", "category": "misc",
+      "name": { "ro": "Covor (rulat)", "en": "Carpet (rolled)" },
+      "volumeM3": 0.3, "dimensionsCm": { "w": 200, "d": 30, "h": 30 }, "weightKg": 15,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": ["stretch-film"],
+      "notes": "Rolling/unrolling 5 min each (assumption). Large wool carpets 3x4 m: ~30-40 kg.",
+      "source": { "url": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf", "note": "RLAU: Teppich 3 RE = 0.3 m3." },
+      "verified": false
+    },
+    {
+      "id": "floor-lamp", "category": "misc",
+      "name": { "ro": "Lampadar", "en": "Floor lamp" },
+      "volumeM3": 0.1, "dimensionsCm": { "w": 40, "d": 40, "h": 170 }, "weightKg": 5,
+      "needsDisassembly": "optional", "disassemblyMinutes": 5, "assemblyMinutes": 5,
+      "heavy": false, "fragile": true, "canStandOnEnd": "yes",
+      "packaging": ["bubble-wrap"],
+      "notes": "Shade packed separately in a box.",
+      "source": { "url": "assumption", "note": "" },
+      "verified": false
+    },
+    {
+      "id": "vacuum-cleaner", "category": "misc",
+      "name": { "ro": "Aspirator", "en": "Vacuum cleaner" },
+      "volumeM3": 0.2, "dimensionsCm": null, "weightKg": 7,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": [],
+      "notes": "",
+      "source": { "url": "https://www.solide-umzuege.de/umzugsvolumen_berechnen.php", "note": "German moving calculators: Staubsauger ~0.2 m3 (search summary, page not opened)." },
+      "verified": false
+    },
+    {
+      "id": "suitcase", "category": "boxes",
+      "name": { "ro": "Valiză mare", "en": "Large suitcase" },
+      "volumeM3": 0.12, "dimensionsCm": { "w": 50, "d": 30, "h": 75 }, "weightKg": 15,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": [],
+      "notes": "Packed by client; counts as a ready box.",
+      "source": { "url": "assumption", "note": "Geometric 0.11 m3." },
+      "verified": false
+    },
+    {
+      "id": "stroller", "category": "misc",
+      "name": { "ro": "Cărucior copil", "en": "Baby stroller" },
+      "volumeM3": 0.3, "dimensionsCm": { "w": 60, "d": 90, "h": 100 }, "weightKg": 12,
+      "needsDisassembly": "optional", "disassemblyMinutes": 2, "assemblyMinutes": 2,
+      "heavy": false, "fragile": false, "canStandOnEnd": "caution",
+      "packaging": ["stretch-film"],
+      "notes": "Folded: ~0.15 m3.",
+      "source": { "url": "assumption", "note": "" },
+      "verified": false
+    },
+    {
+      "id": "box-standard", "category": "boxes",
+      "name": { "ro": "Cutie carton standard (~60 l)", "en": "Standard cardboard box (~60 l)" },
+      "volumeM3": 0.1, "dimensionsCm": { "w": 48.5, "d": 32.5, "h": 38 }, "weightKg": 15,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": [],
+      "notes": "Max recommended filled weight ~20 kg (assumption). Geometric 0.06 m3; 0.1 m3 per box is the industry convention (~10 boxes per m3 of load).",
+      "source": { "url": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf", "note": "Umzugsgutliste: Umzugskarton up to 80 l = 1 RE = 0.1 m3; over 80 l = 1.5 RE. Dimensions 48.5x32.5x38 cm (60 l) and '~10 boxes per m3' from a Dutch search-result summary (webwoordenboek.nl)." },
+      "verified": false
+    },
+    {
+      "id": "box-books", "category": "boxes",
+      "name": { "ro": "Cutie mică pentru cărți (~35 l)", "en": "Small book box (~35 l)" },
+      "volumeM3": 0.05, "dimensionsCm": { "w": 40, "d": 30, "h": 30 }, "weightKg": 18,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": [],
+      "notes": "Books ~0.5 kg/l: a 35 l box full of books ~18 kg; dense, drives payload not volume.",
+      "source": { "url": "assumption", "note": "" },
+      "verified": false
+    },
+    {
+      "id": "crate-reusable", "category": "boxes",
+      "name": { "ro": "Ladă reutilizabilă din plastic (a companiei)", "en": "Company reusable plastic crate" },
+      "volumeM3": 0.1, "dimensionsCm": { "w": 60, "d": 40, "h": 35 }, "weightKg": 18,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "no",
+      "packaging": [],
+      "notes": "ASSUMPTION: 60x40x35 cm outer, ~70-80 l inner. Geometric 0.084 m3; rigid and stackable with lid, so 0.09-0.1 m3 loaded. Empty crates nest (delivery/collection volume much smaller - to measure). Weight = typical filled weight.",
+      "source": { "url": "assumption", "note": "Dimensions given by the project brief as an assumption; replace with the company's actual crate model." },
+      "verified": false
+    },
+    {
+      "id": "wardrobe-box", "category": "boxes",
+      "name": { "ro": "Cutie garderobă (cu bară de umerașe)", "en": "Wardrobe box (with hanging rail)" },
+      "volumeM3": 0.4, "dimensionsCm": { "w": 50, "d": 60, "h": 120 }, "weightKg": 15,
+      "needsDisassembly": "no", "disassemblyMinutes": 0, "assemblyMinutes": 0,
+      "heavy": false, "fragile": false, "canStandOnEnd": "yes",
+      "packaging": [],
+      "notes": "Holds ~50-60 cm of hanging clothes (assumption). Geometric 0.36 m3.",
+      "source": { "url": "assumption", "note": "Typical wardrobe box ~50x60x120 cm; size not confirmed by a fetched source." },
+      "verified": false
+    },
+    {
+      "id": "office-workstation-bundle", "category": "office",
+      "name": { "ro": "Post de lucru complet (birou + scaun + PC + 4 cutii)", "en": "Office workstation bundle (desk + chair + PC + 4 boxes)" },
+      "volumeM3": 2.15, "dimensionsCm": null, "weightKg": 125,
+      "needsDisassembly": "optional", "disassemblyMinutes": 25, "assemblyMinutes": 35,
+      "heavy": true, "fragile": true, "canStandOnEnd": "no",
+      "packaging": ["box-standard", "bubble-wrap"],
+      "notes": "Convenience bundle for the office scenario = desk 1.2 + office-chair 0.4 + pc-monitor-set 0.15 + 4 x box-standard 0.4. Derived, so explainable from the lines above.",
+      "source": { "url": "assumption", "note": "Derived from catalog lines." },
+      "verified": false
+    }
+  ],
+  "roomPresets": {
+    "note": "Total loaded volume BEFORE loadFactor, including boxes, excluding kitchen cabinets (in Romania kitchen furniture usually stays). min/max ~ p10/p90 guess; typical = point estimate. Romanian naming: 'camere' counts living room + bedrooms (kitchen and bathroom not counted).",
+    "presets": [
+      {
+        "id": "garsoniera", "name": { "ro": "Garsonieră", "en": "Studio (garsoniera)" },
+        "description": { "ro": "o cameră + bucătărie mică/chicinetă + baie, ~20-35 m²", "en": "single room + kitchenette + bathroom, ~20-35 m2" },
+        "areaM2": { "min": 20, "max": 35 },
+        "volumeM3": { "min": 6, "typical": 9, "max": 13 },
+        "boxes": { "min": 15, "typical": 20, "max": 30 },
+        "source": { "url": "https://www.deutschland-rechner.de/umzugskosten-rechner", "note": "Derived from rule 3-4 m3 per 10 m2 of living area (search summary) applied to 20-35 m2. Garsoniera area 11-26 m2 in old blocks (bzi.ro). Box counts: kaufland.pl gives 10-15 for <=40 m2, raised as assumption." },
+        "verified": false
+      },
+      {
+        "id": "apartament-1-camera", "name": { "ro": "Apartament 1 cameră (nou)", "en": "1-room flat (new build)" },
+        "description": { "ro": "o cameră + bucătărie separată/open-space + baie, ~30-45 m²", "en": "one room + separate/open kitchen + bathroom, ~30-45 m2" },
+        "areaM2": { "min": 30, "max": 45 },
+        "volumeM3": { "min": 9, "typical": 12, "max": 17 },
+        "boxes": { "min": 20, "typical": 25, "max": 35 },
+        "source": { "url": "https://www.bzi.ro/garsoniera-sau-apartament-de-1-camera-in-iasi-avantaje-si-capcane-la-care-trebuie-sa-fii-atent-5426126", "note": "Area per bzi.ro (search summary). Volume: 3-4 m3/10 m2 rule; German 1-Zimmer-Wohnung 10-20 m3 (search summary)." },
+        "verified": false
+      },
+      {
+        "id": "apartament-2-camere", "name": { "ro": "Apartament 2 camere", "en": "2-room flat (1 bedroom + living)" },
+        "description": { "ro": "sufragerie + 1 dormitor, ~45-60 m²", "en": "living room + 1 bedroom, ~45-60 m2" },
+        "areaM2": { "min": 45, "max": 60 },
+        "volumeM3": { "min": 14, "typical": 18, "max": 25 },
+        "boxes": { "min": 25, "typical": 35, "max": 50 },
+        "source": { "url": "https://www.man-with-a-van.co.uk/advice/removal-van-sizes.php", "note": "UK: 1-bedroom flat 300-500 cu ft = 8.5-14 m3, 250 cu ft (~7 m3) per furnished bedroom; Germany 2-Zimmer 15-25 m3; Romania: 3.5 t van 15-20 m3 for 2-3 camere (brig.ro). Range is a synthesis (assumption)." },
+        "verified": false
+      },
+      {
+        "id": "apartament-3-camere", "name": { "ro": "Apartament 3 camere", "en": "3-room flat (2 bedrooms + living)" },
+        "description": { "ro": "sufragerie + 2 dormitoare, ~60-80 m²", "en": "living room + 2 bedrooms, ~60-80 m2" },
+        "areaM2": { "min": 60, "max": 80 },
+        "volumeM3": { "min": 20, "typical": 27, "max": 35 },
+        "boxes": { "min": 40, "typical": 50, "max": 70 },
+        "source": { "url": "https://www.man-with-a-van.co.uk/advice/removal-van-sizes.php", "note": "UK: 2-bedroom flat 600-900 cu ft = 17-25.5 m3; 3-4 m3/10 m2 rule -> 18-32 m3. Synthesis (assumption)." },
+        "verified": false
+      },
+      {
+        "id": "apartament-4-camere", "name": { "ro": "Apartament 4 camere", "en": "4-room flat (3 bedrooms + living)" },
+        "description": { "ro": "sufragerie + 3 dormitoare, ~80-100 m²", "en": "living room + 3 bedrooms, ~80-100 m2" },
+        "areaM2": { "min": 80, "max": 100 },
+        "volumeM3": { "min": 28, "typical": 35, "max": 45 },
+        "boxes": { "min": 55, "typical": 70, "max": 90 },
+        "source": { "url": "https://www.deutschland-rechner.de/umzugskosten-rechner", "note": "3-4 m3/10 m2 rule (search summary) -> 24-40 m3; +~7 m3 per extra bedroom (UK rule). Assumption." },
+        "verified": false
+      },
+      {
+        "id": "casa", "name": { "ro": "Casă", "en": "House" },
+        "description": { "ro": "casă / duplex; recomandat inventar detaliat sau evaluare", "en": "house / duplex; itemised inventory or survey recommended" },
+        "areaM2": { "min": 100, "max": 200 },
+        "volumeM3": { "min": 35, "typical": 50, "max": 80 },
+        "boxes": { "min": 60, "typical": 90, "max": 140 },
+        "source": { "url": "assumption", "note": "Very wide spread (garage, attic, garden). Quick mode should push to itemised mode or survey." },
+        "verified": false
+      },
+      {
+        "id": "birou-per-post", "name": { "ro": "Birou (per post de lucru)", "en": "Office (per workstation)" },
+        "description": { "ro": "volum per angajat: birou, scaun, PC, ~4 cutii; plus dulapuri/arhivă separat", "en": "per employee: desk, chair, PC, ~4 boxes; cabinets/archive separately" },
+        "areaM2": null,
+        "volumeM3": { "min": 1.5, "typical": 2.15, "max": 3.0 },
+        "boxes": { "min": 3, "typical": 4, "max": 8 },
+        "source": { "url": "assumption", "note": "Derived from office-workstation-bundle." },
+        "verified": false
+      }
+    ],
+    "modifiers": [
+      { "id": "few-things", "name": { "ro": "Puține lucruri / minimalist", "en": "Few belongings" }, "factor": 0.8, "source": { "url": "assumption" }, "verified": false },
+      { "id": "normal", "name": { "ro": "Normal", "en": "Average" }, "factor": 1.0, "source": { "url": "assumption" }, "verified": false },
+      { "id": "many-things", "name": { "ro": "Multe lucruri", "en": "Many belongings" }, "factor": 1.25, "source": { "url": "assumption" }, "verified": false },
+      { "id": "with-storage", "name": { "ro": "Cu boxă / pivniță / balcon plin", "en": "Plus storage room / cellar / full balcony" }, "addM3": 3, "source": { "url": "assumption" }, "verified": false }
+    ]
+  },
+  "vehicles": [
+    {
+      "id": "van-6", "name": "Furgon mic ~6 m³ (tip Renault Trafic / Ford Transit Custom L2H1)",
+      "bodyType": "panel-van", "gvwKg": 3000,
+      "nominalVolumeM3": 6.0, "usableVolumeM3": 5.4, "payloadKg": 1000,
+      "cargoCm": { "l": 280, "w": 166, "h": 140 }, "betweenWheelArchesCm": 125,
+      "licence": "B",
+      "notes": "Small jobs: a few large items, student moves. All values assumption (no source fetched).",
+      "source": { "url": "assumption", "note": "Usable = nominal x 0.9 (wheel arches, door frame) - assumption." },
+      "verified": false
+    },
+    {
+      "id": "renault-master-l1h1", "name": "Renault Master L1H1 (~8 m³)",
+      "bodyType": "panel-van", "gvwKg": 3500,
+      "nominalVolumeM3": 8.0, "usableVolumeM3": 7.2, "payloadKg": 873,
+      "cargoCm": { "l": 258, "w": 176, "h": 170 }, "betweenWheelArchesCm": null,
+      "licence": "B",
+      "notes": "Width 176 cm is an assumption; length/height/volume/payload from source.",
+      "source": { "url": "https://www.vanguide.co.uk/guides/renault-master-dimensions/", "note": "L1H1 load length 2583 mm, height 1700 mm, 8 m3, payload up to 873 kg (search summary)." },
+      "verified": false
+    },
+    {
+      "id": "ford-transit-l2h2", "name": "Ford Transit L2H2 (~10 m³)",
+      "bodyType": "panel-van", "gvwKg": 3500,
+      "nominalVolumeM3": 10.0, "usableVolumeM3": 9.0, "payloadKg": 1200,
+      "cargoCm": { "l": 304, "w": 178, "h": 188 }, "betweenWheelArchesCm": 139,
+      "licence": "B",
+      "notes": "FWD figures (RWD 9.5 m3). Payload assumption (depends on engine/trim).",
+      "source": { "url": "https://www.vanguide.co.uk/guides/ford-transit-dimensions/", "note": "L2H2: load length 3044, width 1784, height 1886 mm, 10.0 m3 FWD; 1392 mm between arches (search summary)." },
+      "verified": false
+    },
+    {
+      "id": "mercedes-sprinter-l2h2", "name": "Mercedes-Benz Sprinter L2H2 (~10.5-11 m³)",
+      "bodyType": "panel-van", "gvwKg": 3500,
+      "nominalVolumeM3": 10.5, "usableVolumeM3": 9.5, "payloadKg": 1268,
+      "cargoCm": { "l": 340, "w": 178, "h": 194 }, "betweenWheelArchesCm": 135,
+      "licence": "B",
+      "notes": "Volume 10.5 is an assumption (German rental guides quote 11-14 m3 for 'Sprinter lang'). Height: sources disagree (vanaways spec ~2009-2079 mm vs ~1940 mm): verify on the company's vehicle. Between arches 1350-1412 mm.",
+      "source": { "url": "https://strapi.cmstest.vanaways.co.uk/vans/mercedes-benz/sprinter/sprinter-315cdi-l2-diesel-fwd/35t-h2-premium-van-2020/spec-sheet.pdf", "note": "315 CDI L2H2: payload 1268 kg, load width 1787 mm, 1412 mm between arches. Length 3.3-3.5 m and 1.35 m between arches: basworld.com (search summaries)." },
+      "verified": false
+    },
+    {
+      "id": "ford-transit-l3h3", "name": "Ford Transit L3H3 (~13 m³)",
+      "bodyType": "panel-van", "gvwKg": 3500,
+      "nominalVolumeM3": 13.0, "usableVolumeM3": 11.7, "payloadKg": 1100,
+      "cargoCm": { "l": 349, "w": 178, "h": 212 }, "betweenWheelArchesCm": 139,
+      "licence": "B",
+      "notes": "Payload assumption.",
+      "source": { "url": "https://www.vanguide.co.uk/guides/ford-transit-dimensions/", "note": "L3H3: 3494 x 1784 x 2125 mm, 13.0 m3 FWD (search summary)." },
+      "verified": false
+    },
+    {
+      "id": "mercedes-sprinter-l3h2", "name": "Mercedes-Benz Sprinter L3H2 (~14 m³)",
+      "bodyType": "panel-van", "gvwKg": 3500,
+      "nominalVolumeM3": 14.0, "usableVolumeM3": 12.6, "payloadKg": 1087,
+      "cargoCm": { "l": 431, "w": 178, "h": 194 }, "betweenWheelArchesCm": 135,
+      "licence": "B",
+      "notes": "Common 'duba' for 1-2 room moves in Romania. Height to verify (see L2H2).",
+      "source": { "url": "https://www.autoklass.ro/articole/modelul-sprinter-furgon.html", "note": "Long, raised roof: 4.31 m, 14 m3; extra-long 4.71 m, 15.5 m3 (search summary). Payload 1087 kg, load length 4410 mm: vanaways 315 CDI L3H2 spec sheet." },
+      "verified": false
+    },
+    {
+      "id": "ford-transit-l4h3", "name": "Ford Transit L4H3 Jumbo (~15 m³)",
+      "bodyType": "panel-van", "gvwKg": 3500,
+      "nominalVolumeM3": 15.1, "usableVolumeM3": 13.6, "payloadKg": 1000,
+      "cargoCm": { "l": 422, "w": 178, "h": 212 }, "betweenWheelArchesCm": 115,
+      "licence": "B",
+      "notes": "RWD twin rear wheels: 1154 mm between arches. Payload assumption.",
+      "source": { "url": "https://www.vanguide.co.uk/guides/ford-transit-dimensions/", "note": "L4H3: load length 4217 mm, width 1784 mm, 15.1 m3 (search summary)." },
+      "verified": false
+    },
+    {
+      "id": "iveco-daily-35s-16", "name": "Iveco Daily 35S furgon (~16 m³)",
+      "bodyType": "panel-van", "gvwKg": 3500,
+      "nominalVolumeM3": 16.0, "usableVolumeM3": 14.4, "payloadKg": 1220,
+      "cargoCm": { "l": 470, "w": 180, "h": 190 }, "betweenWheelArchesCm": null,
+      "licence": "B",
+      "notes": "Cargo dimensions are assumptions. Payload: lower end of 1220-1420 kg range.",
+      "source": { "url": "https://www.basworld.com/content/iveco-daily-van-dimensions-cargo-space-chassis", "note": "Daily 35S van 7.3-16 m3; payload 1220-1420 kg for 3.5 t (search summary; truck1.eu 35S14: 1430 kg)." },
+      "verified": false
+    },
+    {
+      "id": "box-35t-20", "name": "Dubă cu box / Luton 3,5 t (~18-20 m³)",
+      "bodyType": "box", "gvwKg": 3500,
+      "nominalVolumeM3": 19.4, "usableVolumeM3": 18.5, "payloadKg": 1000,
+      "cargoCm": { "l": 400, "w": 220, "h": 220 }, "betweenWheelArchesCm": 220,
+      "licence": "B",
+      "notes": "Rectangular box, no wheel arches -> usable ~95% (assumption). Payload is the binding limit: 18.5 m3 x 112 kg/m3 = ~2.1 t > ~1 t payload. Tail-lift reduces payload. Cluj firms advertise 14/20/24 m3 with ~1.2 t payload.",
+      "source": { "url": "https://letsmovelondon.co.uk/luton-van-size-guide-dimensions-and-capacity-for-london-removals/", "note": "3.5 t Luton 4.0 x 2.2 x 2.2 m, 18-20 m3; payload ~1 t / 800-1200 kg with tail lift (vanreviewer.co.uk, enterprise.co.uk) (search summaries)." },
+      "verified": false
+    },
+    {
+      "id": "truck-75t-30", "name": "Camion 7,5 t cu box (~30 m³)",
+      "bodyType": "box", "gvwKg": 7500,
+      "nominalVolumeM3": 30.0, "usableVolumeM3": 28.5, "payloadKg": 2500,
+      "cargoCm": { "l": 600, "w": 240, "h": 220 }, "betweenWheelArchesCm": 240,
+      "licence": "C1",
+      "notes": "Needs C1 licence (and tachograph/driver CPC rules - to check). Cluj: >3.5 t restricted in zona 0 (historic centre) under HCL 484/2011; >7.5 t banned except with free-passage authorisation (since 18.07.2025). Dimensions/payload assumption.",
+      "source": { "url": "https://www.untrr.ro/ro/tia-i-ca-in-cluj-zona-0-are-reguli-speciale.html", "note": "Volume range 20-35 m3 for 7.5 t from German rental guides (search summary). Cluj rules: untrr.ro, primariaclujnapoca.ro (search summaries)." },
+      "verified": false
+    }
+  ],
+  "vehicleSelection": {
+    "safetyMargin": 0.10,
+    "payloadMargin": 0.05,
+    "maxFillForQuickMode": "use volumeM3.max of the range",
+    "secondTripAllowedIfDriveMinutesOneWayMax": 30,
+    "secondTripSecuringMinutes": 15,
+    "overflowSmallThreshold": 0.15,
+    "note": "Algorithm in docs/research/02-volume.md section 7. All numbers are assumptions.",
+    "source": { "url": "assumption" },
+    "verified": false
+  }
+}

@@ -1,0 +1,208 @@
+{
+  "$schema_note": "Классы лифтов для конфигуратора (R3). Все размеры — внутренние/чистые, см. Значения представительные (консервативные внутри класса), verified:false. Подробности и источники — docs/research/03-time-elevators.md, раздел 'Лифты'.",
+  "version": "0.1.0",
+  "unknownFallback": "small",
+  "unknownExtraSigmaLn": 0.10,
+  "fitMarginsCm": {
+    "value": { "door": 5, "height": 5, "floor": 3 },
+    "source": "Предположение: зазор на одеяла/стрейч и руки грузчика",
+    "verified": false
+  },
+  "personsRule": {
+    "value": "persons = floor(ratedLoadKg / 75)",
+    "source": "EN 81-20 §5.4.2 (связь номинальной нагрузки, площади кабины и числа пассажиров; 75 кг на человека — по памяти, не подтверждено поиском). Обзор: https://elevatorworld.com/article/rated-load-and-maximum-available-car-area",
+    "verified": false,
+    "note": "Позволяет восстановить класс по табличке, если на ней видно только кг или только число людей."
+  },
+  "plateRequirement": {
+    "value": "В кабине обязательна хорошо видимая табличка с номинальной нагрузкой (кг) и максимальным числом пассажиров.",
+    "source": "Lifts Directive 2014/33/EU, Annex I (в UK — The Lifts Regulations 2016, Schedule 1 para 6): https://legislation.gov.uk/uksi/2016/1093/schedule/1/paragraph/6/data.xht ; EN 81-20 §5.4.2",
+    "verified": false,
+    "note": "Для старых лифтов (до директивы) табличка тоже почти всегда есть (советско/румынская практика + требования ISCIR), но это Предположение."
+  },
+  "classes": [
+    {
+      "id": "none",
+      "label": { "ro": "Fără lift / liftul nu funcționează", "en": "No elevator / elevator out of order" },
+      "hint": {
+        "ro": "Alegeți și dacă liftul există, dar asociația interzice transportul mobilei cu el.",
+        "en": "Also pick this if there is a lift but the building rules forbid moving furniture in it."
+      },
+      "ratedLoadKg": 0,
+      "persons": 0,
+      "cabinCm": null,
+      "doorCm": null,
+      "cabinVolumeM3": 0,
+      "rules": { "everythingByStairs": true },
+      "timeFactor": null,
+      "timeFactorNote": "Используется access.floorPenaltyNoLift из 03-time.config.json.",
+      "cratesPerTrip": 0,
+      "m3PerTripEffective": 0,
+      "typicalBuildings": "Blocuri P+3/P+4 до 1989 г. (≈88 000 зданий / 3,5 млн жителей без лифта по данным программы 'Lift pentru viață'); дома старого центра.",
+      "source": "https://www.ziarulprofit.ro/proiect-cu-mare-impact-social-adoptat-in-parlament-lift-pentru-viata-un-program-care-prevede-constructia-de-lifturi-in-exteriorul-blocurilor-vechi-sau-rampe-de-acces/ ; https://www.capital.ro/schimbare-in-blocurile-cu-trei-sau-patru-etaje-veste-buna-pentru-milioane-de-romani-care-stau-la-bloc.html",
+      "verified": false
+    },
+    {
+      "id": "small",
+      "label": { "ro": "Lift mic (bloc vechi, 4 persoane, ~300–400 kg)", "en": "Small lift (old block, 4 persons, ~300–400 kg)" },
+      "hint": {
+        "ro": "Tipic pentru blocurile P+8/P+10 construite înainte de 1990: uși cu deschidere manuală sau ușă de ~70 cm, cabina cam 1 × 1 m. Pe plăcuța din cabină scrie 4 persoane / 300 sau 320 kg.",
+        "en": "Typical for pre-1990 P+8/P+10 blocks: manual swing door or ~70 cm door, cabin about 1 × 1 m. The plate inside says 4 persons / 300 or 320 kg."
+      },
+      "ratedLoadKg": 320,
+      "ratedLoadRangeKg": [300, 400],
+      "persons": 4,
+      "personsRange": [4, 5],
+      "cabinCm": { "w": 90, "d": 100, "h": 200 },
+      "cabinVariantsCm": [
+        { "w": 90, "d": 100, "h": null, "door": 70, "load": 300, "persons": 4, "source": "Тендерная спецификация ECO4AA (300 kg, 4 pers., дверь 700 мм, кабина 900×1000) — по сниппету поиска: https://construnews.com/archivos/87239/ascensor_ecolift.pdf" },
+        { "w": 100, "d": 108, "h": 220, "door": 70, "load": 400, "persons": 4, "source": "Caiet de sarcini модернизации лифтов в старых блоках (дверь 700×2000, кабина ≥1005×1085, h 2200) — по сниппету поиска, Молдова: https://storage.mtender.gov.md/get/b3d5c2be-4ad9-4e69-b723-fe7ebaa128af-1563990892595" },
+        { "w": 110, "d": 95, "h": null, "door": 80, "load": 400, "persons": 5, "source": "ГОСТ 5746-83 (СССР): 400 кг, кабина 1100×950, дверь 800 — https://dnaop.com/html/42632_2.html" }
+      ],
+      "doorCm": { "w": 70, "h": 200 },
+      "doorType": "manual swing landing door + folding/sliding car door (Предположение для старых блоков)",
+      "cabinVolumeM3": 1.8,
+      "rules": {
+        "doorClearCm": 65,
+        "maxUprightHeightCm": 195,
+        "floorDiagonalCm": 135,
+        "maxUprightFootprintRule": "прямоугольник b×c (после поворота) вписывается в 87×97 см; для тонкого предмета (c≤5 см) максимальная ширина b ≈ 129 см, c=20 → 115, c=40 → 100",
+        "maxLongThinItemCm": 220,
+        "maxLongThinItemNote": "Тонкие длинные предметы (панели шкафа, столешница, доски, c ≤ 5 см, b ≤ 60 см) наклонно в плоскости 'глубина × высота': √(200² + 129²) ≈ 238 см минус запас.",
+        "examples": {
+          "fridge_60x65x185": "fits (upright)",
+          "sofa_2seat_200x90x85": "no (глубина 85 > дверь 65)",
+          "mattress_160x200": "no (160 > диагонали пола; только по лестнице)",
+          "mattress_90x200": "borderline: стоя 200 > 195 — только если гнётся (пена), иначе по лестнице",
+          "pax_frame_100x58x236": "no (236 > высоты и наклонной диагонали с учётом ширины 58)",
+          "kallax_4x4_147x147x39": "no",
+          "crate_stack_dolly_5x": "fits (2 стопки)"
+        }
+      },
+      "timeFactor": 1.20,
+      "timeFactorNote": "Множитель к времени переноски на этом конце: узкая дверь, мало места, ручные двери, грузчик едет с грузом. Предположение.",
+      "cratesPerTrip": 10,
+      "cratesNote": "Ящик ~60×40×35 см (~0,08 м³), стопка 5 шт на тележке, 2 стопки + 1 грузчик на 0,9 м². Предположение.",
+      "m3PerTripEffective": 0.6,
+      "typicalBuildings": "Blocuri P+8 / P+10 1965–1990 (≈9 из 10 блоков с лифтами построены в 1960–80-х). Многие лифты выработали ресурс.",
+      "source": "https://adevarul.ro/stiri-locale/buzau/lifturile-buzoiene-adevarate-custi-ale-groazei-806927.html ; https://www.capital.ro/romania-sta-pe-o-bomba-cu-ceas-romanii-care-stau-la-bloc-sunt-in-pericol.html ; см. cabinVariantsCm",
+      "verified": false
+    },
+    {
+      "id": "medium",
+      "label": { "ro": "Lift mediu (6–8 persoane, 450–630 kg)", "en": "Medium lift (6–8 persons, 450–630 kg)" },
+      "hint": {
+        "ro": "Tipic pentru blocuri noi (după 2000) și lifturi înlocuite: ușă automată de 80–90 cm, cabina cam 1 × 1,25 m sau 1,1 × 1,4 m. Pe plăcuță: 6 persoane / 450 kg sau 8 persoane / 630 kg.",
+        "en": "Typical for new buildings (after 2000) and replaced lifts: automatic door 80–90 cm, cabin about 1 × 1.25 m or 1.1 × 1.4 m. Plate: 6 persons / 450 kg or 8 persons / 630 kg."
+      },
+      "ratedLoadKg": 450,
+      "ratedLoadRangeKg": [450, 800],
+      "persons": 6,
+      "personsRange": [6, 10],
+      "cabinCm": { "w": 100, "d": 125, "h": 210 },
+      "cabinVariantsCm": [
+        { "w": 100, "d": 125, "h": null, "door": 80, "load": 450, "persons": 6, "source": "EN 81-70 Type 1 (1000×1250, в ред. 2018 — 1000×1300; дверь ≥800): https://www.tkelevator.com/media/austria/brochures_tke/tke-en8170-fact-sheet-atch-de-v082021.pdf ; https://elevatorworld.com/?p=71343" },
+        { "w": 110, "d": 140, "h": null, "door": 80, "load": 630, "persons": 8, "source": "ISO 4190-1 Class I 630 kg (1100×1400, вход ≥800 по узкой стороне — по сниппету): https://dnaop.com/html/61164_12.html ; EN 81-70 Type 2 (дверь ≥900 по сниппету KONE): https://kone.co.uk/tools-downloads/codes-and-standards/en81-70-compliant-solutions" }
+      ],
+      "doorCm": { "w": 80, "h": 200 },
+      "doorType": "automatic telescopic/center-opening",
+      "cabinVolumeM3": 2.63,
+      "rules": {
+        "doorClearCm": 75,
+        "maxUprightHeightCm": 205,
+        "floorDiagonalCm": 160,
+        "maxUprightFootprintRule": "прямоугольник b×c вписывается в 97×122 см; тонкий (c≤5) — b до ≈155 см, c=20 → 141, c=40 → 125",
+        "maxLongThinItemCm": 245,
+        "examples": {
+          "fridge_70x70x200": "fits",
+          "sofa_2seat_200x90x85": "no (глубина 85 > дверь 75); если спинка/ножки снимаются и c ≤ 75 — стоя (200 ≤ 205)",
+          "mattress_160x200": "borderline: 160 > 141 при толщине 20 — по лестнице, если не гнётся",
+          "mattress_90x200": "fits (стоя, 200 ≤ 205)",
+          "pax_frame_100x58x236": "no (236 > 205 стоя; наклонно мешает ширина 58)",
+          "kallax_4x4_147x147x39": "no (147 > 125 при толщине 39)"
+        }
+      },
+      "timeFactor": 1.10,
+      "timeFactorNote": "Предположение.",
+      "cratesPerTrip": 15,
+      "cratesNote": "3 стопки по 5 + грузчик. Предположение.",
+      "m3PerTripEffective": 1.1,
+      "typicalBuildings": "Новостройки Клужа (Florești, Sopor, Borhanci, Bună Ziua), заменённые лифты в старых блоках (ограничены размером шахты). NP 057-02: зданиям выше P+5 — минимум 2 лифта, один из которых позволяет перевозить крупную мебель.",
+      "source": "https://www.avocatnet.ro/forum/discutie_475950/Regim-de-inaltime-al-unei-cladiri-si-dotarea-cu-ascensoare.html (NP 057-02 по сниппету) ; см. cabinVariantsCm",
+      "verified": false
+    },
+    {
+      "id": "large",
+      "label": { "ro": "Lift mare / de marfă / pentru targă (≥ 1000 kg, 13+ persoane)", "en": "Large / freight / stretcher lift (≥ 1000 kg, 13+ persons)" },
+      "hint": {
+        "ro": "Cabina adâncă (cam 1,1 × 2,1 m sau mai mare), ușa de 90 cm sau mai lată. Frecvent în clădiri noi înalte, birouri, spitale, ca al doilea lift 'pentru mobilă'.",
+        "en": "Deep cabin (about 1.1 × 2.1 m or larger), door 90 cm or wider. Common in new high-rise, offices, hospitals, as the second 'furniture' lift."
+      },
+      "ratedLoadKg": 1000,
+      "ratedLoadRangeKg": [1000, 2500],
+      "persons": 13,
+      "personsRange": [13, 33],
+      "cabinCm": { "w": 110, "d": 210, "h": 210 },
+      "cabinVariantsCm": [
+        { "w": 110, "d": 210, "h": null, "door": 90, "load": 1000, "persons": 13, "source": "EN 81-70 Type 3 (1100×2100, дверь ≥900) — сниппет KONE/TKE; SL1000 Evac: 1000 kg, 13 pers., 1100×2100, проём 900×2100–2200: https://source.thenbs.com/product/evacuation-lift/2UdXdM9bDybEB9EPhnR3eY/vhCbWGyawyV2hLAUtgic9r" },
+        { "w": 140, "d": 200, "h": null, "door": 110, "load": 1275, "persons": 17, "source": "EN 81-70 Type 5 (1400×2000 или 2000×1400, дверь ≥1100) — сниппет: https://kone.co.uk/tools-downloads/codes-and-standards/en81-70-compliant-solutions" },
+        { "w": 140, "d": 240, "h": null, "door": 130, "load": 1600, "persons": 21, "source": "Больничный лифт ISO 4190-1 class III — по памяти, не подтверждено поиском (Предположение)" }
+      ],
+      "doorCm": { "w": 90, "h": 200 },
+      "doorType": "automatic",
+      "cabinVolumeM3": 4.85,
+      "rules": {
+        "doorClearCm": 85,
+        "maxUprightHeightCm": 205,
+        "floorDiagonalCm": 237,
+        "maxUprightFootprintRule": "прямоугольник b×c вписывается в 107×207 см; тонкий — b до ≈233 см, c=40 → 210",
+        "maxLongThinItemCm": 290,
+        "examples": {
+          "sofa_2seat_200x90x85": "fits (лёжа на полу 200 ≤ 207; дверь 85 ≥ 85 впритык — Предположение: проверить)",
+          "sofa_3seat_230x95x90": "стоя нет (230 > 205), лёжа нет (230 > 207) → по лестнице или разборка",
+          "mattress_160x200": "fits (стоя/лёжа)",
+          "pax_frame_100x58x236": "borderline (наклонно; 236 < 290, но ширина 58 и разворот в двери) — по умолчанию разборка",
+          "kallax_4x4_147x147x39": "fits"
+        }
+      },
+      "timeFactor": 1.05,
+      "timeFactorNote": "Почти как parter: быстрая загрузка, тележки въезжают. Предположение.",
+      "cratesPerTrip": 30,
+      "cratesNote": "6 стопок по 5. Предположение.",
+      "m3PerTripEffective": 2.2,
+      "typicalBuildings": "Новые здания > P+5 (второй лифт по NP 057-02), офисы, больницы.",
+      "source": "см. cabinVariantsCm",
+      "verified": false
+    },
+    {
+      "id": "unknown",
+      "label": { "ro": "Nu știu ce lift este", "en": "I don't know the elevator type" },
+      "hint": {
+        "ro": "Calculăm prudent ca pentru un lift mic. Fotografiați plăcuța din cabină (kg / persoane) sau măsurați lățimea ușii — prețul garantat se poate micșora.",
+        "en": "We calculate conservatively as a small lift. Photograph the plate inside the cabin (kg / persons) or measure the door width — the guaranteed window may get shorter."
+      },
+      "resolvesTo": "small",
+      "extraSigmaLn": 0.10,
+      "identification": [
+        "photo_of_plate (kg + persoane) → class by ratedLoadKg: <450 small; 450–800 medium; ≥1000 large (800–999 → medium, Предположение)",
+        "door_width_measured: <75 cm small; 75–89 medium; ≥90 large (+ глубина кабины ≥ 180 → large)",
+        "ask_administrator_asociatie (тип лифта, разрешено ли перевозить мебель, требования к защите кабины)",
+        "company_address_db (адрес → класс лифта, ширина двери, фото, дата, кто подтвердил)"
+      ],
+      "source": "см. plateRequirement",
+      "verified": false
+    }
+  ],
+  "fitAlgorithm": {
+    "value": "sort dims a≥b≥c; passesDoor = c ≤ doorClear && b ≤ doorH−margin; fitsInCabin = ∃ ориентация (v; x,y) из перестановок (a,b,c): v ≤ cabin.h − margin.height && rectFits(x, y, cabin.w − margin.floor, cabin.d − margin.floor); fitsThinTilted = c ≤ 5 && b ≤ 60 && a ≤ maxLongThinItem; fits = passesDoor && (fitsInCabin || fitsThinTilted). rectFits(x,y,W,D) — существует угол θ: x·cosθ + y·sinθ ≤ D и x·sinθ + y·cosθ ≤ W.",
+    "source": "Геометрия; метод 'на попа / по диагонали' — https://itemfits.com/blog/will-couch-fit-apartment-elevator ; https://www.potterybarn.com/netstorage/images/pdfs/guide/PotteryBarnHowToMeasureGuide.pdf",
+    "verified": false,
+    "note": "Мягкие предметы (пенный матрас, кресло-мешок) — флаг flexible: допускаем превышение до 10% по длинному габариту. Не учитывает разворот в тамбуре/коридоре перед лифтом — для этого в UI вопрос 'есть ли поворот перед дверью лифта'."
+  },
+  "buildingRules": {
+    "value": "Регламент блока (regulament intern / regulamentul condominiului по Legea 196/2018) может запрещать перевозку громоздких предметов лифтом или требовать защиты кабины; штрафы за нарушение порядка — 500–1500 lei (Legea 61/1991, по сниппету).",
+    "source": "https://www.capital.ro/amenda-de-pana-la-1-500-de-lei-pentru-cei-care-folosesc-liftul-e-interzis-la-bloc-proprietarii-si-chiriasii-au-interdictie.html ; https://www.avocatnet.ro/act-normativ-LEGE-nr-196-2018_225.html*15",
+    "verified": false,
+    "note": "В UI — чекбокс 'asociația permite folosirea liftului pentru mobilă?' (da / nu / nu știu). 'nu' → класс none для крупных предметов; коробки — по договорённости."
+  }
+}
