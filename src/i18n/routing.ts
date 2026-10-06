@@ -15,6 +15,7 @@ export const routing = defineRouting({
     '/estimate/[step]': { ro: '/estimare/[step]', en: '/estimate/[step]' },
     '/estimate/result': { ro: '/estimare/rezultat', en: '/estimate/result' },
     '/estimate/contact': { ro: '/estimare/trimite', en: '/estimate/send' },
+    '/rates': { ro: '/tarife', en: '/rates' },
   },
 });
 

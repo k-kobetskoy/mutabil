@@ -28,7 +28,15 @@ export const SAMPLE_ORDER: OrderInput = {
   mode: 'quick',
   taskType: 'apartment',
   size: { presetId: 'apartament-2-camere' },
-  from: { zoneId: 'manastur', floor: 4, elevator: 'medium', furnitureInLift: 'yes', carry: 'lt10', parking: 'atEntrance', stairs: 'normal' },
+  from: {
+    zoneId: 'manastur',
+    floor: 4,
+    elevator: 'medium',
+    furnitureInLift: 'yes',
+    carry: 'lt10',
+    parking: 'atEntrance',
+    stairs: 'normal',
+  },
   to: { zoneId: 'gheorgheni', floor: 1, elevator: 'none', carry: 'lt10', parking: 'atEntrance', stairs: 'normal' },
   survey: { method: 'remote' },
   protection: { level: 'basic' },
@@ -76,7 +84,12 @@ export function QuickSearch() {
     },
   ];
   const liftGroups = [
-    { options: (['none', 'small', 'medium', 'large', 'unknown'] as const).map((k) => ({ id: k, label: `${t(`lift.tile.${k}`)} · ${t(`lift.tileHint.${k}`)}` })) },
+    {
+      options: (['none', 'small', 'medium', 'large', 'unknown'] as const).map((k) => ({
+        id: k,
+        label: `${t(`lift.tile.${k}`)} · ${t(`lift.tileHint.${k}`)}`,
+      })),
+    },
   ];
   const zones = zoneGroups(locale, t);
 
@@ -84,16 +97,36 @@ export function QuickSearch() {
     setTried(true);
     if (!what || !from.zoneId || !to.zoneId) return;
     const cls = (id?: string) => cfg.zones.zones.find((z) => z.id === id)?.class;
-    const route = cls(from.zoneId) === 'intercity' || cls(to.zoneId) === 'intercity' ? 'intercity' : cls(from.zoneId) === 'suburb' || cls(to.zoneId) === 'suburb' ? 'suburb' : 'city';
-    const order: OrderInput = { ...current, ...draft, route, mode: what === 'items' ? 'detailed' : 'quick', from: { ...current.from, ...from }, to: { ...current.to, ...to } };
+    const route =
+      cls(from.zoneId) === 'intercity' || cls(to.zoneId) === 'intercity'
+        ? 'intercity'
+        : cls(from.zoneId) === 'suburb' || cls(to.zoneId) === 'suburb'
+          ? 'suburb'
+          : 'city';
+    const order: OrderInput = {
+      ...current,
+      ...draft,
+      route,
+      mode: what === 'items' ? 'detailed' : 'quick',
+      from: { ...current.from, ...from },
+      to: { ...current.to, ...to },
+    };
     replace(order);
-    if (what === 'items') router.push({ pathname: '/estimate/[step]', params: { step: cfg.steps.steps.find((s) => s.id === 'items')!.slug[locale] } });
+    if (what === 'items')
+      router.push({ pathname: '/estimate/[step]', params: { step: cfg.steps.steps.find((s) => s.id === 'items')!.slug[locale] } });
     else router.push('/estimate/result');
   };
 
   const endFields = (end: 'from' | 'to', state: EndState, set: (s: EndState) => void) => (
     <div className="grid grid-cols-[auto_1fr] items-end gap-3">
-      <Stepper onNight label={end === 'from' ? t('landing.floorFrom') : t('landing.floorTo')} value={state.floor} min={0} max={30} onChange={(floor) => set({ ...state, floor })} />
+      <Stepper
+        onNight
+        label={end === 'from' ? t('landing.floorFrom') : t('landing.floorTo')}
+        value={state.floor}
+        min={0}
+        max={30}
+        onChange={(floor) => set({ ...state, floor })}
+      />
       {(state.floor ?? 0) > 0 ? (
         <SelectField
           onNight
@@ -111,7 +144,10 @@ export function QuickSearch() {
 
   return (
     <div className="grid gap-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-start">
-      <section aria-labelledby="search-title" className="on-night rounded-[var(--radius-panel)] bg-night p-5 text-on-night shadow-[var(--shadow-panel)] sm:p-6">
+      <section
+        aria-labelledby="search-title"
+        className="on-night rounded-[var(--radius-panel)] bg-night p-5 text-on-night shadow-[var(--shadow-panel)] sm:p-6"
+      >
         <h2 id="search-title" className="sr-only">
           {t('landing.searchTitle')}
         </h2>
@@ -179,7 +215,10 @@ export function QuickSearch() {
             {t('landing.cta')}
             <ArrowRight size={20} aria-hidden />
           </Button>
-          <Link href="/estimate" className="text-center text-[0.95rem] font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white">
+          <Link
+            href="/estimate"
+            className="text-center text-[0.95rem] font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
+          >
             {t('landing.exact')}
           </Link>
         </Form>
@@ -190,7 +229,6 @@ export function QuickSearch() {
           {touched ? t('landing.passTitleLive') : t('landing.passTitleSample')}
         </p>
         {est && <BoardingPass order={shown} est={est} sample={!touched} compact />}
-        <p className="text-[0.88rem] text-ink-muted">{t('landing.passNote')}</p>
       </div>
     </div>
   );

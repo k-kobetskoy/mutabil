@@ -12,6 +12,7 @@ import { addClock, lei, leiRange, longDate, num, type AppLocale } from '@/lib/fo
 import { VanSketch } from '@/ui/Sketch';
 import { cx } from '@/ui/cx';
 import { fareOf } from './fares';
+import { PriceExplainer } from './PriceExplainer';
 import { useRouteLabels } from './useRoute';
 
 export function BoardingPass({
@@ -125,6 +126,7 @@ export function BoardingPass({
             <div className="tabular price-digits font-[family-name:var(--font-display)] text-[1.9rem] leading-tight font-extrabold">
               {variant === 'conditional' ? lei(est.price.base, locale) : leiRange(est.price.low, est.price.high, locale)}
             </div>
+            <PriceExplainer onNight />
           </div>
         </div>
       </div>

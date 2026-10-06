@@ -36,7 +36,13 @@ export function LocaleSwitcher({ onNight }: { onNight?: boolean }) {
           lang={l}
           className={cx(
             'code-wide min-h-10 cursor-pointer rounded-md px-2.5 text-[0.75rem]',
-            l === locale ? (onNight ? 'bg-white text-night' : 'bg-night text-white') : onNight ? 'text-on-night-muted hover:text-white' : 'text-ink-muted hover:text-ink',
+            l === locale
+              ? onNight
+                ? 'bg-white text-night'
+                : 'bg-night text-white'
+              : onNight
+                ? 'text-on-night-muted hover:text-white'
+                : 'text-ink-muted hover:text-ink',
           )}
         >
           {l}
