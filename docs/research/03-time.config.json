@@ -8,7 +8,6 @@
     "distance": "m (переноска), km (езда)",
     "floor": "этаж по румынскому счёту: parter = 0, etaj 1 = 1"
   },
-
   "productivity": {
     "loadRatePerMover": {
       "value": 3.5,
@@ -25,17 +24,23 @@
       "note": "Выгрузка быстрее погрузки (не нужно плотно 'тетрисить' кузов). Соотношение ~1,3–1,5× из примера HireAHelper. Предположение: 4,5."
     },
     "crewEfficiency": {
-      "value": { "1": 0.9, "2": 1.0, "3": 0.93, "4": 0.875, "5": 0.8, "6": 0.75 },
+      "value": {
+        "1": 0.9,
+        "2": 1,
+        "3": 0.93,
+        "4": 0.875,
+        "5": 0.8,
+        "6": 0.75
+      },
       "unit": "dimensionless, множитель к n (эффективные грузчики = n × eff)",
       "source": "https://www.getbellhops.com/blog/?p=106133 (пример: 2 movers 7 ч, 3 movers 5 ч, 4 movers 4 ч → 14/15/16 чел·ч) ; https://www.consumeraffairs.com/movers/how-long-does-it-take-movers-to-load-a-truck.html (3–4 грузчика на 25–50% быстрее, чем 2)",
       "verified": false,
       "note": "Убывающая отдача: люди мешают друг другу на лестнице/в лифте, кузов грузит один. 1 грузчик — 0.9 и только для лёгких заказов (тяжёлые предметы требуют 2). 5–6 — экстраполяция (Предположение)."
     }
   },
-
   "access": {
     "floorPenaltyNoLift": {
-      "value": 0.10,
+      "value": 0.1,
       "unit": "доля к времени переноски на этом конце, за каждый этаж выше parter",
       "source": "https://www.consumeraffairs.com/movers/how-long-does-it-take-movers-to-load-a-truck.html (+20–30 мин на пролёт при погрузке 2-bedroom 3–4 ч ≈ 10–12%) ; https://meister-job.de/was-kostet-umzugsunternehmen/ (DE: +5–10% к цене за этаж без лифта) ; https://www.storagescholars.com/blog/how-many-hours-for-moving-help (вплоть до +1 ч на пролёт)",
       "verified": false,
@@ -56,7 +61,11 @@
       "note": "Калибровать по фактам."
     },
     "stairTypeFactor": {
-      "value": { "normal": 1.0, "narrow": 1.2, "winding": 1.35 },
+      "value": {
+        "normal": 1,
+        "narrow": 1.2,
+        "winding": 1.35
+      },
       "unit": "множитель к этажному штрафу",
       "source": "Предположение (в тарифах US узкие/винтовые лестницы оговариваются отдельно, но числовых коэффициентов не найдено)",
       "verified": false,
@@ -98,24 +107,33 @@
       "note": "Для крупных предметов, которые НЕ влезли в лифт и несутся по лестнице (диван, двуспальный матрас, холодильник > кабины, панели > maxLongThinItemCm). Добавляется поверх объёма, уже учтённого со штрафом лестницы (развороты на площадках, 2 человека на предмет)."
     }
   },
-
   "parking": {
     "assumedCarryM": {
-      "value": { "atEntrance": 5, "nearby": 25, "far": 50, "unknown": 30 },
+      "value": {
+        "atEntrance": 5,
+        "nearby": 25,
+        "far": 50,
+        "unknown": 30
+      },
       "unit": "m",
       "source": "Предположение",
       "verified": false,
       "note": "Если клиент не ввёл дистанцию переноски — берём по типу парковки."
     },
     "fixedMinutes": {
-      "value": { "atEntrance": 0, "nearby": 0, "far": 15, "unknown": 10, "restrictedZone": 20 },
+      "value": {
+        "atEntrance": 0,
+        "nearby": 0,
+        "far": 15,
+        "unknown": 10,
+        "restrictedZone": 20
+      },
       "unit": "min (на каждый конец)",
       "source": "https://www.consumeraffairs.com/movers/how-long-does-it-take-movers-to-load-a-truck.html (+15–30 мин на парковку/дальнюю переноску)",
       "verified": false,
       "note": "restrictedZone — пешеходный центр Клужа, двор с шлагбаумом, нужен пропуск/окно въезда. Требует проверки правил Primăria Cluj-Napoca (вне рамок R3)."
     }
   },
-
   "itemWork": {
     "disassemblyAssemblyCatalogRef": {
       "value": "see catalog below",
@@ -125,19 +143,110 @@
       "note": "Время разборки на старом адресе (dis) и сборки на новом (asm) в чел·мин для бригады, уже знакомой с моделью. Это НЕ сборка из коробки: повторная сборка ~50–70% от первичной (Предположение)."
     },
     "catalog": {
-      "bed_double_simple": { "dis": 20, "asm": 30, "unit": "man-min", "source": "https://homegnome.com/blog/assembly/how-long-does-furniture-assembly-take/ (кровать 30–60 мин из коробки) ; https://www.myjobquote.co.uk/questions/dismantle-furniture (~30 мин на предмет разборки)", "verified": false, "note": "Каркас + ламели; без подъёмного механизма." },
-      "bed_storage_lift": { "dis": 35, "asm": 50, "unit": "man-min", "source": "https://www.trade2base.com/blog/flat-pack-assembly-costs-uk (кровати 60–90 мин, ottoman — верхняя граница)", "verified": false, "note": "Кровать с газлифтом/ящиком." },
-      "bunk_bed": { "dis": 40, "asm": 60, "unit": "man-min", "source": "https://www.homeadvisor.com/cost/home-design-and-decor/assemble-furniture (двухъярусные — сложная категория)", "verified": false, "note": "Предположение по времени." },
-      "wardrobe_pax_100": { "dis": 45, "asm": 90, "unit": "man-min", "source": "https://www.ikea.co.id/en/inspirations/how-to-assemble-ikea-pax-wardrobe (PAX 2–5 ч из коробки) ; https://www.airtasker.com/uk/assembly/wardrobe-assembly/england (2-door ~3 ч)", "verified": false, "note": "Каркас PAX 100×58×236 см: в малый/средний лифт не входит даже на попа (высота 236 > кабины) — либо разбирать, либо по лестнице." },
-      "wardrobe_pax_150_200": { "dis": 70, "asm": 140, "unit": "man-min", "source": "https://www.airtasker.com/uk/assembly/wardrobe-assembly/england (large wardrobe 4–5 ч из коробки)", "verified": false, "note": "Две и более секции, раздвижные двери — верх вилки." },
-      "wardrobe_classic_3door": { "dis": 40, "asm": 60, "unit": "man-min", "source": "Предположение (типичный румынский ЛДСП 'dulap 3 uși')", "verified": false, "note": "" },
-      "kallax_4x4": { "dis": 0, "asm": 0, "unit": "man-min", "source": "https://www.trade2base.com/blog/flat-pack-assembly-costs-uk (KALLAX 4×4 из коробки 45–60 мин + 15–20 мин крепление к стене)", "verified": false, "note": "Обычно перевозится целиком (147×147×39 см) — в малый лифт не входит (147 > дверь 70 по второму габариту? нет: проходит торцом 39×147 при высоте двери 200 — проверяется правилом fits). Если нужно разбирать: dis 30 / asm 45; снятие/крепление к стене 15/20." },
-      "desk_simple": { "dis": 15, "asm": 20, "unit": "man-min", "source": "https://homegnome.com/blog/assembly/how-long-does-furniture-assembly-take/ (desk ~30 мин из коробки)", "verified": false, "note": "" },
-      "desk_with_hutch": { "dis": 30, "asm": 45, "unit": "man-min", "source": "https://www.trade2base.com/blog/flat-pack-assembly-costs-uk (desk with hutch/return 60–90 мин)", "verified": false, "note": "" },
-      "dining_table": { "dis": 10, "asm": 10, "unit": "man-min", "source": "Предположение (снять ножки/столешницу)", "verified": false, "note": "" },
-      "sofa_corner_modular": { "dis": 10, "asm": 10, "unit": "man-min", "source": "Предположение", "verified": false, "note": "Разъединить модули, снять ножки." },
-      "washing_machine_prep": { "dis": 15, "asm": 15, "unit": "man-min", "source": "Предположение", "verified": false, "note": "Транспортные болты, слив/подача; подключение к новой сантехнике — отдельная услуга." },
-      "tv_wall_mount": { "dis": 15, "asm": 25, "unit": "man-min", "source": "Предположение", "verified": false, "note": "Монтаж на новую стену требует сверления — отдельная услуга." }
+      "bed_double_simple": {
+        "dis": 20,
+        "asm": 30,
+        "unit": "man-min",
+        "source": "https://homegnome.com/blog/assembly/how-long-does-furniture-assembly-take/ (кровать 30–60 мин из коробки) ; https://www.myjobquote.co.uk/questions/dismantle-furniture (~30 мин на предмет разборки)",
+        "verified": false,
+        "note": "Каркас + ламели; без подъёмного механизма."
+      },
+      "bed_storage_lift": {
+        "dis": 35,
+        "asm": 50,
+        "unit": "man-min",
+        "source": "https://www.trade2base.com/blog/flat-pack-assembly-costs-uk (кровати 60–90 мин, ottoman — верхняя граница)",
+        "verified": false,
+        "note": "Кровать с газлифтом/ящиком."
+      },
+      "bunk_bed": {
+        "dis": 40,
+        "asm": 60,
+        "unit": "man-min",
+        "source": "https://www.homeadvisor.com/cost/home-design-and-decor/assemble-furniture (двухъярусные — сложная категория)",
+        "verified": false,
+        "note": "Предположение по времени."
+      },
+      "wardrobe_pax_100": {
+        "dis": 45,
+        "asm": 90,
+        "unit": "man-min",
+        "source": "https://www.ikea.co.id/en/inspirations/how-to-assemble-ikea-pax-wardrobe (PAX 2–5 ч из коробки) ; https://www.airtasker.com/uk/assembly/wardrobe-assembly/england (2-door ~3 ч)",
+        "verified": false,
+        "note": "Каркас PAX 100×58×236 см: в малый/средний лифт не входит даже на попа (высота 236 > кабины) — либо разбирать, либо по лестнице."
+      },
+      "wardrobe_pax_150_200": {
+        "dis": 70,
+        "asm": 140,
+        "unit": "man-min",
+        "source": "https://www.airtasker.com/uk/assembly/wardrobe-assembly/england (large wardrobe 4–5 ч из коробки)",
+        "verified": false,
+        "note": "Две и более секции, раздвижные двери — верх вилки."
+      },
+      "wardrobe_classic_3door": {
+        "dis": 40,
+        "asm": 60,
+        "unit": "man-min",
+        "source": "Предположение (типичный румынский ЛДСП 'dulap 3 uși')",
+        "verified": false,
+        "note": ""
+      },
+      "kallax_4x4": {
+        "dis": 0,
+        "asm": 0,
+        "unit": "man-min",
+        "source": "https://www.trade2base.com/blog/flat-pack-assembly-costs-uk (KALLAX 4×4 из коробки 45–60 мин + 15–20 мин крепление к стене)",
+        "verified": false,
+        "note": "Обычно перевозится целиком (147×147×39 см): в small/medium лифт не входит (см. 03-elevators.config.json), в large — входит. Если нужно разбирать: dis 30 / asm 45; снятие/крепление к стене 15/20."
+      },
+      "desk_simple": {
+        "dis": 15,
+        "asm": 20,
+        "unit": "man-min",
+        "source": "https://homegnome.com/blog/assembly/how-long-does-furniture-assembly-take/ (desk ~30 мин из коробки)",
+        "verified": false,
+        "note": ""
+      },
+      "desk_with_hutch": {
+        "dis": 30,
+        "asm": 45,
+        "unit": "man-min",
+        "source": "https://www.trade2base.com/blog/flat-pack-assembly-costs-uk (desk with hutch/return 60–90 мин)",
+        "verified": false,
+        "note": ""
+      },
+      "dining_table": {
+        "dis": 10,
+        "asm": 10,
+        "unit": "man-min",
+        "source": "Предположение (снять ножки/столешницу)",
+        "verified": false,
+        "note": ""
+      },
+      "sofa_corner_modular": {
+        "dis": 10,
+        "asm": 10,
+        "unit": "man-min",
+        "source": "Предположение",
+        "verified": false,
+        "note": "Разъединить модули, снять ножки."
+      },
+      "washing_machine_prep": {
+        "dis": 15,
+        "asm": 15,
+        "unit": "man-min",
+        "source": "Предположение",
+        "verified": false,
+        "note": "Транспортные болты, слив/подача; подключение к новой сантехнике — отдельная услуга."
+      },
+      "tv_wall_mount": {
+        "dis": 15,
+        "asm": 25,
+        "unit": "man-min",
+        "source": "Предположение",
+        "verified": false,
+        "note": "Монтаж на новую стену требует сверления — отдельная услуга."
+      }
     },
     "maxParallelAssemblers": {
       "value": 2,
@@ -147,7 +256,6 @@
       "note": "Работа с мебелью идёт в общий котёл чел·ч бригады; если сумма dis/asm > (n−1)×elapsed, она становится узким местом: elapsed ≥ ΣitemManH / maxParallelAssemblers."
     }
   },
-
   "drive": {
     "avgUrbanSpeedKmh": {
       "value": 20,
@@ -164,7 +272,10 @@
       "note": "Только если нет routing API."
     },
     "peakFactor": {
-      "value": { "offPeak": 1.0, "peak": 1.3 },
+      "value": {
+        "offPeak": 1,
+        "peak": 1.3
+      },
       "unit": "множитель к времени езды",
       "source": "https://playtech.ro/2025/indexul-de-trafic-2025-cum-arata-mobilitatea-oraselor-din-romania-orele-de-varf-pe-sosele/ (пики 11–14; также 7:30–9:30, 16–19 — Предположение)",
       "verified": false,
@@ -185,7 +296,6 @@
       "note": "Включать ли подачу машины с базы во время заказа (влияет на окно, если true)."
     }
   },
-
   "fixed": {
     "setupMin": {
       "value": 15,
@@ -209,7 +319,6 @@
       "note": "Обшивка кабины картоном/одеялами, фиксация двери."
     }
   },
-
   "buffer": {
     "method": {
       "value": "lognormal-quantile",
@@ -233,7 +342,12 @@
       "note": "P85 → множитель ×1.30 при σ=0.25. Компромисс: P90 (×1.38) даёт слишком широкие окна и отпугивает клиента; P80 — частые споры."
     },
     "uncertaintyAdders": {
-      "value": { "liftUnknown": 0.10, "inventoryByRoomsOnly": 0.15, "stairsTypeUnknown": 0.05, "parkingUnknown": 0.05 },
+      "value": {
+        "liftUnknown": 0.1,
+        "inventoryByRoomsOnly": 0.15,
+        "stairsTypeUnknown": 0.05,
+        "parkingUnknown": 0.05
+      },
       "unit": "добавка к sigmaLn",
       "source": "Предположение",
       "verified": false,
@@ -275,7 +389,6 @@
       "note": "Сверхурочные — шагами по 30 мин и только если превышение вызвано расхождением с заявкой (больше вещей, неработающий лифт, не заявленная разборка)."
     }
   },
-
   "liftThroughputCheck": {
     "floorHeightM": {
       "value": 2.75,
@@ -292,14 +405,21 @@
       "note": "Новые лифты 1,0 м/с."
     },
     "cabinLoadUnloadSecPerTrip": {
-      "value": { "small": 90, "medium": 120, "large": 180 },
+      "value": {
+        "small": 90,
+        "medium": 120,
+        "large": 180
+      },
       "unit": "s (загрузка + выгрузка кабины)",
       "source": "Предположение",
       "verified": false,
       "note": ""
     },
     "doorCycleSecPerStop": {
-      "value": { "manual": 15, "automatic": 8 },
+      "value": {
+        "manual": 15,
+        "automatic": 8
+      },
       "unit": "s",
       "source": "Предположение (старые лифты — распашная шахтная дверь + складная кабинная)",
       "verified": false,
