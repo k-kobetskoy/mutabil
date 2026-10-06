@@ -1,0 +1,259 @@
+{
+  "$comment": "R4 Pricing model — черновик pricing.config.json. Все суммы в RON (lei), ВКЛЮЧАЯ НДС 21%, если не сказано иное. Каждое число: {value, unit, source, verified, note}. verified:false = плейсхолдер, требует подтверждения владельцем бизнеса/бухгалтером/юристом. Рыночные цифры взяты из сниппетов веб-поиска (WebFetch был заблокирован прокси), см. docs/research/04-pricing.md.",
+  "meta": {
+    "version": "0.1.0-draft",
+    "createdAt": "2026-10-06",
+    "market": "Cluj-Napoca, RO",
+    "researchDoc": "docs/research/04-pricing.md"
+  },
+
+  "currency": "RON",
+  "currencySymbol": "lei",
+  "locale": "ro-RO",
+
+  "tax": {
+    "vatRate": { "value": 0.21, "unit": "fraction", "source": "https://www.pwc.ro/en/tax-legal/alerts/law-no--141-2025-on-some-fiscal-budgetary-measures.html ; https://tvrinfo.ro/romania-intra-in-august-cu-tva-de-21-si-accize-mai-mari-scumpiri-la-transport-comunicatii-si-alimente/", "verified": false, "note": "Стандартная ставка 21% с 01.08.2025 (Legea 141/2025). Подтверждено поиском; подтвердить у бухгалтера, что услуги переезда идут по стандартной ставке." },
+    "pricesIncludeVat": true,
+    "vatRegistered": { "value": 1, "unit": "bool(0/1)", "source": "https://www.capital.ro/plafonul-national-de-scutire-de-tva-pentru-intreprinderile-mici-va-creste-de-la-300-000-de-lei-la-395-000-de-lei-de-la-1-septembrie.html", "verified": false, "note": "Если оборот компании < 395 000 lei/год (порог с 01.09.2025), она может быть неплательщиком НДС — тогда vatRegistered=0 и строка 'din care TVA' не показывается." },
+    "showVatBreakdown": true
+  },
+
+  "rounding": {
+    "lineItemRoundTo": { "value": 1, "unit": "lei", "source": "internal", "verified": false, "note": "Каждая строка округляется до целого лея (математически)." },
+    "totalRoundTo": { "value": 10, "unit": "lei", "source": "internal", "verified": false, "note": "Итог точной/гарантированной сметы округляется ВВЕРХ до 10 lei." },
+    "rangeRoundTo": { "value": 50, "unit": "lei", "source": "internal", "verified": false, "note": "Диапазон: нижняя граница вниз, верхняя вверх до 50 lei." },
+    "billingIncrementMinutes": { "value": 30, "unit": "min", "source": "https://www.kcc.ks.gov/images/PDFs/tariff-hg/kansas_moving_center_inc.pdf ; https://your.yale.edu/workplace-services/moving-storage/office-equipment-moves/moving-and-relocation-rates", "verified": false, "note": "В США типично 15 мин; для RO предлагаем 30 мин — проще для клиента. После минимальных часов время округляется вверх до шага." },
+    "billingGraceMinutes": { "value": 10, "unit": "min", "source": "internal", "verified": false, "note": "Первые 10 минут сверх начатого шага не тарифицируются (жест доверия)." }
+  },
+
+  "vehicles": {
+    "van-6": {
+      "label": "Dubă mică (~6 m³)",
+      "capacityM3": { "value": 6, "unit": "m3", "source": "internal", "verified": false, "note": "Класс VW Transporter/Ford Transit Custom." },
+      "usableFillFactor": { "value": 0.85, "unit": "fraction", "source": "internal", "verified": false, "note": "Реально заполняемая доля объёма с учётом формы мебели. Предположение." },
+      "hourlyRate": { "value": 90, "unit": "lei/h", "source": "https://www.mutaribucuresti.ro/pret-transport-mutare.html", "verified": false, "note": "Транспорт с водителем (водитель не считается грузчиком). Рынок: 75–100 lei/h за транспорт. Позиционирование 'качество' — верх рынка." }
+    },
+    "van-12": {
+      "label": "Dubă medie (~12 m³)",
+      "capacityM3": { "value": 12, "unit": "m3", "source": "internal", "verified": false, "note": "Класс Sprinter/Crafter L2H2–L3H2." },
+      "usableFillFactor": { "value": 0.85, "unit": "fraction", "source": "internal", "verified": false, "note": "Предположение." },
+      "hourlyRate": { "value": 110, "unit": "lei/h", "source": "https://www.mutaribucuresti.ro/pret-transport-mutare.html ; https://homerun.ro/costuri-preturi/cluj-transport-marfa_475_494", "verified": false, "note": "Рынок Cluj: 3.5t — 200 lei за первые 2 ч (≈100 lei/h)." }
+    },
+    "van-16": {
+      "label": "Dubă mare (~16 m³)",
+      "capacityM3": { "value": 16, "unit": "m3", "source": "https://www.inmove.ro/transport-mobila/", "verified": false, "note": "Класс Sprinter L4H2/Jumbo; в Бухаресте рекламируют 'dubă 17 m³'." },
+      "usableFillFactor": { "value": 0.85, "unit": "fraction", "source": "internal", "verified": false, "note": "Предположение." },
+      "hourlyRate": { "value": 130, "unit": "lei/h", "source": "https://homerun.ro/costuri-preturi/cluj-transport-marfa_475_494", "verified": false, "note": "Рынок Cluj: 3.5t 'mare' — 300 lei за 2 ч (≈150 lei/h, без грузчиков)." }
+    },
+    "van-20": {
+      "label": "Autoutilitară cu box (~20 m³, lift)",
+      "capacityM3": { "value": 20, "unit": "m3", "source": "internal", "verified": false, "note": "3.5t с фургоном-коробом и гидробортом." },
+      "usableFillFactor": { "value": 0.9, "unit": "fraction", "source": "internal", "verified": false, "note": "Короб прямоугольный — заполнение выше. Предположение." },
+      "hourlyRate": { "value": 150, "unit": "lei/h", "source": "https://homerun.ro/costuri-preturi/cluj-transport-marfa_475_494", "verified": false, "note": "Рынок Cluj: 5t — 500 lei за 2 ч (≈250 lei/h). Для 3.5t-короба 150 lei/h — предположение." }
+    }
+  },
+
+  "crew": {
+    "moverHourlyRate": { "value": 70, "unit": "lei/h per mover", "source": "https://homerun.ro/costuri-preturi/cluj-transport-marfa_475_494 ; https://www.mutaribucuresti.ro/pret-transport-mutare.html", "verified": false, "note": "Cluj: 'echipă 2 oameni calificați — 140 lei/oră' (=70/чел). Бухарест: от 50 lei/h на рабочего. Берём верх рынка (обученная команда)." },
+    "minMovers": { "value": 2, "unit": "people", "source": "internal", "verified": false, "note": "" },
+    "maxMovers": { "value": 6, "unit": "people", "source": "internal", "verified": false, "note": "" },
+    "crewSizeRules": [
+      { "maxVolumeM3": { "value": 8, "unit": "m3", "source": "internal", "verified": false, "note": "Предположение." }, "movers": 2 },
+      { "maxVolumeM3": { "value": 22, "unit": "m3", "source": "internal", "verified": false, "note": "Предположение. 2-комн. квартира обычно 15–25 m³." }, "movers": 3 },
+      { "maxVolumeM3": { "value": 40, "unit": "m3", "source": "internal", "verified": false, "note": "Предположение." }, "movers": 4 }
+    ],
+    "handlingRateM3PerMoverHour": { "value": 2.5, "unit": "m3 per mover-hour (погрузка+разгрузка вместе)", "source": "https://brig.ro/mutari/cluj-napoca", "verified": false, "note": "Калибровка: 2-комн. (~20 m³) — 3–5 ч командой из 2 (brig.ro, сниппет). 20/(2×4)=2.5. Калибровать по фактическим заказам." }
+  },
+
+  "time": {
+    "minimumBillableHours": { "value": 2, "unit": "h", "source": "https://homerun.ro/costuri-preturi/cluj-transport-marfa_475_494 ; https://heavenlymove.com/services/hourly-movers", "verified": false, "note": "Cluj: '200 lei până la 2 ore'; в США типично минимум 2 ч." },
+    "setupProtectionHours": { "value": 0.25, "unit": "h", "source": "internal", "verified": false, "note": "Укладка защиты пола/дверей/лифта на обоих адресах. Предположение." },
+    "floorNoElevatorPenaltyPerFloor": { "value": 0.08, "unit": "fraction of handling time at that address per floor", "source": "https://homerun.ro/costuri-preturi-in/cluj-napoca-mutari-mobila_24857_10480", "verified": false, "note": "Рынок берёт за этаж отдельно (15 RON/этаж за диван; 30–60 RON/этаж/грузчик). Мы закладываем во время, а не отдельной строкой. Предположение." },
+    "elevatorSmallPenalty": { "value": 0.05, "unit": "fraction", "source": "internal", "verified": false, "note": "Маленький лифт (крупная мебель по лестнице). Предположение." },
+    "longCarryPenaltyPer10m": { "value": 0.03, "unit": "fraction per 10 m over 20 m", "source": "internal", "verified": false, "note": "Пронос от машины до подъезда > 20 м. Предположение." },
+    "urbanAvgSpeedKmh": { "value": 20, "unit": "km/h", "source": "internal", "verified": false, "note": "Средняя скорость в Cluj с пробками для оценки drive time. Заменить на Routes API." },
+    "extraTripRoundTripMinutes": { "value": 0, "unit": "min", "source": "internal", "verified": false, "note": "0 = вычисляется как 2× drive time между адресами при превышении объёма машины." }
+  },
+
+  "dispatch": {
+    "$comment": "Taxa de deplasare: фиксированно по зонам вместо 'ora de deplasare', чтобы не было сюрпризов.",
+    "zones": {
+      "cluj-napoca": { "fee": { "value": 80, "unit": "lei/order", "source": "internal", "verified": false, "note": "Подача машины и команды от базы до первого адреса и возврат. Предположение." } },
+      "metro-ring": { "fee": { "value": 120, "unit": "lei/order", "source": "internal", "verified": false, "note": "Florești, Baciu, Apahida, Feleacu, Gilău и т.п. Предположение." } }
+    },
+    "perKmOutsideZones": { "value": 3.5, "unit": "lei/km", "source": "https://brig.ro/mutari/cluj-napoca", "verified": false, "note": "Рынок междугородних: 1.5–5 lei/km + манипуляции. Для MVP — только Cluj + пригород." }
+  },
+
+  "surcharges": {
+    "saturday": { "value": 0.15, "unit": "fraction of transport+labor", "source": "https://www.seoads.org/de-ce-ajung-unii-sa-plateasca-dublu-pentru-mutari-de-weekend-si-ce-trebuie-sa-verifici-mereu-inainte-8898/", "verified": false, "note": "Рынок: выходные +15–20%." },
+    "sundayOrHoliday": { "value": 0.25, "unit": "fraction of transport+labor", "source": "https://www.seoads.org/de-ce-ajung-unii-sa-plateasca-dublu-pentru-mutari-de-weekend-si-ce-trebuie-sa-verifici-mereu-inainte-8898/", "verified": false, "note": "Предположение (рынок 15–20% для выходных в целом; воскресенье дороже из-за доплат персоналу)." },
+    "eveningAfter18": { "value": 0.2, "unit": "fraction of hours after 18:00", "source": "internal", "verified": false, "note": "Применяется только к часам после 18:00. Предположение." },
+    "endOfMonthPeak": { "value": 0, "unit": "fraction", "source": "https://www.seoads.org/de-ce-ajung-unii-sa-plateasca-dublu-pentru-mutari-de-weekend-si-ce-trebuie-sa-verifici-mereu-inainte-8898/", "verified": false, "note": "Рынок поднимает цены в конце месяца на 15–20%; для MVP выключено (0) — решение владельца." }
+  },
+
+  "fullDay": {
+    "hours": { "value": 8, "unit": "h", "source": "https://www.firmademutari-bucuresti.ro/", "verified": false, "note": "Пакет 'zi întreagă'." },
+    "discount": { "value": 0.1, "unit": "fraction", "source": "internal", "verified": false, "note": "Цена = 8 × (машина + грузчики) × (1 − 0.10). Сверх 8 ч — обычная сверхурочная ставка. Предположение." }
+  },
+
+  "overtime": {
+    "multiplier": { "value": 1.0, "unit": "x base crew rate", "source": "internal", "verified": false, "note": "Сверхурочный час = та же ставка, что и базовый (без штрафного коэффициента) — часть позиционирования 'прозрачность'." },
+    "perHourByComposition": {
+      "$comment": "Производные значения = vehicle.hourlyRate + movers × crew.moverHourlyRate. Считать в коде; здесь для отображения/проверки.",
+      "van-6+2": { "value": 230, "unit": "lei/h", "source": "derived", "verified": false, "note": "90 + 2×70" },
+      "van-12+2": { "value": 250, "unit": "lei/h", "source": "derived", "verified": false, "note": "110 + 2×70" },
+      "van-12+3": { "value": 320, "unit": "lei/h", "source": "derived", "verified": false, "note": "110 + 3×70" },
+      "van-16+3": { "value": 340, "unit": "lei/h", "source": "derived", "verified": false, "note": "130 + 3×70" },
+      "van-20+3": { "value": 360, "unit": "lei/h", "source": "derived", "verified": false, "note": "150 + 3×70" },
+      "van-20+4": { "value": 430, "unit": "lei/h", "source": "derived", "verified": false, "note": "150 + 4×70" }
+    },
+    "requiresClientApprovalAfterMinutes": { "value": 30, "unit": "min", "source": "internal", "verified": false, "note": "Если работа выходит за окно более чем на 30 мин — бригадир получает подтверждение клиента (в приложении/SMS) до продолжения." }
+  },
+
+  "window": {
+    "arrivalWindowMinutes": { "value": 30, "unit": "min", "source": "https://www.hireahelper.com/legal/guarantee", "verified": false, "note": "Гарантированное окно прибытия (напр. 08:00–08:30)." },
+    "completionBufferFraction": { "value": 0.15, "unit": "fraction of estimated hours", "source": "internal", "verified": false, "note": "Окно завершения = старт + оценка часов × 1.15. Предположение." },
+    "lateArrivalCreditPer30Min": { "value": 50, "unit": "lei", "source": "https://www.hireahelper.com/legal/guarantee", "verified": false, "note": "HireAHelper: 5% за каждый полный час опоздания. Мы: 50 lei за каждые начатые 30 мин после окна. Предположение." }
+  },
+
+  "minimumOrder": {
+    "value": { "value": 500, "unit": "lei", "source": "https://brig.ro/mutari/cluj-napoca", "verified": false, "note": "Минимальная сумма заказа переезда (без продажи одних материалов). Рынок: garsonieră от 300 lei. Предположение." }
+  },
+
+  "packing": {
+    "packerHourlyRate": { "value": 70, "unit": "lei/h per packer", "source": "https://ofertemutare.ro/mutari/bucuresti", "verified": false, "note": "= ставка грузчика. Рынок: упаковка 200–500 lei доп., 'de la 200 lei pentru 2–4 ore'." },
+    "perBoxPackingFee": { "value": 15, "unit": "lei/box (только работа)", "source": "https://mutantii.ro/servicii/", "verified": false, "note": "Mutanții Cluj: короб 20 lei+TVA, короб с упаковкой 30 lei+TVA → работа ≈10 lei+TVA≈12 lei. Берём 15 lei с НДС." },
+    "boxesPerPackerHour": { "value": 6, "unit": "boxes/h", "source": "internal", "verified": false, "note": "Норма для расчёта времени упаковки. Предположение." },
+    "modes": {
+      "none": { "label": "Clientul împachetează" },
+      "partial": { "label": "Bucătărie + fragile", "shareOfBoxes": { "value": 0.35, "unit": "fraction", "source": "internal", "verified": false, "note": "Предположение." } },
+      "full": { "label": "Împachetare completă", "shareOfBoxes": { "value": 1.0, "unit": "fraction", "source": "internal", "verified": false, "note": "" } }
+    }
+  },
+
+  "materials": {
+    "cardboardBoxStandard": { "value": 15, "unit": "lei/pcs", "source": "https://mutare-bucuresti.ro/en/product-category/cutii-carton/ ; https://www.hornbach.ro/p/cutie-carton-packpoint-500x400x360-mm-pentru-transport-colete/5493276/ ; https://www.emag.ro/search/cutie+carton+mutare", "verified": false, "note": "60×40×40, 5 слоёв. Рынок: 8.24 lei (Hornbach 49×46×36), ~8.3 lei/шт (eMAG набор 5×60×40×40 за 41.38), 15–18.50 lei (mutare-bucuresti), 20 lei+TVA (Mutanții Cluj)." },
+    "cardboardBoxBooks": { "value": 10, "unit": "lei/pcs", "source": "https://www.hornbach.ro/p/cutie-carton-depozitare-si-mutare-230x320x235mm/12152795/", "verified": false, "note": "Малый короб для книг/посуды. Предположение по рынку 5–12 lei." },
+    "wardrobeBoxRental": { "value": 35, "unit": "lei/pcs per move", "source": "https://mutare-bucuresti.ro/product/cutie-garderoba-pentru-haine-pe-umeras/", "verified": false, "note": "Покупка на рынке: 305.50 lei (52×60×135 см) — дорого, поэтому предлагаем аренду на день переезда (многоразовые). Предположение." },
+    "wardrobeBoxSale": { "value": 120, "unit": "lei/pcs", "source": "https://mutare-bucuresti.ro/product/cutie-garderoba-pentru-haine-pe-umeras/", "verified": false, "note": "Если клиент хочет оставить себе. Предположение (ниже рыночных 305.50)." },
+    "mattressBagSingle": { "value": 35, "unit": "lei/pcs", "source": "none-found", "verified": false, "note": "Не найдено цен на мешки для матрасов в RO (поиск выдал только наматрасники 33–129 lei). Предположение." },
+    "mattressBagDouble": { "value": 45, "unit": "lei/pcs", "source": "none-found", "verified": false, "note": "Предположение." },
+    "tvProtector": { "value": 60, "unit": "lei/pcs", "source": "none-found", "verified": false, "note": "Многоразовый мягкий чехол для ТВ до 65\" или одноразовый короб. Предположение." },
+    "mirrorPictureProtection": { "value": 40, "unit": "lei/item", "source": "none-found", "verified": false, "note": "Уголки + картон + пузырчатая плёнка на 1 зеркало/картину до 1.2 м. Предположение." },
+    "bubbleWrapRoll": { "value": 45, "unit": "lei/roll", "source": "https://www.leroymerlin.ro/produse/feronerie-si-securitate/lize-carucioare-si-produse-ambalare/produse-ambalare-pentru-mutare/", "verified": false, "note": "Доп. продажа; базовое количество в 'включено бесплатно'. Предположение." }
+  },
+
+  "includedFree": {
+    "$comment": "Блок 'Inclus gratuit'. Стоимость закладывается в ставки; показывается клиенту как список.",
+    "items": ["tape", "stretchFilm", "movingBlankets", "dollies", "floorProtection", "doorFrameProtection", "basicToolkit"],
+    "stretchFilmRollsIncluded": { "value": 2, "unit": "rolls/order", "source": "https://leroymerlin.ro/produse/produse-ambalare-pentru-mutare/947/folie-stretch-pentru-ambalare-23-microni-x-50-cm-l-100-m-transparenta/32077", "verified": false, "note": "Рулон стретча в рознице ~7–60 lei. Сверх лимита — по факту, но в MVP не тарифицируем." },
+    "tapeRollsIncluded": { "value": 3, "unit": "rolls/order", "source": "internal", "verified": false, "note": "Предположение." }
+  },
+
+  "reusableCrates": {
+    "includedDays": { "value": 7, "unit": "days", "source": "business rule", "verified": false, "note": "Бизнес-правило: 7 дней аренды включены." },
+    "pricePerCrateIncludedPeriod": { "value": 12, "unit": "lei/crate (7 days)", "source": "https://www.okazii.ro/cutii-pentru-mutare-relocare-depozitare-distributie-inchiriere-25-cutii-pe-o-perioada-de-o-saptamana-a167708181 ; https://www.kleinanzeigen.de/pro/knusperkiste", "verified": false, "note": "RO (Rent A Box, объявление 2015): 345 lei/25 ящиков/неделя = 13.8 lei/ящик. DE (Knusperkiste): €3.50–4 первая неделя. Чуть дешевле картона 15 lei — чтобы подталкивать к многоразовым." },
+    "extraPerCratePerDay": { "value": 1, "unit": "lei/crate/day", "source": "https://www.kleinanzeigen.de/pro/knusperkiste ; https://cratehireexpress.co.uk/", "verified": false, "note": "DE: ~€0.50–1 за каждую следующую неделю; UK: £0.39–0.89/неделя (B2B). 1 lei/день ≈ 7 lei/неделя — с запасом на логистику. Предположение." },
+    "minCrates": { "value": 20, "unit": "crates", "source": "internal", "verified": false, "note": "Минимальный заказ ящиков. Предположение." },
+    "deliveryFee": { "value": 75, "unit": "lei", "source": "https://mutare-bucuresti.ro/en/product-category/cutii-carton/", "verified": false, "note": "Доставка пустых ящиков заранее. Рынок (Бухарест, доставка материалов): 210 lei с НДС. Бесплатно, если есть заказ переезда (deliveryFreeWithMove)." },
+    "deliveryFreeWithMove": true,
+    "pickupFee": { "value": 75, "unit": "lei", "source": "internal", "verified": false, "note": "Забор пустых ящиков после распаковки. Бесплатно, если клиент сдаёт ящики команде в день переезда (выгрузили и сразу распаковали). Предположение." },
+    "lostOrDamagedCrateFee": { "value": 90, "unit": "lei/crate", "source": "https://www.hornbach.ro/p/cutie-plastic-cu-capac-jelenia-plast-600x400x440-mm-transparenta-capac-colorat-cu-roti/6386992/", "verified": false, "note": "Аналогичный ящик 60×40×44 с крышкой в рознице 71.07 lei. Предположение." },
+    "crateVolumeLiters": { "value": 65, "unit": "L", "source": "internal", "verified": false, "note": "Типовой ящик 60×40×40 с откидной крышкой. Для расчёта объёма: 1 ящик ≈ 0.08 m³ в машине." },
+    "deposit": { "value": 0, "unit": "lei", "source": "internal", "verified": false, "note": "Без залога в MVP; штраф за утерю по lostOrDamagedCrateFee." }
+  },
+
+  "assembly": {
+    "masterHourlyRate": { "value": 110, "unit": "lei/h", "source": "https://homerun.ro/costuri-preturi/cluj-montaj-mobila_34056_494", "verified": false, "note": "Рынок монтажа: 30–80 lei/h; наш мастер — с инструментом и гарантией. Используется для нестандартных позиций." },
+    "masterOnMovingDayFee": { "value": 100, "unit": "lei/order", "source": "internal", "verified": false, "note": "Наценка за выделенного мастера в день переезда (параллельно бригаде, бригада не простаивает). Предположение." },
+    "perItem": {
+      "bed": { "value": 100, "unit": "lei (dis+assembly)", "source": "https://homerun.ro/costuri-preturi/cluj-montaj-mobila_34056_494", "verified": false, "note": "Рынок: кровать 100–200 lei (только монтаж); 100–150 lei. Цена за демонтаж+монтаж — предположение." },
+      "wardrobeSmall": { "value": 120, "unit": "lei (dis+assembly)", "source": "https://homerun.ro/costuri-preturi/cluj-montaj-mobila_34056_494", "verified": false, "note": "Рынок: простой шкаф 80–120 lei, шкаф 150–350 lei." },
+      "wardrobeLarge": { "value": 220, "unit": "lei (dis+assembly)", "source": "https://homerun.ro/costuri-preturi/cluj-montaj-mobila_34056_494", "verified": false, "note": "Рынок: большой PAX 150–250 lei." },
+      "table": { "value": 40, "unit": "lei (dis+assembly)", "source": "internal", "verified": false, "note": "Снятие ножек. Предположение." },
+      "dresserOrNightstand": { "value": 50, "unit": "lei (dis+assembly)", "source": "https://homerun.ro/costuri-preturi/cluj-montaj-mobila_34056_494", "verified": false, "note": "Рынок: комод/тумба 50–100 lei." },
+      "sofaModular": { "value": 40, "unit": "lei (dis+assembly)", "source": "internal", "verified": false, "note": "Предположение." },
+      "tvWallMount": { "value": 120, "unit": "lei (снятие+навеска)", "source": "internal", "verified": false, "note": "Предположение." }
+    },
+    "kitchenFurniture": { "value": 0, "unit": "lei", "source": "https://homerun.ro/costuri-preturi/cluj-montaj-mobila_34056_494", "verified": false, "note": "Кухни (рынок 500–1500 lei) — только после осмотра, в MVP не считаем автоматически (0 = 'la cerere')." }
+  },
+
+  "specialItems": {
+    "$comment": "Особые предметы. При выборе полной защиты для них — отдельная строка 'Ambalare întărită'.",
+    "reinforcedPackingFee": {
+      "default": { "value": 150, "unit": "lei/item", "source": "internal", "verified": false, "note": "Индивидуальная упаковка: пена/уголки/обрешётка-лайт. Предположение." },
+      "pianoUpright": { "value": 400, "unit": "lei/item", "source": "https://www.napoca-mutari.ro/transport-mobila-cluj.html", "verified": false, "note": "Пианино — плюс +1 грузчик и ремни. Napoca Mutari заявляет перевозку пианино; цен в сниппете нет. Предположение." },
+      "artworkOrMirrorLarge": { "value": 150, "unit": "lei/item", "source": "internal", "verified": false, "note": "> 1.2 м. Предположение." },
+      "glassOrStoneTabletop": { "value": 150, "unit": "lei/item", "source": "internal", "verified": false, "note": "Предположение." },
+      "safeUnder150kg": { "value": 250, "unit": "lei/item", "source": "internal", "verified": false, "note": "Предположение." }
+    }
+  },
+
+  "protection": {
+    "basic": {
+      "label": "Protecție standard (inclusă)",
+      "price": { "value": 0, "unit": "lei", "source": "https://notari.pro/noul-cod-civil-legea-287-2009/art-1985-repararea-prejudiciului-contractul-de-transport-de-bunuri-contractul-de-transport", "verified": false, "note": "Включена. Ответственность за доказанное повреждение по нашей вине по реальной стоимости с учётом износа (Codul civil art. 1984–1985)." },
+      "liabilityPerKg": { "value": 50, "unit": "lei/kg per article", "source": "https://notari.pro/noul-cod-civil-legea-287-2009/art-1959-raspunderea-transportatorului-dispozitii-generale-contractul-de-transport ; https://treaties.un.org/doc/Publication/UNTS/Volume%201208/volume-1208-A-19487-English.pdf", "verified": false, "note": "ВНИМАНИЕ: Codul civil art. 1959(1) — перевозчик не может исключить/ограничить ответственность иначе как в случаях, предусмотренных законом. Лимит на кг (по аналогии с CMR 8.33 SDR/kg ≈ 50 lei/kg, курс SDR — предположение) может быть недействителен для внутреннего B2C. Нужна проверка юриста (R6). Использовать только как ориентир/для внутренних расчётов." },
+      "perItemCap": { "value": 2000, "unit": "lei", "source": "internal", "verified": false, "note": "Тот же юридический риск. Предположение." },
+      "clientPackedContentsCovered": false
+    },
+    "full": {
+      "label": "Protecție completă (valoare declarată)",
+      "rateOfDeclaredValue": { "value": 0.012, "unit": "fraction", "source": "https://csipros.org/full-value-protection-the-thing-carriers-love-right-up-until-they-have-to-use-it/ ; https://greekmoving.com/7-questions-about-moving-insurance/", "verified": false, "note": "США: обычно 1–3% от заявленной стоимости; пример $1.84 за $100. Себестоимость страхования груза в RO ~0.05–0.1% (CMR), остальное — самострахование и админ. Предположение." },
+      "rateWithDeductible": { "value": 0.008, "unit": "fraction", "source": "https://greekmoving.com/7-questions-about-moving-insurance/", "verified": false, "note": "С франшизой deductibleOption. Предположение." },
+      "deductibleOption": { "value": 500, "unit": "lei per claim", "source": "https://csipros.org/full-value-protection-the-thing-carriers-love-right-up-until-they-have-to-use-it/", "verified": false, "note": "США: франшизы $0/$500/$1000." },
+      "minFee": { "value": 150, "unit": "lei", "source": "internal", "verified": false, "note": "Предположение." },
+      "minDeclaredValue": { "value": 10000, "unit": "lei", "source": "https://www.fmcsa.dot.gov/sites/fmcsa.dot.gov/files/2023-07/PYM_Understanding%20Valuation_March23%20%28002%29.pdf", "verified": false, "note": "США: $6.00 × вес (lb), минимум $6,000. Для RO — фиксированный минимум 10 000 lei. Предположение." },
+      "minDeclaredValuePerM3": { "value": 1000, "unit": "lei/m3", "source": "internal", "verified": false, "note": "Нижняя граница заявленной стоимости = max(minDeclaredValue, объём × 1000). Защищает от занижения. Предположение." },
+      "highValueItemThreshold": { "value": 5000, "unit": "lei/item", "source": "https://www.fmcsa.dot.gov/protect-your-move/valuation-insurance", "verified": false, "note": "Предметы дороже порога — обязательно в описи отдельно (аналог 'items of extraordinary value' в США)." },
+      "settlementOptions": ["repair", "replace", "cashValue"],
+      "includesClientPackedContents": { "value": 0, "unit": "bool(0/1)", "source": "internal", "verified": false, "note": "Содержимое коробок, упакованных клиентом, покрывается только при видимом повреждении короба. Предположение." }
+    }
+  },
+
+  "survey": {
+    "onSite": {
+      "label": "Vizită specialist",
+      "price": { "value": 150, "unit": "lei", "source": "https://mutantii.ro/servicii/ ; https://www.firmademutari-bucuresti.ro/", "verified": false, "note": "Конкуренты в Cluj/Бухаресте делают осмотр бесплатно — поэтому 100% засчитывается в заказ. Цена нужна как фильтр несерьёзных заявок. Предположение." },
+      "deductibleFromOrder": true,
+      "deductibleValidDays": { "value": 30, "unit": "days", "source": "internal", "verified": false, "note": "Засчитывается, если переезд заказан в течение 30 дней." },
+      "resultPriceType": "guaranteed",
+      "guaranteeTolerance": { "value": 0.05, "unit": "fraction", "source": "internal", "verified": false, "note": "Итог ≤ подтверждённая смета × 1.05 при неизменном объёме работ. Предположение." }
+    },
+    "video": {
+      "label": "Video-tur (client)",
+      "price": { "value": 0, "unit": "lei", "source": "internal", "verified": false, "note": "Бесплатно; оценщик смотрит видео/звонок." },
+      "deductibleFromOrder": false,
+      "resultPriceType": "guaranteed",
+      "guaranteeTolerance": { "value": 0.1, "unit": "fraction", "source": "https://jjkellercompliancenetwork.com/regsense/375407-under-what-circumstances-must-i-relinquish-possession-of-a-collect-on-delivery-shipment-transported-under-a-non-binding-estimate", "verified": false, "note": "Аналог американского правила 110% (49 CFR 375.407): итог ≤ смета × 1.10." }
+    },
+    "none": {
+      "label": "Fără evaluare",
+      "price": { "value": 0, "unit": "lei", "source": "internal", "verified": false, "note": "" },
+      "deductibleFromOrder": false,
+      "resultPriceType": "range",
+      "guaranteeTolerance": null
+    }
+  },
+
+  "rangeWidth": {
+    "$comment": "Неопределённость объёма (V) по способу оценки. V_low = V×(1−low), V_high = V×(1+high). Асимметрия: клиенты чаще недооценивают объём.",
+    "none": {
+      "low": { "value": 0.15, "unit": "fraction", "source": "internal", "verified": false, "note": "Предположение. Калибровать по факту (сравнение заявленного/фактического объёма)." },
+      "high": { "value": 0.35, "unit": "fraction", "source": "internal", "verified": false, "note": "Предположение." }
+    },
+    "video": {
+      "low": { "value": 0.07, "unit": "fraction", "source": "internal", "verified": false, "note": "Показывается как диапазон ДО подтверждения сметы оценщиком." },
+      "high": { "value": 0.15, "unit": "fraction", "source": "internal", "verified": false, "note": "Предположение." }
+    },
+    "onSite": {
+      "low": { "value": 0.05, "unit": "fraction", "source": "internal", "verified": false, "note": "Предположение." },
+      "high": { "value": 0.05, "unit": "fraction", "source": "internal", "verified": false, "note": "Предположение." }
+    },
+    "timeUncertaintyHigh": { "value": 0.1, "unit": "fraction", "source": "internal", "verified": false, "note": "Доп. запас по времени на трафик/лифт в верхней границе. Предположение." }
+  },
+
+  "fx": {
+    "eurRon": { "value": 5.1, "unit": "RON per EUR", "source": "none-found", "verified": false, "note": "Только для пересчёта зарубежных ориентиров в документе. Курс не проверялся. Предположение." }
+  }
+}

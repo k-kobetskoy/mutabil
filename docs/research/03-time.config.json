@@ -1,0 +1,309 @@
+{
+  "$schema_note": "Коэффициенты формулы времени переезда (R3). Каждый коэффициент: {value, unit, source, verified, note}. verified:false = плейсхолдер, требует калибровки на реальных заказах. Формула описана в docs/research/03-time-elevators.md, раздел 'Формула времени'.",
+  "version": "0.1.0",
+  "currency_note": "Только время; цены — в другом конфиге.",
+  "units": {
+    "volume": "m3",
+    "time": "h (часы), если не указано min",
+    "distance": "m (переноска), km (езда)",
+    "floor": "этаж по румынскому счёту: parter = 0, etaj 1 = 1"
+  },
+
+  "productivity": {
+    "loadRatePerMover": {
+      "value": 3.5,
+      "unit": "m3 / man-hour",
+      "source": "https://www.consumeraffairs.com/movers/how-long-does-it-take-movers-to-load-a-truck.html ; https://www.movingscam.com/forum/viewtopic.php?p=30465 ; https://www.mass.gov/doc/first-rate-moving-32036-tariff/download",
+      "verified": false,
+      "note": "Погрузка в идеальных условиях: parter или большой лифт, переноска ≤ freeCarryM, мебель упакована в одеяла/стрейч силами бригады, коробки/ящики собраны клиентом. Вилка из источников: 2-bedroom (US) грузят 2 грузчика за 3–4 ч (ConsumerAffairs) → ~3–4 м³/чел·ч при ~25 м³; '500 lb в час на человека погрузка+выгрузка' (movingscam) при 7 lb/ft³ ≈ 2 м³/чел·ч на полный цикл; консервативный тариф 40 ft³/ч/чел ≈ 1,13 м³/чел·ч (First Rate Moving, полный цикл). Предположение: 3,5 погрузка + 4,5 выгрузка ≈ 1,97 м³/чел·ч на полный цикл."
+    },
+    "unloadRatePerMover": {
+      "value": 4.5,
+      "unit": "m3 / man-hour",
+      "source": "https://blog.hireahelper.com/tag/3-bedroom-house/ (load 2 movers 3 h / unload 2 movers 2 h для 2–3-bedroom)",
+      "verified": false,
+      "note": "Выгрузка быстрее погрузки (не нужно плотно 'тетрисить' кузов). Соотношение ~1,3–1,5× из примера HireAHelper. Предположение: 4,5."
+    },
+    "crewEfficiency": {
+      "value": { "1": 0.9, "2": 1.0, "3": 0.93, "4": 0.875, "5": 0.8, "6": 0.75 },
+      "unit": "dimensionless, множитель к n (эффективные грузчики = n × eff)",
+      "source": "https://www.getbellhops.com/blog/?p=106133 (пример: 2 movers 7 ч, 3 movers 5 ч, 4 movers 4 ч → 14/15/16 чел·ч) ; https://www.consumeraffairs.com/movers/how-long-does-it-take-movers-to-load-a-truck.html (3–4 грузчика на 25–50% быстрее, чем 2)",
+      "verified": false,
+      "note": "Убывающая отдача: люди мешают друг другу на лестнице/в лифте, кузов грузит один. 1 грузчик — 0.9 и только для лёгких заказов (тяжёлые предметы требуют 2). 5–6 — экстраполяция (Предположение)."
+    }
+  },
+
+  "access": {
+    "floorPenaltyNoLift": {
+      "value": 0.10,
+      "unit": "доля к времени переноски на этом конце, за каждый этаж выше parter",
+      "source": "https://www.consumeraffairs.com/movers/how-long-does-it-take-movers-to-load-a-truck.html (+20–30 мин на пролёт при погрузке 2-bedroom 3–4 ч ≈ 10–12%) ; https://meister-job.de/was-kostet-umzugsunternehmen/ (DE: +5–10% к цене за этаж без лифта) ; https://www.storagescholars.com/blog/how-many-hours-for-moving-help (вплоть до +1 ч на пролёт)",
+      "verified": false,
+      "note": "Линейно до progressiveFromFloor включительно, выше — с множителем progressiveMultiplier (усталость)."
+    },
+    "progressiveFromFloor": {
+      "value": 4,
+      "unit": "этаж",
+      "source": "Предположение",
+      "verified": false,
+      "note": "Этажи выше этого считаются с повышенным штрафом (P+8/P+10 без работающего лифта)."
+    },
+    "progressiveMultiplier": {
+      "value": 1.5,
+      "unit": "множитель к floorPenaltyNoLift для этажей > progressiveFromFloor",
+      "source": "Предположение",
+      "verified": false,
+      "note": "Калибровать по фактам."
+    },
+    "stairTypeFactor": {
+      "value": { "normal": 1.0, "narrow": 1.2, "winding": 1.35 },
+      "unit": "множитель к этажному штрафу",
+      "source": "Предположение (в тарифах US узкие/винтовые лестницы оговариваются отдельно, но числовых коэффициентов не найдено)",
+      "verified": false,
+      "note": "narrow — марш < ~1 м или нет просвета между маршами для подъёма дивана; winding — винтовая/забежные ступени (старый фонд центра Клужа, дома на 2–3 этажа)."
+    },
+    "raisedGroundFloorEquivalent": {
+      "value": 0.5,
+      "unit": "этаж-эквивалент без лифта",
+      "source": "Предположение",
+      "verified": false,
+      "note": "Ступени у входа / 'parter înalt' / лифт с остановками на полуплощадках (характерно для части панельных блоков). Добавляется к пути и по лестнице, и с лифтом."
+    },
+    "liftPerFloorPenalty": {
+      "value": 0.01,
+      "unit": "доля за этаж при перевозке лифтом",
+      "source": "Предположение (время хода кабины на этаж ~3–4 с при 0,7–1 м/с и высоте этажа ~2,75 м — мало по сравнению с погрузкой кабины)",
+      "verified": false,
+      "note": "Базовый фактор класса лифта — в 03-elevators.config.json (timeFactor)."
+    },
+    "freeCarryM": {
+      "value": 10,
+      "unit": "m",
+      "source": "Предположение; ср. US-тарифы: первые 75 ft (~23 м) бесплатно — https://www.mass.gov/doc/fast-quality-tariff-25hg50-tpd/download ; https://www.movingscam.com/forum/viewtopic.php?p=30634",
+      "verified": false,
+      "note": "Дистанция от двери фургона до входной двери подъезда, включённая в базовую производительность."
+    },
+    "carryPenaltyPer10m": {
+      "value": 0.06,
+      "unit": "доля к времени переноски за каждые 10 м сверх freeCarryM",
+      "source": "Оценка: ~100 ходок на 20 м³ (0,2 м³/ходку с тележкой), +20 м туда-обратно ≈ +20 с на ходку → ~0,55 чел·ч ≈ 6–7% от ~8 чел·ч. Прокси: long carry $75 за каждые 75 ft — https://www.mass.gov/doc/fast-quality-tariff-25hg50-tpd/download ; +15–30 мин на дальнюю парковку — https://www.consumeraffairs.com/movers/how-long-does-it-take-movers-to-load-a-truck.html",
+      "verified": false,
+      "note": "Предположение. Плитка/брусчатка/бордюры без пандуса — через parking.fixedMinutes или ручную правку."
+    },
+    "bulkyStairsExtraManMinPerFloor": {
+      "value": 3,
+      "unit": "man-min на предмет на этаж",
+      "source": "Предположение",
+      "verified": false,
+      "note": "Для крупных предметов, которые НЕ влезли в лифт и несутся по лестнице (диван, двуспальный матрас, холодильник > кабины, панели > maxLongThinItemCm). Добавляется поверх объёма, уже учтённого со штрафом лестницы (развороты на площадках, 2 человека на предмет)."
+    }
+  },
+
+  "parking": {
+    "assumedCarryM": {
+      "value": { "atEntrance": 5, "nearby": 25, "far": 50, "unknown": 30 },
+      "unit": "m",
+      "source": "Предположение",
+      "verified": false,
+      "note": "Если клиент не ввёл дистанцию переноски — берём по типу парковки."
+    },
+    "fixedMinutes": {
+      "value": { "atEntrance": 0, "nearby": 0, "far": 15, "unknown": 10, "restrictedZone": 20 },
+      "unit": "min (на каждый конец)",
+      "source": "https://www.consumeraffairs.com/movers/how-long-does-it-take-movers-to-load-a-truck.html (+15–30 мин на парковку/дальнюю переноску)",
+      "verified": false,
+      "note": "restrictedZone — пешеходный центр Клужа, двор с шлагбаумом, нужен пропуск/окно въезда. Требует проверки правил Primăria Cluj-Napoca (вне рамок R3)."
+    }
+  },
+
+  "itemWork": {
+    "disassemblyAssemblyCatalogRef": {
+      "value": "see catalog below",
+      "unit": "man-min",
+      "source": "см. отдельные позиции",
+      "verified": false,
+      "note": "Время разборки на старом адресе (dis) и сборки на новом (asm) в чел·мин для бригады, уже знакомой с моделью. Это НЕ сборка из коробки: повторная сборка ~50–70% от первичной (Предположение)."
+    },
+    "catalog": {
+      "bed_double_simple": { "dis": 20, "asm": 30, "unit": "man-min", "source": "https://homegnome.com/blog/assembly/how-long-does-furniture-assembly-take/ (кровать 30–60 мин из коробки) ; https://www.myjobquote.co.uk/questions/dismantle-furniture (~30 мин на предмет разборки)", "verified": false, "note": "Каркас + ламели; без подъёмного механизма." },
+      "bed_storage_lift": { "dis": 35, "asm": 50, "unit": "man-min", "source": "https://www.trade2base.com/blog/flat-pack-assembly-costs-uk (кровати 60–90 мин, ottoman — верхняя граница)", "verified": false, "note": "Кровать с газлифтом/ящиком." },
+      "bunk_bed": { "dis": 40, "asm": 60, "unit": "man-min", "source": "https://www.homeadvisor.com/cost/home-design-and-decor/assemble-furniture (двухъярусные — сложная категория)", "verified": false, "note": "Предположение по времени." },
+      "wardrobe_pax_100": { "dis": 45, "asm": 90, "unit": "man-min", "source": "https://www.ikea.co.id/en/inspirations/how-to-assemble-ikea-pax-wardrobe (PAX 2–5 ч из коробки) ; https://www.airtasker.com/uk/assembly/wardrobe-assembly/england (2-door ~3 ч)", "verified": false, "note": "Каркас PAX 100×58×236 см: в малый/средний лифт не входит даже на попа (высота 236 > кабины) — либо разбирать, либо по лестнице." },
+      "wardrobe_pax_150_200": { "dis": 70, "asm": 140, "unit": "man-min", "source": "https://www.airtasker.com/uk/assembly/wardrobe-assembly/england (large wardrobe 4–5 ч из коробки)", "verified": false, "note": "Две и более секции, раздвижные двери — верх вилки." },
+      "wardrobe_classic_3door": { "dis": 40, "asm": 60, "unit": "man-min", "source": "Предположение (типичный румынский ЛДСП 'dulap 3 uși')", "verified": false, "note": "" },
+      "kallax_4x4": { "dis": 0, "asm": 0, "unit": "man-min", "source": "https://www.trade2base.com/blog/flat-pack-assembly-costs-uk (KALLAX 4×4 из коробки 45–60 мин + 15–20 мин крепление к стене)", "verified": false, "note": "Обычно перевозится целиком (147×147×39 см) — в малый лифт не входит (147 > дверь 70 по второму габариту? нет: проходит торцом 39×147 при высоте двери 200 — проверяется правилом fits). Если нужно разбирать: dis 30 / asm 45; снятие/крепление к стене 15/20." },
+      "desk_simple": { "dis": 15, "asm": 20, "unit": "man-min", "source": "https://homegnome.com/blog/assembly/how-long-does-furniture-assembly-take/ (desk ~30 мин из коробки)", "verified": false, "note": "" },
+      "desk_with_hutch": { "dis": 30, "asm": 45, "unit": "man-min", "source": "https://www.trade2base.com/blog/flat-pack-assembly-costs-uk (desk with hutch/return 60–90 мин)", "verified": false, "note": "" },
+      "dining_table": { "dis": 10, "asm": 10, "unit": "man-min", "source": "Предположение (снять ножки/столешницу)", "verified": false, "note": "" },
+      "sofa_corner_modular": { "dis": 10, "asm": 10, "unit": "man-min", "source": "Предположение", "verified": false, "note": "Разъединить модули, снять ножки." },
+      "washing_machine_prep": { "dis": 15, "asm": 15, "unit": "man-min", "source": "Предположение", "verified": false, "note": "Транспортные болты, слив/подача; подключение к новой сантехнике — отдельная услуга." },
+      "tv_wall_mount": { "dis": 15, "asm": 25, "unit": "man-min", "source": "Предположение", "verified": false, "note": "Монтаж на новую стену требует сверления — отдельная услуга." }
+    },
+    "maxParallelAssemblers": {
+      "value": 2,
+      "unit": "человек",
+      "source": "Предположение",
+      "verified": false,
+      "note": "Работа с мебелью идёт в общий котёл чел·ч бригады; если сумма dis/asm > (n−1)×elapsed, она становится узким местом: elapsed ≥ ΣitemManH / maxParallelAssemblers."
+    }
+  },
+
+  "drive": {
+    "avgUrbanSpeedKmh": {
+      "value": 20,
+      "unit": "km/h",
+      "source": "Предположение. Контекст: TomTom Traffic Index 2025 — Клуж опустился на 7 позиций из-за стройплощадок, пик сместился на 11:00–14:00: https://playtech.ro/2025/indexul-de-trafic-2025-cum-arata-mobilitatea-oraselor-din-romania-orele-de-varf-pe-sosele/ ; https://www.wall-street.ro/articol/auto/bucuresti-timisoara-cluj-napoca-si-iasi-orasele-cu-cel-mai-aglomerat-trafic.html",
+      "verified": false,
+      "note": "Для фургона 3,5 т внутри Клужа с учётом светофоров. Заменить на routing API (OSRM/Google) с трафиком, когда будет."
+    },
+    "detourFactor": {
+      "value": 1.35,
+      "unit": "дорожный км / км по прямой",
+      "source": "Предположение (типично 1,2–1,4 для городов)",
+      "verified": false,
+      "note": "Только если нет routing API."
+    },
+    "peakFactor": {
+      "value": { "offPeak": 1.0, "peak": 1.3 },
+      "unit": "множитель к времени езды",
+      "source": "https://playtech.ro/2025/indexul-de-trafic-2025-cum-arata-mobilitatea-oraselor-din-romania-orele-de-varf-pe-sosele/ (пики 11–14; также 7:30–9:30, 16–19 — Предположение)",
+      "verified": false,
+      "note": "Если окно погрузки/езды пересекается с пиком."
+    },
+    "minDriveMin": {
+      "value": 15,
+      "unit": "min",
+      "source": "Предположение",
+      "verified": false,
+      "note": "Выезд со двора, парковка у нового адреса."
+    },
+    "depotLegBillable": {
+      "value": false,
+      "unit": "bool",
+      "source": "Бизнес-решение",
+      "verified": false,
+      "note": "Включать ли подачу машины с базы во время заказа (влияет на окно, если true)."
+    }
+  },
+
+  "fixed": {
+    "setupMin": {
+      "value": 15,
+      "unit": "min",
+      "source": "Предположение",
+      "verified": false,
+      "note": "Обход квартиры, сверка списка, защита пола/дверей."
+    },
+    "teardownMin": {
+      "value": 15,
+      "unit": "min",
+      "source": "Предположение",
+      "verified": false,
+      "note": "Расстановка по комнатам, сбор одеял, подпись акта, оплата."
+    },
+    "liftProtectionMinPerLiftEnd": {
+      "value": 10,
+      "unit": "min",
+      "source": "Предположение; обоснование — регламенты блоков требуют не повреждать кабину: https://www.capital.ro/amenda-de-pana-la-1-500-de-lei-pentru-cei-care-folosesc-liftul-e-interzis-la-bloc-proprietarii-si-chiriasii-au-interdictie.html",
+      "verified": false,
+      "note": "Обшивка кабины картоном/одеялами, фиксация двери."
+    }
+  },
+
+  "buffer": {
+    "method": {
+      "value": "lognormal-quantile",
+      "unit": "",
+      "source": "Математика: если факт/оценка ~ LogNormal(0, σ), то Pq = exp(z_q·σ). σ=0.25 → P80 ×1.23, P85 ×1.30, P90 ×1.38.",
+      "verified": false,
+      "note": "До накопления статистики σ — экспертная. После 30+ заказов: σ = std(ln(факт/оценка))."
+    },
+    "sigmaLn": {
+      "value": 0.25,
+      "unit": "std of ln(actual/estimate)",
+      "source": "Предположение",
+      "verified": false,
+      "note": "Калибровать."
+    },
+    "targetQuantileZ": {
+      "value": 1.0364,
+      "unit": "z-score (P85)",
+      "source": "Стандартное нормальное распределение",
+      "verified": false,
+      "note": "P85 → множитель ×1.30 при σ=0.25. Компромисс: P90 (×1.38) даёт слишком широкие окна и отпугивает клиента; P80 — частые споры."
+    },
+    "uncertaintyAdders": {
+      "value": { "liftUnknown": 0.10, "inventoryByRoomsOnly": 0.15, "stairsTypeUnknown": 0.05, "parkingUnknown": 0.05 },
+      "unit": "добавка к sigmaLn",
+      "source": "Предположение",
+      "verified": false,
+      "note": "Неизвестность расширяет окно (σ складываем линейно — консервативно)."
+    },
+    "minBufferH": {
+      "value": 0.5,
+      "unit": "h",
+      "source": "https://www.consumeraffairs.com/movers/how-long-does-it-take-movers-to-load-a-truck.html (рекомендуют буфер 30–60 мин)",
+      "verified": false,
+      "note": "Окно ≥ оценка + 0,5 ч, даже для маленьких заказов."
+    },
+    "minBillableH": {
+      "value": 2,
+      "unit": "h",
+      "source": "https://www.storagescholars.com/blog/how-many-hours-for-moving-help (минимальный заказ 2 ч)",
+      "verified": false,
+      "note": "Бизнес-решение; конкуренты в Клуже — проверить в R-конкуренты."
+    },
+    "estimateRoundingH": {
+      "value": 0.5,
+      "unit": "h",
+      "source": "Продуктовое решение",
+      "verified": false,
+      "note": "Ожидаемое время показываем, округляя вверх до 30 мин."
+    },
+    "windowRoundingH": {
+      "value": 1,
+      "unit": "h",
+      "source": "Продуктовое решение",
+      "verified": false,
+      "note": "Гарантированное окно — вверх до целого часа ('до 6 часов')."
+    },
+    "overtimeStepH": {
+      "value": 0.5,
+      "unit": "h",
+      "source": "Продуктовое решение; аналогия с правилом 110% и исключениями для неучтённых услуг — https://www.fmcsa.dot.gov/consumer-protection/protect-your-move/what-binding-move-estimate",
+      "verified": false,
+      "note": "Сверхурочные — шагами по 30 мин и только если превышение вызвано расхождением с заявкой (больше вещей, неработающий лифт, не заявленная разборка)."
+    }
+  },
+
+  "liftThroughputCheck": {
+    "floorHeightM": {
+      "value": 2.75,
+      "unit": "m",
+      "source": "Предположение (типовые панельные блоки: этаж ~2,7–2,8 м)",
+      "verified": false,
+      "note": ""
+    },
+    "oldLiftSpeedMs": {
+      "value": 0.7,
+      "unit": "m/s",
+      "source": "Предположение; ГОСТ 5746-83 упоминает 0,71 и 1,0 м/с для 400 кг — https://dnaop.com/html/42632_2.html",
+      "verified": false,
+      "note": "Новые лифты 1,0 м/с."
+    },
+    "cabinLoadUnloadSecPerTrip": {
+      "value": { "small": 90, "medium": 120, "large": 180 },
+      "unit": "s (загрузка + выгрузка кабины)",
+      "source": "Предположение",
+      "verified": false,
+      "note": ""
+    },
+    "doorCycleSecPerStop": {
+      "value": { "manual": 15, "automatic": 8 },
+      "unit": "s",
+      "source": "Предположение (старые лифты — распашная шахтная дверь + складная кабинная)",
+      "verified": false,
+      "note": ""
+    }
+  }
+}
