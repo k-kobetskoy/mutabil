@@ -22,7 +22,7 @@ export const Point = z.array(z.number().min(0).max(1)).length(3).meta({ id: 'Poi
 
 export const MarkIntent = z
   .enum(['move', 'stay', 'careful'])
-  .meta({ id: 'MarkIntent', description: 'green = we move it, red = it stays, yellow = careful/fragile/disassemble' });
+  .meta({ id: 'MarkIntent', description: 'green = we move it, blue = it stays, yellow = careful/fragile/disassemble' });
 
 export const Annotation = z
   .strictObject({

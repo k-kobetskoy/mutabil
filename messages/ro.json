@@ -594,7 +594,20 @@
     "photoNote": "Comentariu pentru fotografie",
     "done": "Gata",
     "width": "Grosime",
-    "legend": "Verde — mutăm, albastru — rămâne, galben — atenție / fragil / de demontat."
+    "legend": "Verde — mutăm, albastru — rămâne, galben — atenție / fragil / de demontat.",
+    "tools": "Instrument",
+    "intents": "Ce înseamnă marcajul",
+    "thin": "Subțire",
+    "medium": "Mediu",
+    "thick": "Gros",
+    "zoomIn": "Mărește",
+    "zoomOut": "Micșorează",
+    "pins": "Puncte",
+    "pinLabel": "Punctul {n}",
+    "removePin": "Șterge punctul {n}",
+    "pinsEmpty": "Atinge fotografia cu „Punct cu comentariu” sau folosește butonul de mai jos. Un punct poate spune ce anume mutăm sau ce trebuie tratat cu grijă.",
+    "saved": "Se salvează pe acest dispozitiv pe măsură ce lucrezi.",
+    "loading": "Deschidem fotografia…"
   },
   "validation": {
     "required": "Completează acest câmp",

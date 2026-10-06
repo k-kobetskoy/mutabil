@@ -48,7 +48,7 @@ type MediaState = {
   generalNote: string;
   add: (m: MediaItem) => void;
   remove: (id: string) => void;
-  annotate: (id: string, a: Annotation) => void;
+  annotate: (id: string, a: Annotation | undefined) => void;
   setGeneralNote: (n: string) => void;
 };
 

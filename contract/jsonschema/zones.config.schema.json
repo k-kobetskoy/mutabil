@@ -127,6 +127,11 @@
             ],
             "type": "string"
           },
+          "code": {
+            "maxLength": 4,
+            "minLength": 2,
+            "type": "string"
+          },
           "id": {
             "type": "string"
           },
@@ -164,6 +169,7 @@
         },
         "required": [
           "id",
+          "code",
           "name",
           "class",
           "lat",

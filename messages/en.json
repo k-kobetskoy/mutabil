@@ -594,7 +594,20 @@
     "photoNote": "Comment for the photo",
     "done": "Done",
     "width": "Thickness",
-    "legend": "Green — we move it, blue — it stays, yellow — careful / fragile / take apart."
+    "legend": "Green — we move it, blue — it stays, yellow — careful / fragile / take apart.",
+    "tools": "Tool",
+    "intents": "What the mark means",
+    "thin": "Thin",
+    "medium": "Medium",
+    "thick": "Thick",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "pins": "Points",
+    "pinLabel": "Point {n}",
+    "removePin": "Remove point {n}",
+    "pinsEmpty": "Tap the photo with “Point with comment”, or use the button below. A point can say what exactly moves or needs care.",
+    "saved": "Saved on this device as you go.",
+    "loading": "Opening the photo…"
   },
   "validation": {
     "required": "Fill in this field",

@@ -569,7 +569,7 @@ components:
         - en
       type: string
     MarkIntent:
-      description: green = we move it, red = it stays, yellow = careful/fragile/disassemble
+      description: green = we move it, blue = it stays, yellow = careful/fragile/disassemble
       enum:
         - move
         - stay
