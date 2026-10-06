@@ -1,13 +1,23 @@
 /**
- * Placeholder line drawings (R7 §3.4): one stroke weight, night ink, real sizes in cm,
- * labelled "sketch · photo coming". To be replaced with real photos later.
+ * Line drawings (R7 §3.4): one stroke weight, night ink. They illustrate services, not proof;
+ * real photos go into the care section (decisions D35).
  */
 import type { ReactNode } from 'react';
 import { cx } from './cx';
 
 const S = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round' } as const;
 
-function Frame({ children, viewBox = '0 0 120 80', className, title }: { children: ReactNode; viewBox?: string; className?: string; title: string }) {
+function Frame({
+  children,
+  viewBox = '0 0 120 80',
+  className,
+  title,
+}: {
+  children: ReactNode;
+  viewBox?: string;
+  className?: string;
+  title: string;
+}) {
   return (
     <svg viewBox={viewBox} role="img" aria-label={title} className={cx('h-auto w-full', className)}>
       <title>{title}</title>
@@ -15,15 +25,6 @@ function Frame({ children, viewBox = '0 0 120 80', className, title }: { childre
     </svg>
   );
 }
-
-const Dim = ({ x1, y1, x2, y2, label, lx, ly }: { x1: number; y1: number; x2: number; y2: number; label: string; lx: number; ly: number }) => (
-  <g className="text-ink-muted">
-    <path d={`M${x1} ${y1} L${x2} ${y2}`} {...S} strokeWidth={1} strokeDasharray="2 2" />
-    <text x={lx} y={ly} fontSize="7" fill="currentColor" textAnchor="middle" fontFamily="var(--font-sans)">
-      {label}
-    </text>
-  </g>
-);
 
 export function CrateSketch({ title, className }: { title: string; className?: string }) {
   return (
@@ -35,7 +36,6 @@ export function CrateSketch({ title, className }: { title: string; className?: s
           <path d="M20 5 h16" {...S} />
         </g>
       ))}
-      <Dim x1={28} y1={72} x2={84} y2={72} label="60 × 40 × 35 cm" lx={56} ly={79} />
     </Frame>
   );
 }
@@ -51,7 +51,6 @@ export function WardrobeBoxSketch({ title, className }: { title: string; classNa
           <path d={`M${x - 6} 26 v26 h12 v-26`} {...S} strokeDasharray="3 3" />
         </g>
       ))}
-      <Dim x1={38} y1={75} x2={82} y2={75} label="50 × 60 × 120 cm" lx={60} ly={80} />
     </Frame>
   );
 }
@@ -62,7 +61,6 @@ export function MattressBagSketch({ title, className }: { title: string; classNa
       <path d="M14 30 q2 -8 10 -8 h72 q8 0 10 8 v18 q-2 8 -10 8 h-72 q-8 0 -10 -8 z" {...S} />
       <path d="M20 34 h80 M20 44 h80" {...S} strokeDasharray="1 4" />
       <path d="M100 22 l8 -8 M104 26 l8 -6" {...S} />
-      <Dim x1={14} y1={68} x2={106} y2={68} label="160 × 200 cm" lx={60} ly={76} />
     </Frame>
   );
 }
@@ -91,6 +89,21 @@ export function PackingSketch({ title, className }: { title: string; className?:
   );
 }
 
+export function VisitSketch({ title, className }: { title: string; className?: string }) {
+  return (
+    <Frame title={title} className={className}>
+      <path d="M38 12 h44 v62 h-44 z" {...S} />
+      <path d="M52 8 h16 v8 h-16 z" {...S} />
+      {[28, 42, 56].map((y) => (
+        <g key={y}>
+          <path d={`M45 ${y} l3 3 l6 -6`} {...S} />
+          <path d={`M60 ${y} h15`} {...S} />
+        </g>
+      ))}
+    </Frame>
+  );
+}
+
 export function VanSketch({ className, title }: { className?: string; title: string }) {
   return (
     <svg viewBox="0 0 48 24" role="img" aria-label={title} className={className}>
@@ -106,7 +119,15 @@ export function VanSketch({ className, title }: { className?: string; title: str
  * Lift cabins seen from above, at one scale (1 cm = 0.45 px): the class reads from what fits.
  * none = a staircase, unknown = dashed cabin with a question mark.
  */
-export function LiftPlan({ kind, className, title }: { kind: 'none' | 'small' | 'medium' | 'large' | 'unknown'; className?: string; title: string }) {
+export function LiftPlan({
+  kind,
+  className,
+  title,
+}: {
+  kind: 'none' | 'small' | 'medium' | 'large' | 'unknown';
+  className?: string;
+  title: string;
+}) {
   const k = 0.45;
   const cab = { small: [90, 100], medium: [100, 125], large: [110, 210] }[kind === 'unknown' ? 'small' : kind === 'none' ? 'small' : kind];
   const w = cab[0] * k;
@@ -125,24 +146,42 @@ export function LiftPlan({ kind, className, title }: { kind: 'none' | 'small' | 
       ) : (
         <g>
           <rect x={x} y={y} width={w} height={d} rx={1.5} {...S} strokeDasharray={kind === 'unknown' ? '3 3' : undefined} />
-          <path d={`M${x + w / 2 - ((kind === 'large' ? 90 : kind === 'medium' ? 80 : 70) * k) / 2} ${y + d} h${(kind === 'large' ? 90 : kind === 'medium' ? 80 : 70) * k}`} {...S} strokeWidth={3.2} />
+          <path
+            d={`M${x + w / 2 - ((kind === 'large' ? 90 : kind === 'medium' ? 80 : 70) * k) / 2} ${y + d} h${(kind === 'large' ? 90 : kind === 'medium' ? 80 : 70) * k}`}
+            {...S}
+            strokeWidth={3.2}
+          />
           {kind === 'unknown' ? (
-            <text x={50} y={y + d / 2 + 5} fontSize="16" textAnchor="middle" fill="currentColor" fontFamily="var(--font-display)" fontWeight={800}>
+            <text
+              x={50}
+              y={y + d / 2 + 5}
+              fontSize="16"
+              textAnchor="middle"
+              fill="currentColor"
+              fontFamily="var(--font-display)"
+              fontWeight={800}
+            >
               ?
             </text>
           ) : (
             <>
               {/* fridge 60×65 always fits */}
               <rect x={x + 3} y={y + 3} width={60 * k} height={65 * k} {...S} strokeWidth={1.2} />
-              {kind === 'large' && <rect x={x + 3} y={y + 3 + 65 * k + 4} width={95 * k} height={210 * k - 65 * k - 12} {...S} strokeWidth={1.2} strokeDasharray="4 2" />}
+              {kind === 'large' && (
+                <rect
+                  x={x + 3}
+                  y={y + 3 + 65 * k + 4}
+                  width={95 * k}
+                  height={210 * k - 65 * k - 12}
+                  {...S}
+                  strokeWidth={1.2}
+                  strokeDasharray="4 2"
+                />
+              )}
             </>
           )}
         </g>
       )}
     </svg>
   );
-}
-
-export function SketchCaption({ children }: { children: ReactNode }) {
-  return <span className="text-[0.72rem] tracking-wide text-ink-muted">{children}</span>;
 }

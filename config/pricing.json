@@ -125,6 +125,35 @@
       "note": "Скидка за полный день."
     }
   },
+  "fullService": {
+    "$comment": "«Ne ocupăm de tot» (D31): ориентир «от X лей» на лендинге = нижняя граница вилки типового переезда (полная упаковка, ящики, выезд специалиста) × multiplier, округлено вверх. Запас клиенту не показывается.",
+    "multiplier": {
+      "value": 1.3,
+      "unit": "factor",
+      "source": "owner 2026-10-07 (D31)",
+      "verified": false,
+      "note": "Запас цены «под ключ» поверх расчёта по ставкам."
+    },
+    "roundUpLei": {
+      "value": 50,
+      "unit": "lei",
+      "source": "assumption",
+      "verified": false,
+      "note": "Шаг округления ориентира вверх."
+    },
+    "presets": ["garsoniera", "apartament-2-camere", "apartament-3-camere"],
+    "reference": {
+      "fromZoneId": "manastur",
+      "toZoneId": "gheorgheni",
+      "floor": {
+        "value": 2,
+        "unit": "floor",
+        "source": "assumption",
+        "verified": false,
+        "note": "Типовой этаж для ориентира, лифт средний с обеих сторон."
+      }
+    }
+  },
   "overtime": {
     "multiplier": {
       "value": 1,

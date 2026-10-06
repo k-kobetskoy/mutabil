@@ -72,6 +72,7 @@ export class MockOrderService implements OrderService {
 
     const est = estimate(req.order, getConfig()); // server-side recomputation
     const tasks = est.tasks.map((t) => t.code);
+    if (req.order.service === 'full') tasks.unshift('SCHEDULE_VISIT');
     if (req.media?.some((m) => m.kind === 'photo' || m.kind === 'video')) tasks.push('REVIEW_MEDIA');
 
     for (const end of ['from', 'to'] as const) {

@@ -5,14 +5,15 @@
   },
   "brand": "Mutabil",
   "nav": {
-    "fares": "Fares",
-    "extras": "Extras",
-    "how": "How it goes",
     "rules": "How we calculate",
     "faq": "Questions",
     "start": "Detailed estimate",
     "language": "Language",
-    "skip": "Skip to content"
+    "skip": "Skip to content",
+    "gets": "What you get",
+    "care": "Care",
+    "ways": "How to order",
+    "startShort": "Estimate"
   },
   "common": {
     "continue": "Continue",
@@ -30,7 +31,6 @@
     "to": "To",
     "swap": "Swap departure and arrival",
     "loading": "Loading…",
-    "sketch": "sketch · photo coming",
     "perHour": "/ hour",
     "pieces": "pcs",
     "hoursShort": "h",
@@ -55,53 +55,7 @@
     },
     "cta": "See price and time",
     "exact": "Or make a detailed estimate, ~3 minutes",
-    "passTitleSample": "This is what an estimate looks like",
     "passTitleLive": "Your estimate, approximate",
-    "fares": {
-      "title": "Three fares. The differences are written down, not hidden.",
-      "lead": "The fare decides how certain the price is and how well your things are protected. Every option can be changed on its own.",
-      "estimate": "Estimate",
-      "estimateFor": "You only want to know the cost",
-      "fixed": "Fixed price",
-      "fixedFor": "You want a certain sum after a survey from photos or video",
-      "complete": "Complete",
-      "completeFor": "You want to worry about nothing",
-      "rowPrice": "Price",
-      "rowSurvey": "Survey",
-      "rowProtection": "Protection",
-      "rowCrates": "Reusable crates",
-      "priceInterval": "range",
-      "priceCapRemote": "fixed, ≤ +{pct} %",
-      "priceCapOnsite": "fixed, ≤ +{pct} %",
-      "surveyNone": "none",
-      "surveyRemote": "photo / video",
-      "surveyOnsite": "on-site visit",
-      "protectionBasic": "as by law",
-      "protectionFull": "declared value",
-      "cratesOptional": "optional",
-      "cratesIncluded": "7 days included",
-      "includedAll": "In every fare: tape, stretch film, blankets, dollies, floor and door protection.",
-      "pick": "Price it with {fare}"
-    },
-    "extras": {
-      "title": "Extras: what you add to the move",
-      "lead": "Every option shows its unit price right here. Nothing is pre-selected.",
-      "crates": "Reusable crates",
-      "cratesText": "We bring them {before} days before and collect them {after} days after. No boxes to buy, none to throw away.",
-      "cratesPrice": "{rate} lei / crate · {days} days included · then {extra} leu / day",
-      "wardrobe": "Wardrobe box",
-      "wardrobeText": "Clothes travel on hangers, just as they hang in the wardrobe.",
-      "wardrobePrice": "{rate} lei / pc, rental",
-      "mattress": "Mattress bag",
-      "mattressText": "A clean mattress on arrival, no dust, no scratches.",
-      "mattressPrice": "{single}–{double} lei / pc",
-      "assembly": "Disassembly and assembly",
-      "assemblyText": "A craftsman takes the furniture apart beforehand and puts it together on arrival. The crew does not wait for him.",
-      "assemblyPrice": "from {bed} lei / bed · {wardrobe} lei / large wardrobe",
-      "packing": "Packing",
-      "packingText": "Partial (kitchen and fragile items) or complete. Done the day before.",
-      "packingPrice": "{rate} lei / packed box"
-    },
     "journey": {
       "title": "How it goes",
       "request": "Request",
@@ -114,9 +68,9 @@
       "moveText": "The crew arrives in the window you picked. You know from the start how long it takes.",
       "pickup": "Crate pickup",
       "pickupText": "After 7 days, free.",
-      "dayBefore": "D−{n}",
-      "day": "D",
-      "dayAfter": "D+{n}"
+      "dayBefore": "{n} days before",
+      "day": "moving day",
+      "dayAfter": "{n} days after"
     },
     "faq": {
       "title": "What happens if…",
@@ -127,11 +81,12 @@
       "q3": "…something does not fit the lift?",
       "a3": "The configurator warns you in advance and prices the stairs for that item. Furniture that comes apart travels as panels.",
       "q4": "…something gets damaged?",
-      "a4": "With basic protection we are liable as the law provides. With complete protection we repair, replace or pay the declared value, with no discussion about wear.",
+      "a4": "We are liable by law: if something breaks through our fault, we repair it or pay its real value. The crew leader records the problem with you on the spot.",
       "q5": "…the crew is late or works longer?",
       "a5": "The end of the window is written in the estimate. If we overrun because of us, you do not pay above the cap.",
       "q6": "…I don't know the answer to a question?",
-      "a6": "Choose “Not sure”. You will see right away what we assume and how much the price can change."
+      "a6": "Choose “Not sure”. You will see right away what we assume and how much the price can change.",
+      "more": "All rates and calculation rules"
     },
     "footer": {
       "company": "Mutabil SRL (company details to be added)",
@@ -140,6 +95,64 @@
       "legal": "Privacy policy · Service terms · Protection terms · Cancellation policy",
       "anpc": "ANPC — Alternative dispute resolution",
       "vat": "All prices are in lei and include 21 % VAT."
+    },
+    "gets": {
+      "title": "What you get with Mutabil",
+      "lead": "Everything that makes a move easy, from one provider. Pick only what you need.",
+      "crates": "Reusable crates",
+      "cratesText": "We bring them {before} days before and collect them {after} days after. No boxes to buy, no tape to hunt for, nothing to throw away.",
+      "wardrobe": "Wardrobe boxes",
+      "wardrobeText": "Clothes travel on their hangers, exactly as they hang in the wardrobe. Hang them back on arrival.",
+      "mattress": "Mattress bags",
+      "mattressText": "Your mattress arrives clean, free of dust and marks.",
+      "assembly": "Disassembly and assembly",
+      "assemblyText": "A handyman takes the furniture apart before the move and puts it together on arrival. Your bed is ready on the first night.",
+      "packing": "Packing",
+      "packingText": "We pack the kitchen and the fragile things, or everything, the day before.",
+      "visit": "A specialist visit",
+      "visitText": "They come to your home, see what moves and give you a fixed price. No surprises on moving day.",
+      "cta": "Estimate your move"
+    },
+    "care": {
+      "title": "How we take care of your home and things",
+      "lead": "Before the first item leaves, we protect the floor, the doors and the lift. Furniture leaves wrapped and arrives the same way.",
+      "floor": "Floors covered",
+      "floorText": "Cardboard or film all the way from the room to the door.",
+      "doors": "Doors and lift protected",
+      "doorsText": "Door frames and lift walls are covered before any furniture passes.",
+      "furniture": "Furniture wrapped",
+      "furnitureText": "Blankets and stretch film on every piece, corners protected.",
+      "crates": "Closed, labelled crates",
+      "cratesText": "Every crate says which room it goes to.",
+      "van": "Load secured",
+      "vanText": "Straps and blankets in the van: nothing moves on the road.",
+      "crew": "A crew with the right tools",
+      "crewText": "Dollies, straps and tools, so we work fast without rushing.",
+      "note": "Photos from our moves will be here. Until then, we describe what you'll see."
+    },
+    "ways": {
+      "title": "Two ways to order",
+      "lead": "Choose every detail yourself, or leave it all to us.",
+      "flexTitle": "You configure it",
+      "flexWho": "For those who want to decide and pay only for what they choose.",
+      "flex1": "Choose the services and see the price right away",
+      "flex2": "A free survey from photos and video, or a specialist visit",
+      "flex3": "A fixed price after the survey",
+      "flexCta": "Calculate the price",
+      "fullTitle": "We take care of everything",
+      "fullWho": "For those who don't want to think about any of it.",
+      "full1": "A specialist visits your home and plans the move",
+      "full2": "We bring crates and boxes and pack everything",
+      "full3": "We take furniture apart and put it back together",
+      "full4": "Cleaning by our partner, if you want it",
+      "full5": "A fixed price, set after the visit",
+      "fromTitle": "Guide price",
+      "from": "from {price}",
+      "fullCta": "Book a visit"
+    },
+    "final": {
+      "title": "See what your move costs",
+      "text": "It takes three minutes and commits you to nothing."
     }
   },
   "start": {
@@ -636,7 +649,11 @@
       "email": "The e-mail address looks wrong"
     },
     "terms": "Tick that you understand how the price is formed",
-    "invalid": "Invalid value"
+    "invalid": "Invalid value",
+    "visit": {
+      "size": "Choose what we move",
+      "datePast": "Choose a date from today on"
+    }
   },
   "lines": {
     "transport": "Transport · {vehicle}{count, plural, =1 {} other { × #}} · {hours} h × {rate} lei",
@@ -745,7 +762,8 @@
     "SURVEY_INVENTORY": "We count your things at the survey",
     "SURVEY_PIANO": "We survey the piano",
     "CONFIRM_INTERCITY": "We confirm the route",
-    "REVIEW_MEDIA": "We look at your photos and video"
+    "REVIEW_MEDIA": "We look at your photos and video",
+    "SCHEDULE_VISIT": "Agree with you on the time of the specialist visit"
   },
   "included": {
     "tape": "Packing tape",
@@ -848,5 +866,28 @@
     "promise3": "No haggling at the door: the price is the one these rules give.",
     "note": "All prices are in lei and include 21 % VAT. The values are being verified.",
     "cta": "Estimate your move"
+  },
+  "visit": {
+    "metaTitle": "Book a visit",
+    "title": "We take care of everything",
+    "lead": "Tell us where you're moving from and to. We'll call to agree on a time; the specialist sees everything on site and gives you a fixed price.",
+    "from": "From",
+    "to": "To",
+    "size": "What we move",
+    "house": "House",
+    "date": "When do you want to move?",
+    "dateHint": "Roughly is fine. You can leave it empty.",
+    "cleaning": "I also want cleaning after the move, by your partner",
+    "cleaningNote": "Cleaning after the move: yes",
+    "terms": "I understand that the fixed price is set after the visit.",
+    "submit": "Book the visit",
+    "asideTitle": "What's included",
+    "fromPrice": "Guide price for {size}: from {price}",
+    "visitFree": "The visit is free and commits you to nothing.",
+    "flexible": "Prefer to choose the services yourself?",
+    "flexibleCta": "Calculate the price",
+    "successTitle": "We got your request",
+    "successText": "Request number: {id}. We'll call you soon to agree on the visit time.",
+    "home": "Back to the home page"
   }
 }

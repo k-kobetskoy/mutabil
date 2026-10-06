@@ -225,8 +225,9 @@ export function QuickSearch() {
       </section>
 
       <div className="flex flex-col gap-2">
-        <p className="label-cap text-ink-muted" aria-live="polite">
-          {touched ? t('landing.passTitleLive') : t('landing.passTitleSample')}
+        {/* The sample carries its own "example" badge; screen readers hear when it becomes theirs */}
+        <p className="sr-only" aria-live="polite">
+          {touched ? t('landing.passTitleLive') : ''}
         </p>
         {est && <BoardingPass order={shown} est={est} sample={!touched} compact />}
       </div>

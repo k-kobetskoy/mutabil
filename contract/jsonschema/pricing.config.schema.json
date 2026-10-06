@@ -170,6 +170,55 @@
       ],
       "type": "object"
     },
+    "fullService": {
+      "additionalProperties": false,
+      "properties": {
+        "multiplier": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "presets": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "reference": {
+          "additionalProperties": false,
+          "properties": {
+            "floor": {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "fromZoneId": {
+              "type": "string"
+            },
+            "toZoneId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "fromZoneId",
+            "toZoneId",
+            "floor"
+          ],
+          "type": "object"
+        },
+        "roundUpLei": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "multiplier",
+        "roundUpLei",
+        "presets",
+        "reference"
+      ],
+      "type": "object"
+    },
     "includedFree": {
       "items": {
         "type": "string"
@@ -546,6 +595,7 @@
     "dispatch",
     "surcharges",
     "fullDay",
+    "fullService",
     "overtime",
     "packing",
     "materials",

@@ -25,6 +25,12 @@ export const PricingConfig = z.object({
   }),
   surcharges: z.object({ weekend: frac }),
   fullDay: z.object({ hours: pos, discount: frac }),
+  fullService: z.object({
+    multiplier: pos,
+    roundUpLei: pos,
+    presets: z.array(z.string()).min(1),
+    reference: z.object({ fromZoneId: z.string(), toZoneId: z.string(), floor: z.int().min(0) }),
+  }),
   overtime: z.object({ multiplier: pos }),
   packing: z.object({ perBoxLei: pos, partialShare: frac }),
   materials: z.object({

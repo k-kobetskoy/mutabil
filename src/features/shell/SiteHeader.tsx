@@ -18,14 +18,14 @@ export async function SiteHeader({ compact }: { compact?: boolean } = {}) {
         </Link>
         {!compact && (
           <nav aria-label="Mutabil" className="hidden items-center gap-6 text-[0.95rem] font-semibold md:flex">
-            <Link href={{ pathname: '/', hash: 'tarife' }} className="text-ink no-underline hover:text-route">
-              {t('fares')}
+            <Link href={{ pathname: '/', hash: 'ce-primesti' }} className="text-ink no-underline hover:text-route">
+              {t('gets')}
             </Link>
-            <Link href={{ pathname: '/', hash: 'bagaje' }} className="text-ink no-underline hover:text-route">
-              {t('extras')}
+            <Link href={{ pathname: '/', hash: 'grija' }} className="text-ink no-underline hover:text-route">
+              {t('care')}
             </Link>
-            <Link href={{ pathname: '/', hash: 'cum' }} className="text-ink no-underline hover:text-route">
-              {t('how')}
+            <Link href={{ pathname: '/', hash: 'moduri' }} className="text-ink no-underline hover:text-route">
+              {t('ways')}
             </Link>
             <Link href="/rates" className="text-ink no-underline hover:text-route">
               {t('rules')}
@@ -40,9 +40,10 @@ export async function SiteHeader({ compact }: { compact?: boolean } = {}) {
           {!compact && (
             <Link
               href="/estimate"
-              className="hidden min-h-10 items-center rounded-[var(--radius-field)] bg-night px-4 font-[family-name:var(--font-display)] text-[0.9rem] font-bold text-white no-underline hover:bg-night-3 sm:inline-flex"
+              className="inline-flex min-h-10 items-center rounded-[var(--radius-field)] bg-night px-4 font-[family-name:var(--font-display)] text-[0.9rem] font-bold text-white no-underline hover:bg-night-3"
             >
-              {t('start')}
+              <span className="sm:hidden">{t('startShort')}</span>
+              <span className="max-sm:hidden">{t('start')}</span>
             </Link>
           )}
         </div>

@@ -5,14 +5,15 @@
   },
   "brand": "Mutabil",
   "nav": {
-    "fares": "Tarife",
-    "extras": "Bagaje",
-    "how": "Cum decurge",
     "rules": "Cum calculăm",
     "faq": "Întrebări",
     "start": "Estimare exactă",
     "language": "Limba",
-    "skip": "Sari la conținut"
+    "skip": "Sari la conținut",
+    "gets": "Ce primești",
+    "care": "Grija",
+    "ways": "Cum comanzi",
+    "startShort": "Estimare"
   },
   "common": {
     "continue": "Continuă",
@@ -30,7 +31,6 @@
     "to": "La",
     "swap": "Inversează plecarea și sosirea",
     "loading": "Se încarcă…",
-    "sketch": "schiță · fotografie în curând",
     "perHour": "/ oră",
     "pieces": "buc.",
     "hoursShort": "h",
@@ -55,53 +55,7 @@
     },
     "cta": "Vezi prețul și ora",
     "exact": "Sau fă o estimare exactă, ~3 minute",
-    "passTitleSample": "Așa arată o estimare",
     "passTitleLive": "Estimarea ta, orientativă",
-    "fares": {
-      "title": "Trei tarife. Diferențele sunt scrise, nu ascunse.",
-      "lead": "Tariful alege cât de sigur e prețul și cât de bine sunt protejate lucrurile. Orice opțiune se poate schimba separat.",
-      "estimate": "Estimare",
-      "estimateFor": "Vrei doar să afli costul",
-      "fixed": "Preț fix",
-      "fixedFor": "Vrei o sumă sigură după o evaluare din fotografii sau video",
-      "complete": "Complet",
-      "completeFor": "Vrei să nu-ți faci griji pentru nimic",
-      "rowPrice": "Preț",
-      "rowSurvey": "Evaluare",
-      "rowProtection": "Protecție",
-      "rowCrates": "Lăzi reutilizabile",
-      "priceInterval": "interval",
-      "priceCapRemote": "fix, ≤ +{pct} %",
-      "priceCapOnsite": "fix, ≤ +{pct} %",
-      "surveyNone": "fără",
-      "surveyRemote": "foto / video",
-      "surveyOnsite": "la fața locului",
-      "protectionBasic": "conform legii",
-      "protectionFull": "valoare declarată",
-      "cratesOptional": "opțional",
-      "cratesIncluded": "7 zile incluse",
-      "includedAll": "În toate tarifele: bandă, stretch, pături, cărucioare, protecția podelei și a ușilor.",
-      "pick": "Calculează cu tariful {fare}"
-    },
-    "extras": {
-      "title": "Bagaje: ce adaugi la mutare",
-      "lead": "Fiecare opțiune are prețul pe unitate scris aici. Nimic nu e bifat dinainte.",
-      "crates": "Lăzi reutilizabile",
-      "cratesText": "Le aducem cu {before} zile înainte și le luăm la {after} zile după. Nu mai cumperi cutii și nu le arunci.",
-      "cratesPrice": "{rate} lei / ladă · {days} zile incluse · apoi {extra} leu / zi",
-      "wardrobe": "Cutie-garderobă",
-      "wardrobeText": "Hainele merg pe umerașe, așa cum stau în dulap.",
-      "wardrobePrice": "{rate} lei / buc., chirie",
-      "mattress": "Husă pentru saltea",
-      "mattressText": "Saltea curată la sosire, fără praf și fără zgârieturi.",
-      "mattressPrice": "{single}–{double} lei / buc.",
-      "assembly": "Demontare și montare",
-      "assemblyText": "Un meșter demontează mobila înainte și o montează la sosire. Echipa nu stă după el.",
-      "assemblyPrice": "de la {bed} lei / pat · {wardrobe} lei / dulap mare",
-      "packing": "Împachetare",
-      "packingText": "Parțial (bucătărie și fragile) sau complet. Se face cu o zi înainte.",
-      "packingPrice": "{rate} lei / cutie împachetată"
-    },
     "journey": {
       "title": "Cum decurge",
       "request": "Cererea",
@@ -114,9 +68,9 @@
       "moveText": "Echipa vine în intervalul de sosire ales. Știi de la început cât durează.",
       "pickup": "Ridicarea lăzilor",
       "pickupText": "După 7 zile, gratuit.",
-      "dayBefore": "Z−{n}",
-      "day": "Z",
-      "dayAfter": "Z+{n}"
+      "dayBefore": "cu {n} zile înainte",
+      "day": "ziua mutării",
+      "dayAfter": "după {n} zile"
     },
     "faq": {
       "title": "Ce se întâmplă dacă…",
@@ -127,11 +81,12 @@
       "q3": "…ceva nu încape în lift?",
       "a3": "Configuratorul te avertizează din timp și calculează scările pentru acel obiect. Mobila care se demontează devine panouri.",
       "q4": "…se strică ceva?",
-      "a4": "Cu protecția de bază răspundem conform legii. Cu protecția completă reparăm, înlocuim sau plătim valoarea declarată, fără discuții despre uzură.",
+      "a4": "Răspundem conform legii: dacă ceva se strică din vina noastră, reparăm sau plătim valoarea reală. Șeful echipei notează problema împreună cu tine, pe loc.",
       "q5": "…echipa întârzie sau lucrează mai mult?",
       "a5": "Fereastra de final e scrisă în estimare. Dacă depășim din cauza noastră, nu plătești peste plafon.",
       "q6": "…nu știu răspunsul la o întrebare?",
-      "a6": "Alege „Nu știu”. Vezi imediat ce presupunem și cu cât se poate schimba prețul."
+      "a6": "Alege „Nu știu”. Vezi imediat ce presupunem și cu cât se poate schimba prețul.",
+      "more": "Toate tarifele și regulile de calcul"
     },
     "footer": {
       "company": "Mutabil SRL (date de identificare în curs de completare)",
@@ -140,6 +95,64 @@
       "legal": "Politica de confidențialitate · Condițiile serviciului · Condițiile de protecție · Politica de anulare",
       "anpc": "ANPC — Soluționarea alternativă a litigiilor",
       "vat": "Toate prețurile sunt în lei și includ TVA 21 %."
+    },
+    "gets": {
+      "title": "Ce primești cu Mutabil",
+      "lead": "Tot ce face o mutare ușoară, de la un singur furnizor. Alegi doar ce îți trebuie.",
+      "crates": "Lăzi reutilizabile",
+      "cratesText": "Le aducem cu {before} zile înainte și le luăm la {after} zile după. Nu cumperi cutii, nu cauți bandă, nu arunci nimic.",
+      "wardrobe": "Cutii-garderobă",
+      "wardrobeText": "Hainele călătoresc pe umerașe, exact cum stau în dulap. La sosire le agăți la loc.",
+      "mattress": "Huse pentru saltele",
+      "mattressText": "Salteaua ajunge curată, fără praf și fără urme.",
+      "assembly": "Demontare și montare",
+      "assemblyText": "Un meșter demontează mobila înainte și o montează la sosire. Patul e gata de dormit din prima seară.",
+      "packing": "Împachetare",
+      "packingText": "Împachetăm noi bucătăria și lucrurile fragile sau tot, cu o zi înainte.",
+      "visit": "Vizita unui specialist",
+      "visitText": "Vine acasă, vede ce mutăm și îți dă un preț fix. Fără surprize în ziua mutării.",
+      "cta": "Calculează-ți mutarea"
+    },
+    "care": {
+      "title": "Cum avem grijă de casă și de lucruri",
+      "lead": "Înainte să scoatem primul lucru, protejăm podeaua, ușile și liftul. Mobila pleacă învelită și ajunge la fel.",
+      "floor": "Podeaua acoperită",
+      "floorText": "Carton sau folie pe tot drumul, de la cameră până la ușă.",
+      "doors": "Uși și lift protejate",
+      "doorsText": "Tocurile și pereții liftului sunt acoperite înainte să treacă mobila.",
+      "furniture": "Mobila învelită",
+      "furnitureText": "Pături și folie stretch pe fiecare piesă, colțurile protejate.",
+      "crates": "Lăzi închise și etichetate",
+      "cratesText": "Fiecare ladă are scris în ce cameră merge.",
+      "van": "Încărcătura prinsă",
+      "vanText": "Chingi și pături în dubă: nimic nu se mișcă pe drum.",
+      "crew": "Echipa cu unelte potrivite",
+      "crewText": "Cărucioare, chingi și scule, ca să lucrăm repede fără să ne grăbim.",
+      "note": "Aici vor fi fotografii din mutările noastre. Până atunci, îți descriem ce vei vedea."
+    },
+    "ways": {
+      "title": "Două moduri de a comanda",
+      "lead": "Alegi tu fiecare detaliu sau ne lași pe noi să ne ocupăm de tot.",
+      "flexTitle": "Configurezi tu",
+      "flexWho": "Pentru cine vrea să decidă singur și să plătească doar ce alege.",
+      "flex1": "Alegi serviciile și vezi prețul pe loc",
+      "flex2": "Evaluare gratuită din fotografii și video sau vizita unui specialist",
+      "flex3": "După evaluare primești un preț fix",
+      "flexCta": "Calculează prețul",
+      "fullTitle": "Ne ocupăm de tot",
+      "fullWho": "Pentru cine nu vrea să se gândească la nimic.",
+      "full1": "Un specialist vine acasă și face planul mutării",
+      "full2": "Aducem lăzi și cutii și împachetăm tot",
+      "full3": "Demontăm și montăm mobila",
+      "full4": "Curățenie prin partenerul nostru, dacă vrei",
+      "full5": "Preț fix, stabilit după vizită",
+      "fromTitle": "Orientativ",
+      "from": "de la {price}",
+      "fullCta": "Programează vizita"
+    },
+    "final": {
+      "title": "Vezi cât costă mutarea ta",
+      "text": "Durează trei minute și nu te obligă la nimic."
     }
   },
   "start": {
@@ -636,7 +649,11 @@
       "email": "Adresa de e-mail pare greșită"
     },
     "terms": "Bifează că ai înțeles cum se formează prețul",
-    "invalid": "Valoare nevalidă"
+    "invalid": "Valoare nevalidă",
+    "visit": {
+      "size": "Alege ce mutăm",
+      "datePast": "Alege o dată de azi încolo"
+    }
   },
   "lines": {
     "transport": "Transport · {vehicle}{count, plural, =1 {} other { × #}} · {hours} h × {rate} lei",
@@ -745,7 +762,8 @@
     "SURVEY_INVENTORY": "Numărăm lucrurile la evaluare",
     "SURVEY_PIANO": "Evaluăm pianul",
     "CONFIRM_INTERCITY": "Confirmăm traseul",
-    "REVIEW_MEDIA": "Ne uităm la fotografii și video"
+    "REVIEW_MEDIA": "Ne uităm la fotografii și video",
+    "SCHEDULE_VISIT": "Stabilim cu tine ora vizitei specialistului"
   },
   "included": {
     "tape": "Bandă adezivă",
@@ -848,5 +866,28 @@
     "promise3": "Nu negociem la ușă: prețul e cel calculat după aceste reguli.",
     "note": "Toate prețurile sunt în lei și includ TVA 21 %. Valorile sunt în curs de verificare.",
     "cta": "Calculează-ți mutarea"
+  },
+  "visit": {
+    "metaTitle": "Programează vizita",
+    "title": "Ne ocupăm de tot",
+    "lead": "Spune-ne de unde și unde te muți. Te sunăm să stabilim ora vizitei, iar specialistul vede totul la fața locului și îți dă un preț fix.",
+    "from": "De la",
+    "to": "La",
+    "size": "Ce mutăm",
+    "house": "Casă",
+    "date": "Când vrei să te muți?",
+    "dateHint": "Aproximativ e suficient. Poți lăsa gol.",
+    "cleaning": "Vreau și curățenie după mutare, prin partenerul vostru",
+    "cleaningNote": "Curățenie după mutare: da",
+    "terms": "Am înțeles că prețul fix se stabilește după vizită.",
+    "submit": "Programează vizita",
+    "asideTitle": "Ce e inclus",
+    "fromPrice": "Orientativ pentru {size}: de la {price}",
+    "visitFree": "Vizita e gratuită și nu te obligă la nimic.",
+    "flexible": "Preferi să alegi singur serviciile?",
+    "flexibleCta": "Calculează prețul",
+    "successTitle": "Am primit cererea",
+    "successText": "Numărul cererii: {id}. Te sunăm în curând să stabilim ora vizitei.",
+    "home": "Înapoi la pagina principală"
   }
 }

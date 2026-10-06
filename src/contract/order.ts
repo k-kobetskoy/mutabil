@@ -63,6 +63,10 @@ export const OrderInput = z
   .strictObject({
     v: z.literal(1),
     mode: z.enum(['quick', 'detailed']),
+    service: z
+      .enum(['flexible', 'full'])
+      .optional()
+      .meta({ description: '"full" = we take care of everything: a specialist visit sets a fixed price (D31). Absent = flexible.' }),
     taskType: TaskType.optional(),
     size: z
       .strictObject({

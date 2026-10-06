@@ -21,6 +21,27 @@ describe('mock order service', () => {
     expect(res.estimate.lines.length).toBeGreaterThan(0);
     expect(res.tasks).toContain('REVIEW_MEDIA');
   });
+  it('a full-service request (D31) asks first to schedule the specialist visit', async () => {
+    const svc = new MockOrderService(new MockAddressDirectory());
+    const res = await svc.submitOrder(
+      request({
+        order: {
+          v: 1,
+          mode: 'detailed',
+          service: 'full',
+          taskType: 'apartment',
+          size: { presetId: 'apartament-2-camere' },
+          from: { zoneId: 'manastur' },
+          to: { zoneId: 'gheorgheni' },
+          inventory: { mode: 'atSurvey' },
+          packing: { who: 'full', containers: 'crates' },
+          survey: { method: 'onsite' },
+        },
+        addresses: {},
+      }),
+    );
+    expect(res.tasks[0]).toBe('SCHEDULE_VISIT');
+  });
   it('requires phone or email', async () => {
     const svc = new MockOrderService(new MockAddressDirectory());
     await expect(svc.submitOrder(request({ contact: { name: 'Ana' } }))).rejects.toBeInstanceOf(ValidationProblem);

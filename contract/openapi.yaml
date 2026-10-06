@@ -745,6 +745,12 @@ components:
                 - afternoon
               type: string
           type: object
+        service:
+          description: '"full" = we take care of everything: a specialist visit sets a fixed price (D31). Absent = flexible.'
+          enum:
+            - flexible
+            - full
+          type: string
         size:
           additionalProperties: false
           properties:
