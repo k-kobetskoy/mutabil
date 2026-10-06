@@ -8,17 +8,10 @@
         "ro": "ce-mutam",
         "en": "what"
       },
-      "modes": [
-        "quick",
-        "detailed"
-      ],
+      "modes": ["quick", "detailed"],
       "required": {
-        "quick": [
-          "taskType"
-        ],
-        "detailed": [
-          "taskType"
-        ]
+        "quick": ["taskType"],
+        "detailed": ["taskType"]
       }
     },
     {
@@ -27,21 +20,10 @@
         "ro": "acces",
         "en": "access"
       },
-      "modes": [
-        "quick",
-        "detailed"
-      ],
+      "modes": ["quick", "detailed"],
       "required": {
-        "quick": [
-          "from.floor",
-          "to.floor"
-        ],
-        "detailed": [
-          "from.zoneId",
-          "to.zoneId",
-          "from.floor",
-          "to.floor"
-        ]
+        "quick": ["from.floor", "to.floor"],
+        "detailed": ["from.zoneId", "to.zoneId", "from.floor", "to.floor"]
       }
     },
     {
@@ -50,13 +32,9 @@
         "ro": "traseu",
         "en": "route"
       },
-      "modes": [
-        "quick"
-      ],
+      "modes": ["quick"],
       "required": {
-        "quick": [
-          "route"
-        ]
+        "quick": ["route"]
       }
     },
     {
@@ -65,13 +43,9 @@
         "ro": "ce-transportam",
         "en": "items"
       },
-      "modes": [
-        "detailed"
-      ],
+      "modes": ["detailed"],
       "required": {
-        "detailed": [
-          "inventory.mode"
-        ]
+        "detailed": ["inventory.mode"]
       }
     },
     {
@@ -80,9 +54,7 @@
         "ro": "servicii",
         "en": "services"
       },
-      "modes": [
-        "detailed"
-      ],
+      "modes": ["detailed"],
       "required": {
         "detailed": []
       }
@@ -93,14 +65,9 @@
         "ro": "protectie",
         "en": "protection"
       },
-      "modes": [
-        "detailed"
-      ],
+      "modes": ["detailed"],
       "required": {
-        "detailed": [
-          "protection.level",
-          "survey.method"
-        ]
+        "detailed": ["protection.level", "survey.method"]
       }
     },
     {
@@ -109,13 +76,9 @@
         "ro": "data",
         "en": "date"
       },
-      "modes": [
-        "detailed"
-      ],
+      "modes": ["detailed"],
       "required": {
-        "detailed": [
-          "schedule.date"
-        ]
+        "detailed": ["schedule.date"]
       }
     }
   ]

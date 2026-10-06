@@ -56,6 +56,7 @@ export const PricingConfig = z.object({
     minDeclaredPerM3Lei: pos,
     highValueItemLei: pos,
   }),
+  includedFree: z.array(z.string()),
   survey: z.object({
     onsite: z.object({ priceLei: pos, deductibleFromOrder: z.boolean(), deductibleValidDays: z.int(), capTolerance: frac }),
     remote: z.object({ priceLei: pos, deductibleFromOrder: z.boolean(), capTolerance: frac }),
@@ -132,6 +133,7 @@ export const ElevatorsConfig = z.object({
   longThinMaxWidthCm: pos,
   flexibleExtraLength: frac,
   presetNoFitShare: z.object({ small: frac, medium: frac, large: frac }),
+  presetFurnitureShare: frac,
   classes: z.array(ElevatorClass).length(3),
   throughput: z.object({ floorHeightM: pos, liftSpeedMs: pos, doorCycleSec: pos }),
 });
@@ -184,6 +186,7 @@ export const CatalogConfig = z.object({
   loadFactor: pos,
   geometricVolumeFactor: pos,
   densityFallbackKgM3: pos,
+  listSmallItemsShare: frac,
   packaging: z.object({ box: PackUnit, crate: PackUnit, wardrobeBox: PackUnit, kallaxInsert: PackUnit }),
   presets: z.array(
     z.object({

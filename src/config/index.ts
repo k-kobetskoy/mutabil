@@ -13,15 +13,7 @@ import appRaw from '../../config/app.json';
 import rulesRaw from '../../config/rules.json';
 import stepsRaw from '../../config/steps.json';
 import { unwrap } from './unwrap';
-import {
-  AppConfig,
-  CatalogConfig,
-  ElevatorsConfig,
-  PricingConfig,
-  TimeConfig,
-  VehiclesConfig,
-  ZonesConfig,
-} from './schema';
+import { AppConfig, CatalogConfig, ElevatorsConfig, PricingConfig, TimeConfig, VehiclesConfig, ZonesConfig } from './schema';
 import { parseRules, type RulesConfig } from '@/domain/rules/engine';
 import { StepsConfig } from '@/domain/flow/steps';
 

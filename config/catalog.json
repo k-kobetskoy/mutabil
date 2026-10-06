@@ -16,11 +16,11 @@
     "note": "Для своих предметов по габаритам W×D×H."
   },
   "densityFallbackKgM3": {
-    "value": 112,
-    "unit": "kg/m3",
+    "value": 90,
+    "unit": "kg/m3 of goods (before loadFactor)",
     "source": "https://moveblueprint.com/guide/cube-sheet",
     "verified": false,
-    "note": "Если вес не известен."
+    "note": "US-конвенция 112 кг/м³ (7 lb/ft³) завышена для мебельных переездов (R2 §5): с ней ни один фургон 3,5 т не везёт двушку за рейс. 90 — предположение, откалибровать взвешиванием 3–5 переездов."
   },
   "packaging": {
     "box": {
@@ -69,6 +69,13 @@
       "verified": false,
       "note": "Вставка Kallax = готовая коробка, без упаковки."
     }
+  },
+  "listSmallItemsShare": {
+    "value": 0.1,
+    "unit": "fraction of preset typical volume",
+    "source": "assumption",
+    "verified": false,
+    "note": "Детальный список: мелочь вне списка (лампы, стулья, сумки) — доля от типичного объёма пресета."
   },
   "presets": [
     {
@@ -274,10 +281,7 @@
       "fragile": false,
       "canStandOnEnd": "no",
       "common": true,
-      "packaging": [
-        "stretch-film",
-        "blankets"
-      ],
+      "packaging": ["stretch-film", "blankets"],
       "source": "https://www.extra.formularservice.niedersachsen.de/cdmextra/cfs/eject/pdf/242.pdf?print=yes&MANDANTID=5&FORMUID=035_035",
       "verified": false
     },
@@ -303,10 +307,7 @@
       "fragile": false,
       "canStandOnEnd": "no",
       "common": true,
-      "packaging": [
-        "stretch-film",
-        "blankets"
-      ],
+      "packaging": ["stretch-film", "blankets"],
       "source": "https://www.extra.formularservice.niedersachsen.de/cdmextra/cfs/eject/pdf/242.pdf?print=yes&MANDANTID=5&FORMUID=035_035",
       "verified": false
     },
@@ -331,10 +332,7 @@
       "heavy": true,
       "fragile": false,
       "canStandOnEnd": "no",
-      "packaging": [
-        "stretch-film",
-        "blankets"
-      ],
+      "packaging": ["stretch-film", "blankets"],
       "source": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf",
       "verified": false
     },
@@ -360,10 +358,7 @@
       "fragile": false,
       "canStandOnEnd": "no",
       "common": true,
-      "packaging": [
-        "stretch-film",
-        "blankets"
-      ],
+      "packaging": ["stretch-film", "blankets"],
       "source": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf",
       "verified": false
     },
@@ -389,9 +384,7 @@
       "fragile": false,
       "canStandOnEnd": "caution",
       "common": true,
-      "packaging": [
-        "stretch-film"
-      ],
+      "packaging": ["stretch-film"],
       "source": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf",
       "verified": false
     },
@@ -417,9 +410,7 @@
       "canStandOnEnd": "yes",
       "flexible": true,
       "common": true,
-      "packaging": [
-        "mattress-bag"
-      ],
+      "packaging": ["mattress-bag"],
       "source": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf",
       "verified": false
     },
@@ -445,9 +436,7 @@
       "canStandOnEnd": "yes",
       "flexible": true,
       "common": true,
-      "packaging": [
-        "mattress-bag"
-      ],
+      "packaging": ["mattress-bag"],
       "source": "assumption",
       "verified": false
     },
@@ -471,9 +460,7 @@
       "heavy": false,
       "fragile": false,
       "canStandOnEnd": "yes",
-      "packaging": [
-        "stretch-film"
-      ],
+      "packaging": ["stretch-film"],
       "source": "assumption",
       "verified": false
     },
@@ -498,10 +485,7 @@
       "fragile": false,
       "canStandOnEnd": "caution",
       "common": true,
-      "packaging": [
-        "stretch-film",
-        "blankets"
-      ],
+      "packaging": ["stretch-film", "blankets"],
       "source": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf",
       "verified": false
     },
@@ -527,10 +511,7 @@
       "fragile": false,
       "canStandOnEnd": "yes",
       "common": true,
-      "packaging": [
-        "stretch-film",
-        "sofa-cover"
-      ],
+      "packaging": ["stretch-film", "sofa-cover"],
       "source": "https://moveblueprint.com/research/cube-sheet-comparison-2026",
       "verified": false
     },
@@ -556,10 +537,7 @@
       "fragile": false,
       "canStandOnEnd": "caution",
       "common": true,
-      "packaging": [
-        "stretch-film",
-        "sofa-cover"
-      ],
+      "packaging": ["stretch-film", "sofa-cover"],
       "source": "https://moveblueprint.com/research/cube-sheet-comparison-2026",
       "verified": false
     },
@@ -585,10 +563,7 @@
       "fragile": false,
       "canStandOnEnd": "caution",
       "common": true,
-      "packaging": [
-        "stretch-film",
-        "sofa-cover"
-      ],
+      "packaging": ["stretch-film", "sofa-cover"],
       "source": "https://aws.state.ak.us/OnlinePublicNotices/Notices/Attachment.aspx?id=157736",
       "verified": false
     },
@@ -613,9 +588,7 @@
       "fragile": false,
       "canStandOnEnd": "yes",
       "common": true,
-      "packaging": [
-        "stretch-film"
-      ],
+      "packaging": ["stretch-film"],
       "source": "http://nordsee-umzuege.de/wp-content/uploads/2017/08/Nordsee_Umzuege_Umzugsgutliste_Final-1.pdf",
       "verified": false
     },
@@ -640,9 +613,7 @@
       "heavy": false,
       "fragile": false,
       "canStandOnEnd": "yes",
-      "packaging": [
-        "blankets"
-      ],
+      "packaging": ["blankets"],
       "source": "https://aws.state.ak.us/OnlinePublicNotices/Notices/Attachment.aspx?id=157736",
       "verified": false
     },
@@ -668,10 +639,7 @@
       "fragile": false,
       "canStandOnEnd": "yes",
       "common": true,
-      "packaging": [
-        "blankets",
-        "stretch-film"
-      ],
+      "packaging": ["blankets", "stretch-film"],
       "source": "https://aws.state.ak.us/OnlinePublicNotices/Notices/Attachment.aspx?id=157736",
       "verified": false
     },
@@ -696,9 +664,7 @@
       "fragile": false,
       "canStandOnEnd": "yes",
       "common": true,
-      "packaging": [
-        "stretch-film"
-      ],
+      "packaging": ["stretch-film"],
       "source": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf",
       "verified": false
     },
@@ -722,10 +688,7 @@
       "heavy": false,
       "fragile": false,
       "canStandOnEnd": "yes",
-      "packaging": [
-        "stretch-film",
-        "blankets"
-      ],
+      "packaging": ["stretch-film", "blankets"],
       "source": "assumption",
       "verified": false
     },
@@ -751,9 +714,7 @@
       "fragile": true,
       "canStandOnEnd": "no",
       "common": true,
-      "packaging": [
-        "tv-protection"
-      ],
+      "packaging": ["tv-protection"],
       "source": "http://nordsee-umzuege.de/wp-content/uploads/2017/08/Nordsee_Umzuege_Umzugsgutliste_Final-1.pdf",
       "verified": false
     },
@@ -779,9 +740,7 @@
       "fragile": false,
       "canStandOnEnd": "yes",
       "common": true,
-      "packaging": [
-        "stretch-film"
-      ],
+      "packaging": ["stretch-film"],
       "source": "http://nordsee-umzuege.de/wp-content/uploads/2017/08/Nordsee_Umzuege_Umzugsgutliste_Final-1.pdf",
       "verified": false
     },
@@ -806,9 +765,7 @@
       "fragile": false,
       "canStandOnEnd": "yes",
       "common": true,
-      "packaging": [
-        "stretch-film"
-      ],
+      "packaging": ["stretch-film"],
       "source": "https://www.dimensions.com/element/ikea-kallax-shelf-unit-4x4",
       "verified": false
     },
@@ -834,9 +791,7 @@
       "fragile": false,
       "canStandOnEnd": "yes",
       "common": true,
-      "packaging": [
-        "stretch-film"
-      ],
+      "packaging": ["stretch-film"],
       "source": "https://www.dimensions.com/element/ikea-kallax-shelf-unit-4x4",
       "verified": false
     },
@@ -862,9 +817,7 @@
       "fragile": false,
       "canStandOnEnd": "yes",
       "common": true,
-      "packaging": [
-        "blankets"
-      ],
+      "packaging": ["blankets"],
       "source": "http://nordsee-umzuege.de/wp-content/uploads/2017/08/Nordsee_Umzuege_Umzugsgutliste_Final-1.pdf",
       "verified": false
     },
@@ -888,9 +841,7 @@
       "heavy": false,
       "fragile": false,
       "canStandOnEnd": "yes",
-      "packaging": [
-        "stretch-film"
-      ],
+      "packaging": ["stretch-film"],
       "source": "assumption",
       "verified": false
     },
@@ -914,9 +865,7 @@
       "heavy": true,
       "fragile": false,
       "canStandOnEnd": "no",
-      "packaging": [
-        "blankets"
-      ],
+      "packaging": ["blankets"],
       "source": "assumption",
       "verified": false
     },
@@ -937,10 +886,7 @@
       "heavy": false,
       "fragile": true,
       "canStandOnEnd": "no",
-      "packaging": [
-        "bubble-wrap",
-        "box-standard"
-      ],
+      "packaging": ["bubble-wrap", "box-standard"],
       "source": "assumption",
       "verified": false
     },
@@ -964,10 +910,7 @@
       "heavy": true,
       "fragile": true,
       "canStandOnEnd": "no",
-      "packaging": [
-        "stretch-film",
-        "blankets"
-      ],
+      "packaging": ["stretch-film", "blankets"],
       "source": "assumption",
       "verified": false
     },
@@ -993,10 +936,7 @@
       "fragile": false,
       "canStandOnEnd": "caution",
       "common": true,
-      "packaging": [
-        "blankets",
-        "stretch-film"
-      ],
+      "packaging": ["blankets", "stretch-film"],
       "source": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf",
       "verified": false
     },
@@ -1021,10 +961,7 @@
       "heavy": false,
       "fragile": false,
       "canStandOnEnd": "caution",
-      "packaging": [
-        "blankets",
-        "stretch-film"
-      ],
+      "packaging": ["blankets", "stretch-film"],
       "source": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf",
       "verified": false
     },
@@ -1049,10 +986,7 @@
       "heavy": false,
       "fragile": false,
       "canStandOnEnd": "caution",
-      "packaging": [
-        "blankets",
-        "stretch-film"
-      ],
+      "packaging": ["blankets", "stretch-film"],
       "source": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf",
       "verified": false
     },
@@ -1076,10 +1010,7 @@
       "heavy": false,
       "fragile": false,
       "canStandOnEnd": "caution",
-      "packaging": [
-        "blankets",
-        "stretch-film"
-      ],
+      "packaging": ["blankets", "stretch-film"],
       "source": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf",
       "verified": false
     },
@@ -1104,10 +1035,7 @@
       "fragile": false,
       "canStandOnEnd": "yes",
       "common": true,
-      "packaging": [
-        "blankets",
-        "stretch-film"
-      ],
+      "packaging": ["blankets", "stretch-film"],
       "source": "https://sirelo.co.uk/removal-volume-calculator/",
       "verified": false
     },
@@ -1132,10 +1060,7 @@
       "heavy": true,
       "fragile": false,
       "canStandOnEnd": "yes",
-      "packaging": [
-        "blankets",
-        "stretch-film"
-      ],
+      "packaging": ["blankets", "stretch-film"],
       "minMovers": 3,
       "source": "https://moveblueprint.com/research/cube-sheet-comparison-2026",
       "verified": false
@@ -1160,10 +1085,7 @@
       "heavy": true,
       "fragile": false,
       "canStandOnEnd": "caution",
-      "packaging": [
-        "blankets",
-        "stretch-film"
-      ],
+      "packaging": ["blankets", "stretch-film"],
       "source": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf",
       "verified": false
     },
@@ -1188,10 +1110,7 @@
       "heavy": false,
       "fragile": false,
       "canStandOnEnd": "caution",
-      "packaging": [
-        "blankets",
-        "stretch-film"
-      ],
+      "packaging": ["blankets", "stretch-film"],
       "source": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf",
       "verified": false
     },
@@ -1215,9 +1134,7 @@
       "heavy": false,
       "fragile": true,
       "canStandOnEnd": "no",
-      "packaging": [
-        "bubble-wrap"
-      ],
+      "packaging": ["bubble-wrap"],
       "source": "assumption",
       "verified": false
     },
@@ -1242,10 +1159,7 @@
       "fragile": true,
       "canStandOnEnd": "no",
       "common": true,
-      "packaging": [
-        "blankets",
-        "piano-board"
-      ],
+      "packaging": ["blankets", "piano-board"],
       "minMovers": 3,
       "surveyRecommended": true,
       "source": "https://daynesmusic.com/boston-up-118e-vertical-piano",
@@ -1273,9 +1187,7 @@
       "fragile": false,
       "canStandOnEnd": "yes",
       "common": true,
-      "packaging": [
-        "stretch-film"
-      ],
+      "packaging": ["stretch-film"],
       "source": "http://nordsee-umzuege.de/wp-content/uploads/2017/08/Nordsee_Umzuege_Umzugsgutliste_Final-1.pdf",
       "verified": false
     },
@@ -1299,9 +1211,7 @@
       "heavy": false,
       "fragile": true,
       "canStandOnEnd": "no",
-      "packaging": [
-        "box-standard"
-      ],
+      "packaging": ["box-standard"],
       "source": "assumption",
       "verified": false
     },
@@ -1325,9 +1235,7 @@
       "heavy": false,
       "fragile": true,
       "canStandOnEnd": "no",
-      "packaging": [
-        "stretch-film"
-      ],
+      "packaging": ["stretch-film"],
       "source": "assumption",
       "verified": false
     },
@@ -1353,9 +1261,7 @@
       "fragile": true,
       "canStandOnEnd": "yes",
       "common": true,
-      "packaging": [
-        "mirror-protection"
-      ],
+      "packaging": ["mirror-protection"],
       "source": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf",
       "verified": false
     },
@@ -1380,9 +1286,7 @@
       "fragile": false,
       "canStandOnEnd": "yes",
       "flexible": true,
-      "packaging": [
-        "stretch-film"
-      ],
+      "packaging": ["stretch-film"],
       "source": "https://www.verwaltungsvorschriften-im-internet.de/pdf/AA-6-20000224-KF-A001.pdf",
       "verified": false
     },
@@ -1407,9 +1311,7 @@
       "heavy": false,
       "fragile": true,
       "canStandOnEnd": "yes",
-      "packaging": [
-        "bubble-wrap"
-      ],
+      "packaging": ["bubble-wrap"],
       "source": "assumption",
       "verified": false
     },
@@ -1478,9 +1380,7 @@
       "heavy": false,
       "fragile": false,
       "canStandOnEnd": "caution",
-      "packaging": [
-        "stretch-film"
-      ],
+      "packaging": ["stretch-film"],
       "source": "assumption",
       "verified": false
     },
@@ -1501,10 +1401,7 @@
       "heavy": true,
       "fragile": true,
       "canStandOnEnd": "no",
-      "packaging": [
-        "box-standard",
-        "bubble-wrap"
-      ],
+      "packaging": ["box-standard", "bubble-wrap"],
       "source": "assumption",
       "verified": false
     }

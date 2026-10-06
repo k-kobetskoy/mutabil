@@ -218,7 +218,7 @@
       "unit": "ln-sd",
       "source": "docs/research/03-time-elevators.md",
       "verified": false,
-      "note": "Неизвестность расширяет окно."
+      "note": "Независимые неопределённости складываются как корень из суммы квадратов: σ² = σ0² + Σ a²."
     },
     "minBufferH": {
       "value": 0.5,

@@ -84,6 +84,7 @@ export const Estimate = z
       base: Bani,
       low: Bani,
       high: Bani,
+      worst: Bani.meta({ description: 'Every unknown answer at its worst and max volume' }),
       vat: Bani,
       afterSurvey: z
         .object({ capTolerance: z.number(), method: z.enum(['onsite', 'remote']) })

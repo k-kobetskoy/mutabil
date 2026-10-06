@@ -325,6 +325,7 @@
       "note": "Вещи дороже — обязательно в опись."
     }
   },
+  "includedFree": ["tape", "stretchFilm", "blankets", "dollies", "floorProtection", "doorProtection", "liftProtection", "basicTools"],
   "survey": {
     "onsite": {
       "priceLei": {

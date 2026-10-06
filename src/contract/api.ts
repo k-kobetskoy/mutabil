@@ -99,7 +99,10 @@ export const Problem = z
     title: z.string(),
     status: z.int(),
     detail: z.string().optional(),
-    errors: z.array(z.object({ path: z.string(), key: z.string() })).optional().meta({ description: 'i18n keys, e.g. validation.floor.required' }),
+    errors: z
+      .array(z.object({ path: z.string(), key: z.string() }))
+      .optional()
+      .meta({ description: 'i18n keys, e.g. validation.floor.required' }),
   })
   .meta({ id: 'Problem', description: 'RFC 9457 problem details' });
 

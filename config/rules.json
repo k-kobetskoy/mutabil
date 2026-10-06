@@ -4,10 +4,7 @@
   "rules": [
     {
       "id": "floor-unanswered",
-      "each": [
-        "from",
-        "to"
-      ],
+      "each": ["from", "to"],
       "when": {
         "==": [
           {
@@ -21,22 +18,14 @@
           "type": "assume",
           "path": "$end.floor",
           "value": 3,
-          "options": [
-            0,
-            2,
-            4,
-            8
-          ],
+          "options": [0, 2, 4, 8],
           "explain": "assume.floor"
         }
       ]
     },
     {
       "id": "elevator-unknown",
-      "each": [
-        "from",
-        "to"
-      ],
+      "each": ["from", "to"],
       "when": {
         "and": [
           {
@@ -71,12 +60,7 @@
           "type": "assume",
           "path": "$end.elevator",
           "value": "small",
-          "options": [
-            "none",
-            "small",
-            "medium",
-            "large"
-          ],
+          "options": ["none", "small", "medium", "large"],
           "sigma": "liftUnknown",
           "explain": "assume.elevatorSmall"
         },
@@ -91,10 +75,7 @@
     },
     {
       "id": "stairs-unknown",
-      "each": [
-        "from",
-        "to"
-      ],
+      "each": ["from", "to"],
       "when": {
         "and": [
           {
@@ -129,11 +110,7 @@
           "type": "assume",
           "path": "$end.stairs",
           "value": "normal",
-          "options": [
-            "normal",
-            "narrow",
-            "winding"
-          ],
+          "options": ["normal", "narrow", "winding"],
           "sigma": "stairsUnknown",
           "explain": "assume.stairsNormal"
         }
@@ -141,10 +118,7 @@
     },
     {
       "id": "carry-unknown",
-      "each": [
-        "from",
-        "to"
-      ],
+      "each": ["from", "to"],
       "when": {
         "or": [
           {
@@ -167,11 +141,7 @@
           "type": "assume",
           "path": "$end.carry",
           "value": "10to30",
-          "options": [
-            "lt10",
-            "10to30",
-            "gt30"
-          ],
+          "options": ["lt10", "10to30", "gt30"],
           "sigma": "carryUnknown",
           "explain": "assume.carry"
         }
@@ -179,10 +149,7 @@
     },
     {
       "id": "parking-unknown",
-      "each": [
-        "from",
-        "to"
-      ],
+      "each": ["from", "to"],
       "when": {
         "or": [
           {
@@ -205,11 +172,7 @@
           "type": "assume",
           "path": "$end.parking",
           "value": "nearby",
-          "options": [
-            "atEntrance",
-            "nearby",
-            "far"
-          ],
+          "options": ["atEntrance", "nearby", "far"],
           "sigma": "parkingUnknown",
           "explain": "assume.parking"
         }
@@ -217,10 +180,7 @@
     },
     {
       "id": "furniture-in-lift-unknown",
-      "each": [
-        "from",
-        "to"
-      ],
+      "each": ["from", "to"],
       "when": {
         "and": [
           {
@@ -263,10 +223,7 @@
           "type": "assume",
           "path": "$end.furnitureInLift",
           "value": "yes",
-          "options": [
-            "yes",
-            "no"
-          ],
+          "options": ["yes", "no"],
           "sigma": "furnitureInLiftUnknown",
           "explain": "assume.furnitureInLift"
         }
@@ -274,10 +231,7 @@
     },
     {
       "id": "zone-uncertain-access",
-      "each": [
-        "from",
-        "to"
-      ],
+      "each": ["from", "to"],
       "when": {
         "==": [
           {
@@ -314,9 +268,7 @@
         {
           "type": "restrictOptions",
           "path": "survey.method",
-          "allow": [
-            "onsite"
-          ]
+          "allow": ["onsite"]
         },
         {
           "type": "hint",
@@ -338,10 +290,7 @@
         {
           "type": "restrictOptions",
           "path": "survey.method",
-          "allow": [
-            "onsite",
-            "remote"
-          ]
+          "allow": ["onsite", "remote"]
         },
         {
           "type": "addTask",

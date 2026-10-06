@@ -116,7 +116,14 @@ export function applyRules(input: OrderInput, cfg: RulesConfig): RulesResult {
         switch (eff.type) {
           case 'assume':
             order = setPath(order, eff.path, eff.value);
-            res.assumptions.push({ ruleId: rule.id, path: eff.path, value: eff.value, options: eff.options, sigma: eff.sigma, explain: eff.explain });
+            res.assumptions.push({
+              ruleId: rule.id,
+              path: eff.path,
+              value: eff.value,
+              options: eff.options,
+              sigma: eff.sigma,
+              explain: eff.explain,
+            });
             break;
           case 'addTask':
             if (!res.tasks.some((t) => t.code === eff.code && JSON.stringify(t.params) === JSON.stringify(eff.params)))

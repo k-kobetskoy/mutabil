@@ -18,9 +18,7 @@ export const CarryChoice = z
   .enum(['lt10', '10to30', 'gt30', 'unknown'])
   .meta({ id: 'CarryChoice', description: 'Distance from the van to the building entrance, metres.' });
 
-export const ParkingChoice = z
-  .enum(['atEntrance', 'nearby', 'far', 'unknown'])
-  .meta({ id: 'ParkingChoice' });
+export const ParkingChoice = z.enum(['atEntrance', 'nearby', 'far', 'unknown']).meta({ id: 'ParkingChoice' });
 
 export const StairsChoice = z.enum(['normal', 'narrow', 'winding', 'unknown']).meta({ id: 'StairsChoice' });
 

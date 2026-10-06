@@ -6,15 +6,7 @@
 export type Wrapped<T> = { value: T; unit: string; source: string; verified: boolean; note?: string };
 
 export function isWrapped(x: unknown): x is Wrapped<unknown> {
-  return (
-    typeof x === 'object' &&
-    x !== null &&
-    !Array.isArray(x) &&
-    'value' in x &&
-    'verified' in x &&
-    'source' in x &&
-    'unit' in x
-  );
+  return typeof x === 'object' && x !== null && !Array.isArray(x) && 'value' in x && 'verified' in x && 'source' in x && 'unit' in x;
 }
 
 export function unwrap(x: unknown): unknown {
