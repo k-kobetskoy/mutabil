@@ -1,0 +1,764 @@
+{
+  "meta": {
+    "title": "Mutabil — moving in Cluj with the price and time known up front",
+    "description": "Configure your move and see the van, crew, hours, guaranteed window and every price line right away. Reusable crates, assembly, protection."
+  },
+  "brand": "Mutabil",
+  "nav": {
+    "fares": "Fares",
+    "extras": "Extras",
+    "how": "How it goes",
+    "rules": "How we calculate",
+    "faq": "Questions",
+    "start": "Detailed estimate",
+    "language": "Language",
+    "skip": "Skip to content"
+  },
+  "common": {
+    "continue": "Continue",
+    "back": "Back",
+    "edit": "change",
+    "close": "Close",
+    "unknown": "Not sure",
+    "yes": "Yes",
+    "no": "No",
+    "optional": "optional",
+    "why": "Why?",
+    "example": "example",
+    "vatIncluded": "incl. VAT",
+    "from": "From",
+    "to": "To",
+    "swap": "Swap departure and arrival",
+    "loading": "Loading…",
+    "sketch": "sketch · photo coming",
+    "perHour": "/ hour",
+    "pieces": "pcs",
+    "hoursShort": "h",
+    "remove": "Remove",
+    "add": "Add",
+    "of": "of"
+  },
+  "landing": {
+    "title": "Book your move like a flight.",
+    "lead": "See the price, the arrival time and what is included — before you call anyone. No haggling on the day.",
+    "searchTitle": "Price your move",
+    "what": "What are we moving",
+    "floors": "Floor and lift",
+    "floorFrom": "Floor at departure",
+    "floorTo": "Floor at arrival",
+    "liftFrom": "Lift at departure",
+    "liftTo": "Lift at arrival",
+    "liftShort": {
+      "yes": "Lift",
+      "none": "No lift",
+      "unknown": "Not sure"
+    },
+    "cta": "See price and time",
+    "exact": "Or make a detailed estimate, ~3 minutes",
+    "passTitleSample": "This is what an estimate looks like",
+    "passTitleLive": "Your estimate, approximate",
+    "passNote": "A range until the survey. Details in one click.",
+    "fares": {
+      "title": "Three fares. The differences are written down, not hidden.",
+      "lead": "The fare decides how certain the price is and how well your things are protected. Every option can be changed on its own.",
+      "estimate": "Estimate",
+      "estimateFor": "You only want to know the cost",
+      "fixed": "Fixed price",
+      "fixedFor": "You want a certain sum after a survey from photos or video",
+      "complete": "Complete",
+      "completeFor": "You want to worry about nothing",
+      "rowPrice": "Price",
+      "rowSurvey": "Survey",
+      "rowProtection": "Protection",
+      "rowCrates": "Reusable crates",
+      "priceInterval": "range",
+      "priceCapRemote": "fixed, ≤ +{pct} %",
+      "priceCapOnsite": "fixed, ≤ +{pct} %",
+      "surveyNone": "none",
+      "surveyRemote": "photo / video",
+      "surveyOnsite": "on-site visit",
+      "protectionBasic": "as by law",
+      "protectionFull": "declared value",
+      "cratesOptional": "optional",
+      "cratesIncluded": "7 days included",
+      "includedAll": "In every fare: tape, stretch film, blankets, dollies, floor and door protection.",
+      "pick": "Price it with {fare}"
+    },
+    "extras": {
+      "title": "Extras: what you add to the move",
+      "lead": "Every option shows its unit price right here. Nothing is pre-selected.",
+      "crates": "Reusable crates",
+      "cratesText": "We bring them {before} days before and collect them {after} days after. No boxes to buy, none to throw away.",
+      "cratesPrice": "{rate} lei / crate · {days} days included · then {extra} leu / day",
+      "wardrobe": "Wardrobe box",
+      "wardrobeText": "Clothes travel on hangers, just as they hang in the wardrobe.",
+      "wardrobePrice": "{rate} lei / pc, rental",
+      "mattress": "Mattress bag",
+      "mattressText": "A clean mattress on arrival, no dust, no scratches.",
+      "mattressPrice": "{single}–{double} lei / pc",
+      "assembly": "Disassembly and assembly",
+      "assemblyText": "A craftsman takes the furniture apart beforehand and puts it together on arrival. The crew does not wait for him.",
+      "assemblyPrice": "from {bed} lei / bed · {wardrobe} lei / large wardrobe",
+      "packing": "Packing",
+      "packingText": "Partial (kitchen and fragile items) or complete. Done the day before.",
+      "packingPrice": "{rate} lei / packed box"
+    },
+    "journey": {
+      "title": "How it goes",
+      "request": "Request",
+      "requestText": "You configure and send. Free and with no obligation.",
+      "survey": "Survey",
+      "surveyText": "Photos, video or a visit. Then you get the fixed price.",
+      "crates": "Crates",
+      "cratesText": "Arrive a few days before, if you chose them.",
+      "move": "The move",
+      "moveText": "The crew arrives in the window you picked. You know from the start how long it takes.",
+      "pickup": "Crate pickup",
+      "pickupText": "After 7 days, free.",
+      "dayBefore": "D−{n}",
+      "day": "D",
+      "dayAfter": "D+{n}"
+    },
+    "rules": {
+      "title": "How we calculate",
+      "lead": "The same rates you see in the estimate. There are no others.",
+      "mover": "One mover",
+      "vehicle": "Van {name}",
+      "overtime": "One hour beyond the guaranteed window",
+      "overtimeText": "van + crew, the same rate, billed per 30 minutes",
+      "minimum": "Minimum order",
+      "minimumText": "{min} lei · at least {hours} hours",
+      "cap": "Cap after the survey",
+      "capText": "the final price does not exceed the confirmed estimate by more than {remote} % (photo/video) or {onsite} % (visit), if volume and access are as described",
+      "note": "All prices are in lei and include 21 % VAT. Rates are being verified."
+    },
+    "faq": {
+      "title": "What happens if…",
+      "q1": "…there are more things than I said?",
+      "a1": "The crew lead shows you what changed and what it costs before any extra work starts. Nothing is added without your consent.",
+      "q2": "…the lift is smaller or out of order?",
+      "a2": "If you chose “Not sure”, we have already priced a small lift. If there is no working lift at all, we carry by the stairs under the same rules as in the estimate.",
+      "q3": "…something does not fit the lift?",
+      "a3": "The configurator warns you in advance and prices the stairs for that item. Furniture that comes apart travels as panels.",
+      "q4": "…something gets damaged?",
+      "a4": "With basic protection we are liable as the law provides. With complete protection we repair, replace or pay the declared value, with no discussion about wear.",
+      "q5": "…the crew is late or works longer?",
+      "a5": "The end of the window is written in the estimate. If we overrun because of us, you do not pay above the cap.",
+      "q6": "…I don't know the answer to a question?",
+      "a6": "Choose “Not sure”. You will see right away what we assume and how much the price can change."
+    },
+    "footer": {
+      "company": "Mutabil SRL (company details to be added)",
+      "address": "Cluj-Napoca, Romania",
+      "contact": "Phone and e-mail: coming soon",
+      "legal": "Privacy policy · Service terms · Protection terms · Cancellation policy",
+      "anpc": "ANPC — Alternative dispute resolution",
+      "vat": "All prices are in lei and include 21 % VAT."
+    }
+  },
+  "start": {
+    "title": "How would you like to price it?",
+    "quick": "Quick estimate",
+    "quickText": "3 questions · ~30 seconds · price range",
+    "detailed": "Detailed estimate",
+    "detailedText": "6 steps · 3–5 minutes · van, crew, hours, guaranteed window",
+    "continue": "Continue where you left off",
+    "restart": "Start over",
+    "carry": "Your quick answers carry over to the detailed estimate."
+  },
+  "stage": {
+    "what": "Route",
+    "access": "Access",
+    "route": "Distance",
+    "items": "Baggage",
+    "services": "Services",
+    "protection": "Fare",
+    "when": "Date"
+  },
+  "steps": {
+    "what": {
+      "title": "What are we moving?",
+      "taskType": "Type of move",
+      "size": "How big is the home?",
+      "amount": "How much stuff do you have?",
+      "storage": "I also have a storage room, cellar or full balcony",
+      "workstations": "How many workstations?"
+    },
+    "access": {
+      "title": "From where to where?",
+      "zone": "Neighbourhood or town",
+      "zonePlaceholder": "Choose",
+      "distanceKm": "Distance there, km",
+      "floor": "Floor",
+      "floorHint": "Ground floor = 0",
+      "elevator": "What lift is there?",
+      "plateHint": "Look at the plate inside the cabin: it shows the number of persons and kilograms.",
+      "platePhoto": "Photograph the plate",
+      "plateAdded": "Plate attached",
+      "more": "Parking, stairs, distance to the entrance",
+      "furnitureInLift": "Does the building allow furniture in the lift?",
+      "carry": "From the van to the entrance",
+      "parking": "Where can the van stop?",
+      "stairs": "Staircase",
+      "raisedEntrance": "There are steps at the entrance or the lift stops between floors",
+      "address": "Exact address",
+      "addressHint": "Optional. Not included in the share link. If we already know the building, we fill in the lift for you.",
+      "street": "Street",
+      "number": "No.",
+      "block": "Block",
+      "stair": "Entrance",
+      "apartment": "Apt.",
+      "directoryFound": "We know this building: {lift}. Filled in.",
+      "directoryUse": "Use it",
+      "from": "Departure",
+      "to": "Arrival"
+    },
+    "route": {
+      "title": "Where to?",
+      "city": "Within Cluj",
+      "suburb": "To the outskirts",
+      "suburbText": "Florești, Baciu, Apahida…",
+      "intercity": "To another city"
+    },
+    "items": {
+      "title": "What are we carrying?",
+      "mode": "How should we count your things?",
+      "modeList": "I'll pick the large items",
+      "modeListText": "The most precise estimate",
+      "modePreset": "By number of rooms",
+      "modePresetText": "Quick, wider range",
+      "modeSurvey": "Count them at the survey",
+      "modeSurveyText": "Needs a photo/video survey or a visit",
+      "boxes": "Boxes or crates",
+      "boxesHint": "For {preset} we usually count ~{typical}. Change it if you know better.",
+      "kallax": "Kallax-type shelf boxes",
+      "kallaxHint": "They travel as they are, no repacking.",
+      "categories": {
+        "bedroom": "Bedroom",
+        "living": "Living room",
+        "office": "Office",
+        "appliances": "Appliances",
+        "electronics": "Electronics",
+        "special": "Special",
+        "misc": "Other"
+      },
+      "showAll": "All items",
+      "showCommon": "Common only",
+      "special": "Fragile or valuable things",
+      "specialText": "Reinforced packing and labelling, priced separately.",
+      "specialKind": {
+        "fragile": "Fragile",
+        "valuable": "Valuable",
+        "pristine": "Not a single scratch",
+        "piano": "Piano"
+      },
+      "specialLabel": "What it is",
+      "specialValue": "Declared value, lei",
+      "addSpecial": "Add a thing",
+      "media": "Photos and video of the home",
+      "mediaText": "Optional. Best: photos + video, or a video where you say what moves and what stays.",
+      "custom": "Another item, with dimensions",
+      "customLabel": "What it is",
+      "customW": "Width, cm",
+      "customD": "Depth, cm",
+      "customH": "Height, cm",
+      "addCustom": "Add the item"
+    },
+    "services": {
+      "title": "What do we do?",
+      "who": "Who packs?",
+      "containers": "What do we pack into?",
+      "cratesRule": "With crates the survey is on site: the specialist brings the crates and surveys in one visit.",
+      "crateDays": "How many days do the crates stay with you?",
+      "crateDaysHint": "{included} days are included. Each extra day: {rate} leu / crate.",
+      "extras": "Special packaging",
+      "assembly": "What do we take apart and reassemble?",
+      "assemblyText": "The craftsman works in parallel with the crew.",
+      "onMovingDay": "Disassembly on the moving day",
+      "onMovingDayText": "For example, you need your desk until the last day. +{fee} lei for the craftsman's trip.",
+      "noAssemblyItems": "First choose the large items in the “Baggage” step."
+    },
+    "protection": {
+      "title": "How certain do you want it?",
+      "fares": "Choose a fare or set each option below",
+      "difference": "{delta} compared to now",
+      "compare": "Compare fares",
+      "level": "Protection of your things",
+      "basic": "Basic, included",
+      "basicText": "We are liable as the law provides: compensation at actual value, allowing for wear.",
+      "full": "Complete",
+      "fullText": "We repair, replace or pay the declared value, with no discussion about wear. {rate} % of the declared value, at least {min} lei.",
+      "declared": "Declared value of your things, lei",
+      "declaredHint": "At least {min} lei or {perM3} lei / m³. Items above {item} lei go on the inventory.",
+      "deductible": "With a {amount} lei excess (rate {rate} %)",
+      "survey": "Survey",
+      "onsite": "Specialist visit",
+      "onsiteText": "{price} lei, deducted from the order if you move within {days} days. Cap: +{pct} %.",
+      "onsiteRisk": "The most certain price.",
+      "remote": "Your photos and video",
+      "remoteText": "Free. Cap: +{pct} %. The estimator may ask for more.",
+      "remoteRisk": "If something is not visible, they may ask for a video or a visit.",
+      "none": "No survey",
+      "noneText": "It stays a range. You pay for the real time at the published rates.",
+      "noneRisk": "The price may be higher if there are more things.",
+      "disabledByCrates": "Not available with reusable crates"
+    },
+    "when": {
+      "title": "When?",
+      "date": "Moving date",
+      "slot": "Crew arrival time",
+      "slots": {
+        "morning": "Morning",
+        "midday": "Midday",
+        "afternoon": "Afternoon"
+      },
+      "arrival": "arrival {from}–{to}",
+      "busy": "booked",
+      "tooLate": "doesn't fit the day",
+      "fullDay": "Book the van and crew for the whole day",
+      "fullDayText": "{hours} hours, {pct} % off. Beyond that — the extra hour rate.",
+      "weekend": "Saturday and Sunday +{pct} % on transport and crew."
+    }
+  },
+  "fields": {
+    "taskType": {
+      "apartment": "Apartment",
+      "house": "House",
+      "items": "A few large items",
+      "office": "Office"
+    },
+    "amount": {
+      "light": "Little",
+      "normal": "Average",
+      "heavy": "A lot"
+    }
+  },
+  "lift": {
+    "short": {
+      "none": "no lift",
+      "small": "small lift",
+      "medium": "medium lift",
+      "large": "large lift",
+      "unknown": "unknown lift"
+    },
+    "tile": {
+      "none": "No lift",
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large / freight",
+      "unknown": "Not sure"
+    },
+    "tileHint": {
+      "none": "or out of order",
+      "small": "4 persons · old block",
+      "medium": "6–8 persons",
+      "large": "13+ persons · freight",
+      "unknown": "we assume a small one"
+    }
+  },
+  "values": {
+    "none": "no lift",
+    "small": "small lift",
+    "medium": "medium lift",
+    "large": "large lift",
+    "unknown": "not sure",
+    "yes": "yes",
+    "no": "no",
+    "lt10": "under 10 m",
+    "10to30": "10–30 m",
+    "gt30": "over 30 m",
+    "atEntrance": "right at the door",
+    "nearby": "nearby",
+    "far": "far",
+    "normal": "regular",
+    "narrow": "narrow",
+    "winding": "spiral / old",
+    "onsite": "visit",
+    "remote": "photo / video",
+    "self": "me",
+    "partial": "partial",
+    "full": "complete",
+    "crates": "your crates",
+    "cardboard": "cardboard boxes",
+    "own": "my own boxes"
+  },
+  "choices": {
+    "carry": {
+      "lt10": "Under 10 m",
+      "10to30": "10–30 m",
+      "gt30": "Over 30 m"
+    },
+    "parking": {
+      "atEntrance": "Right at the door",
+      "nearby": "Nearby",
+      "far": "Far"
+    },
+    "stairs": {
+      "normal": "Regular",
+      "narrow": "Narrow",
+      "winding": "Spiral / old"
+    },
+    "who": {
+      "self": "Me",
+      "selfText": "I pack myself",
+      "partial": "You, partly",
+      "partialText": "The kitchen and fragile things",
+      "full": "You, fully",
+      "fullText": "Everything, the day before"
+    },
+    "containers": {
+      "crates": "Your reusable crates",
+      "cratesText": "You bring them and take them back",
+      "cardboard": "Cardboard boxes",
+      "cardboardText": "{rate} lei / pc, delivered",
+      "own": "My own boxes",
+      "ownText": "No cost"
+    },
+    "extras": {
+      "wardrobeBoxes": "Wardrobe box",
+      "mattressBagsDouble": "Double mattress bag",
+      "mattressBagsSingle": "Single mattress bag",
+      "tvProtection": "TV protection",
+      "mirrorProtection": "Mirror / picture protection"
+    }
+  },
+  "packing": {
+    "who": {
+      "self": "me",
+      "partial": "partial",
+      "full": "complete"
+    }
+  },
+  "end": {
+    "from": "at departure",
+    "to": "at arrival"
+  },
+  "zoneClass": {
+    "city": "Cluj-Napoca",
+    "suburb": "outskirts",
+    "intercity": "another city"
+  },
+  "paths": {
+    "from.floor": "Floor at departure",
+    "to.floor": "Floor at arrival",
+    "from.elevator": "Lift at departure",
+    "to.elevator": "Lift at arrival",
+    "from.stairs": "Stairs at departure",
+    "to.stairs": "Stairs at arrival",
+    "from.carry": "Distance to the entrance (departure)",
+    "to.carry": "Distance to the entrance (arrival)",
+    "from.parking": "Parking at departure",
+    "to.parking": "Parking at arrival",
+    "from.furnitureInLift": "Furniture in the lift (departure)",
+    "to.furnitureInLift": "Furniture in the lift (arrival)",
+    "survey.method": "Survey"
+  },
+  "vehicles": {
+    "van-6": "small van 6 m³",
+    "van-12": "van 12 m³",
+    "van-16": "van 16 m³",
+    "box-20": "box van 20 m³",
+    "truck-30": "7.5 t truck, 30 m³"
+  },
+  "estimate": {
+    "title": "Your estimate",
+    "empty": "We don't have enough answers for a price yet.",
+    "emptyCta": "Start the estimate",
+    "passFrom": "Departure",
+    "passArrival": "Estimated finish",
+    "passGuaranteed": "guaranteed by",
+    "passWindow": "Duration ≈ {expected} h · guaranteed within {window} h",
+    "passDate": "Date",
+    "passNoDate": "date to choose",
+    "passVehicle": "Van",
+    "passCrew": "Crew",
+    "passCrewValue": "{n} movers",
+    "passFare": "Fare",
+    "passTotal": "Total incl. VAT",
+    "fareEstimate": "Estimate",
+    "fareFixed": "Fixed price after survey",
+    "fareComplete": "Complete",
+    "rangeLabel": "Range until the survey",
+    "afterSurvey": "After the survey you get a fixed price. The final price does not exceed the confirmed estimate by more than {pct} %, if volume and access are as described.",
+    "noSurvey": "Without a survey it stays a range: you pay for the real time at the rates below. Ask for a free photo survey to get a fixed price.",
+    "vat": "of which 21 % VAT: {vat}",
+    "breakdown": "Price details",
+    "included": "Included free",
+    "overtime": "Each hour beyond the guaranteed window: {perHour} (billed per {step} minutes). Only if your things or access differ from what you described, and only with your consent.",
+    "time": "How long it takes",
+    "timeLead": "We estimate ≈ {expected} h. We guarantee to finish within {window} h.",
+    "vehicleWhy": "Why this van",
+    "crewAlternatives": "Another crew",
+    "crewAlt": "{n} movers · within {window} h · {total}",
+    "crewChosen": "chosen",
+    "crewPick": "Choose",
+    "warnings": "Good to know",
+    "assumptions": "What we assumed",
+    "scenariosTitle": "What can change the price",
+    "scenarioIf": "if it's {value}",
+    "worst": "At most, if everything is at its worst: {worst}",
+    "variantRange": "Range",
+    "variantConditional": "Sum + conditions",
+    "variantLabel": "How we show the price",
+    "timeline": "What happens next",
+    "timelineKind": {
+      "survey": "Survey",
+      "cratesDelivery": "We bring the crates (and survey)",
+      "packing": "We pack",
+      "move": "The move",
+      "cratesPickup": "We collect the crates"
+    },
+    "share": "Send this estimate to someone",
+    "shareCopied": "Link copied. The link contains no personal data.",
+    "send": "Send request (free, no obligation)",
+    "editAnswers": "Change answers",
+    "refine": "Make the detailed estimate · ~3 min",
+    "refineText": "Your answers are already filled in.",
+    "linkInvalid": "This link is no longer valid. Start a new estimate.",
+    "linkLoaded": "We loaded the estimate from the link, at today's rates.",
+    "tasksTitle": "What we check"
+  },
+  "priceBar": {
+    "noPrice": "The price appears after the first step",
+    "open": "See price details",
+    "estimate": "See the estimate",
+    "change": "{delta}"
+  },
+  "contact": {
+    "title": "Send the request",
+    "lead": "We reply with the survey confirmation. The request is free and commits you to nothing.",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "E-mail",
+    "channel": "How should we contact you?",
+    "channels": {
+      "phone": "Phone",
+      "whatsapp": "WhatsApp",
+      "email": "E-mail"
+    },
+    "comment": "Comment",
+    "commentHint": "Anything that helps: intercom code, schedule, what to know about the building.",
+    "addresses": "Exact addresses",
+    "estimateTerms": "I understand that before the survey the price is an estimated range and the fixed price is confirmed after the survey.",
+    "marketing": "I'd like to receive offers and news by e-mail/SMS. I can unsubscribe at any time.",
+    "privacy": "By sending this request you share your contact and move details so we can prepare your quote. See our Privacy Policy.",
+    "submit": "Send request (free, no obligation)",
+    "sending": "Sending…",
+    "successTitle": "We received your request",
+    "successText": "Request number: {id}. We will contact you about the survey.",
+    "successTasks": "What we check before the fixed price:",
+    "newEstimate": "New estimate",
+    "summary": "What you are sending"
+  },
+  "media": {
+    "add": "Add photos or video",
+    "notice": "Film only rooms and belongings. Please avoid people, documents, screens and valuables. You can talk in the video: say what moves and what stays, without names or personal data. Only our estimator sees the material; we use it only for the quote and delete it within the set period.",
+    "note": "General comment",
+    "notePlaceholder": "For example: we move everything except the kitchen and the bedroom wardrobe.",
+    "mark": "Mark on the photo",
+    "marks": "{count, plural, =0 {no marks} one {# mark} other {# marks}}",
+    "photos": "{count, plural, =0 {no photos} one {# photo} other {# photos}}",
+    "videos": "{count, plural, =0 {no videos} one {# video} other {# videos}}",
+    "local": "Files stay on this device until you send the request.",
+    "tooMany": "Maximum {max}.",
+    "video": "video"
+  },
+  "editor": {
+    "title": "Mark on the photo",
+    "move": "We move",
+    "stay": "Stays",
+    "careful": "Careful",
+    "draw": "Draw",
+    "pin": "Point with comment",
+    "pan": "Move the image",
+    "undo": "Undo",
+    "redo": "Redo",
+    "clear": "Clear all",
+    "addPin": "Add a point",
+    "pinText": "Comment for point {n}",
+    "pinMove": "Move with the arrow keys",
+    "photoNote": "Comment for the photo",
+    "done": "Done",
+    "width": "Thickness",
+    "legend": "Green — we move it, blue — it stays, yellow — careful / fragile / take apart."
+  },
+  "validation": {
+    "required": "Fill in this field",
+    "floor": {
+      "required": "Enter the floor",
+      "max": "The floor can be at most 30"
+    },
+    "zone": {
+      "required": "Choose the neighbourhood or town"
+    },
+    "elevator": {
+      "required": "Choose the lift or “Not sure”"
+    },
+    "taskType": {
+      "required": "Choose what we're moving"
+    },
+    "size": {
+      "required": "Choose the size of the home"
+    },
+    "inventory": {
+      "required": "Choose how we count your things",
+      "emptyItems": "Add at least one item"
+    },
+    "protection": {
+      "required": "Choose the protection"
+    },
+    "survey": {
+      "required": "Choose the survey"
+    },
+    "date": {
+      "required": "Choose the date",
+      "past": "Choose a date from tomorrow on"
+    },
+    "route": {
+      "required": "Choose the route"
+    },
+    "contact": {
+      "name": "Write your name",
+      "phoneOrEmail": "Leave a phone number or an e-mail",
+      "email": "The e-mail address looks wrong"
+    },
+    "terms": "Tick that you understand how the price is formed",
+    "invalid": "Invalid value"
+  },
+  "lines": {
+    "transport": "Transport · {vehicle}{count, plural, =1 {} other { × #}} · {hours} h × {rate} lei",
+    "crew": "Crew · {crew} movers · {hours} h × {rate} lei",
+    "fullDayDiscount": "Whole day · {hours} h, −{pct} %",
+    "weekend": "Weekend · +{pct} % on transport and crew",
+    "dispatch": "Dispatch · {zoneClass}",
+    "intercity": "Intercity road · {km} km × {rate} lei",
+    "packing": "Packing · {boxes} boxes × {rate} lei",
+    "materials": "Packaging",
+    "crates": "Reusable crates · {crates} × {rate} lei, {includedDays} days included{extraDays, plural, =0 {} other { + # days × {extraRate} leu}}",
+    "assembly": "Disassembly and assembly · {items} items",
+    "special": "Special things · {qty} pcs, reinforced packing",
+    "protection": "Complete protection · {ratePct} % of {declared} lei",
+    "survey": {
+      "onsite": "Specialist visit",
+      "remote": "Photo / video survey",
+      "none": "No survey"
+    },
+    "surveyCredit": "Visit deducted (move within {days} days)",
+    "minimumOrder": "Top-up to the {min} lei minimum order"
+  },
+  "materials": {
+    "cardboard": "Cardboard boxes · {qty} × {rate} lei",
+    "wardrobeBox": "Wardrobe boxes · {qty} × {rate} lei",
+    "mattressBagDouble": "Double mattress bags · {qty} × {rate} lei",
+    "mattressBagSingle": "Single mattress bags · {qty} × {rate} lei",
+    "tv": "TV protection · {qty} × {rate} lei",
+    "mirror": "Mirror / picture protection · {qty} × {rate} lei",
+    "special": "Reinforced packing for {qty} special things"
+  },
+  "assembly": {
+    "item": "{item} × {qty} · {rate} lei",
+    "masterOnMovingDay": "The craftsman also comes on the moving day · {rate} lei"
+  },
+  "special": {
+    "fragile": "Fragile · {rate} lei",
+    "valuable": "Valuable · {rate} lei",
+    "pristine": "No scratches · {rate} lei",
+    "piano": "Piano · {rate} lei"
+  },
+  "time": {
+    "load": "Loading: {m3} m³, floor {floors}, {lift} → {hours} h with {crew} movers (lift ×{fLift}, stairs ×{fStairs}, distance ×{fCarry})",
+    "unload": "Unloading: {m3} m³, floor {floors}, {lift} → {hours} h with {crew} movers (lift ×{fLift}, stairs ×{fStairs}, distance ×{fCarry})",
+    "drive": "Driving: {hours} h",
+    "fixed": "Floor, door and lift protection: {hours} h",
+    "extraTrips": "Extra trips ({trips} in total): {hours} h",
+    "masterAssembly": "The craftsman assembles in parallel: {hours} h",
+    "masterDisassembly": "The craftsman disassembles on the moving day: {hours} h",
+    "liftBottleneck": "The lift limits the pace {end}: {hours} h"
+  },
+  "range": {
+    "volumePreset": "The volume is estimated from the number of rooms: {min}–{max} m³.",
+    "volumeList": {
+      "none": "Without a survey the volume may vary by −{lowPct} % / +{highPct} %.",
+      "remote": "Until the photo/video survey: −{lowPct} % / +{highPct} %.",
+      "onsite": "Until the visit: −{lowPct} % / +{highPct} %."
+    },
+    "assumption": "{path}: we assumed “{assumed}”, it can change the price by up to {spreadLei} lei."
+  },
+  "assume": {
+    "floor": "{path}: not chosen yet, we assumed floor {value}.",
+    "elevatorSmall": "{path}: “Not sure” → we price a small lift. Photograph the plate and the window gets shorter.",
+    "stairsNormal": "{path}: we assumed a regular staircase.",
+    "carry": "{path}: we assumed 10–30 m.",
+    "parking": "{path}: we assumed the van can stop nearby.",
+    "furnitureInLift": "{path}: we assumed furniture is allowed in the lift."
+  },
+  "vehicle": {
+    "reasonVolume": "{m3} m³ with margin fit into a {vehicle} ({usable} m³) · {fill} % full{trips, plural, =1 {} other {, # trips}}{count, plural, =1 {} other {, # vans}}.",
+    "reasonWeight": "Weight decides, ~{kg} kg: a {vehicle} carries {payload} kg{trips, plural, =1 {} other {, # trips}}{count, plural, =1 {} other {, # vans}}.",
+    "reasonAccess": "{vehicle}: {m3} m³, {fill} % full. Access is limited at one of the addresses, see below."
+  },
+  "crew": {
+    "reason": "{crew} movers: the best price at which the move fits in a day (guaranteed within {windowH} h). Minimum for your things: {min}.",
+    "chosenByClient": "{crew} movers, chosen by you. Window: within {windowH} h."
+  },
+  "warn": {
+    "noFitLift": {
+      "door": "{item} does not pass the lift door ({lift}) {end} → we carry it by the stairs.",
+      "cabin": "{item} does not fit the lift cabin ({lift}) {end} → we carry it by the stairs.",
+      "notAllowed": "{item}: the building does not allow furniture in the lift {end} → by the stairs."
+    },
+    "selfDisassembly": "{item} moves only taken apart. You do it, or choose the craftsman under “Services”.",
+    "parkedAway": "Zone {end}: vehicles over {maxT} t have limited access → the {vehicle} stops ~{meters} m away, the distance is priced in.",
+    "exceedsWorkday": "The move does not fit in a working day (within {windowH} h, maximum {max} h). We recommend a survey visit or more movers.",
+    "fullDayExceeded": "The move takes ~{hours} h, longer than a booked day. Extra hours are paid separately.",
+    "crewMin": "Your things need at least {min} movers.",
+    "forcedOption": "{path}: we changed “{from}” to “{to}”, following the service rules.",
+    "intercityDistanceAssumed": "The distance to another city is assumed: {km} km. Enter the real distance under “Access”."
+  },
+  "rules": {
+    "cratesOnsiteOnly": "With reusable crates the survey is on site only: the specialist brings the crates and surveys in one visit.",
+    "atSurveyNeedsSurvey": "If we count your things at the survey, we need a photo/video survey or a visit.",
+    "officeSurveyRecommended": "For offices we recommend a survey visit.",
+    "houseSurveyRecommended": "For houses we recommend a survey: the volume varies a lot.",
+    "pianoSurveyRecommended": "A piano needs a survey and a crew of at least 3.",
+    "noSurveyRangeOnly": "Without a survey the price stays a range.",
+    "zoneUncertain": "We check whether the address is in zone 0 and whether the van can enter.",
+    "intercity": "For another city we confirm the route and the distance."
+  },
+  "tasks": {
+    "CLARIFY_ELEVATOR": "We clarify the lift",
+    "CONFIRM_ZONE": "We check the access zone",
+    "REQUEST_ACCESS_PERMIT": "We request the access permit",
+    "SURVEY_INVENTORY": "We count your things at the survey",
+    "SURVEY_PIANO": "We survey the piano",
+    "CONFIRM_INTERCITY": "We confirm the route",
+    "REVIEW_MEDIA": "We look at your photos and video"
+  },
+  "included": {
+    "tape": "Packing tape",
+    "stretchFilm": "Stretch film",
+    "blankets": "Protective blankets",
+    "dollies": "Dollies and straps",
+    "floorProtection": "Floor protection",
+    "doorProtection": "Door protection",
+    "liftProtection": "Lift protection",
+    "basicTools": "Basic tools"
+  },
+  "lineLabel": {
+    "transport": "Transport",
+    "crew": "Crew",
+    "fullDayDiscount": "Whole-day discount",
+    "weekend": "Weekend",
+    "dispatch": "Dispatch",
+    "intercity": "Intercity road",
+    "packing": "Packing",
+    "materials": "Packaging",
+    "crates": "Reusable crates",
+    "assembly": "Disassembly and assembly",
+    "special": "Special things",
+    "protection": "Complete protection",
+    "survey": "Survey",
+    "surveyCredit": "Survey deducted",
+    "minimumOrder": "Minimum order"
+  }
+}

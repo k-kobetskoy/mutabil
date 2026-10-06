@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "sh scripts/start-standalone.sh",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
+    "@internationalized/date": "^3.12.4",
     "idb-keyval": "^6.3.0",
     "json-logic-js": "^2.0.5",
     "lucide-react": "^1.52.0",

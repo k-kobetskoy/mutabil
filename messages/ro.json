@@ -1,0 +1,764 @@
+{
+  "meta": {
+    "title": "Mutabil — mutări în Cluj cu preț și oră știute dinainte",
+    "description": "Configurezi mutarea și vezi imediat duba, echipa, orele, fereastra garantată și fiecare linie de preț. Lăzi reutilizabile, montaj, protecție."
+  },
+  "brand": "Mutabil",
+  "nav": {
+    "fares": "Tarife",
+    "extras": "Bagaje",
+    "how": "Cum decurge",
+    "rules": "Cum calculăm",
+    "faq": "Întrebări",
+    "start": "Estimare exactă",
+    "language": "Limba",
+    "skip": "Sari la conținut"
+  },
+  "common": {
+    "continue": "Continuă",
+    "back": "Înapoi",
+    "edit": "schimbă",
+    "close": "Închide",
+    "unknown": "Nu știu",
+    "yes": "Da",
+    "no": "Nu",
+    "optional": "opțional",
+    "why": "De ce?",
+    "example": "exemplu",
+    "vatIncluded": "cu TVA",
+    "from": "De la",
+    "to": "La",
+    "swap": "Inversează plecarea și sosirea",
+    "loading": "Se încarcă…",
+    "sketch": "schiță · fotografie în curând",
+    "perHour": "/ oră",
+    "pieces": "buc.",
+    "hoursShort": "h",
+    "remove": "Elimină",
+    "add": "Adaugă",
+    "of": "din"
+  },
+  "landing": {
+    "title": "Rezervă mutarea ca pe un zbor.",
+    "lead": "Vezi prețul, ora de sosire și ce e inclus — înainte să suni pe cineva. Fără negocieri la fața locului.",
+    "searchTitle": "Calculează mutarea",
+    "what": "Ce mutăm",
+    "floors": "Etaj și lift",
+    "floorFrom": "Etaj la plecare",
+    "floorTo": "Etaj la sosire",
+    "liftFrom": "Lift la plecare",
+    "liftTo": "Lift la sosire",
+    "liftShort": {
+      "yes": "Lift",
+      "none": "Fără lift",
+      "unknown": "Nu știu"
+    },
+    "cta": "Vezi prețul și ora",
+    "exact": "Sau fă o estimare exactă, ~3 minute",
+    "passTitleSample": "Așa arată o estimare",
+    "passTitleLive": "Estimarea ta, orientativă",
+    "passNote": "Interval până la evaluare. Detaliile cu un clic.",
+    "fares": {
+      "title": "Trei tarife. Diferențele sunt scrise, nu ascunse.",
+      "lead": "Tariful alege cât de sigur e prețul și cât de bine sunt protejate lucrurile. Orice opțiune se poate schimba separat.",
+      "estimate": "Estimare",
+      "estimateFor": "Vrei doar să afli costul",
+      "fixed": "Preț fix",
+      "fixedFor": "Vrei o sumă sigură după o evaluare din fotografii sau video",
+      "complete": "Complet",
+      "completeFor": "Vrei să nu-ți faci griji pentru nimic",
+      "rowPrice": "Preț",
+      "rowSurvey": "Evaluare",
+      "rowProtection": "Protecție",
+      "rowCrates": "Lăzi reutilizabile",
+      "priceInterval": "interval",
+      "priceCapRemote": "fix, ≤ +{pct} %",
+      "priceCapOnsite": "fix, ≤ +{pct} %",
+      "surveyNone": "fără",
+      "surveyRemote": "foto / video",
+      "surveyOnsite": "la fața locului",
+      "protectionBasic": "conform legii",
+      "protectionFull": "valoare declarată",
+      "cratesOptional": "opțional",
+      "cratesIncluded": "7 zile incluse",
+      "includedAll": "În toate tarifele: bandă, stretch, pături, cărucioare, protecția podelei și a ușilor.",
+      "pick": "Calculează cu tariful {fare}"
+    },
+    "extras": {
+      "title": "Bagaje: ce adaugi la mutare",
+      "lead": "Fiecare opțiune are prețul pe unitate scris aici. Nimic nu e bifat dinainte.",
+      "crates": "Lăzi reutilizabile",
+      "cratesText": "Le aducem cu {before} zile înainte și le luăm la {after} zile după. Nu mai cumperi cutii și nu le arunci.",
+      "cratesPrice": "{rate} lei / ladă · {days} zile incluse · apoi {extra} leu / zi",
+      "wardrobe": "Cutie-garderobă",
+      "wardrobeText": "Hainele merg pe umerașe, așa cum stau în dulap.",
+      "wardrobePrice": "{rate} lei / buc., chirie",
+      "mattress": "Husă pentru saltea",
+      "mattressText": "Saltea curată la sosire, fără praf și fără zgârieturi.",
+      "mattressPrice": "{single}–{double} lei / buc.",
+      "assembly": "Demontare și montare",
+      "assemblyText": "Un meșter demontează mobila înainte și o montează la sosire. Echipa nu stă după el.",
+      "assemblyPrice": "de la {bed} lei / pat · {wardrobe} lei / dulap mare",
+      "packing": "Împachetare",
+      "packingText": "Parțial (bucătărie și fragile) sau complet. Se face cu o zi înainte.",
+      "packingPrice": "{rate} lei / cutie împachetată"
+    },
+    "journey": {
+      "title": "Cum decurge",
+      "request": "Cererea",
+      "requestText": "Configurezi și trimiți. Gratuit și fără obligații.",
+      "survey": "Evaluarea",
+      "surveyText": "Fotografii, video sau o vizită. Apoi primești prețul fix.",
+      "crates": "Lăzile",
+      "cratesText": "Ajung cu câteva zile înainte, dacă le-ai ales.",
+      "move": "Mutarea",
+      "moveText": "Echipa vine în intervalul de sosire ales. Știi de la început cât durează.",
+      "pickup": "Ridicarea lăzilor",
+      "pickupText": "După 7 zile, gratuit.",
+      "dayBefore": "Z−{n}",
+      "day": "Z",
+      "dayAfter": "Z+{n}"
+    },
+    "rules": {
+      "title": "Cum calculăm",
+      "lead": "Aceleași tarife pe care le vezi în estimare. Nu există altele.",
+      "mover": "Un om din echipă",
+      "vehicle": "Dubă {name}",
+      "overtime": "O oră peste fereastra garantată",
+      "overtimeText": "duba + echipa, aceeași tarifă, facturată la 30 de minute",
+      "minimum": "Comanda minimă",
+      "minimumText": "{min} lei · minimum {hours} ore",
+      "cap": "Plafonul după evaluare",
+      "capText": "prețul final nu depășește estimarea confirmată cu mai mult de {remote} % (foto/video) sau {onsite} % (vizită), dacă volumul și accesul sunt cele descrise",
+      "note": "Toate prețurile sunt în lei și includ TVA 21 %. Valorile sunt în curs de verificare."
+    },
+    "faq": {
+      "title": "Ce se întâmplă dacă…",
+      "q1": "…sunt mai multe lucruri decât am spus?",
+      "a1": "Șeful echipei îți arată ce s-a schimbat și cât costă, înainte să înceapă munca în plus. Fără acordul tău nu se adaugă nimic.",
+      "q2": "…liftul e mai mic sau nu merge?",
+      "a2": "Dacă ai ales „Nu știu”, am calculat deja cu un lift mic. Dacă liftul nu merge deloc, urcăm pe scări după aceleași reguli din estimare.",
+      "q3": "…ceva nu încape în lift?",
+      "a3": "Configuratorul te avertizează din timp și calculează scările pentru acel obiect. Mobila care se demontează devine panouri.",
+      "q4": "…se strică ceva?",
+      "a4": "Cu protecția de bază răspundem conform legii. Cu protecția completă reparăm, înlocuim sau plătim valoarea declarată, fără discuții despre uzură.",
+      "q5": "…echipa întârzie sau lucrează mai mult?",
+      "a5": "Fereastra de final e scrisă în estimare. Dacă depășim din cauza noastră, nu plătești peste plafon.",
+      "q6": "…nu știu răspunsul la o întrebare?",
+      "a6": "Alege „Nu știu”. Vezi imediat ce presupunem și cu cât se poate schimba prețul."
+    },
+    "footer": {
+      "company": "Mutabil SRL (date de identificare în curs de completare)",
+      "address": "Cluj-Napoca, România",
+      "contact": "Telefon și e-mail: în curând",
+      "legal": "Politica de confidențialitate · Condițiile serviciului · Condițiile de protecție · Politica de anulare",
+      "anpc": "ANPC — Soluționarea alternativă a litigiilor",
+      "vat": "Toate prețurile sunt în lei și includ TVA 21 %."
+    }
+  },
+  "start": {
+    "title": "Cum vrei să calculezi?",
+    "quick": "Estimare rapidă",
+    "quickText": "3 întrebări · ~30 secunde · interval de preț",
+    "detailed": "Estimare exactă",
+    "detailedText": "6 pași · 3–5 minute · dubă, echipă, ore, fereastră garantată",
+    "continue": "Continuă de unde ai rămas",
+    "restart": "Începe din nou",
+    "carry": "Răspunsurile din estimarea rapidă trec automat în cea exactă."
+  },
+  "stage": {
+    "what": "Ruta",
+    "access": "Acces",
+    "route": "Traseu",
+    "items": "Bagaje",
+    "services": "Servicii",
+    "protection": "Tarif",
+    "when": "Data"
+  },
+  "steps": {
+    "what": {
+      "title": "Ce mutăm?",
+      "taskType": "Tipul mutării",
+      "size": "Cât de mare e locuința?",
+      "amount": "Câte lucruri ai?",
+      "storage": "Am și boxă, pivniță sau balcon plin",
+      "workstations": "Câte posturi de lucru?"
+    },
+    "access": {
+      "title": "De unde și unde?",
+      "zone": "Cartier sau localitate",
+      "zonePlaceholder": "Alege",
+      "distanceKm": "Distanța până acolo, km",
+      "floor": "Etaj",
+      "floorHint": "Parter = 0",
+      "elevator": "Ce lift este?",
+      "plateHint": "Uită-te la plăcuța din cabină: scrie câte persoane și câte kilograme.",
+      "platePhoto": "Fotografiază plăcuța",
+      "plateAdded": "Plăcuța e atașată",
+      "more": "Parcare, scară, distanță până la intrare",
+      "furnitureInLift": "Asociația permite mobila în lift?",
+      "carry": "De la dubă până la intrare",
+      "parking": "Unde poate opri duba?",
+      "stairs": "Scara",
+      "raisedEntrance": "Sunt trepte la intrare sau liftul oprește între etaje",
+      "address": "Adresa exactă",
+      "addressHint": "Opțional. Nu apare în linkul de distribuire. Dacă știm deja blocul, completăm liftul pentru tine.",
+      "street": "Strada",
+      "number": "Nr.",
+      "block": "Bloc",
+      "stair": "Scara",
+      "apartment": "Ap.",
+      "directoryFound": "Știm blocul acesta: {lift}. L-am completat.",
+      "directoryUse": "Folosește",
+      "from": "Plecare",
+      "to": "Sosire"
+    },
+    "route": {
+      "title": "Unde mergem?",
+      "city": "Prin Cluj",
+      "suburb": "Spre periferie",
+      "suburbText": "Florești, Baciu, Apahida…",
+      "intercity": "În alt oraș"
+    },
+    "items": {
+      "title": "Ce transportăm?",
+      "mode": "Cum vrei să numărăm lucrurile?",
+      "modeList": "Aleg obiectele mari",
+      "modeListText": "Cea mai precisă estimare",
+      "modePreset": "După numărul de camere",
+      "modePresetText": "Rapid, interval mai larg",
+      "modeSurvey": "Le numărăm la evaluare",
+      "modeSurveyText": "Necesită o evaluare foto/video sau o vizită",
+      "boxes": "Cutii sau lăzi",
+      "boxesHint": "Pentru {preset} socotim de obicei ~{typical}. Schimbă dacă știi mai bine.",
+      "kallax": "Cutii din rafturi tip Kallax",
+      "kallaxHint": "Merg așa cum sunt, nu le mai împachetăm.",
+      "categories": {
+        "bedroom": "Dormitor",
+        "living": "Living",
+        "office": "Birou",
+        "appliances": "Electrocasnice",
+        "electronics": "Electronice",
+        "special": "Speciale",
+        "misc": "Altele"
+      },
+      "showAll": "Toate obiectele",
+      "showCommon": "Doar cele frecvente",
+      "special": "Lucruri fragile sau de valoare",
+      "specialText": "Ambalare întărită și marcare, preț separat.",
+      "specialKind": {
+        "fragile": "Fragil",
+        "valuable": "De valoare",
+        "pristine": "Fără nicio zgârietură",
+        "piano": "Pian"
+      },
+      "specialLabel": "Ce este",
+      "specialValue": "Valoare declarată, lei",
+      "addSpecial": "Adaugă un lucru",
+      "media": "Fotografii și video ale locuinței",
+      "mediaText": "Opțional. Cel mai bine: fotografii + video, sau un video în care spui ce mutăm și ce rămâne.",
+      "custom": "Alt obiect, cu dimensiuni",
+      "customLabel": "Ce este",
+      "customW": "Lățime, cm",
+      "customD": "Adâncime, cm",
+      "customH": "Înălțime, cm",
+      "addCustom": "Adaugă obiectul"
+    },
+    "services": {
+      "title": "Ce facem noi?",
+      "who": "Cine împachetează?",
+      "containers": "În ce împachetăm?",
+      "cratesRule": "Cu lăzi, evaluarea se face la fața locului: specialistul aduce lăzile și evaluează într-o singură vizită.",
+      "crateDays": "Câte zile rămân lăzile la tine?",
+      "crateDaysHint": "{included} zile sunt incluse. Fiecare zi în plus: {rate} leu / ladă.",
+      "extras": "Ambalaje speciale",
+      "assembly": "Ce demontăm și montăm?",
+      "assemblyText": "Meșterul lucrează în paralel cu echipa.",
+      "onMovingDay": "Demontarea în ziua mutării",
+      "onMovingDayText": "De exemplu, biroul îți trebuie până în ultima zi. +{fee} lei pentru deplasarea meșterului.",
+      "noAssemblyItems": "Alege întâi obiectele mari la pasul „Bagaje”."
+    },
+    "protection": {
+      "title": "Cât de sigur vrei să fie?",
+      "fares": "Alege un tarif sau setează separat mai jos",
+      "difference": "{delta} față de acum",
+      "compare": "Compară tarifele",
+      "level": "Protecția lucrurilor",
+      "basic": "De bază, inclusă",
+      "basicText": "Răspundem conform legii: despăgubire la valoarea reală, ținând cont de uzură.",
+      "full": "Completă",
+      "fullText": "Reparăm, înlocuim sau plătim valoarea declarată, fără discuții despre uzură. {rate} % din valoarea declarată, minimum {min} lei.",
+      "declared": "Valoarea declarată a lucrurilor, lei",
+      "declaredHint": "Minim {min} lei sau {perM3} lei / m³. Obiectele peste {item} lei se trec în inventar.",
+      "deductible": "Cu franșiză de {amount} lei (tarif {rate} %)",
+      "survey": "Evaluarea",
+      "onsite": "Vizită a specialistului",
+      "onsiteText": "{price} lei, se scad din comandă dacă te muți în {days} zile. Plafon: +{pct} %.",
+      "onsiteRisk": "Cel mai sigur preț.",
+      "remote": "Fotografii și video de la tine",
+      "remoteText": "Gratuit. Plafon: +{pct} %. Evaluatorul poate cere completări.",
+      "remoteRisk": "Dacă ceva nu se vede, poate cere un video sau o vizită.",
+      "none": "Fără evaluare",
+      "noneText": "Rămâne un interval. Plătești după timpul real, la tarifele publicate.",
+      "noneRisk": "Prețul poate fi mai mare dacă sunt mai multe lucruri.",
+      "disabledByCrates": "Indisponibil cu lăzi reutilizabile"
+    },
+    "when": {
+      "title": "Când?",
+      "date": "Data mutării",
+      "slot": "Ora de sosire a echipei",
+      "slots": {
+        "morning": "Dimineața",
+        "midday": "La prânz",
+        "afternoon": "După-amiaza"
+      },
+      "arrival": "sosire {from}–{to}",
+      "busy": "ocupat",
+      "tooLate": "nu încape în zi",
+      "fullDay": "Rezervă duba și echipa toată ziua",
+      "fullDayText": "{hours} ore, cu {pct} % reducere. Peste ele — ora suplimentară.",
+      "weekend": "Sâmbătă și duminică +{pct} % la transport și echipă."
+    }
+  },
+  "fields": {
+    "taskType": {
+      "apartment": "Apartament",
+      "house": "Casă",
+      "items": "Câteva obiecte mari",
+      "office": "Birou"
+    },
+    "amount": {
+      "light": "Puține",
+      "normal": "Obișnuit",
+      "heavy": "Multe"
+    }
+  },
+  "lift": {
+    "short": {
+      "none": "fără lift",
+      "small": "lift mic",
+      "medium": "lift mediu",
+      "large": "lift mare",
+      "unknown": "lift necunoscut"
+    },
+    "tile": {
+      "none": "Fără lift",
+      "small": "Mic",
+      "medium": "Mediu",
+      "large": "Mare / marfă",
+      "unknown": "Nu știu"
+    },
+    "tileHint": {
+      "none": "sau nu merge",
+      "small": "4 pers. · bloc vechi",
+      "medium": "6–8 pers.",
+      "large": "13+ pers. · marfă",
+      "unknown": "calculăm cu unul mic"
+    }
+  },
+  "values": {
+    "none": "fără lift",
+    "small": "lift mic",
+    "medium": "lift mediu",
+    "large": "lift mare",
+    "unknown": "nu știu",
+    "yes": "da",
+    "no": "nu",
+    "lt10": "sub 10 m",
+    "10to30": "10–30 m",
+    "gt30": "peste 30 m",
+    "atEntrance": "chiar la intrare",
+    "nearby": "aproape",
+    "far": "departe",
+    "normal": "obișnuită",
+    "narrow": "îngustă",
+    "winding": "în spirală / veche",
+    "onsite": "vizită",
+    "remote": "foto / video",
+    "self": "eu",
+    "partial": "parțial",
+    "full": "complet",
+    "crates": "lăzile voastre",
+    "cardboard": "cutii de carton",
+    "own": "cutiile mele"
+  },
+  "choices": {
+    "carry": {
+      "lt10": "Sub 10 m",
+      "10to30": "10–30 m",
+      "gt30": "Peste 30 m"
+    },
+    "parking": {
+      "atEntrance": "Chiar la intrare",
+      "nearby": "Aproape",
+      "far": "Departe"
+    },
+    "stairs": {
+      "normal": "Obișnuită",
+      "narrow": "Îngustă",
+      "winding": "Spirală / veche"
+    },
+    "who": {
+      "self": "Eu",
+      "selfText": "Împachetez singur",
+      "partial": "Parțial voi",
+      "partialText": "Bucătăria și ce e fragil",
+      "full": "Complet voi",
+      "fullText": "Totul, cu o zi înainte"
+    },
+    "containers": {
+      "crates": "Lăzile voastre reutilizabile",
+      "cratesText": "Le aduceți și le luați înapoi",
+      "cardboard": "Cutii de carton",
+      "cardboardText": "{rate} lei / buc., le aducem",
+      "own": "Cutiile mele",
+      "ownText": "Fără cost"
+    },
+    "extras": {
+      "wardrobeBoxes": "Cutie-garderobă",
+      "mattressBagsDouble": "Husă saltea dublă",
+      "mattressBagsSingle": "Husă saltea simplă",
+      "tvProtection": "Protecție TV",
+      "mirrorProtection": "Protecție oglindă / tablou"
+    }
+  },
+  "packing": {
+    "who": {
+      "self": "eu",
+      "partial": "parțial",
+      "full": "complet"
+    }
+  },
+  "end": {
+    "from": "la plecare",
+    "to": "la sosire"
+  },
+  "zoneClass": {
+    "city": "Cluj-Napoca",
+    "suburb": "periferie",
+    "intercity": "alt oraș"
+  },
+  "paths": {
+    "from.floor": "Etajul la plecare",
+    "to.floor": "Etajul la sosire",
+    "from.elevator": "Liftul la plecare",
+    "to.elevator": "Liftul la sosire",
+    "from.stairs": "Scara la plecare",
+    "to.stairs": "Scara la sosire",
+    "from.carry": "Distanța până la intrare (plecare)",
+    "to.carry": "Distanța până la intrare (sosire)",
+    "from.parking": "Parcarea la plecare",
+    "to.parking": "Parcarea la sosire",
+    "from.furnitureInLift": "Mobila în lift (plecare)",
+    "to.furnitureInLift": "Mobila în lift (sosire)",
+    "survey.method": "Evaluarea"
+  },
+  "vehicles": {
+    "van-6": "dubă mică 6 m³",
+    "van-12": "dubă 12 m³",
+    "van-16": "dubă 16 m³",
+    "box-20": "dubă cu box 20 m³",
+    "truck-30": "camion 7,5 t, 30 m³"
+  },
+  "estimate": {
+    "title": "Estimarea ta",
+    "empty": "Încă nu avem destule răspunsuri pentru un preț.",
+    "emptyCta": "Începe estimarea",
+    "passFrom": "Plecare",
+    "passArrival": "Sosire estimată",
+    "passGuaranteed": "garantat până la",
+    "passWindow": "Durată ≈ {expected} h · garantat până la {window} h",
+    "passDate": "Data",
+    "passNoDate": "data de ales",
+    "passVehicle": "Duba",
+    "passCrew": "Echipa",
+    "passCrewValue": "{n} oameni",
+    "passFare": "Tarif",
+    "passTotal": "Total cu TVA",
+    "fareEstimate": "Estimare",
+    "fareFixed": "Preț fix după evaluare",
+    "fareComplete": "Complet",
+    "rangeLabel": "Interval până la evaluare",
+    "afterSurvey": "După evaluare primești un preț fix. Finalul nu depășește estimarea confirmată cu mai mult de {pct} %, dacă volumul și accesul sunt cele descrise.",
+    "noSurvey": "Fără evaluare rămâne un interval: plătești după timpul real, la tarifele de mai jos. Cere o evaluare gratuită din fotografii pentru un preț fix.",
+    "vat": "din care TVA 21 %: {vat}",
+    "breakdown": "Detalii preț",
+    "included": "Inclus gratuit",
+    "overtime": "Fiecare oră peste fereastra garantată: {perHour} (se facturează la {step} minute). Doar dacă lucrurile sau accesul diferă de cele descrise și doar cu acordul tău.",
+    "time": "Cât durează",
+    "timeLead": "Estimăm ≈ {expected} h. Garantăm finalul în cel mult {window} h.",
+    "vehicleWhy": "De ce această dubă",
+    "crewAlternatives": "Altă echipă",
+    "crewAlt": "{n} oameni · până la {window} h · {total}",
+    "crewChosen": "aleasă",
+    "crewPick": "Alege",
+    "warnings": "De știut",
+    "assumptions": "Ce am presupus",
+    "scenariosTitle": "Ce poate schimba prețul",
+    "scenarioIf": "dacă e {value}",
+    "worst": "Cel mai mult, dacă totul e în cel mai rău caz: {worst}",
+    "variantRange": "Interval",
+    "variantConditional": "Sumă + condiții",
+    "variantLabel": "Cum afișăm prețul",
+    "timeline": "Ce urmează",
+    "timelineKind": {
+      "survey": "Evaluarea",
+      "cratesDelivery": "Aducem lăzile (și evaluăm)",
+      "packing": "Împachetăm",
+      "move": "Mutarea",
+      "cratesPickup": "Luăm lăzile"
+    },
+    "share": "Trimite estimarea cuiva",
+    "shareCopied": "Link copiat. Linkul nu conține date personale.",
+    "send": "Trimite cererea (gratuit, fără obligații)",
+    "editAnswers": "Schimbă răspunsurile",
+    "refine": "Fă estimarea exactă · ~3 min",
+    "refineText": "Răspunsurile tale sunt deja completate.",
+    "linkInvalid": "Linkul nu mai e valabil. Începe o estimare nouă.",
+    "linkLoaded": "Am încărcat estimarea din link, cu tarifele de azi.",
+    "tasksTitle": "Ce verificăm noi"
+  },
+  "priceBar": {
+    "noPrice": "Prețul apare după primul pas",
+    "open": "Vezi detaliile prețului",
+    "estimate": "Vezi estimarea",
+    "change": "{delta}"
+  },
+  "contact": {
+    "title": "Trimite cererea",
+    "lead": "Îți răspundem cu confirmarea evaluării. Cererea e gratuită și nu te obligă la nimic.",
+    "name": "Nume",
+    "phone": "Telefon",
+    "email": "E-mail",
+    "channel": "Cum preferi să te contactăm?",
+    "channels": {
+      "phone": "Telefon",
+      "whatsapp": "WhatsApp",
+      "email": "E-mail"
+    },
+    "comment": "Comentariu",
+    "commentHint": "Orice ne ajută: cod de interfon, program, ce să știm despre bloc.",
+    "addresses": "Adresele exacte",
+    "estimateTerms": "Înțeleg că, înainte de evaluare, prețul este un interval estimativ, iar prețul fix se confirmă după evaluare.",
+    "marketing": "Doresc să primesc oferte și noutăți prin e-mail/SMS. Mă pot dezabona oricând.",
+    "privacy": "Prin trimiterea cererii ne transmiți datele de contact și detaliile mutării, pe care le folosim pentru a-ți pregăti oferta. Detalii în Politica de confidențialitate.",
+    "submit": "Trimite cererea (gratuit, fără obligații)",
+    "sending": "Se trimite…",
+    "successTitle": "Am primit cererea",
+    "successText": "Numărul cererii: {id}. Te contactăm pentru evaluare.",
+    "successTasks": "Ce verificăm înainte de prețul fix:",
+    "newEstimate": "Estimare nouă",
+    "summary": "Ce trimiți"
+  },
+  "media": {
+    "add": "Adaugă fotografii sau video",
+    "notice": "Filmează doar camerele și lucrurile. Te rugăm să nu filmezi persoane, documente, ecrane sau obiecte de valoare. Poți vorbi în video: spune ce mutăm și ce rămâne, fără nume și date personale. Doar evaluatorul nostru vede materialul; îl folosim numai pentru ofertă și îl ștergem în termenul stabilit.",
+    "note": "Comentariu general",
+    "notePlaceholder": "De exemplu: mutăm tot, în afară de bucătărie și dulapul din dormitor.",
+    "mark": "Marchează pe fotografie",
+    "marks": "{count, plural, =0 {fără marcaje} one {# marcaj} few {# marcaje} other {# de marcaje}}",
+    "photos": "{count, plural, =0 {nicio fotografie} one {# fotografie} few {# fotografii} other {# de fotografii}}",
+    "videos": "{count, plural, =0 {niciun video} one {# video} few {# video} other {# de video}}",
+    "local": "Fișierele rămân pe acest dispozitiv până trimiți cererea.",
+    "tooMany": "Maximum {max}.",
+    "video": "video"
+  },
+  "editor": {
+    "title": "Marchează pe fotografie",
+    "move": "Mutăm",
+    "stay": "Rămâne",
+    "careful": "Atenție",
+    "draw": "Desenează",
+    "pin": "Punct cu comentariu",
+    "pan": "Mută imaginea",
+    "undo": "Anulează",
+    "redo": "Refă",
+    "clear": "Șterge tot",
+    "addPin": "Adaugă un punct",
+    "pinText": "Comentariu pentru punctul {n}",
+    "pinMove": "Mută cu săgețile",
+    "photoNote": "Comentariu pentru fotografie",
+    "done": "Gata",
+    "width": "Grosime",
+    "legend": "Verde — mutăm, albastru — rămâne, galben — atenție / fragil / de demontat."
+  },
+  "validation": {
+    "required": "Completează acest câmp",
+    "floor": {
+      "required": "Indică etajul",
+      "max": "Etajul poate fi cel mult 30"
+    },
+    "zone": {
+      "required": "Alege cartierul sau localitatea"
+    },
+    "elevator": {
+      "required": "Alege liftul sau „Nu știu”"
+    },
+    "taskType": {
+      "required": "Alege ce mutăm"
+    },
+    "size": {
+      "required": "Alege mărimea locuinței"
+    },
+    "inventory": {
+      "required": "Alege cum numărăm lucrurile",
+      "emptyItems": "Adaugă cel puțin un obiect"
+    },
+    "protection": {
+      "required": "Alege protecția"
+    },
+    "survey": {
+      "required": "Alege evaluarea"
+    },
+    "date": {
+      "required": "Alege data",
+      "past": "Alege o dată de mâine încolo"
+    },
+    "route": {
+      "required": "Alege traseul"
+    },
+    "contact": {
+      "name": "Scrie-ți numele",
+      "phoneOrEmail": "Lasă un telefon sau un e-mail",
+      "email": "Adresa de e-mail pare greșită"
+    },
+    "terms": "Bifează că ai înțeles cum se formează prețul",
+    "invalid": "Valoare nevalidă"
+  },
+  "lines": {
+    "transport": "Transport · {vehicle}{count, plural, =1 {} other { × #}} · {hours} h × {rate} lei",
+    "crew": "Echipă · {crew} oameni · {hours} h × {rate} lei",
+    "fullDayDiscount": "Toată ziua · {hours} h, −{pct} %",
+    "weekend": "Weekend · +{pct} % la transport și echipă",
+    "dispatch": "Deplasare · {zoneClass}",
+    "intercity": "Drum între orașe · {km} km × {rate} lei",
+    "packing": "Împachetare · {boxes} cutii × {rate} lei",
+    "materials": "Ambalaje",
+    "crates": "Lăzi reutilizabile · {crates} × {rate} lei, {includedDays} zile incluse{extraDays, plural, =0 {} other { + # zile × {extraRate} leu}}",
+    "assembly": "Demontare și montare · {items} obiecte",
+    "special": "Lucruri speciale · {qty} buc., ambalare întărită",
+    "protection": "Protecție completă · {ratePct} % din {declared} lei",
+    "survey": {
+      "onsite": "Vizita specialistului",
+      "remote": "Evaluare foto / video",
+      "none": "Fără evaluare"
+    },
+    "surveyCredit": "Se scade vizita (mutare în {days} zile)",
+    "minimumOrder": "Completare până la comanda minimă de {min} lei"
+  },
+  "materials": {
+    "cardboard": "Cutii de carton · {qty} × {rate} lei",
+    "wardrobeBox": "Cutii-garderobă · {qty} × {rate} lei",
+    "mattressBagDouble": "Huse saltea dublă · {qty} × {rate} lei",
+    "mattressBagSingle": "Huse saltea simplă · {qty} × {rate} lei",
+    "tv": "Protecție TV · {qty} × {rate} lei",
+    "mirror": "Protecție oglindă / tablou · {qty} × {rate} lei",
+    "special": "Ambalare întărită pentru {qty} lucruri speciale"
+  },
+  "assembly": {
+    "item": "{item} × {qty} · {rate} lei",
+    "masterOnMovingDay": "Meșterul vine și în ziua mutării · {rate} lei"
+  },
+  "special": {
+    "fragile": "Fragil · {rate} lei",
+    "valuable": "De valoare · {rate} lei",
+    "pristine": "Fără zgârieturi · {rate} lei",
+    "piano": "Pian · {rate} lei"
+  },
+  "time": {
+    "load": "Încărcare: {m3} m³, etajul {floors}, {lift} → {hours} h cu {crew} oameni (lift ×{fLift}, scări ×{fStairs}, distanță ×{fCarry})",
+    "unload": "Descărcare: {m3} m³, etajul {floors}, {lift} → {hours} h cu {crew} oameni (lift ×{fLift}, scări ×{fStairs}, distanță ×{fCarry})",
+    "drive": "Drum: {hours} h",
+    "fixed": "Protecția podelei, a ușilor și a liftului: {hours} h",
+    "extraTrips": "Curse în plus ({trips} în total): {hours} h",
+    "masterAssembly": "Meșterul montează în paralel: {hours} h",
+    "masterDisassembly": "Meșterul demontează în ziua mutării: {hours} h",
+    "liftBottleneck": "Liftul limitează viteza {end}: {hours} h"
+  },
+  "range": {
+    "volumePreset": "Volumul e estimat după numărul de camere: {min}–{max} m³.",
+    "volumeList": {
+      "none": "Fără evaluare, volumul poate varia cu −{lowPct} % / +{highPct} %.",
+      "remote": "Până la evaluarea foto/video: −{lowPct} % / +{highPct} %.",
+      "onsite": "Până la vizită: −{lowPct} % / +{highPct} %."
+    },
+    "assumption": "{path}: am presupus „{assumed}”, poate schimba prețul cu până la {spreadLei} lei."
+  },
+  "assume": {
+    "floor": "{path}: încă nu l-ai ales, am presupus etajul {value}.",
+    "elevatorSmall": "{path}: „Nu știu” → calculăm cu un lift mic. Fotografiază plăcuța și fereastra devine mai scurtă.",
+    "stairsNormal": "{path}: am presupus o scară obișnuită.",
+    "carry": "{path}: am presupus 10–30 m.",
+    "parking": "{path}: am presupus că duba oprește aproape.",
+    "furnitureInLift": "{path}: am presupus că mobila e permisă în lift."
+  },
+  "vehicle": {
+    "reasonVolume": "{m3} m³ cu rezervă încap în {vehicle} ({usable} m³) · ocupare {fill} %{trips, plural, =1 {} other {, # curse}}{count, plural, =1 {} other {, # dube}}.",
+    "reasonWeight": "Greutatea, ~{kg} kg, decide: {vehicle} duce {payload} kg{trips, plural, =1 {} other {, # curse}}{count, plural, =1 {} other {, # dube}}.",
+    "reasonAccess": "{vehicle}: {m3} m³, ocupare {fill} %. La una dintre adrese accesul e limitat, vezi mai jos."
+  },
+  "crew": {
+    "reason": "{crew} oameni: cel mai bun preț la care mutarea încape în zi (garantat până la {windowH} h). Minimum pentru lucrurile tale: {min}.",
+    "chosenByClient": "{crew} oameni, ales de tine. Fereastra: până la {windowH} h."
+  },
+  "warn": {
+    "noFitLift": {
+      "door": "{item} nu trece prin ușa liftului ({lift}) {end} → îl urcăm pe scări.",
+      "cabin": "{item} nu încape în cabina liftului ({lift}) {end} → îl urcăm pe scări.",
+      "notAllowed": "{item}: asociația nu permite mobila în lift {end} → pe scări."
+    },
+    "selfDisassembly": "{item} se mută doar demontat. Îl demontezi tu sau alegi meșterul la „Servicii”.",
+    "parkedAway": "Zona {end}: accesul vehiculelor peste {maxT} t e limitat → {vehicle} oprește la ~{meters} m, am calculat distanța.",
+    "exceedsWorkday": "Mutarea nu încape într-o zi de lucru (până la {windowH} h, maxim {max} h). Recomandăm o vizită de evaluare sau mai mulți oameni.",
+    "fullDayExceeded": "Mutarea durează ~{hours} h, mai mult decât o zi rezervată. Orele în plus se plătesc separat.",
+    "crewMin": "Pentru lucrurile tale sunt necesari cel puțin {min} oameni.",
+    "forcedOption": "{path}: am schimbat „{from}” în „{to}”, după regulile serviciului.",
+    "intercityDistanceAssumed": "Distanța până în alt oraș e presupusă: {km} km. Scrie distanța reală la „Acces”."
+  },
+  "rules": {
+    "cratesOnsiteOnly": "Cu lăzi reutilizabile evaluarea e doar la fața locului: specialistul aduce lăzile și evaluează într-o singură vizită.",
+    "atSurveyNeedsSurvey": "Dacă numărăm lucrurile la evaluare, avem nevoie de o evaluare foto/video sau de o vizită.",
+    "officeSurveyRecommended": "Pentru birouri recomandăm o vizită de evaluare.",
+    "houseSurveyRecommended": "Pentru case recomandăm o evaluare: volumul variază mult.",
+    "pianoSurveyRecommended": "Pianul cere o evaluare și o echipă de cel puțin 3 oameni.",
+    "noSurveyRangeOnly": "Fără evaluare prețul rămâne un interval.",
+    "zoneUncertain": "Verificăm dacă adresa e în zona 0 și dacă duba poate intra.",
+    "intercity": "Pentru alt oraș confirmăm traseul și distanța."
+  },
+  "tasks": {
+    "CLARIFY_ELEVATOR": "Lămurim liftul",
+    "CONFIRM_ZONE": "Verificăm zona de acces",
+    "REQUEST_ACCESS_PERMIT": "Cerem permisul de acces",
+    "SURVEY_INVENTORY": "Numărăm lucrurile la evaluare",
+    "SURVEY_PIANO": "Evaluăm pianul",
+    "CONFIRM_INTERCITY": "Confirmăm traseul",
+    "REVIEW_MEDIA": "Ne uităm la fotografii și video"
+  },
+  "included": {
+    "tape": "Bandă adezivă",
+    "stretchFilm": "Folie stretch",
+    "blankets": "Pături de protecție",
+    "dollies": "Cărucioare și chingi",
+    "floorProtection": "Protecția podelei",
+    "doorProtection": "Protecția ușilor",
+    "liftProtection": "Protecția liftului",
+    "basicTools": "Scule de bază"
+  },
+  "lineLabel": {
+    "transport": "Transport",
+    "crew": "Echipă",
+    "fullDayDiscount": "Reducere zi întreagă",
+    "weekend": "Weekend",
+    "dispatch": "Deplasare",
+    "intercity": "Drum între orașe",
+    "packing": "Împachetare",
+    "materials": "Ambalaje",
+    "crates": "Lăzi reutilizabile",
+    "assembly": "Demontare și montare",
+    "special": "Lucruri speciale",
+    "protection": "Protecție completă",
+    "survey": "Evaluare",
+    "surveyCredit": "Evaluare scăzută",
+    "minimumOrder": "Comandă minimă"
+  }
+}

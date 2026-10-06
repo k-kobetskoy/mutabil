@@ -1,0 +1,118 @@
+@import 'tailwindcss';
+
+/*
+ * Mutabil design tokens — direction "Rezervare" (docs/design-plan.md):
+ * a move booked like a flight. Night blue owns large fields (search panel, boarding pass,
+ * price bar); amber only marks what is guaranteed; route blue is action and selection.
+ */
+@theme {
+  --color-night: #0b1f3a;
+  --color-night-2: #142c50;
+  --color-night-3: #1f3a64;
+  --color-on-night: #ffffff;
+  --color-on-night-muted: #a9b8d3;
+  --color-cloud: #f3f5f8;
+  --color-paper: #ffffff;
+  --color-ink: #0b1f3a;
+  --color-ink-muted: #4a5a72;
+  --color-line: #d5dbe5;
+  --color-line-strong: #a8b3c4;
+  --color-route: #2459e6;
+  --color-route-hover: #1b47bd;
+  --color-route-soft: #e7eefe;
+  --color-amber: #f6b73c;
+  --color-amber-soft: #fff4dc;
+  --color-ok: #1e9e6a;
+  --color-ok-ink: #157a51;
+  --color-ok-soft: #e3f5ec;
+  --color-error: #9a3412;
+
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-field: 0.625rem;
+  --radius-panel: 1.25rem;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-panel: 0 18px 40px -18px rgb(11 31 58 / 0.35), 0 2px 6px -2px rgb(11 31 58 / 0.12);
+  --shadow-lift: 0 10px 24px -12px rgb(11 31 58 / 0.3);
+}
+
+@layer base {
+  html {
+    color: var(--color-ink);
+    background: var(--color-cloud);
+    -webkit-text-size-adjust: 100%;
+    scrollbar-color: var(--color-line-strong) var(--color-cloud);
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    caret-color: var(--color-route);
+  }
+  ::selection {
+    background: var(--color-route);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-route);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  .on-night :focus-visible {
+    outline-color: var(--color-amber);
+  }
+  a {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    letter-spacing: -0.015em;
+  }
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Route codes like on a boarding pass: wide caps */
+@utility code-wide {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+@utility label-cap {
+  font-family: var(--font-display);
+  font-stretch: 112%;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@utility condensed {
+  font-family: var(--font-display);
+  font-stretch: 80%;
+}

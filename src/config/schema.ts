@@ -222,6 +222,7 @@ export const ZonesConfig = z.object({
   zones: z.array(
     z.object({
       id: z.string(),
+      code: z.string().min(2).max(4),
       name: I18n,
       class: z.enum(['city', 'suburb', 'intercity']),
       lat: num.nullable(),

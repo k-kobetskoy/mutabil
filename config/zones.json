@@ -59,7 +59,8 @@
       "class": "city",
       "lat": 46.77,
       "lng": 23.5895,
-      "access": "zona-0"
+      "access": "zona-0",
+      "code": "CEN"
     },
     {
       "id": "centru-unknown",
@@ -71,7 +72,8 @@
       "lat": 46.771,
       "lng": 23.593,
       "access": "zona-0",
-      "uncertainAccess": true
+      "uncertainAccess": true,
+      "code": "CEN"
     },
     {
       "id": "andrei-muresanu",
@@ -81,7 +83,8 @@
       },
       "class": "city",
       "lat": 46.757,
-      "lng": 23.605
+      "lng": 23.605,
+      "code": "AMU"
     },
     {
       "id": "becas",
@@ -91,7 +94,8 @@
       },
       "class": "city",
       "lat": 46.735,
-      "lng": 23.56
+      "lng": 23.56,
+      "code": "BEC"
     },
     {
       "id": "borhanci",
@@ -101,7 +105,8 @@
       },
       "class": "city",
       "lat": 46.745,
-      "lng": 23.625
+      "lng": 23.625,
+      "code": "BOR"
     },
     {
       "id": "bulgaria",
@@ -111,7 +116,8 @@
       },
       "class": "city",
       "lat": 46.788,
-      "lng": 23.605
+      "lng": 23.605,
+      "code": "BUL"
     },
     {
       "id": "buna-ziua",
@@ -121,7 +127,8 @@
       },
       "class": "city",
       "lat": 46.74,
-      "lng": 23.6
+      "lng": 23.6,
+      "code": "BZI"
     },
     {
       "id": "dambul-rotund",
@@ -131,7 +138,8 @@
       },
       "class": "city",
       "lat": 46.79,
-      "lng": 23.565
+      "lng": 23.565,
+      "code": "DRO"
     },
     {
       "id": "europa",
@@ -141,7 +149,8 @@
       },
       "class": "city",
       "lat": 46.738,
-      "lng": 23.585
+      "lng": 23.585,
+      "code": "EUR"
     },
     {
       "id": "gheorgheni",
@@ -151,7 +160,8 @@
       },
       "class": "city",
       "lat": 46.765,
-      "lng": 23.625
+      "lng": 23.625,
+      "code": "GHE"
     },
     {
       "id": "grigorescu",
@@ -161,7 +171,8 @@
       },
       "class": "city",
       "lat": 46.772,
-      "lng": 23.55
+      "lng": 23.55,
+      "code": "GRI"
     },
     {
       "id": "gruia",
@@ -171,7 +182,8 @@
       },
       "class": "city",
       "lat": 46.78,
-      "lng": 23.578
+      "lng": 23.578,
+      "code": "GRU"
     },
     {
       "id": "intre-lacuri",
@@ -181,7 +193,8 @@
       },
       "class": "city",
       "lat": 46.775,
-      "lng": 23.63
+      "lng": 23.63,
+      "code": "ILA"
     },
     {
       "id": "iris",
@@ -191,7 +204,8 @@
       },
       "class": "city",
       "lat": 46.795,
-      "lng": 23.59
+      "lng": 23.59,
+      "code": "IRI"
     },
     {
       "id": "manastur",
@@ -201,7 +215,8 @@
       },
       "class": "city",
       "lat": 46.755,
-      "lng": 23.555
+      "lng": 23.555,
+      "code": "MĂN"
     },
     {
       "id": "marasti",
@@ -211,7 +226,8 @@
       },
       "class": "city",
       "lat": 46.78,
-      "lng": 23.615
+      "lng": 23.615,
+      "code": "MĂR"
     },
     {
       "id": "someseni",
@@ -221,7 +237,8 @@
       },
       "class": "city",
       "lat": 46.785,
-      "lng": 23.645
+      "lng": 23.645,
+      "code": "SOM"
     },
     {
       "id": "sopor",
@@ -231,7 +248,8 @@
       },
       "class": "city",
       "lat": 46.795,
-      "lng": 23.63
+      "lng": 23.63,
+      "code": "SOP"
     },
     {
       "id": "zorilor",
@@ -241,7 +259,8 @@
       },
       "class": "city",
       "lat": 46.752,
-      "lng": 23.58
+      "lng": 23.58,
+      "code": "ZOR"
     },
     {
       "id": "apahida",
@@ -251,7 +270,8 @@
       },
       "class": "suburb",
       "lat": 46.81,
-      "lng": 23.745
+      "lng": 23.745,
+      "code": "APA"
     },
     {
       "id": "baciu",
@@ -261,7 +281,8 @@
       },
       "class": "suburb",
       "lat": 46.793,
-      "lng": 23.525
+      "lng": 23.525,
+      "code": "BAC"
     },
     {
       "id": "chinteni",
@@ -271,7 +292,8 @@
       },
       "class": "suburb",
       "lat": 46.86,
-      "lng": 23.53
+      "lng": 23.53,
+      "code": "CHI"
     },
     {
       "id": "feleacu",
@@ -281,7 +303,8 @@
       },
       "class": "suburb",
       "lat": 46.71,
-      "lng": 23.595
+      "lng": 23.595,
+      "code": "FEL"
     },
     {
       "id": "floresti",
@@ -291,7 +314,8 @@
       },
       "class": "suburb",
       "lat": 46.747,
-      "lng": 23.49
+      "lng": 23.49,
+      "code": "FLO"
     },
     {
       "id": "gilau",
@@ -301,7 +325,8 @@
       },
       "class": "suburb",
       "lat": 46.755,
-      "lng": 23.38
+      "lng": 23.38,
+      "code": "GIL"
     },
     {
       "id": "jucu",
@@ -311,7 +336,8 @@
       },
       "class": "suburb",
       "lat": 46.86,
-      "lng": 23.79
+      "lng": 23.79,
+      "code": "JUC"
     },
     {
       "id": "sannicoara",
@@ -321,7 +347,8 @@
       },
       "class": "suburb",
       "lat": 46.787,
-      "lng": 23.73
+      "lng": 23.73,
+      "code": "SÂN"
     },
     {
       "id": "other-city",
@@ -331,7 +358,8 @@
       },
       "class": "intercity",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "code": "ALT"
     }
   ],
   "source": "assumption (approximate neighbourhood centroids)",

@@ -141,3 +141,15 @@ describe('wizard flow', () => {
     expect(nextStep('what', {}, 'detailed', cfg.steps)?.id).toBe('access');
   });
 });
+
+import { validateStep } from '@/domain/flow/validate';
+describe('step validation', () => {
+  const step = (id: string) => getConfig().steps.steps.find((s) => s.id === id)!;
+  it('asks for the floor and, above the ground floor, for the lift', () => {
+    const e = validateStep({ v: 1, mode: 'detailed', from: { zoneId: 'iris', floor: 3 }, to: { zoneId: 'iris' } }, step('access'), 'detailed', '2026-10-06');
+    expect(e).toEqual({ 'to.floor': 'validation.floor.required', 'from.elevator': 'validation.elevator.required' });
+  });
+  it('a date in the past is refused', () => {
+    expect(validateStep({ v: 1, mode: 'detailed', schedule: { date: '2026-10-01' } }, step('when'), 'detailed', '2026-10-06')).toEqual({ 'schedule.date': 'validation.date.past' });
+  });
+});
