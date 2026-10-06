@@ -167,7 +167,7 @@
     "carry": "Your quick answers carry over to the detailed estimate."
   },
   "stage": {
-    "what": "Route",
+    "what": "What",
     "access": "Access",
     "route": "Distance",
     "items": "Baggage",
@@ -211,7 +211,8 @@
       "directoryFound": "We know this building: {lift}. Filled in.",
       "directoryUse": "Use it",
       "from": "Departure",
-      "to": "Arrival"
+      "to": "Arrival",
+      "directoryKnown": "We know this building: {lift}."
     },
     "route": {
       "title": "Where to?",
@@ -262,7 +263,8 @@
       "customW": "Width, cm",
       "customD": "Depth, cm",
       "customH": "Height, cm",
-      "addCustom": "Add the item"
+      "addCustom": "Add the item",
+      "specialKindLabel": "What kind"
     },
     "services": {
       "title": "What do we do?",
@@ -301,7 +303,8 @@
       "none": "No survey",
       "noneText": "It stays a range. You pay for the real time at the published rates.",
       "noneRisk": "The price may be higher if there are more things.",
-      "disabledByCrates": "Not available with reusable crates"
+      "disabledByCrates": "Not available with reusable crates",
+      "disabledByAtSurvey": "Unavailable: the items are counted at the survey"
     },
     "when": {
       "title": "When?",
@@ -317,7 +320,8 @@
       "tooLate": "doesn't fit the day",
       "fullDay": "Book the van and crew for the whole day",
       "fullDayText": "{hours} hours, {pct} % off. Beyond that — the extra hour rate.",
-      "weekend": "Saturday and Sunday +{pct} % on transport and crew."
+      "weekend": "Saturday and Sunday +{pct} % on transport and crew.",
+      "pickDate": "Pick the date first, then the arrival time."
     }
   },
   "fields": {
@@ -516,7 +520,16 @@
     "refineText": "Your answers are already filled in.",
     "linkInvalid": "This link is no longer valid. Start a new estimate.",
     "linkLoaded": "We loaded the estimate from the link, at today's rates.",
-    "tasksTitle": "What we check"
+    "tasksTitle": "What we check",
+    "conditionalLead": "The sum for what you told us. It changes only if one of the answers below turns out different:",
+    "conditionPath": "{path}",
+    "optionValue": "{value}",
+    "moveDay": "moving day",
+    "daysBefore": "{n, plural, one {the day before} other {# days before}}",
+    "daysAfter": "{n, plural, one {the day after} other {# days after}}",
+    "shareShort": "Share link",
+    "shareNote": "The link has no name, phone or addresses.",
+    "editShort": "Edit"
   },
   "priceBar": {
     "noPrice": "The price appears after the first step",
@@ -548,7 +561,8 @@
     "successText": "Request number: {id}. We will contact you about the survey.",
     "successTasks": "What we check before the fixed price:",
     "newEstimate": "New estimate",
-    "summary": "What you are sending"
+    "summary": "What you are sending",
+    "failed": "We could not send the request. Please try again in a minute."
   },
   "media": {
     "add": "Add photos or video",
@@ -760,5 +774,23 @@
     "survey": "Survey",
     "surveyCredit": "Survey deducted",
     "minimumOrder": "Minimum order"
+  },
+  "flow": {
+    "progress": "Step {n} of {total}",
+    "nav": "Estimate steps",
+    "errorsTitle": "A few answers are still missing",
+    "saved": "Your answers stay on this device for {days} days.",
+    "toResult": "See the estimate",
+    "priceLabel": "Estimate",
+    "priceMeta": "{crew} movers · guaranteed within {window} h",
+    "details": "Details",
+    "asideTitle": "Your booking",
+    "noPriceYet": "Answer the first step to see the van, crew, hours and price here.",
+    "modeQuick": "Quick estimate",
+    "modeDetailed": "Detailed estimate",
+    "toDetailed": "Switch to the detailed estimate",
+    "itemsMovedToDetailed": "For a few items you pick them from a list, so we switch to the detailed estimate.",
+    "chosenCount": "{count, plural, =0 {no items chosen} one {# item chosen} other {# items chosen}}",
+    "loading": "Loading your answers…"
   }
 }

@@ -116,3 +116,33 @@
   font-family: var(--font-display);
   font-stretch: 80%;
 }
+
+/* Price change chip: rises in, then the bar keeps it for a few seconds */
+@keyframes chip-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.delta-chip {
+  animation: chip-in 260ms var(--ease-out-expo) both;
+}
+
+/* Step content enters from the reading direction */
+@keyframes step-in {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.step-in {
+  animation: step-in 320ms var(--ease-out-expo) both;
+}

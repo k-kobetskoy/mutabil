@@ -45,7 +45,9 @@ export function SelectField({
           onNight ? 'border-white/25 bg-white/8 text-white hover:border-white/50' : 'border-line bg-paper text-ink hover:border-line-strong',
         )}
       >
-        <SelectValue className="truncate font-[family-name:var(--font-display)] text-[1.02rem] font-semibold data-[placeholder]:font-normal data-[placeholder]:opacity-70" />
+        <SelectValue className="truncate font-[family-name:var(--font-display)] text-[1.02rem] font-semibold data-[placeholder]:font-normal data-[placeholder]:opacity-70">
+          {({ selectedText, isPlaceholder, defaultChildren }) => (isPlaceholder ? defaultChildren : selectedText)}
+        </SelectValue>
         <ChevronDown size={18} aria-hidden className="shrink-0 opacity-70" />
       </Button>
       <FieldError className="text-[0.92rem] font-semibold text-error">{errorMessage}</FieldError>

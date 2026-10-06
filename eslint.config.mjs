@@ -16,6 +16,11 @@ const eslintConfig = defineConfig([
       "no-restricted-globals": ["error", "window", "document", "localStorage", "sessionStorage", "fetch"],
     },
   },
+  {
+    rules: {
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_", ignoreRestSiblings: true }],
+    },
+  },
   globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "api/**", ".claude/**", "playwright-report/**", "test-results/**"]),
 ]);
 

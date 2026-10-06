@@ -5,6 +5,8 @@
  * and the first client render match (no hydration mismatch).
  */
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useLocale } from 'next-intl';
+import { I18nProvider } from 'react-aria-components';
 import { createMockServices } from '@/services/mock';
 import type { Services } from '@/services/types';
 import { useOrderStore } from '@/state/order-store';
@@ -18,12 +20,17 @@ const ServicesContext = createContext<Services | null>(null);
 
 export function AppProviders({ children }: { children: ReactNode }) {
   const [services] = useState(createMockServices);
+  const locale = useLocale();
   useEffect(() => {
     void useOrderStore.persist.rehydrate();
     void usePrivateStore.persist.rehydrate();
     void useMediaStore.persist.rehydrate();
   }, []);
-  return <ServicesContext.Provider value={services}>{children}</ServicesContext.Provider>;
+  return (
+    <I18nProvider locale={locale === 'ro' ? 'ro-RO' : 'en-GB'}>
+      <ServicesContext.Provider value={services}>{children}</ServicesContext.Provider>
+    </I18nProvider>
+  );
 }
 
 export function useServices(): Services {

@@ -167,7 +167,7 @@
     "carry": "Răspunsurile din estimarea rapidă trec automat în cea exactă."
   },
   "stage": {
-    "what": "Ruta",
+    "what": "Ce mutăm",
     "access": "Acces",
     "route": "Traseu",
     "items": "Bagaje",
@@ -211,7 +211,8 @@
       "directoryFound": "Știm blocul acesta: {lift}. L-am completat.",
       "directoryUse": "Folosește",
       "from": "Plecare",
-      "to": "Sosire"
+      "to": "Sosire",
+      "directoryKnown": "Știm blocul acesta: {lift}."
     },
     "route": {
       "title": "Unde mergem?",
@@ -262,7 +263,8 @@
       "customW": "Lățime, cm",
       "customD": "Adâncime, cm",
       "customH": "Înălțime, cm",
-      "addCustom": "Adaugă obiectul"
+      "addCustom": "Adaugă obiectul",
+      "specialKindLabel": "Ce fel de lucru"
     },
     "services": {
       "title": "Ce facem noi?",
@@ -301,7 +303,8 @@
       "none": "Fără evaluare",
       "noneText": "Rămâne un interval. Plătești după timpul real, la tarifele publicate.",
       "noneRisk": "Prețul poate fi mai mare dacă sunt mai multe lucruri.",
-      "disabledByCrates": "Indisponibil cu lăzi reutilizabile"
+      "disabledByCrates": "Indisponibil cu lăzi reutilizabile",
+      "disabledByAtSurvey": "Indisponibil: lucrurile se numără la evaluare"
     },
     "when": {
       "title": "Când?",
@@ -317,7 +320,8 @@
       "tooLate": "nu încape în zi",
       "fullDay": "Rezervă duba și echipa toată ziua",
       "fullDayText": "{hours} ore, cu {pct} % reducere. Peste ele — ora suplimentară.",
-      "weekend": "Sâmbătă și duminică +{pct} % la transport și echipă."
+      "weekend": "Sâmbătă și duminică +{pct} % la transport și echipă.",
+      "pickDate": "Alege întâi data, apoi ora de sosire."
     }
   },
   "fields": {
@@ -516,7 +520,16 @@
     "refineText": "Răspunsurile tale sunt deja completate.",
     "linkInvalid": "Linkul nu mai e valabil. Începe o estimare nouă.",
     "linkLoaded": "Am încărcat estimarea din link, cu tarifele de azi.",
-    "tasksTitle": "Ce verificăm noi"
+    "tasksTitle": "Ce verificăm noi",
+    "conditionalLead": "Suma pentru ce ne-ai spus. Se schimbă doar dacă unul dintre răspunsurile de mai jos e altul:",
+    "conditionPath": "{path}",
+    "optionValue": "{value}",
+    "moveDay": "ziua mutării",
+    "daysBefore": "{n, plural, one {cu o zi înainte} few {cu # zile înainte} other {cu # de zile înainte}}",
+    "daysAfter": "{n, plural, one {a doua zi} few {după # zile} other {după # de zile}}",
+    "shareShort": "Trimite linkul",
+    "shareNote": "Linkul nu conține nume, telefon sau adrese.",
+    "editShort": "Schimbă"
   },
   "priceBar": {
     "noPrice": "Prețul apare după primul pas",
@@ -548,7 +561,8 @@
     "successText": "Numărul cererii: {id}. Te contactăm pentru evaluare.",
     "successTasks": "Ce verificăm înainte de prețul fix:",
     "newEstimate": "Estimare nouă",
-    "summary": "Ce trimiți"
+    "summary": "Ce trimiți",
+    "failed": "Nu am putut trimite cererea. Încearcă din nou peste un minut."
   },
   "media": {
     "add": "Adaugă fotografii sau video",
@@ -760,5 +774,23 @@
     "survey": "Evaluare",
     "surveyCredit": "Evaluare scăzută",
     "minimumOrder": "Comandă minimă"
+  },
+  "flow": {
+    "progress": "Pasul {n} din {total}",
+    "nav": "Pașii estimării",
+    "errorsTitle": "Mai lipsesc câteva răspunsuri",
+    "saved": "Răspunsurile se păstrează pe acest dispozitiv {days} zile.",
+    "toResult": "Vezi estimarea",
+    "priceLabel": "Estimare",
+    "priceMeta": "{crew} oameni · garantat în {window} h",
+    "details": "Detalii",
+    "asideTitle": "Rezervarea ta",
+    "noPriceYet": "Răspunde la primul pas și vezi aici duba, echipa, orele și prețul.",
+    "modeQuick": "Estimare rapidă",
+    "modeDetailed": "Estimare exactă",
+    "toDetailed": "Treci la estimarea exactă",
+    "itemsMovedToDetailed": "Pentru câteva obiecte le alegi din listă, așa că trecem la estimarea exactă.",
+    "chosenCount": "{count, plural, =0 {niciun obiect ales} one {# obiect ales} few {# obiecte alese} other {# de obiecte alese}}",
+    "loading": "Se încarcă răspunsurile…"
   }
 }

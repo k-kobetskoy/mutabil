@@ -8,13 +8,27 @@ import { useLocale, useTranslations } from 'next-intl';
 import type { Estimate } from '@/contract/estimate';
 import type { OrderInput } from '@/contract/order';
 import { getConfig } from '@/config';
-import { addClock, leiRange, longDate, num, type AppLocale } from '@/lib/format';
+import { addClock, lei, leiRange, longDate, num, type AppLocale } from '@/lib/format';
 import { VanSketch } from '@/ui/Sketch';
 import { cx } from '@/ui/cx';
 import { fareOf } from './fares';
 import { useRouteLabels } from './useRoute';
 
-export function BoardingPass({ order, est, sample, className, compact }: { order: OrderInput; est: Estimate; sample?: boolean; className?: string; compact?: boolean }) {
+export function BoardingPass({
+  order,
+  est,
+  sample,
+  className,
+  compact,
+  variant = 'range',
+}: {
+  order: OrderInput;
+  est: Estimate;
+  sample?: boolean;
+  className?: string;
+  compact?: boolean;
+  variant?: 'range' | 'conditional';
+}) {
   const t = useTranslations();
   const locale = useLocale() as AppLocale;
   const r = useRouteLabels(order);
@@ -82,7 +96,7 @@ export function BoardingPass({ order, est, sample, className, compact }: { order
           <div className="mt-auto">
             <div className="label-cap text-[0.65rem] text-on-night-muted">{t('estimate.passTotal')}</div>
             <div className="tabular price-digits font-[family-name:var(--font-display)] text-[1.9rem] leading-tight font-extrabold">
-              {leiRange(est.price.low, est.price.high, locale)}
+              {variant === 'conditional' ? lei(est.price.base, locale) : leiRange(est.price.low, est.price.high, locale)}
             </div>
           </div>
         </div>
