@@ -1,0 +1,41 @@
+{
+  "$comment": "Настройки интерфейса и сервиса (не цены).",
+  "version": "2026-10-06.1",
+  "ui": {
+    "pricingPresentation": "range",
+    "maxConditionalLines": 3
+  },
+  "media": {
+    "maxPhotos": 20,
+    "maxVideos": 3,
+    "maxVideoTotalMb": 500,
+    "photoMaxSidePx": 2048,
+    "photoJpegQuality": 0.8
+  },
+  "slots": [
+    {
+      "id": "morning",
+      "start": "08:00",
+      "peak": false
+    },
+    {
+      "id": "midday",
+      "start": "11:00",
+      "peak": true
+    },
+    {
+      "id": "afternoon",
+      "start": "14:00",
+      "peak": false
+    }
+  ],
+  "dayEndHour": {
+    "value": 21,
+    "unit": "h",
+    "source": "assumption",
+    "verified": false,
+    "note": "Работы должны закончиться до этого часа: слот доступен, если старт + окно ≤ dayEndHour."
+  },
+  "bookingHorizonDays": 60,
+  "draftTtlDays": 14
+}

@@ -1,0 +1,133 @@
+{
+  "$comment": "Классы лифтов (R3 §7, decisions D7). Внутри класса — наименьший вариант (консервативно). small не подтверждён таблицей ISO — открытый вопрос.",
+  "version": "2026-10-06.1",
+  "unknownFallback": "small",
+  "fitMarginsCm": {
+    "value": {
+      "door": 5,
+      "height": 5,
+      "floor": 3
+    },
+    "unit": "cm",
+    "source": "docs/research/03-time-elevators.md",
+    "verified": false
+  },
+  "longThinMaxThicknessCm": {
+    "value": 5,
+    "unit": "cm",
+    "source": "docs/research/03-time-elevators.md",
+    "verified": false,
+    "note": "Панели, столешницы: можно ставить наклонно."
+  },
+  "longThinMaxWidthCm": {
+    "value": 60,
+    "unit": "cm",
+    "source": "docs/research/03-time-elevators.md",
+    "verified": false
+  },
+  "flexibleExtraLength": {
+    "value": 0.1,
+    "unit": "fraction",
+    "source": "docs/research/03-time-elevators.md",
+    "verified": false,
+    "note": "Пенный матрас гнётся."
+  },
+  "presetNoFitShare": {
+    "value": {
+      "small": 0.2,
+      "medium": 0.12,
+      "large": 0.03
+    },
+    "unit": "fraction of volume",
+    "source": "docs/research/03-time-elevators.md §10",
+    "verified": false,
+    "note": "Если список предметов неизвестен (пресет): доля объёма, которая не войдёт в лифт и пойдёт по лестнице. Пример R3: 3 из 20 м³ для малого."
+  },
+  "classes": [
+    {
+      "id": "small",
+      "ratedLoadKg": 320,
+      "persons": 4,
+      "cabinCm": {
+        "w": 90,
+        "d": 100,
+        "h": 200
+      },
+      "doorCm": {
+        "w": 70,
+        "h": 200
+      },
+      "timeFactor": 1.2,
+      "m3PerTrip": 0.6,
+      "cabinLoadSec": 90,
+      "maxLongThinItemCm": 220,
+      "source": "https://construnews.com/archivos/87239/ascensor_ecolift.pdf ; https://storage.mtender.gov.md/get/b3d5c2be-4ad9-4e69-b723-fe7ebaa128af-1563990892595",
+      "verified": false,
+      "note": "Старые блоки P+8/P+10, 300–400 кг, дверь ~70 см. Не подтверждено ISO 4190-1."
+    },
+    {
+      "id": "medium",
+      "ratedLoadKg": 450,
+      "persons": 6,
+      "cabinCm": {
+        "w": 100,
+        "d": 125,
+        "h": 210
+      },
+      "doorCm": {
+        "w": 80,
+        "h": 200
+      },
+      "timeFactor": 1.1,
+      "m3PerTrip": 1.1,
+      "cabinLoadSec": 120,
+      "maxLongThinItemCm": 245,
+      "source": "https://www.tkelevator.com/media/austria/brochures_tke/tke-en8170-fact-sheet-atch-de-v082021.pdf",
+      "verified": false,
+      "note": "EN 81-70 Type 1 (450 кг). Класс покрывает 450–800 кг."
+    },
+    {
+      "id": "large",
+      "ratedLoadKg": 1000,
+      "persons": 13,
+      "cabinCm": {
+        "w": 110,
+        "d": 210,
+        "h": 210
+      },
+      "doorCm": {
+        "w": 90,
+        "h": 200
+      },
+      "timeFactor": 1.05,
+      "m3PerTrip": 2.2,
+      "cabinLoadSec": 180,
+      "maxLongThinItemCm": 290,
+      "source": "https://kone.co.uk/tools-downloads/codes-and-standards/en81-70-compliant-solutions",
+      "verified": false,
+      "note": "EN 81-70 Type 3 (1000 кг, носилки) и больше, грузовые."
+    }
+  ],
+  "throughput": {
+    "floorHeightM": {
+      "value": 2.75,
+      "unit": "m",
+      "source": "assumption",
+      "verified": false
+    },
+    "liftSpeedMs": {
+      "value": 0.7,
+      "unit": "m/s",
+      "source": "assumption",
+      "verified": false,
+      "note": "Старые лифты."
+    },
+    "doorCycleSec": {
+      "value": 15,
+      "unit": "s",
+      "source": "assumption",
+      "verified": false,
+      "note": "Ручные двери, на остановку."
+    }
+  }
+}

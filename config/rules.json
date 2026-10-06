@@ -1,0 +1,470 @@
+{
+  "$comment": "Бизнес-правила (decisions D18). when — подмножество JSONLogic; then — эффекты из закрытого словаря: assume, addTask, restrictOptions, setDefault, hint, explain, hideStep. each: правило применяется к from и to, $end подставляется. Порядок важен: правила видят уже применённые допущения.",
+  "version": "2026-10-06.1",
+  "rules": [
+    {
+      "id": "floor-unanswered",
+      "each": [
+        "from",
+        "to"
+      ],
+      "when": {
+        "==": [
+          {
+            "var": "$end.floor"
+          },
+          null
+        ]
+      },
+      "then": [
+        {
+          "type": "assume",
+          "path": "$end.floor",
+          "value": 3,
+          "options": [
+            0,
+            2,
+            4,
+            8
+          ],
+          "explain": "assume.floor"
+        }
+      ]
+    },
+    {
+      "id": "elevator-unknown",
+      "each": [
+        "from",
+        "to"
+      ],
+      "when": {
+        "and": [
+          {
+            ">": [
+              {
+                "var": "$end.floor"
+              },
+              0
+            ]
+          },
+          {
+            "or": [
+              {
+                "==": [
+                  {
+                    "var": "$end.elevator"
+                  },
+                  "unknown"
+                ]
+              },
+              {
+                "!": {
+                  "var": "$end.elevator"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "then": [
+        {
+          "type": "assume",
+          "path": "$end.elevator",
+          "value": "small",
+          "options": [
+            "none",
+            "small",
+            "medium",
+            "large"
+          ],
+          "sigma": "liftUnknown",
+          "explain": "assume.elevatorSmall"
+        },
+        {
+          "type": "addTask",
+          "code": "CLARIFY_ELEVATOR",
+          "params": {
+            "end": "$end"
+          }
+        }
+      ]
+    },
+    {
+      "id": "stairs-unknown",
+      "each": [
+        "from",
+        "to"
+      ],
+      "when": {
+        "and": [
+          {
+            ">": [
+              {
+                "var": "$end.floor"
+              },
+              0
+            ]
+          },
+          {
+            "or": [
+              {
+                "==": [
+                  {
+                    "var": "$end.stairs"
+                  },
+                  "unknown"
+                ]
+              },
+              {
+                "!": {
+                  "var": "$end.stairs"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "then": [
+        {
+          "type": "assume",
+          "path": "$end.stairs",
+          "value": "normal",
+          "options": [
+            "normal",
+            "narrow",
+            "winding"
+          ],
+          "sigma": "stairsUnknown",
+          "explain": "assume.stairsNormal"
+        }
+      ]
+    },
+    {
+      "id": "carry-unknown",
+      "each": [
+        "from",
+        "to"
+      ],
+      "when": {
+        "or": [
+          {
+            "==": [
+              {
+                "var": "$end.carry"
+              },
+              "unknown"
+            ]
+          },
+          {
+            "!": {
+              "var": "$end.carry"
+            }
+          }
+        ]
+      },
+      "then": [
+        {
+          "type": "assume",
+          "path": "$end.carry",
+          "value": "10to30",
+          "options": [
+            "lt10",
+            "10to30",
+            "gt30"
+          ],
+          "sigma": "carryUnknown",
+          "explain": "assume.carry"
+        }
+      ]
+    },
+    {
+      "id": "parking-unknown",
+      "each": [
+        "from",
+        "to"
+      ],
+      "when": {
+        "or": [
+          {
+            "==": [
+              {
+                "var": "$end.parking"
+              },
+              "unknown"
+            ]
+          },
+          {
+            "!": {
+              "var": "$end.parking"
+            }
+          }
+        ]
+      },
+      "then": [
+        {
+          "type": "assume",
+          "path": "$end.parking",
+          "value": "nearby",
+          "options": [
+            "atEntrance",
+            "nearby",
+            "far"
+          ],
+          "sigma": "parkingUnknown",
+          "explain": "assume.parking"
+        }
+      ]
+    },
+    {
+      "id": "furniture-in-lift-unknown",
+      "each": [
+        "from",
+        "to"
+      ],
+      "when": {
+        "and": [
+          {
+            ">": [
+              {
+                "var": "$end.floor"
+              },
+              0
+            ]
+          },
+          {
+            "!=": [
+              {
+                "var": "$end.elevator"
+              },
+              "none"
+            ]
+          },
+          {
+            "or": [
+              {
+                "==": [
+                  {
+                    "var": "$end.furnitureInLift"
+                  },
+                  "unknown"
+                ]
+              },
+              {
+                "!": {
+                  "var": "$end.furnitureInLift"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "then": [
+        {
+          "type": "assume",
+          "path": "$end.furnitureInLift",
+          "value": "yes",
+          "options": [
+            "yes",
+            "no"
+          ],
+          "sigma": "furnitureInLiftUnknown",
+          "explain": "assume.furnitureInLift"
+        }
+      ]
+    },
+    {
+      "id": "zone-uncertain-access",
+      "each": [
+        "from",
+        "to"
+      ],
+      "when": {
+        "==": [
+          {
+            "var": "$end.zoneId"
+          },
+          "centru-unknown"
+        ]
+      },
+      "then": [
+        {
+          "type": "addTask",
+          "code": "CONFIRM_ZONE",
+          "params": {
+            "end": "$end"
+          }
+        },
+        {
+          "type": "hint",
+          "key": "rules.zoneUncertain"
+        }
+      ]
+    },
+    {
+      "id": "crates-onsite-survey",
+      "when": {
+        "==": [
+          {
+            "var": "packing.containers"
+          },
+          "crates"
+        ]
+      },
+      "then": [
+        {
+          "type": "restrictOptions",
+          "path": "survey.method",
+          "allow": [
+            "onsite"
+          ]
+        },
+        {
+          "type": "hint",
+          "key": "rules.cratesOnsiteOnly"
+        }
+      ]
+    },
+    {
+      "id": "at-survey-needs-survey",
+      "when": {
+        "==": [
+          {
+            "var": "inventory.mode"
+          },
+          "atSurvey"
+        ]
+      },
+      "then": [
+        {
+          "type": "restrictOptions",
+          "path": "survey.method",
+          "allow": [
+            "onsite",
+            "remote"
+          ]
+        },
+        {
+          "type": "addTask",
+          "code": "SURVEY_INVENTORY"
+        },
+        {
+          "type": "hint",
+          "key": "rules.atSurveyNeedsSurvey"
+        }
+      ]
+    },
+    {
+      "id": "office-survey",
+      "when": {
+        "==": [
+          {
+            "var": "taskType"
+          },
+          "office"
+        ]
+      },
+      "then": [
+        {
+          "type": "hint",
+          "key": "rules.officeSurveyRecommended"
+        }
+      ]
+    },
+    {
+      "id": "house-survey",
+      "when": {
+        "==": [
+          {
+            "var": "taskType"
+          },
+          "house"
+        ]
+      },
+      "then": [
+        {
+          "type": "hint",
+          "key": "rules.houseSurveyRecommended"
+        }
+      ]
+    },
+    {
+      "id": "piano-survey",
+      "when": {
+        ">": [
+          {
+            "var": "inventory.items.piano-upright"
+          },
+          0
+        ]
+      },
+      "then": [
+        {
+          "type": "hint",
+          "key": "rules.pianoSurveyRecommended"
+        },
+        {
+          "type": "addTask",
+          "code": "SURVEY_PIANO"
+        }
+      ]
+    },
+    {
+      "id": "no-survey-range",
+      "when": {
+        "==": [
+          {
+            "var": "survey.method"
+          },
+          "none"
+        ]
+      },
+      "then": [
+        {
+          "type": "hint",
+          "key": "rules.noSurveyRangeOnly"
+        }
+      ]
+    },
+    {
+      "id": "intercity",
+      "when": {
+        "or": [
+          {
+            "==": [
+              {
+                "var": "route"
+              },
+              "intercity"
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "to.zoneId"
+              },
+              "other-city"
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "from.zoneId"
+              },
+              "other-city"
+            ]
+          }
+        ]
+      },
+      "then": [
+        {
+          "type": "addTask",
+          "code": "CONFIRM_INTERCITY"
+        },
+        {
+          "type": "hint",
+          "key": "rules.intercity"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+.next
+node_modules
+pnpm-lock.yaml
+contract/openapi.yaml
+api/internal/gen
+.claude
+docs

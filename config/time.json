@@ -1,0 +1,258 @@
+{
+  "$comment": "Коэффициенты формулы времени (R3 §9, docs/decisions.md D6–D8). Этаж по-румынски: parter = 0.",
+  "version": "2026-10-06.1",
+  "productivity": {
+    "loadRatePerMover": {
+      "value": 3.5,
+      "unit": "m3/man-hour",
+      "source": "https://www.consumeraffairs.com/movers/how-long-does-it-take-movers-to-load-a-truck.html",
+      "verified": false,
+      "note": "Погрузка, базовые условия. ≈1,97 м³/чел·ч на полный цикл вместе с выгрузкой."
+    },
+    "unloadRatePerMover": {
+      "value": 4.5,
+      "unit": "m3/man-hour",
+      "source": "https://blog.hireahelper.com/tag/3-bedroom-house/",
+      "verified": false,
+      "note": "Выгрузка быстрее погрузки в ~1,3–1,5 раза."
+    },
+    "crewEfficiency": {
+      "value": {
+        "2": 1,
+        "3": 0.93,
+        "4": 0.875
+      },
+      "unit": "factor",
+      "source": "https://www.getbellhops.com/blog/?p=106133",
+      "verified": false,
+      "note": "Эффективные грузчики = n × eff(n). Bellhops: 14/15/16 чел·ч для 2/3/4."
+    }
+  },
+  "access": {
+    "floorPenaltyNoLift": {
+      "value": 0.1,
+      "unit": "fraction per floor",
+      "source": "docs/research/03-time-elevators.md",
+      "verified": false,
+      "note": "+10% к переноске за этаж без лифта."
+    },
+    "progressiveFromFloor": {
+      "value": 4,
+      "unit": "floor",
+      "source": "assumption",
+      "verified": false,
+      "note": "Выше этого этажа штраф × progressiveMultiplier."
+    },
+    "progressiveMultiplier": {
+      "value": 1.5,
+      "unit": "factor",
+      "source": "assumption",
+      "verified": false
+    },
+    "stairTypeFactor": {
+      "value": {
+        "normal": 1,
+        "narrow": 1.2,
+        "winding": 1.35
+      },
+      "unit": "factor",
+      "source": "assumption",
+      "verified": false,
+      "note": "Множитель к этажному штрафу."
+    },
+    "raisedEntranceFloors": {
+      "value": 0.5,
+      "unit": "floor-equivalent",
+      "source": "assumption",
+      "verified": false,
+      "note": "Ступени у входа / parter înalt / лифт на полуэтажах."
+    },
+    "liftPerFloorPenalty": {
+      "value": 0.01,
+      "unit": "fraction per floor",
+      "source": "assumption",
+      "verified": false
+    },
+    "freeCarryM": {
+      "value": 10,
+      "unit": "m",
+      "source": "assumption",
+      "verified": false,
+      "note": "Первые метры переноски входят в базовую скорость."
+    },
+    "carryPenaltyPer10m": {
+      "value": 0.06,
+      "unit": "fraction per 10 m",
+      "source": "docs/research/03-time-elevators.md",
+      "verified": false
+    },
+    "carryDistanceM": {
+      "value": {
+        "lt10": 5,
+        "10to30": 20,
+        "gt30": 45
+      },
+      "unit": "m",
+      "source": "assumption",
+      "verified": false,
+      "note": "Ответ клиента о расстоянии от машины до подъезда → метры."
+    },
+    "bulkyStairsExtraManMinPerFloor": {
+      "value": 3,
+      "unit": "man-min per item per floor",
+      "source": "assumption",
+      "verified": false,
+      "note": "Крупный предмет, не вошедший в лифт, несут по лестнице."
+    }
+  },
+  "parking": {
+    "fixedMinutes": {
+      "value": {
+        "atEntrance": 0,
+        "nearby": 0,
+        "far": 15
+      },
+      "unit": "min per end",
+      "source": "https://www.consumeraffairs.com/movers/how-long-does-it-take-movers-to-load-a-truck.html",
+      "verified": false
+    },
+    "extraCarryM": {
+      "value": {
+        "atEntrance": 0,
+        "nearby": 15,
+        "far": 40
+      },
+      "unit": "m",
+      "source": "assumption",
+      "verified": false,
+      "note": "Добавка к переноске из-за места стоянки."
+    }
+  },
+  "drive": {
+    "avgUrbanSpeedKmh": {
+      "value": 20,
+      "unit": "km/h",
+      "source": "assumption",
+      "verified": false,
+      "note": "Фургон 3,5 т по Клужу. TomTom 2025: пик 11:00–14:00."
+    },
+    "intercitySpeedKmh": {
+      "value": 60,
+      "unit": "km/h",
+      "source": "assumption",
+      "verified": false
+    },
+    "detourFactor": {
+      "value": 1.35,
+      "unit": "factor",
+      "source": "assumption",
+      "verified": false,
+      "note": "Дорожное расстояние = по прямой × коэффициент."
+    },
+    "peakFactor": {
+      "value": 1.3,
+      "unit": "factor",
+      "source": "https://playtech.ro/2025/indexul-de-trafic-2025-cum-arata-mobilitatea-oraselor-din-romania-orele-de-varf-pe-sosele/",
+      "verified": false,
+      "note": "Слот, попадающий в 11:00–14:00."
+    },
+    "minDriveMin": {
+      "value": 15,
+      "unit": "min",
+      "source": "assumption",
+      "verified": false
+    },
+    "tripSecuringMin": {
+      "value": 15,
+      "unit": "min",
+      "source": "docs/research/02-volume.md",
+      "verified": false,
+      "note": "Крепление груза на каждый доп. рейс."
+    }
+  },
+  "fixed": {
+    "setupMin": {
+      "value": 15,
+      "unit": "min",
+      "source": "assumption",
+      "verified": false,
+      "note": "Защита пола, дверей."
+    },
+    "teardownMin": {
+      "value": 15,
+      "unit": "min",
+      "source": "assumption",
+      "verified": false
+    },
+    "liftProtectionMinPerLiftEnd": {
+      "value": 10,
+      "unit": "min",
+      "source": "assumption",
+      "verified": false
+    }
+  },
+  "buffer": {
+    "sigmaLn": {
+      "value": 0.25,
+      "unit": "ln-sd",
+      "source": "docs/research/03-time-elevators.md",
+      "verified": false,
+      "note": "Разброс ln(факт/оценка). Откалибровать на 30 заказах."
+    },
+    "quantileZ": {
+      "value": 1.0364,
+      "unit": "z",
+      "source": "docs/research/03-time-elevators.md",
+      "verified": false,
+      "note": "P85."
+    },
+    "sigmaAdders": {
+      "value": {
+        "liftUnknown": 0.1,
+        "inventoryByPreset": 0.15,
+        "stairsUnknown": 0.05,
+        "parkingUnknown": 0.05,
+        "carryUnknown": 0.03,
+        "furnitureInLiftUnknown": 0.03
+      },
+      "unit": "ln-sd",
+      "source": "docs/research/03-time-elevators.md",
+      "verified": false,
+      "note": "Неизвестность расширяет окно."
+    },
+    "minBufferH": {
+      "value": 0.5,
+      "unit": "h",
+      "source": "docs/research/03-time-elevators.md",
+      "verified": false
+    },
+    "estimateRoundingH": {
+      "value": 0.5,
+      "unit": "h",
+      "source": "docs/research/03-time-elevators.md",
+      "verified": false
+    },
+    "windowRoundingH": {
+      "value": 1,
+      "unit": "h",
+      "source": "docs/research/03-time-elevators.md",
+      "verified": false
+    },
+    "workdayMaxH": {
+      "value": 10,
+      "unit": "h",
+      "source": "assumption",
+      "verified": false,
+      "note": "Больше — предлагаем весь день / больше людей / осмотр."
+    }
+  },
+  "assembly": {
+    "maxParallelMasters": {
+      "value": 1,
+      "unit": "persons",
+      "source": "assumption",
+      "verified": false,
+      "note": "Мастер один; его время ограничивает конец работ."
+    }
+  }
+}

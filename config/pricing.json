@@ -1,0 +1,403 @@
+{
+  "$comment": "Ставки и коэффициенты цены. Каждое число: {value, unit, source, verified, note}. verified:false = заглушка, проверить до запуска. Все цены в лей С НДС. Исследование: docs/research/04-pricing.md, решения: docs/decisions.md D9–D15.",
+  "version": "2026-10-06.1",
+  "currency": "RON",
+  "vat": {
+    "rate": {
+      "value": 0.21,
+      "unit": "fraction",
+      "source": "https://www.pwc.ro/en/tax-legal/alerts/law-no--141-2025-on-some-fiscal-budgetary-measures.html",
+      "verified": false,
+      "note": "Legea 141/2025: 21% с 01.08.2025."
+    },
+    "pricesIncludeVat": true
+  },
+  "rounding": {
+    "lineLei": {
+      "value": 1,
+      "unit": "lei",
+      "source": "internal",
+      "verified": false,
+      "note": "Каждая строка сметы округляется до 1 лея."
+    },
+    "totalLei": {
+      "value": 10,
+      "unit": "lei",
+      "source": "internal",
+      "verified": false,
+      "note": "Итог округляется вверх до 10 лей."
+    },
+    "rangeLei": {
+      "value": 50,
+      "unit": "lei",
+      "source": "internal",
+      "verified": false,
+      "note": "Границы вилки: низ вниз, верх вверх до 50 лей."
+    }
+  },
+  "crew": {
+    "moverHourlyLei": {
+      "value": 70,
+      "unit": "lei/h",
+      "source": "https://homerun.ro/costuri-preturi/cluj-transport-marfa_475_494",
+      "verified": false,
+      "note": "Cluj: '2 oameni — 140 lei/oră'. Плейсхолдер ТЗ был 50."
+    },
+    "minMovers": {
+      "value": 2,
+      "unit": "persons",
+      "source": "internal",
+      "verified": false
+    },
+    "maxMovers": {
+      "value": 4,
+      "unit": "persons",
+      "source": "internal",
+      "verified": false,
+      "note": "Больше 4 — только после осмотра."
+    }
+  },
+  "billing": {
+    "minimumBillableH": {
+      "value": 2,
+      "unit": "h",
+      "source": "https://homerun.ro/costuri-preturi/cluj-transport-marfa_475_494",
+      "verified": false,
+      "note": "Рынок Cluj: '200 lei până la 2 ore'."
+    },
+    "stepH": {
+      "value": 0.5,
+      "unit": "h",
+      "source": "docs/research/04-pricing.md",
+      "verified": false,
+      "note": "Шаг тарификации после минимума."
+    }
+  },
+  "minimumOrderLei": {
+    "value": 500,
+    "unit": "lei",
+    "source": "docs/research/04-pricing.md",
+    "verified": false,
+    "note": "Минимальный заказ переезда."
+  },
+  "dispatch": {
+    "feeByZoneClassLei": {
+      "value": {
+        "city": 80,
+        "suburb": 120,
+        "intercity": 120
+      },
+      "unit": "lei",
+      "source": "docs/research/04-pricing.md",
+      "verified": false,
+      "note": "Подача машины фиксом по зоне выезда, а не «час дороги»."
+    },
+    "perKmIntercityLei": {
+      "value": 3.5,
+      "unit": "lei/km",
+      "source": "https://brig.ro/mutari/cluj-napoca",
+      "verified": false,
+      "note": "Рынок 1,5–5 lei/km. Только для «другой город», в одну сторону."
+    }
+  },
+  "surcharges": {
+    "weekend": {
+      "value": 0.15,
+      "unit": "fraction of transport+crew",
+      "source": "https://www.seoads.org/de-ce-ajung-unii-sa-plateasca-dublu-pentru-mutari-de-weekend-si-ce-trebuie-sa-verifici-mereu-inainte-8898/",
+      "verified": false,
+      "note": "Сб и Вс. Рынок +15–20%. Отдельная строка."
+    }
+  },
+  "fullDay": {
+    "hours": {
+      "value": 8,
+      "unit": "h",
+      "source": "docs/research/04-pricing.md",
+      "verified": false,
+      "note": "Бронь машины и бригады на весь день."
+    },
+    "discount": {
+      "value": 0.1,
+      "unit": "fraction",
+      "source": "docs/research/04-pricing.md",
+      "verified": false,
+      "note": "Скидка за полный день."
+    }
+  },
+  "overtime": {
+    "multiplier": {
+      "value": 1,
+      "unit": "factor",
+      "source": "docs/research/04-pricing.md",
+      "verified": false,
+      "note": "Сверхчас = та же ставка (машина + бригада), без штрафного коэффициента."
+    }
+  },
+  "packing": {
+    "perBoxLei": {
+      "value": 15,
+      "unit": "lei/box",
+      "source": "https://mutantii.ro/servicii/",
+      "verified": false,
+      "note": "Работа упаковки силами бригады за коробку. Mutanții: 30 lei+TVA за упакованный короб; у нас — без материалов."
+    },
+    "partialShare": {
+      "value": 0.3,
+      "unit": "fraction of boxes",
+      "source": "docs/research/04-pricing.md",
+      "verified": false,
+      "note": "Частичная упаковка: кухня и хрупкое ≈ 30% коробок. Клиент может поправить."
+    }
+  },
+  "materials": {
+    "cardboardBoxLei": {
+      "value": 15,
+      "unit": "lei/pcs",
+      "source": "https://mutare-bucuresti.ro/en/product-category/cutii-carton/",
+      "verified": false,
+      "note": "Коробка ~60 л с доставкой."
+    },
+    "wardrobeBoxRentalLei": {
+      "value": 35,
+      "unit": "lei/pcs",
+      "source": "assumption",
+      "verified": false,
+      "note": "Аренда коробки для одежды на вешалках. Продажа ~305 lei (mutare-bucuresti.ro)."
+    },
+    "mattressBagDoubleLei": {
+      "value": 45,
+      "unit": "lei/pcs",
+      "source": "assumption",
+      "verified": false,
+      "note": "Цены в RO не найдены (лимит поиска)."
+    },
+    "mattressBagSingleLei": {
+      "value": 35,
+      "unit": "lei/pcs",
+      "source": "assumption",
+      "verified": false
+    },
+    "tvProtectionLei": {
+      "value": 60,
+      "unit": "lei/pcs",
+      "source": "assumption",
+      "verified": false
+    },
+    "mirrorProtectionLei": {
+      "value": 40,
+      "unit": "lei/pcs",
+      "source": "assumption",
+      "verified": false,
+      "note": "Зеркало или картина."
+    }
+  },
+  "crates": {
+    "includedDays": {
+      "value": 7,
+      "unit": "days",
+      "source": "ТЗ",
+      "verified": false,
+      "note": "Бизнес-правило: 7 дней аренды включены."
+    },
+    "perCrateIncludedLei": {
+      "value": 12,
+      "unit": "lei/pcs",
+      "source": "docs/research/04-pricing.md",
+      "verified": false,
+      "note": "Дешевле картона (15), чтобы ящики были выгоднее."
+    },
+    "extraPerCratePerDayLei": {
+      "value": 1,
+      "unit": "lei/pcs/day",
+      "source": "https://www.kleinanzeigen.de/pro/knusperkiste",
+      "verified": false,
+      "note": "DE: ~€1/нед. после первой; у нас чуть дороже из-за малого парка."
+    },
+    "minCrates": {
+      "value": 20,
+      "unit": "pcs",
+      "source": "docs/research/04-pricing.md",
+      "verified": false
+    },
+    "lostOrDamagedLei": {
+      "value": 90,
+      "unit": "lei/pcs",
+      "source": "https://www.hornbach.ro/p/cutie-plastic-cu-capac-jelenia-plast-600x400x440-mm-transparenta-capac-colorat-cu-roti/6386992/",
+      "verified": false,
+      "note": "Розница аналога ~71 lei + логистика."
+    },
+    "deliveryDaysBeforeMove": {
+      "value": 3,
+      "unit": "days",
+      "source": "assumption",
+      "verified": false,
+      "note": "Ящики привозим за N дней до переезда (вместе с осмотром)."
+    }
+  },
+  "assembly": {
+    "masterOnMovingDayLei": {
+      "value": 100,
+      "unit": "lei",
+      "source": "docs/research/04-pricing.md",
+      "verified": false,
+      "note": "Выезд мастера для разборки в день переезда (вещь нужна до последнего)."
+    },
+    "perClassLei": {
+      "value": {
+        "bed": 100,
+        "bedComplex": 150,
+        "wardrobeSmall": 120,
+        "wardrobeLarge": 220,
+        "table": 40,
+        "desk": 60,
+        "sofaModular": 40,
+        "shelf": 50,
+        "tvMount": 120,
+        "appliance": 40,
+        "generic": 50
+      },
+      "unit": "lei/item",
+      "source": "https://homerun.ro/costuri-preturi/cluj-montaj-mobila_34056_494",
+      "verified": false,
+      "note": "Разборка + сборка за предмет. Рынок Cluj: кровать 100–150, шкаф 80–350 lei."
+    }
+  },
+  "special": {
+    "reinforcedPackingLei": {
+      "value": {
+        "fragile": 100,
+        "valuable": 150,
+        "pristine": 150,
+        "piano": 400
+      },
+      "unit": "lei/item",
+      "source": "docs/research/04-pricing.md",
+      "verified": false,
+      "note": "Усиленная упаковка и маркировка особой вещи."
+    }
+  },
+  "protection": {
+    "fullRate": {
+      "value": 0.012,
+      "unit": "fraction of declared value",
+      "source": "https://csipros.org/full-value-protection-the-thing-carriers-love-right-up-until-they-have-to-use-it/",
+      "verified": false,
+      "note": "US full value 1–3%. Без франшизы."
+    },
+    "fullRateWithDeductible": {
+      "value": 0.008,
+      "unit": "fraction of declared value",
+      "source": "docs/research/04-pricing.md",
+      "verified": false,
+      "note": "С франшизой deductibleLei."
+    },
+    "deductibleLei": {
+      "value": 500,
+      "unit": "lei",
+      "source": "docs/research/04-pricing.md",
+      "verified": false
+    },
+    "minFeeLei": {
+      "value": 150,
+      "unit": "lei",
+      "source": "docs/research/04-pricing.md",
+      "verified": false
+    },
+    "minDeclaredLei": {
+      "value": 10000,
+      "unit": "lei",
+      "source": "docs/research/04-pricing.md",
+      "verified": false
+    },
+    "minDeclaredPerM3Lei": {
+      "value": 1000,
+      "unit": "lei/m3",
+      "source": "docs/research/04-pricing.md",
+      "verified": false,
+      "note": "Заявленная стоимость не ниже объём × ставка."
+    },
+    "highValueItemLei": {
+      "value": 5000,
+      "unit": "lei",
+      "source": "docs/research/04-pricing.md",
+      "verified": false,
+      "note": "Вещи дороже — обязательно в опись."
+    }
+  },
+  "survey": {
+    "onsite": {
+      "priceLei": {
+        "value": 150,
+        "unit": "lei",
+        "source": "https://mutantii.ro/servicii/",
+        "verified": false,
+        "note": "У конкурентов часто бесплатно; засчитывается в заказ."
+      },
+      "deductibleFromOrder": true,
+      "deductibleValidDays": {
+        "value": 30,
+        "unit": "days",
+        "source": "internal",
+        "verified": false
+      },
+      "capTolerance": {
+        "value": 0.05,
+        "unit": "fraction",
+        "source": "docs/research/04-pricing.md",
+        "verified": false,
+        "note": "Итог ≤ смета × 1,05 при неизменном составе."
+      }
+    },
+    "remote": {
+      "priceLei": {
+        "value": 0,
+        "unit": "lei",
+        "source": "internal",
+        "verified": false
+      },
+      "deductibleFromOrder": false,
+      "capTolerance": {
+        "value": 0.1,
+        "unit": "fraction",
+        "source": "https://jjkellercompliancenetwork.com/regsense/375407-under-what-circumstances-must-i-relinquish-possession-of-a-collect-on-delivery-shipment-transported-under-a-non-binding-estimate",
+        "verified": false,
+        "note": "Аналог правила 110% (49 CFR 375.407)."
+      }
+    },
+    "none": {
+      "priceLei": {
+        "value": 0,
+        "unit": "lei",
+        "source": "internal",
+        "verified": false
+      },
+      "deductibleFromOrder": false,
+      "capTolerance": null
+    }
+  },
+  "range": {
+    "volumeLow": {
+      "value": {
+        "none": 0.15,
+        "remote": 0.07,
+        "onsite": 0.07
+      },
+      "unit": "fraction",
+      "source": "docs/research/04-pricing.md",
+      "verified": false,
+      "note": "Нижняя граница объёма при списке предметов, по способу осмотра."
+    },
+    "volumeHigh": {
+      "value": {
+        "none": 0.35,
+        "remote": 0.15,
+        "onsite": 0.15
+      },
+      "unit": "fraction",
+      "source": "docs/research/04-pricing.md",
+      "verified": false,
+      "note": "Верхняя граница объёма при списке предметов."
+    }
+  }
+}

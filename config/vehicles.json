@@ -1,0 +1,120 @@
+{
+  "$comment": "Классы машин (аренда, decisions D5). hourlyLei — цена клиенту за час машины с водителем (аренда, топливо, водитель внутри). usable = реально загружаемый объём.",
+  "version": "2026-10-06.1",
+  "selection": {
+    "volumeMargin": {
+      "value": 0.1,
+      "unit": "fraction",
+      "source": "docs/research/02-volume.md",
+      "verified": false,
+      "note": "Запас на неточность оценки."
+    },
+    "payloadMargin": {
+      "value": 0.05,
+      "unit": "fraction",
+      "source": "docs/research/02-volume.md",
+      "verified": false
+    },
+    "secondTripMaxDriveMin": {
+      "value": 30,
+      "unit": "min",
+      "source": "docs/research/02-volume.md",
+      "verified": false,
+      "note": "Доп. рейс только для коротких поездок."
+    },
+    "maxTrips": {
+      "value": 3,
+      "unit": "trips",
+      "source": "assumption",
+      "verified": false
+    }
+  },
+  "vehicles": [
+    {
+      "id": "van-6",
+      "enabled": true,
+      "grossWeightT": 3,
+      "licence": "B",
+      "usableM3": 5.4,
+      "payloadKg": 1000,
+      "cargoCm": {
+        "l": 280,
+        "w": 166,
+        "h": 140
+      },
+      "hourlyLei": 90,
+      "example": "Ford Transit Custom / Renault Trafic",
+      "source": "docs/research/02-items.catalog.json (van-6); https://www.mutaribucuresti.ro/pret-transport-mutare.html",
+      "verified": false
+    },
+    {
+      "id": "van-12",
+      "enabled": true,
+      "grossWeightT": 3.5,
+      "licence": "B",
+      "usableM3": 12.6,
+      "payloadKg": 1087,
+      "cargoCm": {
+        "l": 431,
+        "w": 179,
+        "h": 194
+      },
+      "hourlyLei": 110,
+      "example": "Mercedes Sprinter L3H2",
+      "source": "https://www.autoklass.ro/articole/modelul-sprinter-furgon.html",
+      "verified": false
+    },
+    {
+      "id": "van-16",
+      "enabled": true,
+      "grossWeightT": 3.5,
+      "licence": "B",
+      "usableM3": 14.4,
+      "payloadKg": 1220,
+      "cargoCm": {
+        "l": 420,
+        "w": 180,
+        "h": 210
+      },
+      "hourlyLei": 130,
+      "example": "Iveco Daily 35S16",
+      "source": "https://www.basworld.com/content/iveco-daily-van-dimensions-cargo-space-chassis",
+      "verified": false
+    },
+    {
+      "id": "box-20",
+      "enabled": true,
+      "grossWeightT": 3.5,
+      "licence": "B",
+      "usableM3": 18.5,
+      "payloadKg": 1000,
+      "cargoCm": {
+        "l": 400,
+        "w": 220,
+        "h": 220
+      },
+      "hourlyLei": 150,
+      "example": "Box 3,5 t (Luton) с гидробортом",
+      "source": "https://vanreviewer.co.uk/advice/everything-you-need-to-know-about-a-luton-van/",
+      "verified": false
+    },
+    {
+      "id": "truck-30",
+      "enabled": true,
+      "grossWeightT": 7.5,
+      "licence": "C1",
+      "usableM3": 28.5,
+      "payloadKg": 2500,
+      "cargoCm": {
+        "l": 600,
+        "w": 240,
+        "h": 220
+      },
+      "hourlyLei": 220,
+      "example": "Box 7,5 t",
+      "source": "assumption",
+      "verified": false,
+      "note": "Ставка — предположение."
+    }
+  ]
+}

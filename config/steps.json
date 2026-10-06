@@ -1,0 +1,122 @@
+{
+  "$comment": "Шаги мастера (decisions D2). required — поля, без ответа на которые нельзя идти дальше (по режиму). visibleIf — JSONLogic.",
+  "version": "2026-10-06.1",
+  "steps": [
+    {
+      "id": "what",
+      "slug": {
+        "ro": "ce-mutam",
+        "en": "what"
+      },
+      "modes": [
+        "quick",
+        "detailed"
+      ],
+      "required": {
+        "quick": [
+          "taskType"
+        ],
+        "detailed": [
+          "taskType"
+        ]
+      }
+    },
+    {
+      "id": "access",
+      "slug": {
+        "ro": "acces",
+        "en": "access"
+      },
+      "modes": [
+        "quick",
+        "detailed"
+      ],
+      "required": {
+        "quick": [
+          "from.floor",
+          "to.floor"
+        ],
+        "detailed": [
+          "from.zoneId",
+          "to.zoneId",
+          "from.floor",
+          "to.floor"
+        ]
+      }
+    },
+    {
+      "id": "route",
+      "slug": {
+        "ro": "traseu",
+        "en": "route"
+      },
+      "modes": [
+        "quick"
+      ],
+      "required": {
+        "quick": [
+          "route"
+        ]
+      }
+    },
+    {
+      "id": "items",
+      "slug": {
+        "ro": "ce-transportam",
+        "en": "items"
+      },
+      "modes": [
+        "detailed"
+      ],
+      "required": {
+        "detailed": [
+          "inventory.mode"
+        ]
+      }
+    },
+    {
+      "id": "services",
+      "slug": {
+        "ro": "servicii",
+        "en": "services"
+      },
+      "modes": [
+        "detailed"
+      ],
+      "required": {
+        "detailed": []
+      }
+    },
+    {
+      "id": "protection",
+      "slug": {
+        "ro": "protectie",
+        "en": "protection"
+      },
+      "modes": [
+        "detailed"
+      ],
+      "required": {
+        "detailed": [
+          "protection.level",
+          "survey.method"
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "slug": {
+        "ro": "data",
+        "en": "date"
+      },
+      "modes": [
+        "detailed"
+      ],
+      "required": {
+        "detailed": [
+          "schedule.date"
+        ]
+      }
+    }
+  ]
+}
