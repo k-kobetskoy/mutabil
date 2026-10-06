@@ -41,7 +41,11 @@ export function Stepper({
       step={step}
       className={cx('flex', compact ? 'items-center justify-between gap-3' : 'flex-col gap-1.5', className)}
     >
-      <Label className={cx(compact ? 'text-[0.98rem]' : 'label-cap', onNight ? 'text-on-night-muted' : compact ? 'text-ink' : 'text-ink-muted')}>{label}</Label>
+      <Label
+        className={cx(compact ? 'text-[0.98rem]' : 'label-cap', onNight ? 'text-on-night-muted' : compact ? 'text-ink' : 'text-ink-muted')}
+      >
+        {label}
+      </Label>
       <Group
         className={cx(
           'flex w-fit items-center rounded-[var(--radius-field)] border p-0.5',
@@ -51,10 +55,12 @@ export function Stepper({
         <Button slot="decrement" className={btn}>
           <Minus size={18} aria-hidden />
         </Button>
+        {/* An unanswered value shows a dash, not an empty gap between − and + */}
         <Input
+          placeholder="–"
           className={cx(
             'tabular w-12 bg-transparent text-center font-[family-name:var(--font-display)] text-[1.15rem] font-bold outline-none',
-            onNight ? 'text-white' : 'text-ink',
+            onNight ? 'text-white placeholder:text-white/45' : 'text-ink placeholder:text-ink-muted',
           )}
         />
         <Button slot="increment" className={btn}>

@@ -134,7 +134,7 @@ export function ContactScreen() {
           <h1 className="text-[clamp(2rem,5vw,2.6rem)] leading-[1.05] font-extrabold">{t('contact.title')}</h1>
           <p className="mt-2 text-ink-muted">{t('contact.lead')}</p>
           {errList.length > 0 && (
-            <div role="alert" className="mt-5 rounded-[var(--radius-field)] border-l-4 border-error bg-paper px-4 py-3">
+            <div role="alert" className="mt-5 rounded-[var(--radius-field)] border border-error bg-paper px-4 py-3">
               <ul className="list-disc pl-5">
                 {errList.map((k) => (
                   <li key={k}>{t(k)}</li>

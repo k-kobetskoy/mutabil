@@ -411,8 +411,8 @@
       "fullText": "Everything, the day before"
     },
     "containers": {
-      "crates": "Your reusable crates",
-      "cratesText": "You bring them and take them back",
+      "crates": "Our reusable crates",
+      "cratesText": "We bring them before and collect them after",
       "cardboard": "Cardboard boxes",
       "cardboardText": "{rate} lei / pc, delivered",
       "own": "My own boxes",
@@ -468,9 +468,9 @@
     "title": "Your estimate",
     "empty": "We don't have enough answers for a price yet.",
     "emptyCta": "Start the estimate",
-    "passFrom": "Departure",
-    "passArrival": "Estimated finish",
-    "passGuaranteed": "guaranteed by",
+    "passFrom": "We start",
+    "passArrival": "We finish",
+    "passGuaranteed": "Guaranteed by",
     "passWindow": "Duration ≈ {expected} h · guaranteed within {window} h",
     "passDate": "Date",
     "passNoDate": "date to choose",

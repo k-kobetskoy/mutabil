@@ -6,10 +6,10 @@
  */
 import { useEffect, useRef, useState, type ComponentType } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import { AlertCircle, ArrowLeft, ArrowRight, Check } from 'lucide-react';
 import { validateStep } from '@/domain/flow/validate';
 import { Link, useRouter } from '@/i18n/navigation';
-import { lei, leiRange, type AppLocale } from '@/lib/format';
+import { lei, type AppLocale } from '@/lib/format';
 import { useOrderStore } from '@/state/order-store';
 import { Button } from '@/ui/Button';
 import { Disclosure } from '@/ui/Disclosure';
@@ -92,7 +92,6 @@ export function StepScreen({ stepId }: { stepId: string }) {
   };
 
   const Body = BODIES[stepId];
-  const total = flow.steps.length;
 
   if (!hydrated || flow.index < 0) {
     return (
@@ -107,19 +106,24 @@ export function StepScreen({ stepId }: { stepId: string }) {
       <StageStrip flow={flow} />
       <div className="grid gap-10 pt-6 lg:grid-cols-[minmax(0,1fr)_400px] lg:items-start">
         <main id="main" className="min-w-0">
-          <p className="label-cap text-ink-muted">
-            {t(flow.mode === 'quick' ? 'flow.modeQuick' : 'flow.modeDetailed')} · {t('flow.progress', { n: flow.index + 1, total })}
-          </p>
-          <h1 className="mt-2 text-[clamp(1.9rem,5vw,2.6rem)] leading-[1.05] font-extrabold">{t(`steps.${stepId}.title`)}</h1>
+          <h1 className="text-[clamp(1.9rem,5vw,2.6rem)] leading-[1.05] font-extrabold">{t(`steps.${stepId}.title`)}</h1>
 
           {errorList.length > 0 && (
-            <div ref={summaryRef} tabIndex={-1} role="alert" className="mt-5 rounded-[var(--radius-field)] border-l-4 border-error bg-paper px-4 py-3 outline-none">
-              <p className="font-bold">{t('flow.errorsTitle')}</p>
-              <ul className="mt-1 list-disc pl-5 text-[0.95rem]">
-                {errorList.map((k) => (
-                  <li key={k}>{t(k)}</li>
-                ))}
-              </ul>
+            <div
+              ref={summaryRef}
+              tabIndex={-1}
+              role="alert"
+              className="mt-5 flex gap-3 rounded-[var(--radius-field)] border border-error bg-paper px-4 py-3 outline-none"
+            >
+              <AlertCircle size={20} aria-hidden className="mt-0.5 shrink-0 text-error" />
+              <div>
+                <p className="font-bold">{t('flow.errorsTitle')}</p>
+                <ul className="mt-1 list-disc pl-5 text-[0.95rem]">
+                  {errorList.map((k) => (
+                    <li key={k}>{t(k)}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           )}
 
@@ -129,12 +133,18 @@ export function StepScreen({ stepId }: { stepId: string }) {
 
           <div className="mt-10 flex items-center justify-between gap-3 border-t border-line pt-6">
             {flow.prev ? (
-              <Link href={flow.href(flow.prev)} className="inline-flex min-h-12 items-center gap-2 rounded-[var(--radius-field)] px-3 font-[family-name:var(--font-display)] font-bold text-ink no-underline hover:bg-route-soft">
+              <Link
+                href={flow.href(flow.prev)}
+                className="inline-flex min-h-12 items-center gap-2 rounded-[var(--radius-field)] px-3 font-[family-name:var(--font-display)] font-bold text-ink no-underline hover:bg-route-soft"
+              >
                 <ArrowLeft size={18} aria-hidden />
                 {t('common.back')}
               </Link>
             ) : (
-              <Link href="/estimate" className="inline-flex min-h-12 items-center gap-2 rounded-[var(--radius-field)] px-3 font-[family-name:var(--font-display)] font-bold text-ink no-underline hover:bg-route-soft">
+              <Link
+                href="/estimate"
+                className="inline-flex min-h-12 items-center gap-2 rounded-[var(--radius-field)] px-3 font-[family-name:var(--font-display)] font-bold text-ink no-underline hover:bg-route-soft"
+              >
                 <ArrowLeft size={18} aria-hidden />
                 {t('common.back')}
               </Link>
@@ -158,10 +168,20 @@ function StageStrip({ flow }: { flow: ReturnType<typeof useFlow> }) {
   const t = useTranslations();
   return (
     <nav aria-label={t('flow.nav')} className="border-b border-line pt-2">
-      <div className="h-1 overflow-hidden rounded-full bg-line sm:hidden" aria-hidden>
-        <div className="h-full rounded-full bg-route transition-[width] duration-300" style={{ width: `${((flow.index + 1) / flow.steps.length) * 100}%` }} />
+      {/* Phones: one line of progress instead of six squeezed circles */}
+      <div className="flex flex-col gap-2 pb-3 sm:hidden">
+        <p className="text-[0.9rem]">
+          <span className="font-bold">{t(`stage.${flow.steps[flow.index].id}`)}</span>
+          <span className="text-ink-muted"> · {t('flow.progress', { n: flow.index + 1, total: flow.steps.length })}</span>
+        </p>
+        <div className="h-1 overflow-hidden rounded-full bg-line" aria-hidden>
+          <div
+            className="h-full origin-left rounded-full bg-route transition-transform duration-300 ease-[var(--ease-out-expo)]"
+            style={{ transform: `scaleX(${(flow.index + 1) / flow.steps.length})` }}
+          />
+        </div>
       </div>
-      <ol className="flex gap-1 overflow-x-auto py-3 sm:gap-2 [&::-webkit-scrollbar]:hidden">
+      <ol className="flex gap-2 overflow-x-auto py-3 max-sm:hidden [&::-webkit-scrollbar]:hidden">
         {flow.steps.map((s, i) => {
           const current = i === flow.index;
           const done = i < flow.index;
@@ -176,14 +196,17 @@ function StageStrip({ flow }: { flow: ReturnType<typeof useFlow> }) {
               >
                 {done ? <Check size={14} strokeWidth={3} aria-hidden /> : i + 1}
               </span>
-              <span className={cx('whitespace-nowrap', current ? 'font-bold text-ink' : 'text-ink-muted', !current && 'max-sm:sr-only')}>{t(`stage.${s.id}`)}</span>
+              <span className={cx('whitespace-nowrap', current ? 'font-bold text-ink' : 'text-ink-muted')}>{t(`stage.${s.id}`)}</span>
             </>
           );
           return (
-            <li key={s.id} className="flex items-center gap-1 sm:gap-2">
-              {i > 0 && <span aria-hidden className="h-px w-3 bg-line-strong sm:w-6" />}
+            <li key={s.id} className="flex items-center gap-2">
+              {i > 0 && <span aria-hidden className="h-px w-6 bg-line-strong" />}
               {open ? (
-                <Link href={flow.href(s)} className="flex min-h-10 items-center gap-2 rounded-full px-1.5 text-[0.9rem] no-underline hover:bg-route-soft">
+                <Link
+                  href={flow.href(s)}
+                  className="flex min-h-10 items-center gap-2 rounded-full px-1.5 text-[0.9rem] no-underline hover:bg-route-soft"
+                >
                   {inner}
                 </Link>
               ) : (
@@ -206,26 +229,24 @@ function BookingAside({ est }: { est: ReturnType<typeof useEstimate> }) {
   const delta = usePriceDelta(est);
   return (
     <aside aria-label={t('flow.asideTitle')} className="sticky top-6 hidden flex-col gap-4 lg:flex">
-      <p className="label-cap text-ink-muted">{t('flow.asideTitle')}</p>
       {est ? (
         <>
+          {/* The total lives on the pass only; this card explains it and shows what just changed */}
           <BoardingPass order={order} est={est} compact />
           <div className="rounded-[var(--radius-panel)] border border-line bg-paper p-4">
-            <div className="flex items-baseline justify-between gap-3">
-              <span className="text-[0.95rem] text-ink-muted">
-                {t('flow.priceLabel')} · {t('common.vatIncluded')}
-              </span>
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-[0.92rem] text-ink-muted">{t('estimate.vat', { vat: lei(est.price.vat, locale) })}</span>
               <DeltaChip delta={delta} />
             </div>
-            <p className="tabular mt-1 font-[family-name:var(--font-display)] text-[1.6rem] font-extrabold">{leiRange(est.price.low, est.price.high, locale)}</p>
-            <p className="text-[0.85rem] text-ink-muted">{t('estimate.vat', { vat: lei(est.price.vat, locale) })}</p>
             <Disclosure title={t('estimate.breakdown')} className="mt-2 border-t border-line pt-1">
               <Breakdown est={est} />
             </Disclosure>
           </div>
         </>
       ) : (
-        <div className="rounded-[var(--radius-panel)] border border-dashed border-line-strong p-6 text-[0.95rem] text-ink-muted">{t('flow.noPriceYet')}</div>
+        <div className="rounded-[var(--radius-panel)] border border-dashed border-line-strong p-6 text-[0.95rem] text-ink-muted">
+          {t('flow.noPriceYet')}
+        </div>
       )}
     </aside>
   );

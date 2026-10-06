@@ -66,7 +66,7 @@ export function PriceBar({ est }: { est: Estimate | null }) {
               aria-haspopup="dialog"
             >
               <span className="flex flex-col">
-                <span className="label-cap text-[0.62rem] text-on-night-muted">
+                <span className="label-cap text-on-night-muted">
                   {t('flow.priceLabel')} · {t('common.vatIncluded')}
                 </span>
                 <span className="tabular font-[family-name:var(--font-display)] text-[1.2rem] leading-tight font-extrabold text-white">

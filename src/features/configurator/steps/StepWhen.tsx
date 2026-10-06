@@ -7,7 +7,16 @@
 import { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button as AriaButton, Calendar, CalendarCell, CalendarGrid, CalendarGridBody, CalendarGridHeader, CalendarHeaderCell, Heading } from 'react-aria-components';
+import {
+  Button as AriaButton,
+  Calendar,
+  CalendarCell,
+  CalendarGrid,
+  CalendarGridBody,
+  CalendarGridHeader,
+  CalendarHeaderCell,
+  Heading,
+} from 'react-aria-components';
 import { getDayOfWeek, parseDate, today } from '@internationalized/date';
 import type { Slot } from '@/contract/api';
 import { addClock, num, type AppLocale } from '@/lib/format';
@@ -37,7 +46,9 @@ export function StepWhen({ errors }: StepProps) {
   useEffect(() => {
     if (!date) return;
     const ctrl = new AbortController();
-    void slots.listSlots({ from: date, to: date, windowH, fullDay }, { signal: ctrl.signal }).then((s) => !ctrl.signal.aborted && setDay(s));
+    void slots
+      .listSlots({ from: date, to: date, windowH, fullDay }, { signal: ctrl.signal })
+      .then((s) => !ctrl.signal.aborted && setDay(s));
     return () => ctrl.abort();
   }, [date, windowH, fullDay, slots]);
 
@@ -56,7 +67,7 @@ export function StepWhen({ errors }: StepProps) {
     <>
       <div className="grid gap-8 md:grid-cols-[minmax(0,340px)_1fr] md:items-start">
         <div className="flex flex-col gap-2">
-          <span className="label-cap text-ink-muted" id="date-label">
+          <span className="font-[family-name:var(--font-display)] text-[1.02rem] leading-snug font-bold text-ink" id="date-label">
             {t('steps.when.date')}
           </span>
           <Calendar
@@ -69,23 +80,31 @@ export function StepWhen({ errors }: StepProps) {
             className="w-full max-w-[340px] rounded-[var(--radius-panel)] border border-line bg-paper p-3"
           >
             <header className="mb-2 flex items-center justify-between">
-              <AriaButton slot="previous" className="grid size-11 cursor-pointer place-items-center rounded-full hover:bg-route-soft disabled:opacity-30">
+              <AriaButton
+                slot="previous"
+                className="grid size-11 cursor-pointer place-items-center rounded-full hover:bg-route-soft disabled:opacity-30"
+              >
                 <ChevronLeft size={20} aria-hidden />
               </AriaButton>
               <Heading className="font-[family-name:var(--font-display)] text-[1rem] font-bold capitalize" />
-              <AriaButton slot="next" className="grid size-11 cursor-pointer place-items-center rounded-full hover:bg-route-soft disabled:opacity-30">
+              <AriaButton
+                slot="next"
+                className="grid size-11 cursor-pointer place-items-center rounded-full hover:bg-route-soft disabled:opacity-30"
+              >
                 <ChevronRight size={20} aria-hidden />
               </AriaButton>
             </header>
             <CalendarGrid className="w-full border-collapse" weekdayStyle="short">
-              <CalendarGridHeader>{(d) => <CalendarHeaderCell className="pb-1 text-[0.75rem] font-semibold text-ink-muted">{d}</CalendarHeaderCell>}</CalendarGridHeader>
+              <CalendarGridHeader>
+                {(d) => <CalendarHeaderCell className="pb-1 text-[0.75rem] font-semibold text-ink-muted">{d}</CalendarHeaderCell>}
+              </CalendarGridHeader>
               <CalendarGridBody>
                 {(d) => (
                   <CalendarCell
                     date={d}
                     className={({ isSelected, isDisabled, isOutsideMonth, isFocusVisible }) =>
                       cx(
-                        'tabular m-0.5 grid aspect-square cursor-pointer place-items-center rounded-full text-[0.95rem] outline-none',
+                        'tabular m-0.5 grid aspect-square cursor-pointer place-items-center rounded-full font-[family-name:var(--font-display)] text-[0.95rem] font-semibold outline-none',
                         isOutsideMonth && 'invisible',
                         isDisabled ? 'cursor-default text-ink-muted/40' : 'hover:bg-route-soft',
                         isSelected && 'bg-route font-bold text-white hover:bg-route',
@@ -106,12 +125,17 @@ export function StepWhen({ errors }: StepProps) {
               label={t('steps.when.slot')}
               value={order.schedule?.slot}
               onChange={(v) => update('schedule.slot', v)}
-              columns={3}
+              columns={1}
               size="sm"
               tiles={cfg.app.slots.map((s) => {
                 const info = day?.find((x) => x.slot === s.id);
                 const fits = info ? info.available : true;
-                const reason = info && !info.available ? (addHours(s.start, windowH) > cfg.app.dayEndHour || (fullDay && s.id !== 'morning') ? t('steps.when.tooLate') : t('steps.when.busy')) : null;
+                const reason =
+                  info && !info.available
+                    ? addHours(s.start, windowH) > cfg.app.dayEndHour || (fullDay && s.id !== 'morning')
+                      ? t('steps.when.tooLate')
+                      : t('steps.when.busy')
+                    : null;
                 return {
                   value: s.id,
                   label: t(`steps.when.slots.${s.id}`),
@@ -121,16 +145,25 @@ export function StepWhen({ errors }: StepProps) {
               })}
             />
           ) : (
-            <p className="rounded-lg bg-cloud px-4 py-3 text-[0.95rem] text-ink-muted">{t('steps.when.pickDate')}</p>
+            <p className="rounded-[var(--radius-field)] border border-dashed border-line-strong px-4 py-3 text-[0.95rem] text-ink-muted">
+              {t('steps.when.pickDate')}
+            </p>
           )}
           <Switch
             isSelected={fullDay}
             onChange={(v) => update('schedule.fullDay', v || undefined)}
-            description={t('steps.when.fullDayText', { hours: num(cfg.pricing.fullDay.hours, locale), pct: Math.round(cfg.pricing.fullDay.discount * 100) })}
+            description={t('steps.when.fullDayText', {
+              hours: num(cfg.pricing.fullDay.hours, locale),
+              pct: Math.round(cfg.pricing.fullDay.discount * 100),
+            })}
           >
             {t('steps.when.fullDay')}
           </Switch>
-          {weekend && <p className="rounded-lg border-l-4 border-amber bg-amber-soft px-4 py-3 text-[0.95rem]">{t('steps.when.weekend', { pct: Math.round(cfg.pricing.surcharges.weekend * 100) })}</p>}
+          {weekend && (
+            <p className="rounded-[var(--radius-field)] border border-line bg-paper px-4 py-3 text-[0.95rem]">
+              {t('steps.when.weekend', { pct: Math.round(cfg.pricing.surcharges.weekend * 100) })}
+            </p>
+          )}
         </div>
       </div>
     </>

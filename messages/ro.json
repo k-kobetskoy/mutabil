@@ -411,8 +411,8 @@
       "fullText": "Totul, cu o zi înainte"
     },
     "containers": {
-      "crates": "Lăzile voastre reutilizabile",
-      "cratesText": "Le aduceți și le luați înapoi",
+      "crates": "Lăzi reutilizabile de la noi",
+      "cratesText": "Le aducem înainte și le luăm înapoi după",
       "cardboard": "Cutii de carton",
       "cardboardText": "{rate} lei / buc., le aducem",
       "own": "Cutiile mele",
@@ -468,9 +468,9 @@
     "title": "Estimarea ta",
     "empty": "Încă nu avem destule răspunsuri pentru un preț.",
     "emptyCta": "Începe estimarea",
-    "passFrom": "Plecare",
-    "passArrival": "Sosire estimată",
-    "passGuaranteed": "garantat până la",
+    "passFrom": "Începem",
+    "passArrival": "Terminăm",
+    "passGuaranteed": "Garantat până la",
     "passWindow": "Durată ≈ {expected} h · garantat până la {window} h",
     "passDate": "Data",
     "passNoDate": "data de ales",

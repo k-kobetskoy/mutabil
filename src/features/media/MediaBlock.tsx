@@ -70,7 +70,7 @@ export function MediaBlock() {
         </h2>
         <p className="mt-1 text-[0.95rem] text-ink-muted">{t('steps.items.mediaText')}</p>
       </div>
-      <p className="rounded-lg border-l-4 border-route bg-route-soft px-4 py-3 text-[0.92rem] leading-snug">{t('media.notice')}</p>
+      <p className="rounded-[var(--radius-field)] bg-route-soft px-4 py-3 text-[0.92rem] leading-snug">{t('media.notice')}</p>
 
       {items.length > 0 && (
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
@@ -141,7 +141,7 @@ function MediaTile({ item, onRemove, onMark }: { item: MediaItem; onRemove: () =
         )}
         {url && item.kind === 'video' && <video src={url} className="size-full object-cover" muted playsInline preload="metadata" aria-label={item.name} />}
         {item.kind === 'video' && (
-          <span className="label-cap absolute top-2 left-2 flex items-center gap-1 rounded bg-night/80 px-1.5 py-0.5 text-[0.62rem] text-white">
+          <span className="label-cap absolute top-2 left-2 flex items-center gap-1 rounded bg-night/80 px-1.5 py-0.5 text-white">
             <Video size={12} aria-hidden /> {t('media.video')}
           </span>
         )}

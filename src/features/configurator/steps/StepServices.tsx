@@ -6,7 +6,6 @@ import type { AppLocale } from '@/lib/format';
 import { useOrderStore } from '@/state/order-store';
 import { ChoiceTiles } from '@/ui/ChoiceTiles';
 import { Switch } from '@/ui/Fields';
-import { CrateSketch, PackingSketch } from '@/ui/Sketch';
 import { Stepper } from '@/ui/Stepper';
 import { useCfg } from '../providers';
 import type { StepProps } from '../StepScreen';
@@ -30,7 +29,7 @@ export function StepServices(_props: StepProps) {
     mirrorProtection: P.materials.mirrorProtectionLei,
   };
 
-  const listed = order.inventory?.mode === 'list' ? order.inventory.items ?? {} : {};
+  const listed = order.inventory?.mode === 'list' ? (order.inventory.items ?? {}) : {};
   const assemblable = cfg.catalog.items.filter((i) => i.assemblyClass && listed[i.id]);
   const assembly = order.assembly?.items ?? {};
   const anyAssembly = Object.values(assembly).some((n) => n > 0);
@@ -46,7 +45,6 @@ export function StepServices(_props: StepProps) {
           value: v,
           label: t(`choices.who.${v}`),
           hint: t(`choices.who.${v}Text`),
-          icon: v === 'full' ? <PackingSketch title="" className="h-10 w-14" /> : undefined,
         }))}
       />
 
@@ -57,8 +55,12 @@ export function StepServices(_props: StepProps) {
           onChange={(v) => update('packing.containers', v)}
           columns={3}
           tiles={[
-            { value: 'crates', label: t('choices.containers.crates'), hint: t('choices.containers.cratesText'), icon: <CrateSketch title="" className="h-10 w-14" /> },
-            { value: 'cardboard', label: t('choices.containers.cardboard'), hint: t('choices.containers.cardboardText', { rate: P.materials.cardboardBoxLei }) },
+            { value: 'crates', label: t('choices.containers.crates'), hint: t('choices.containers.cratesText') },
+            {
+              value: 'cardboard',
+              label: t('choices.containers.cardboard'),
+              hint: t('choices.containers.cardboardText', { rate: P.materials.cardboardBoxLei }),
+            },
             { value: 'own', label: t('choices.containers.own'), hint: t('choices.containers.ownText') },
           ]}
         />
