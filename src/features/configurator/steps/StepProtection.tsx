@@ -11,6 +11,7 @@ import { estimate } from '@/domain/estimate';
 import { canEstimate } from '@/domain/volume';
 import { leiRange, type AppLocale } from '@/lib/format';
 import { useOrderStore } from '@/state/order-store';
+import { Link } from '@/i18n/navigation';
 import { ChoiceTiles } from '@/ui/ChoiceTiles';
 import { useCfg } from '../providers';
 import type { StepProps } from '../StepScreen';
@@ -48,6 +49,7 @@ export function StepProtection({ errors }: StepProps) {
 
   // With crates only a visit is possible: confirm it in one line instead of a three-tile "choice" (D39)
   const only = allowed && allowed.length === 1 ? (allowed[0] as Survey) : null;
+  const services = cfg.steps.steps.find((s) => s.id === 'services');
   useEffect(() => {
     if (only && order.survey?.method !== only) patch((o) => ({ ...o, survey: { method: only }, protection: { level: 'basic' } }));
   }, [only, order.survey?.method, patch]);
@@ -67,7 +69,14 @@ export function StepProtection({ errors }: StepProps) {
             METHODS.find((m) => m !== only)!,
           ) === 'crates-onsite-survey' && <p className="text-ink-muted">{t('steps.protection.onlyOnsite')}</p>}
           <p>{text[only]}</p>
-          {ranges && <p className="tabular font-[family-name:var(--font-display)] text-[1.2rem] font-extrabold">{ranges[only]}</p>}
+          {services && (
+            <Link
+              href={{ pathname: '/estimate/[step]', params: { step: services.slug[locale] } }}
+              className="mt-1 inline-flex min-h-10 items-center self-start font-semibold text-route underline underline-offset-4 hover:text-route-hover"
+            >
+              {t('steps.protection.changeCrates')}
+            </Link>
+          )}
         </section>
         <p className="max-w-[62ch] text-[0.95rem] text-ink-muted">{t('steps.protection.liability')}</p>
       </>

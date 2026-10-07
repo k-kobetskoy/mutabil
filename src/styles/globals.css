@@ -51,6 +51,13 @@
     line-height: 1.55;
     caret-color: var(--color-route);
   }
+  /* no lone last words ("zi", "ziua") in running text */
+  p,
+  li,
+  dd,
+  label {
+    text-wrap: pretty;
+  }
   ::selection {
     background: var(--color-route);
     color: #fff;

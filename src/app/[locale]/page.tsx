@@ -97,7 +97,6 @@ export default async function LandingPage() {
           <p className="mt-4 mb-8 max-w-[52ch] text-[1.1rem] text-ink-muted sm:text-[1.2rem]">{t('landing.lead')}</p>
           <QuickSearch />
         </section>
-
         {/* What you get: advantages, not a price list (D32) */}
         <section id="ce-primesti" aria-labelledby="gets-title" className="scroll-mt-4 border-y border-line bg-paper">
           <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
@@ -127,7 +126,6 @@ export default async function LandingPage() {
             </div>
           </div>
         </section>
-
         {/* How we take care: drawings in the same hand as "what you get" until real photos arrive (D35, D40) */}
         <section id="grija" aria-labelledby="care-title" className="mx-auto max-w-6xl scroll-mt-4 px-4 py-16 sm:px-6">
           <h2 id="care-title" className={cx(H2, 'max-w-[20ch]')}>
@@ -147,14 +145,13 @@ export default async function LandingPage() {
           </ul>
           <p className="mt-4 text-[0.9rem] text-ink-muted">{t('landing.care.note')}</p>
         </section>
-
         {/* Two ways to order instead of three fares (D31) */}
-        <section id="moduri" aria-labelledby="ways-title" className="mx-auto max-w-6xl scroll-mt-4 px-4 pb-20 sm:px-6">
+        <section id="moduri" aria-labelledby="ways-title" className="mx-auto max-w-6xl scroll-mt-4 px-4 pb-10 sm:px-6">
           <h2 id="ways-title" className={H2}>
             {t('landing.ways.title')}
           </h2>
           <p className="mt-3 max-w-[56ch] text-[1.05rem] text-ink-muted">{t('landing.ways.lead')}</p>
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
+          <div className="mt-10 grid gap-5 md:grid-cols-2 md:items-start">
             <Way
               title={t('landing.ways.flexTitle')}
               who={t('landing.ways.flexWho')}
@@ -204,8 +201,23 @@ export default async function LandingPage() {
             />
           </div>
         </section>
-
-        {/* Journey */}
+        {/* The promises a burned client looks for, on the landing and not only on /tarife (critique 3) */}
+        <section aria-labelledby="never-title" className="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
+          <div className="rounded-[var(--radius-panel)] border border-line bg-paper p-6 sm:p-8">
+            <h2 id="never-title" className="text-[1.5rem] leading-tight font-extrabold">
+              {t('landing.never.title')}
+            </h2>
+            <ul className="mt-5 grid gap-4 md:grid-cols-3">
+              {(['promise1', 'promise2', 'promise3'] as const).map((k) => (
+                <li key={k} className="flex items-start gap-2.5 font-semibold">
+                  <Check size={20} aria-hidden className="mt-0.5 shrink-0 text-ok" />
+                  {t(`rates.${k}`)}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+        {/* Journey */}{' '}
         <section id="cum" aria-labelledby="journey-title" className="on-night scroll-mt-4 bg-night text-on-night">
           <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
             <h2 id="journey-title" className={H2}>
@@ -227,7 +239,13 @@ export default async function LandingPage() {
                   />
                   <div>
                     {/* the day line is always there, so every title sits on the same line */}
-                    <span className={cx('block h-5 text-[0.82rem] leading-5 font-bold', i === 3 ? 'text-amber' : 'text-on-night-muted')}>
+                    <span
+                      className={cx(
+                        'h-5 text-[0.82rem] leading-5 font-bold',
+                        j.day ? 'block' : 'hidden md:block',
+                        i === 3 ? 'text-amber' : 'text-on-night-muted',
+                      )}
+                    >
                       {j.day}
                     </span>
                     <h3 className="text-[1.1rem] font-extrabold">{j.title}</h3>
@@ -238,7 +256,6 @@ export default async function LandingPage() {
             </ol>
           </div>
         </section>
-
         {/* FAQ: what happens if… */}
         <section id="intrebari" aria-labelledby="faq-title" className="scroll-mt-4 bg-paper">
           <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
@@ -265,7 +282,6 @@ export default async function LandingPage() {
             </Link>
           </div>
         </section>
-
         {/* Final call to action */}
         <section aria-labelledby="final-title" className="border-t border-line">
           <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-16 sm:px-6 md:flex-row md:items-end md:justify-between">

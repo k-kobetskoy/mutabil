@@ -11,6 +11,7 @@ import { useSearchParams } from 'next/navigation';
 import type { Estimate, Scenario } from '@/contract/estimate';
 import type { OrderInput } from '@/contract/order';
 import { firstIncomplete, visibleSteps } from '@/domain/flow/steps';
+import { guaranteedMax } from '@/domain/cap';
 import { applyRules } from '@/domain/rules/engine';
 import { decodeShare, encodeShare } from '@/domain/share';
 import { Link, useRouter } from '@/i18n/navigation';
@@ -102,7 +103,7 @@ export function ResultScreen() {
       <div className="mt-8 flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start">
         <div className="contents lg:flex lg:flex-col lg:gap-8">
           <div className="order-1 lg:order-none">
-            <PriceBlock est={est} variant={variant} />
+            <PriceBlock est={est} order={order} variant={variant} />
           </div>
           <div className="order-3 lg:order-none">
             <Card title={t('estimate.breakdown')}>
@@ -155,7 +156,10 @@ function Notice({ tone, children }: { tone: 'info' | 'warn'; children: React.Rea
   return (
     <p
       role="status"
-      className={cx('mb-5 flex items-start gap-2 rounded-lg px-4 py-3 text-[0.95rem]', tone === 'info' ? 'bg-route-soft' : 'bg-amber-soft')}
+      className={cx(
+        'mb-5 flex items-start gap-2 rounded-lg px-4 py-3 text-[0.95rem]',
+        tone === 'info' ? 'bg-route-soft' : 'border border-line bg-paper',
+      )}
     >
       <Info size={18} aria-hidden className="mt-0.5 shrink-0" />
       {children}
@@ -184,33 +188,30 @@ function conditions(scenarios: Scenario[], max: number) {
     .slice(0, max);
 }
 
-function PriceBlock({ est, variant }: { est: Estimate; variant: Variant }) {
+function PriceBlock({ est, order, variant }: { est: Estimate; order: OrderInput; variant: Variant }) {
   const t = useTranslations();
   const locale = useLocaleTyped();
   const explain = useExplain();
   const cfg = useCfg();
   const conds = conditions(est.scenarios, cfg.app.ui.maxConditionalLines);
   const pct = est.price.afterSurvey ? Math.round(est.price.afterSurvey.capTolerance * 100) : 0;
-  // D38: if the survey confirms the answers, the confirmed estimate is the base; the cap is on top
-  const step = cfg.pricing.rounding.totalLei * 100;
-  const maxIfConfirmed = Math.ceil((est.price.base * (1 + (est.price.afterSurvey?.capTolerance ?? 0))) / step) * step;
+  const max = guaranteedMax(est, order, cfg);
   const value = (v: unknown) => explain({ key: 'estimate.scenarioIf', params: { value: v as string } });
 
-  // The total itself is on the pass; this card says how it can move and how it becomes fixed (D37)
+  // The total itself is on the pass; this card says how it can move and how it becomes fixed (D37).
+  // Amber marks the concrete promise (the number), not the general rule (D38).
   return (
     <section aria-labelledby="price-title" className="rounded-[var(--radius-panel)] border border-line bg-paper p-5 sm:p-6">
       <h2 id="price-title" className="text-[1.2rem] font-extrabold">
         {t(est.scenarios.length || variant === 'conditional' ? 'estimate.scenariosTitle' : 'estimate.priceFixTitle')}
       </h2>
-      <p
-        className={cx(
-          'mt-3 rounded-[var(--radius-field)] px-4 py-3 text-[0.95rem]',
-          est.price.afterSurvey ? 'bg-amber-soft' : 'border border-line',
-        )}
-      >
-        {est.price.afterSurvey ? t('estimate.afterSurvey', { pct }) : t('estimate.noSurvey')}
-      </p>
-      {est.price.afterSurvey && <p className="mt-3 font-semibold">{t('estimate.maxIfConfirmed', { max: lei(maxIfConfirmed, locale) })}</p>}
+      {max !== null && (
+        <p className="tabular mt-3 rounded-[var(--radius-field)] bg-amber-soft px-4 py-3 font-semibold">
+          {t('estimate.maxIfConfirmed', { max: lei(max, locale) })}
+        </p>
+      )}
+      <p className="mt-3 text-[0.95rem]">{est.price.afterSurvey ? t('estimate.afterSurvey', { pct }) : t('estimate.noSurvey')}</p>
+      {max !== null && max < est.price.high && <p className="mt-2 text-[0.92rem] text-ink-muted">{t('estimate.rangeVsMax')}</p>}
       {/* with a survey the guaranteed maximum is the number to remember; the worst case only without one */}
       {!est.price.afterSurvey && (
         <p className="mt-3 text-[0.92rem] text-ink-muted">{t('estimate.worst', { worst: lei(est.price.worst, locale) })}</p>

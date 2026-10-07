@@ -49,7 +49,8 @@ export function ChoiceTiles<V extends string>({
     2: 'grid-cols-2',
     3: size === 'md' ? 'grid-cols-1 sm:grid-cols-3' : 'grid-cols-3',
     4: 'grid-cols-2 sm:grid-cols-4',
-    5: 'grid-cols-1 sm:grid-cols-5',
+    // five text-only tiles (home sizes) need room for their hints: 3 + 2 on desktop; pictures fit five
+    5: tiles.some((x) => x.icon) ? 'grid-cols-1 sm:grid-cols-5' : 'grid-cols-1 sm:grid-cols-3',
   }[columns];
   return (
     <RadioGroup

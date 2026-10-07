@@ -8,6 +8,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import type { Estimate } from '@/contract/estimate';
 import type { OrderInput } from '@/contract/order';
 import { getConfig } from '@/config';
+import { guaranteedMax } from '@/domain/cap';
 import { addClock, lei, leiRange, longDate, num, type AppLocale } from '@/lib/format';
 import { VanSketch } from '@/ui/Sketch';
 import { cx } from '@/ui/cx';
@@ -32,7 +33,11 @@ export function BoardingPass({
   const t = useTranslations();
   const locale = useLocale() as AppLocale;
   const r = useRouteLabels(order);
-  const slot = getConfig().app.slots.find((s) => s.id === (order.schedule?.slot ?? 'morning'))!;
+  const cfg = getConfig();
+  const slot = cfg.app.slots.find((s) => s.id === (order.schedule?.slot ?? 'morning'))!;
+  const max = guaranteedMax(est, order, cfg);
+  const preset = cfg.catalog.presets.find((p) => p.id === order.size?.presetId);
+  const moving = preset ? preset.name[locale] : order.taskType ? t(`fields.taskType.${order.taskType}`) : null;
   const start = slot.start;
   const method = order.survey?.method;
   const surveyName = t(
@@ -107,6 +112,12 @@ export function BoardingPass({
           )}
         >
           <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-[0.92rem]">
+            {moving && (
+              <>
+                <dt className="text-on-night-muted">{t('estimate.passMoving')}</dt>
+                <dd className="text-right font-semibold">{moving}</dd>
+              </>
+            )}
             <dt className="text-on-night-muted">{t('estimate.passDate')}</dt>
             <dd className="text-right font-semibold">
               {order.schedule?.date ? longDate(order.schedule.date, locale) : t('estimate.passNoDate')}
@@ -126,6 +137,12 @@ export function BoardingPass({
             <div className="tabular price-digits font-[family-name:var(--font-display)] text-[1.9rem] leading-tight font-extrabold">
               {variant === 'conditional' ? lei(est.price.base, locale) : leiRange(est.price.low, est.price.high, locale)}
             </div>
+            {/* amber = promise: the concrete ceiling, right under the range it bounds (D38) */}
+            {max !== null && (
+              <p className="tabular mt-1.5 inline-block rounded-md bg-amber px-2 py-0.5 text-[0.9rem] font-bold text-night">
+                {t('estimate.passMax', { max: lei(max, locale) })}
+              </p>
+            )}
             <PriceExplainer est={est} onNight />
           </div>
         </div>

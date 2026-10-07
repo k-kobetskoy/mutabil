@@ -153,6 +153,9 @@
     "final": {
       "title": "Vezi cât costă mutarea ta",
       "text": "Durează trei minute și nu te obligă la nimic."
+    },
+    "never": {
+      "title": "Ce nu se întâmplă niciodată"
     }
   },
   "start": {
@@ -256,7 +259,7 @@
       "specialValue": "Valoare declarată, lei",
       "addSpecial": "Adaugă un lucru",
       "media": "Fotografii și video ale locuinței",
-      "mediaText": "Opțional. Cel mai bine: fotografii + video, sau un video în care spui ce mutăm și ce rămâne.",
+      "mediaText": "Cel mai bine: fotografii + video, sau un video în care spui ce mutăm și ce rămâne.",
       "custom": "Alt obiect, cu dimensiuni",
       "customLabel": "Ce este",
       "customW": "Lățime, cm",
@@ -294,7 +297,8 @@
       "liability": "Pentru lucruri răspundem conform legii: dacă ceva se strică din vina noastră, reparăm sau plătim valoarea reală.",
       "disabledByCrates": "Cu lăzi reutilizabile, specialistul aduce lăzile și evaluează în aceeași vizită.",
       "disabledByAtSurvey": "Lucrurile se numără la evaluare, așa că e nevoie de una.",
-      "onlyOnsite": "Cu lăzi reutilizabile, evaluarea e o vizită: specialistul aduce lăzile și vede ce mutăm în aceeași vizită."
+      "onlyOnsite": "Cu lăzi reutilizabile, evaluarea e o vizită: specialistul aduce lăzile și vede ce mutăm în aceeași vizită.",
+      "changeCrates": "Schimbă lăzile"
     },
     "when": {
       "title": "Când?",
@@ -402,7 +406,7 @@
     },
     "containers": {
       "crates": "Lăzi reutilizabile de la noi",
-      "cratesText": "Le aducem și le luăm înapoi. Vin cu vizita specialistului: {fee} lei, se scad din comandă.",
+      "cratesText": "{rate} lei / ladă, {days} zile incluse. Vin cu vizita specialistului: {fee} lei, se scad din comandă.",
       "cardboard": "Cutii de carton",
       "cardboardText": "{rate} lei / buc., le aducem",
       "own": "Cutiile mele",
@@ -532,7 +536,10 @@
     "priceFixTitle": "Cum devine prețul garantat",
     "maxIfConfirmed": "Dacă evaluarea confirmă ce ai descris, nu plătești peste {max}.",
     "baseTotal": "Estimarea de bază",
-    "rangeNote": "Intervalul {range} ține cont de ce nu am văzut încă: volumul real și răspunsurile „Nu știu”."
+    "rangeNote": "Intervalul {range} ține cont de ce nu am văzut încă: volumul real și răspunsurile „Nu știu”.",
+    "passMax": "Cel mult {max}, dacă evaluarea confirmă",
+    "passMoving": "Mutăm",
+    "rangeVsMax": "Intervalul de pe bilet e până vedem lucrurile. Dacă evaluarea găsește mai multe, stabilim un nou maxim înainte de mutare, doar cu acordul tău."
   },
   "priceBar": {
     "noPrice": "Prețul apare după primul pas",

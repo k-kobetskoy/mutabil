@@ -188,9 +188,20 @@ export function ContactScreen() {
         <aside aria-label={t('contact.summary')} className="flex flex-col gap-3 lg:sticky lg:top-6">
           <h2 className="text-[1.1rem] font-extrabold">{t('contact.summary')}</h2>
           <BoardingPass order={order} est={est} compact />
-          <p className="text-[0.9rem] text-ink-muted">
-            {t('media.photos', { count: media.filter((m) => m.kind === 'photo').length })} · {t('media.videos', { count: media.filter((m) => m.kind === 'video').length })}
-          </p>
+          {media.length > 0 && (
+            <p className="text-[0.9rem] text-ink-muted">
+              {t('media.photos', { count: media.filter((m) => m.kind === 'photo').length })} · {t('media.videos', { count: media.filter((m) => m.kind === 'video').length })}
+            </p>
+          )}
+          {/* the promises again, at the moment the phone number is handed over */}
+          <ul className="mt-2 flex flex-col gap-2 text-[0.95rem]">
+            {(['promise1', 'promise2', 'promise3'] as const).map((k) => (
+              <li key={k} className="flex items-start gap-2">
+                <CheckCircle2 size={18} aria-hidden className="mt-0.5 shrink-0 text-ok" />
+                {t(`rates.${k}`)}
+              </li>
+            ))}
+          </ul>
         </aside>
       </div>
     </main>

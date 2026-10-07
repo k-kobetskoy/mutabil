@@ -153,6 +153,9 @@
     "final": {
       "title": "See what your move costs",
       "text": "It takes three minutes and commits you to nothing."
+    },
+    "never": {
+      "title": "What never happens"
     }
   },
   "start": {
@@ -256,7 +259,7 @@
       "specialValue": "Declared value, lei",
       "addSpecial": "Add a thing",
       "media": "Photos and video of the home",
-      "mediaText": "Optional. Best: photos + video, or a video where you say what moves and what stays.",
+      "mediaText": "Best: photos + video, or a video where you say what moves and what stays.",
       "custom": "Another item, with dimensions",
       "customLabel": "What it is",
       "customW": "Width, cm",
@@ -294,7 +297,8 @@
       "liability": "We are liable for your things by law: if something breaks through our fault, we repair it or pay its real value.",
       "disabledByCrates": "With reusable crates, the specialist brings the crates and surveys in the same visit.",
       "disabledByAtSurvey": "Your things are counted at the survey, so one is needed.",
-      "onlyOnsite": "With reusable crates, the survey is a visit: the specialist brings the crates and sees what moves in the same visit."
+      "onlyOnsite": "With reusable crates, the survey is a visit: the specialist brings the crates and sees what moves in the same visit.",
+      "changeCrates": "Change the crates"
     },
     "when": {
       "title": "When?",
@@ -402,7 +406,7 @@
     },
     "containers": {
       "crates": "Our reusable crates",
-      "cratesText": "We bring them and collect them. They come with the specialist visit: {fee} lei, deducted from the order.",
+      "cratesText": "{rate} lei / crate, {days} days included. They come with the specialist visit: {fee} lei, deducted from the order.",
       "cardboard": "Cardboard boxes",
       "cardboardText": "{rate} lei / pc, delivered",
       "own": "My own boxes",
@@ -532,7 +536,10 @@
     "priceFixTitle": "How the price becomes guaranteed",
     "maxIfConfirmed": "If the survey confirms what you described, you never pay more than {max}.",
     "baseTotal": "Base estimate",
-    "rangeNote": "The range {range} allows for what we haven't seen yet: the real volume and your “Not sure” answers."
+    "rangeNote": "The range {range} allows for what we haven't seen yet: the real volume and your “Not sure” answers.",
+    "passMax": "At most {max} if the survey confirms",
+    "passMoving": "Moving",
+    "rangeVsMax": "The range on the pass holds until we see your things. If the survey finds more, we set a new maximum before the move, only with your consent."
   },
   "priceBar": {
     "noPrice": "The price appears after the first step",

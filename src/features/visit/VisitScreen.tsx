@@ -258,7 +258,7 @@ export function VisitScreen() {
               </li>
             ))}
           </ul>
-          <p className="mt-5 border-t border-white/15 pt-4 text-[0.95rem] text-on-night-muted">{t('visit.visitFree')}</p>
+          <p className="mt-5 border-t border-white/15 pt-4 text-[0.95rem] text-on-night-muted max-lg:hidden">{t('visit.visitFree')}</p>
           {guide !== null && sizeName && (
             <p aria-live="polite" className="tabular mt-3 font-[family-name:var(--font-display)] text-[1.05rem] font-bold text-white">
               {t('visit.fromPrice', { size: sizeName.toLowerCase(), price: lei(guide, locale) })}

@@ -119,6 +119,16 @@ function ItemList({ error }: { error?: string }) {
     c,
     list: shown.filter((i) => (CATEGORY_ORDER.includes(i.category) ? i.category : 'misc') === c),
   })).filter((g) => g.list.length);
+  // fill the left column with whole categories until it holds about half of the rows
+  const rows = groups.reduce((s, g) => s + g.list.length + 1, 0);
+  const columns: (typeof groups)[] = [[], []];
+  let leftRows = 0;
+  for (const g of groups) {
+    if (leftRows < rows / 2) {
+      columns[0].push(g);
+      leftRows += g.list.length + 1;
+    } else columns[1].push(g);
+  }
 
   return (
     <section aria-labelledby="items-list" className="flex flex-col gap-4">
@@ -130,25 +140,30 @@ function ItemList({ error }: { error?: string }) {
           {t('flow.chosenCount', { count: chosen })}
         </p>
       </div>
-      <div className="gap-x-8 md:columns-2">
-        {groups.map((g) => (
-          <fieldset key={g.c} className="mb-6 flex flex-col">
-            <legend className="label-cap mb-1 break-after-avoid text-ink-muted">{t(`steps.items.categories.${g.c}`)}</legend>
-            <ul className="divide-y divide-line border-y border-line">
-              {g.list.map((i) => (
-                <li key={i.id} className="break-inside-avoid py-1.5">
-                  <Stepper
-                    compact
-                    label={i.name[locale]}
-                    value={items[i.id] ?? 0}
-                    min={0}
-                    max={99}
-                    onChange={(v) => update(`inventory.items.${i.id}`, v > 0 ? v : undefined)}
-                  />
-                </li>
-              ))}
-            </ul>
-          </fieldset>
+      {/* two explicit columns, a category is never split (CSS columns cut "Living" without its label) */}
+      <div className="grid gap-x-8 md:grid-cols-2">
+        {columns.map((col, ci) => (
+          <div key={ci}>
+            {col.map((g) => (
+              <fieldset key={g.c} className="mb-6 flex flex-col">
+                <legend className="label-cap mb-1 break-after-avoid text-ink-muted">{t(`steps.items.categories.${g.c}`)}</legend>
+                <ul className="divide-y divide-line border-y border-line">
+                  {g.list.map((i) => (
+                    <li key={i.id} className="break-inside-avoid py-1.5">
+                      <Stepper
+                        compact
+                        label={i.name[locale]}
+                        value={items[i.id] ?? 0}
+                        min={0}
+                        max={99}
+                        onChange={(v) => update(`inventory.items.${i.id}`, v > 0 ? v : undefined)}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </fieldset>
+            ))}
+          </div>
         ))}
       </div>
       <Switch isSelected={all} onChange={setAll}>

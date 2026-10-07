@@ -55,9 +55,9 @@ export function Stepper({
         <Button slot="decrement" className={btn}>
           <Minus size={18} aria-hidden />
         </Button>
-        {/* An unanswered value shows a dash, not an empty gap between − and + */}
+        {/* An unanswered value shows a question mark, not an empty gap (a dash read as a second minus) */}
         <Input
-          placeholder="–"
+          placeholder="?"
           // react-aria picks inputMode by platform, so server and Android disagree; our values are whole numbers
           inputMode="numeric"
           className={cx(
