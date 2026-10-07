@@ -558,7 +558,7 @@
     "estimateTerms": "Înțeleg că, înainte de evaluare, prețul este un interval estimativ, iar prețul maxim garantat se confirmă după evaluare.",
     "marketing": "Doresc să primesc oferte și noutăți prin e-mail/SMS. Mă pot dezabona oricând.",
     "privacy": "Prin trimiterea cererii ne transmiți datele de contact și detaliile mutării, pe care le folosim pentru a-ți pregăti oferta. Detalii în Politica de confidențialitate.",
-    "submit": "Trimite cererea (gratuit, fără obligații)",
+    "submit": "Trimite cererea",
     "sending": "Se trimite…",
     "successTitle": "Am primit cererea",
     "successText": "Numărul cererii: {id}. Te contactăm pentru evaluare.",

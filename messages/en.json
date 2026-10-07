@@ -558,7 +558,7 @@
     "estimateTerms": "I understand that before the survey the price is an estimated range, and the guaranteed maximum price is confirmed after the survey.",
     "marketing": "I'd like to receive offers and news by e-mail/SMS. I can unsubscribe at any time.",
     "privacy": "By sending this request you share your contact and move details so we can prepare your quote. See our Privacy Policy.",
-    "submit": "Send request (free, no obligation)",
+    "submit": "Send the request",
     "sending": "Sending…",
     "successTitle": "We received your request",
     "successText": "Request number: {id}. We will contact you about the survey.",

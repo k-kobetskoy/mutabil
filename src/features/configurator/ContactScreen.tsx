@@ -129,7 +129,7 @@ export function ContactScreen() {
       <Link href="/estimate/result" className="inline-flex min-h-11 items-center gap-2 font-[family-name:var(--font-display)] font-bold text-ink no-underline">
         <ArrowLeft size={18} aria-hidden /> {t('flow.toResult')}
       </Link>
-      <div className="mt-4 grid gap-10 lg:grid-cols-[minmax(0,1fr)_400px] lg:items-start">
+      <div className="mt-4 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1fr)_400px] lg:items-start">
         <div>
           <h1 className="text-[clamp(2rem,5vw,2.6rem)] leading-[1.05] font-extrabold">{t('contact.title')}</h1>
           <p className="mt-2 text-ink-muted">{t('contact.lead')}</p>
@@ -174,7 +174,14 @@ export function ContactScreen() {
               <p className="text-[0.85rem] text-ink-muted">{t('contact.privacy')}</p>
             </div>
             <Button type="submit" size="lg" isDisabled={sending} className="self-start max-sm:w-full">
-              {sending ? t('contact.sending') : t('contact.submit')}
+              {sending ? (
+                t('contact.sending')
+              ) : (
+                <span className="flex flex-col items-center leading-tight">
+                  <span>{t('contact.submit')}</span>
+                  <span className="text-[0.8rem] font-normal text-white/85">{t('estimate.sendNote')}</span>
+                </span>
+              )}
             </Button>
           </Form>
         </div>
