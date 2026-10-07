@@ -5,7 +5,9 @@ import { Check } from 'lucide-react';
 import type { Estimate } from '@/contract/estimate';
 import { getConfig } from '@/config';
 import { Link } from '@/i18n/navigation';
+import { guaranteedMax } from '@/domain/cap';
 import { useExplain } from '@/lib/explain';
+import { useOrderStore } from '@/state/order-store';
 import { lei, leiRange, type AppLocale } from '@/lib/format';
 import { Why } from '@/ui/Disclosure';
 
@@ -14,6 +16,9 @@ export function Breakdown({ est, editable = true }: { est: Estimate; editable?: 
   const locale = useLocale() as AppLocale;
   const explain = useExplain();
   const steps = getConfig().steps.steps;
+  const order = useOrderStore((s) => s.order);
+  const max = guaranteedMax(est, order, getConfig());
+  const lineSum = est.lines.reduce((s, l) => s + l.amount, 0);
 
   return (
     <div className="flex flex-col">
@@ -84,15 +89,26 @@ export function Breakdown({ est, editable = true }: { est: Estimate; editable?: 
         <li className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 border-t-2 border-ink py-3">
           <span className="font-[family-name:var(--font-display)] font-extrabold">{t('estimate.baseTotal')}</span>
           <span className="tabular text-right font-[family-name:var(--font-display)] text-[1.1rem] font-extrabold">
-            {lei(
-              est.lines.reduce((s, l) => s + l.amount, 0),
-              locale,
-            )}
+            {lei(est.price.base, locale)}
           </span>
-          {est.price.low !== est.price.high && (
-            <span className="col-span-2 text-[0.9rem] text-ink-muted">
-              {t('estimate.rangeNote', { range: leiRange(est.price.low, est.price.high, locale) })}
+          {lineSum !== est.price.base && (
+            <span className="col-span-2 text-[0.85rem] text-ink-muted">{t('estimate.rounded', { sum: lei(lineSum, locale) })}</span>
+          )}
+          {/* D41: with a maximum, the arithmetic to it; without one, why the pass shows a range */}
+          {max !== null && est.price.afterSurvey ? (
+            <span className="tabular col-span-2 text-[0.9rem] font-semibold">
+              {t('estimate.baseToMax', {
+                base: lei(est.price.base, locale),
+                pct: Math.round(est.price.afterSurvey.capTolerance * 100),
+                max: lei(max, locale),
+              })}
             </span>
+          ) : (
+            est.price.low !== est.price.high && (
+              <span className="col-span-2 text-[0.9rem] text-ink-muted">
+                {t('estimate.rangeNote', { range: leiRange(est.price.low, est.price.high, locale) })}
+              </span>
+            )
           )}
         </li>
       </ul>

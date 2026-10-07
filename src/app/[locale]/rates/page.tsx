@@ -93,7 +93,7 @@ export default async function RatesPage() {
         </Section>
 
         <Section title={t('rates.rangeTitle')}>
-          <div className="flex max-w-[62ch] flex-col gap-3">
+          <div className="flex max-w-[40rem] flex-col gap-3">
             <p>{t('rates.range1')}</p>
             <p className="rounded-[var(--radius-field)] bg-amber-soft px-4 py-3">
               {t('rates.range2', { remote: pct(P.survey.remote.capTolerance), onsite: pct(P.survey.onsite.capTolerance) })}

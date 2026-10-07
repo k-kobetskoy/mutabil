@@ -53,8 +53,10 @@ describe('typical scenarios (ТЗ)', () => {
     expect(lei(line(e, 'survey')!.amount)).toBe(150);
     expect(lei(line(e, 'surveyCredit')!.amount)).toBe(-150);
     expect(e.price.afterSurvey).toEqual({ capTolerance: 0.05, method: 'onsite' });
-    // timeline: crates arrive before, are picked up 7 days after
-    expect(e.timeline.map((t) => t.kind)).toEqual(['cratesDelivery', 'move', 'cratesPickup']);
+    // timeline (D44): the survey a week ahead, crates 3 days before, picked up 7 days after
+    expect(e.timeline.map((t) => t.kind)).toEqual(['survey', 'cratesDelivery', 'move', 'cratesPickup']);
+    expect(e.timeline.find((t) => t.kind === 'survey')).toMatchObject({ dayOffset: -7, date: '2026-10-29' });
+    expect(e.timeline.find((t) => t.kind === 'cratesDelivery')).toMatchObject({ dayOffset: -3, date: '2026-11-02' });
     expect(e.timeline.find((t) => t.kind === 'cratesPickup')).toMatchObject({ dayOffset: 7, date: '2026-11-12' });
     // the 3-seat sofa cannot pass the 80 cm door of a medium lift
     expect(e.warnings.some((w) => w.key === 'warn.noFitLift.door' && w.params?.item === 'sofa-3-seat')).toBe(true);

@@ -57,7 +57,7 @@ test.describe('detailed estimate (D1–D3, D36–D38)', () => {
     await expect(page).toHaveURL(/\/ro\/estimare\/trimite/);
     await page.getByRole('textbox', { name: 'Nume' }).fill('Ana Test');
     await page.getByRole('textbox', { name: 'Telefon' }).fill('+40 712 345 678');
-    await page.getByRole('checkbox', { name: /Înțeleg că, înainte de evaluare/ }).check({ force: true });
+    await page.getByRole('checkbox', { name: /Înțeleg că, până la evaluare/ }).check({ force: true });
     await page.getByRole('button', { name: /Trimite cererea/ }).click();
     await expect(page.getByRole('heading', { name: 'Am primit cererea' })).toBeVisible();
   });

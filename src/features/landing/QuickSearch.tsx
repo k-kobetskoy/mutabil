@@ -103,13 +103,17 @@ export function QuickSearch() {
         : cls(from.zoneId) === 'suburb' || cls(to.zoneId) === 'suburb'
           ? 'suburb'
           : 'city';
+    // A different home starts fresh: the old item list, crates, survey and crew belonged to the
+    // old one and gave a wrong maximum for the new one (critique 5). The same home keeps the draft.
+    const sameHome = current.taskType === draft.taskType && current.size?.presetId === draft.size?.presetId;
+    const base: OrderInput = sameHome ? current : { v: 1, mode: current.mode, ...(current.schedule ? { schedule: current.schedule } : {}) };
     const order: OrderInput = {
-      ...current,
+      ...base,
       ...draft,
       route,
       mode: what === 'items' ? 'detailed' : 'quick',
-      from: { ...current.from, ...from },
-      to: { ...current.to, ...to },
+      from: { ...base.from, ...from },
+      to: { ...base.to, ...to },
     };
     replace(order);
     if (what === 'items')

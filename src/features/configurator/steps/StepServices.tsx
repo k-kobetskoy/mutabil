@@ -74,7 +74,7 @@ export function StepServices(_props: StepProps) {
         />
         {packing.containers === 'crates' && (
           <div className="flex flex-col gap-4 rounded-[var(--radius-panel)] border border-line bg-paper p-5">
-            <p className="text-[0.95rem]">{t('steps.services.cratesRule')}</p>
+            <p className="text-[0.95rem]">{t('steps.services.cratesRule', { days: P.crates.deliveryDaysBeforeMove })}</p>
             <Stepper
               label={t('steps.services.crateDays')}
               value={packing.crateDays ?? P.crates.includedDays}

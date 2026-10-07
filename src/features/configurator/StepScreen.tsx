@@ -5,11 +5,10 @@
  * bar (phones). Validation runs on Continue and then live, with human messages.
  */
 import { useEffect, useRef, useState, type ComponentType } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { AlertCircle, ArrowLeft, ArrowRight, Check } from 'lucide-react';
 import { validateStep } from '@/domain/flow/validate';
 import { Link, useRouter } from '@/i18n/navigation';
-import { lei, type AppLocale } from '@/lib/format';
 import { useOrderStore } from '@/state/order-store';
 import { Button } from '@/ui/Button';
 import { Disclosure } from '@/ui/Disclosure';
@@ -227,7 +226,6 @@ function StageStrip({ flow }: { flow: ReturnType<typeof useFlow> }) {
 
 function BookingAside({ est }: { est: ReturnType<typeof useEstimate> }) {
   const t = useTranslations();
-  const locale = useLocale() as AppLocale;
   const order = useOrderStore((s) => s.order);
   const delta = usePriceDelta(est);
   return (
@@ -236,12 +234,17 @@ function BookingAside({ est }: { est: ReturnType<typeof useEstimate> }) {
         <>
           {/* The total lives on the pass only; this card explains it and shows what just changed */}
           <BoardingPass order={order} est={est} compact />
-          <div className="rounded-[var(--radius-panel)] border border-line bg-paper p-4">
-            <div className="flex items-center justify-between gap-3">
-              <span className="text-[0.92rem] text-ink-muted">{t('estimate.vat', { vat: lei(est.price.vat, locale) })}</span>
-              <DeltaChip delta={delta} />
-            </div>
-            <Disclosure title={t('estimate.breakdown')} level={2} className="mt-2 border-t border-line pt-1">
+          {/* VAT is in the breakdown, next to the base it is computed on (critique 5) */}
+          <div className="rounded-[var(--radius-panel)] border border-line bg-paper px-4 py-1">
+            <Disclosure
+              title={
+                <span className="flex items-center gap-3">
+                  {t('estimate.breakdown')}
+                  <DeltaChip delta={delta} />
+                </span>
+              }
+              level={2}
+            >
               <Breakdown est={est} />
             </Disclosure>
           </div>

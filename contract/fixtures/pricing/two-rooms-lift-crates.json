@@ -385,6 +385,11 @@
     ],
     "timeline": [
       {
+        "kind": "survey",
+        "dayOffset": -7,
+        "date": "2026-10-29"
+      },
+      {
         "kind": "cratesDelivery",
         "dayOffset": -3,
         "date": "2026-11-02"

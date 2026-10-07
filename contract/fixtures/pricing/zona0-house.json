@@ -365,6 +365,11 @@
     ],
     "timeline": [
       {
+        "kind": "survey",
+        "dayOffset": -7,
+        "date": "2026-10-30"
+      },
+      {
         "kind": "packing",
         "dayOffset": -1,
         "date": "2026-11-05"

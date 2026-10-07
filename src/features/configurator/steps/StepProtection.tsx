@@ -71,7 +71,9 @@ export function StepProtection({ errors }: StepProps) {
           {flow.blockedBy(
             'survey.method',
             METHODS.find((m) => m !== only)!,
-          ) === 'crates-onsite-survey' && <p className="text-ink-muted">{t('steps.protection.onlyOnsite')}</p>}
+          ) === 'crates-onsite-survey' && (
+            <p className="text-ink-muted">{t('steps.protection.onlyOnsite', { days: P.crates.deliveryDaysBeforeMove })}</p>
+          )}
           <p>{text[only]}</p>
           {onlyMax !== null && (
             <p className="tabular self-start rounded-[var(--radius-field)] bg-amber-soft px-3 py-2 font-semibold">
@@ -87,7 +89,8 @@ export function StepProtection({ errors }: StepProps) {
             </Link>
           )}
         </section>
-        <p className="max-w-[62ch] text-[0.95rem] text-ink-muted">{t('steps.protection.liability')}</p>
+        <p className="max-w-[40rem] text-[0.95rem]">{t('steps.protection.when', { days: P.survey.latestDaysBeforeMove })}</p>
+        <p className="max-w-[40rem] text-[0.95rem] text-ink-muted">{t('steps.protection.liability')}</p>
       </>
     );
   }
@@ -119,7 +122,8 @@ export function StepProtection({ errors }: StepProps) {
           };
         })}
       />
-      <p className="max-w-[62ch] text-[0.95rem] text-ink-muted">{t('steps.protection.liability')}</p>
+      <p className="max-w-[40rem] text-[0.95rem]">{t('steps.protection.when', { days: P.survey.latestDaysBeforeMove })}</p>
+      <p className="max-w-[40rem] text-[0.95rem] text-ink-muted">{t('steps.protection.liability')}</p>
     </>
   );
 }

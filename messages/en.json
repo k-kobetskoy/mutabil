@@ -61,9 +61,9 @@
       "request": "Request",
       "requestText": "You configure and send. Free and with no obligation.",
       "survey": "Survey",
-      "surveyText": "Photos, video or a visit. Then you get the guaranteed maximum price.",
+      "surveyText": "Early, at the latest a week before: photos, video or a visit. Then you get the guaranteed maximum price.",
       "crates": "Crates",
-      "cratesText": "Arrive a few days before, if you chose them.",
+      "cratesText": "Usually 3 days before; earlier or later, whatever suits you.",
       "move": "The move",
       "moveText": "The crew arrives in the window you picked. You know from the start how long it takes.",
       "pickup": "Crate pickup",
@@ -100,7 +100,7 @@
       "title": "What you get with Mutabil",
       "lead": "Everything that makes a move easy, from one provider. Pick only what you need.",
       "crates": "Reusable crates",
-      "cratesText": "We bring them {before} days before and collect them {after} days after. No boxes to buy, no tape to hunt for, nothing to throw away.",
+      "cratesText": "We bring them {before} days before (or whenever suits you) and collect them {after} days after. No boxes to buy, no tape to hunt for, nothing to throw away.",
       "wardrobe": "Wardrobe boxes",
       "wardrobeText": "Clothes travel on their hangers, exactly as they hang in the wardrobe. Hang them back on arrival.",
       "mattress": "Mattress bags",
@@ -275,8 +275,8 @@
       "title": "What do we do?",
       "who": "Who packs?",
       "containers": "What do we pack into?",
-      "cratesRule": "With crates the survey is on site: the specialist brings the crates and surveys in one visit.",
-      "crateDays": "How many days do the crates stay with you?",
+      "cratesRule": "With crates, the survey is a visit to your home. We usually bring the crates {days} days before; earlier or later, whatever suits you.",
+      "crateDays": "Days after the move",
       "crateDaysHint": "{included} days are included. Each extra day: {rate} leu / crate.",
       "extras": "Special packaging",
       "assembly": "What do we take apart and reassemble?",
@@ -296,11 +296,12 @@
       "none": "No, keep the range",
       "noneText": "You pay for the real time at the published rates. It can cost more if there are more things.",
       "liability": "We are liable for your things by law: if something breaks through our fault, we repair it or pay its real value.",
-      "disabledByCrates": "With reusable crates, the specialist brings the crates and surveys in the same visit.",
+      "disabledByCrates": "With reusable crates, the survey is a visit to your home.",
       "disabledByAtSurvey": "Your things are counted at the survey, so one is needed.",
-      "onlyOnsite": "With reusable crates, the survey is a visit: the specialist brings the crates and sees what moves in the same visit.",
+      "onlyOnsite": "With reusable crates, the survey is a visit to your home. We bring the crates separately, usually {days} days before the move.",
       "changeCrates": "Change the crates",
-      "titleVisit": "The survey: a specialist visit"
+      "titleVisit": "The survey: a specialist visit",
+      "when": "We survey early, at the latest {days} days before the move, so you have time to decide."
     },
     "when": {
       "title": "When?",
@@ -350,9 +351,9 @@
     },
     "tileHint": {
       "none": "or out of order",
-      "small": "4 persons · old block",
-      "medium": "6–8 persons",
-      "large": "13+ persons · freight",
+      "small": "up to 5 persons · ≤ 400 kg",
+      "medium": "6–10 persons · 450–800 kg",
+      "large": "11+ persons · from 900 kg · freight",
       "unknown": "we assume a small one"
     }
   },
@@ -408,7 +409,7 @@
     },
     "containers": {
       "crates": "Our reusable crates",
-      "cratesText": "{rate} lei / crate, {days} days included. They come with the specialist visit: {fee} lei, deducted from the order.",
+      "cratesText": "{rate} lei / crate, {days} days after the move included. Needs the specialist visit: {fee} lei, deducted from the order.",
       "cardboard": "Cardboard boxes",
       "cardboardText": "{rate} lei / pc, delivered",
       "own": "My own boxes",
@@ -494,8 +495,8 @@
     "worst": "At most, if everything is at its worst: {worst}",
     "timeline": "Moving calendar",
     "timelineKind": {
-      "survey": "Survey",
-      "cratesDelivery": "We bring the crates (and survey)",
+      "survey": "Survey, at the latest",
+      "cratesDelivery": "We bring the crates",
       "packing": "We pack",
       "move": "The move",
       "cratesPickup": "We collect the crates"
@@ -544,7 +545,10 @@
     "passMaxLabel": "Guaranteed maximum · incl. VAT",
     "passMaxFrom": "from {low} · if the survey confirms your list",
     "passNoMax": "You get the guaranteed maximum after the survey.",
-    "passListItems": "List the big items to see it now"
+    "passListItems": "List the big items to see it now",
+    "baseToMax": "{base} estimate + {pct} % = at most {max}, if the survey confirms your list.",
+    "rangeVsMaxRemote": "If the survey finds more things than you described, we tell you the new maximum before the move and you can cancel for free.",
+    "rounded": "The lines add up to {sum}, rounded up to 10 lei."
   },
   "priceBar": {
     "noPrice": "The price appears after the first step",
@@ -567,7 +571,7 @@
     "comment": "Comment",
     "commentHint": "Anything that helps: intercom code, schedule, what to know about the building.",
     "addresses": "Exact addresses",
-    "estimateTerms": "I understand that before the survey the price is an estimated range, and the guaranteed maximum price is confirmed after the survey.",
+    "estimateTerms": "I understand that until the survey the price is an estimate, and the guaranteed maximum price is confirmed after the survey.",
     "marketing": "I'd like to receive offers and news by e-mail/SMS. I can unsubscribe at any time.",
     "privacy": "By sending this request you share your contact and move details so we can prepare your quote. See our Privacy Policy.",
     "submit": "Send the request",
@@ -761,7 +765,7 @@
     "intercityDistanceAssumed": "The distance to another city is assumed: {km} km. Enter the real distance under “Access”."
   },
   "rules": {
-    "cratesOnsiteOnly": "With reusable crates the survey is on site only: the specialist brings the crates and surveys in one visit.",
+    "cratesOnsiteOnly": "With reusable crates the survey is an on-site visit; we bring the crates separately, usually 3 days before.",
     "atSurveyNeedsSurvey": "If we count your things at the survey, we need a photo/video survey or a visit.",
     "officeSurveyRecommended": "For offices we recommend a survey visit.",
     "houseSurveyRecommended": "For houses we recommend a survey: the volume varies a lot.",
@@ -866,7 +870,7 @@
     "masterPrice": "{rate} lei / visit",
     "includedTitle": "Included in every move, at no cost",
     "rangeTitle": "From a range to a guaranteed maximum price",
-    "range1": "Until we see what moves, we show a range: what it would cost in the best and in the worst case.",
+    "range1": "Without a survey we show a range: the price depends on how many things you have. After the survey, the range is replaced by a guaranteed maximum price.",
     "range2": "After the survey you get a guaranteed maximum price: the final bill cannot exceed the confirmed estimate by more than {remote} % after photos and video, or {onsite} % after a specialist visit, as long as the volume and access are as described.",
     "range3": "In the \"We take care of everything\" package the visit is free. Otherwise it costs {fee} lei and is deducted from the order.",
     "changesTitle": "When the price changes",
@@ -879,7 +883,7 @@
     "promiseTitle": "What won't happen",
     "promise1": "Nothing is added without your consent.",
     "promise2": "We never hold your belongings for an extra payment.",
-    "promise3": "No haggling at the door: the price is the one these rules give.",
+    "promise3": "No haggling at the door: the price is the one our published rates give.",
     "note": "All prices are in lei and include 21 % VAT. The values are being verified.",
     "cta": "Calculate the price",
     "range4": "If the survey finds more things than you described, we tell you the new maximum before the move. You can cancel for free, and we refund the {fee} lei for the visit."

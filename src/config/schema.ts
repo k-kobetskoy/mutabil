@@ -64,6 +64,7 @@ export const PricingConfig = z.object({
   }),
   includedFree: z.array(z.string()),
   survey: z.object({
+    latestDaysBeforeMove: z.int().min(1),
     onsite: z.object({ priceLei: pos, deductibleFromOrder: z.boolean(), deductibleValidDays: z.int(), capTolerance: frac }),
     remote: z.object({ priceLei: pos, deductibleFromOrder: z.boolean(), capTolerance: frac }),
     none: z.object({ priceLei: pos, deductibleFromOrder: z.boolean(), capTolerance: z.null() }),

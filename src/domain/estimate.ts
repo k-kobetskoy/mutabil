@@ -347,8 +347,9 @@ export function estimate(input: OrderInput, cfg: Cfg): Estimate {
   const crates = order.packing?.containers === 'crates';
   const events: Estimate['timeline'] = [];
   const P = cfg.pricing;
-  if (crates || survey === 'onsite')
-    events.push({ kind: crates ? 'cratesDelivery' : 'survey', dayOffset: -P.crates.deliveryDaysBeforeMove });
+  // D44: the survey comes early enough to decide on a new maximum; crates come separately, later
+  if (survey !== 'none') events.push({ kind: 'survey', dayOffset: -P.survey.latestDaysBeforeMove });
+  if (crates) events.push({ kind: 'cratesDelivery', dayOffset: -P.crates.deliveryDaysBeforeMove });
   if ((order.packing?.who ?? 'self') !== 'self') events.push({ kind: 'packing', dayOffset: -1 });
   events.push({ kind: 'move', dayOffset: 0 });
   if (crates) events.push({ kind: 'cratesPickup', dayOffset: order.packing?.crateDays ?? P.crates.includedDays });

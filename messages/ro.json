@@ -61,9 +61,9 @@
       "request": "Cererea",
       "requestText": "Configurezi și trimiți. Gratuit și fără obligații.",
       "survey": "Evaluarea",
-      "surveyText": "Fotografii, video sau o vizită. Apoi primești prețul maxim garantat.",
+      "surveyText": "Din timp, cel târziu cu o săptămână înainte: fotografii, video sau o vizită. Apoi primești prețul maxim garantat.",
       "crates": "Lăzile",
-      "cratesText": "Ajung cu câteva zile înainte, dacă le-ai ales.",
+      "cratesText": "De obicei cu 3 zile înainte; mai devreme sau mai târziu, cum îți convine.",
       "move": "Mutarea",
       "moveText": "Echipa vine în intervalul de sosire ales. Știi de la început cât durează.",
       "pickup": "Ridicarea lăzilor",
@@ -100,7 +100,7 @@
       "title": "Ce primești cu Mutabil",
       "lead": "Tot ce face o mutare ușoară, de la un singur furnizor. Alegi doar ce îți trebuie.",
       "crates": "Lăzi reutilizabile",
-      "cratesText": "Le aducem cu {before} zile înainte și le luăm la {after} zile după. Nu cumperi cutii, nu cauți bandă, nu arunci nimic.",
+      "cratesText": "Le aducem cu {before} zile înainte (sau când îți convine) și le luăm la {after} zile după. Nu cumperi cutii, nu cauți bandă, nu arunci nimic.",
       "wardrobe": "Cutii-garderobă",
       "wardrobeText": "Hainele călătoresc pe umerașe, exact cum stau în dulap. La sosire le agăți la loc.",
       "mattress": "Huse pentru saltele",
@@ -275,8 +275,8 @@
       "title": "Ce facem noi?",
       "who": "Cine împachetează?",
       "containers": "În ce împachetăm?",
-      "cratesRule": "Cu lăzi, evaluarea se face la fața locului: specialistul aduce lăzile și evaluează într-o singură vizită.",
-      "crateDays": "Câte zile rămân lăzile la tine?",
+      "cratesRule": "Cu lăzi, evaluarea e o vizită la tine acasă. Lăzile le aducem de obicei cu {days} zile înainte; mai devreme sau mai târziu, cum îți convine.",
+      "crateDays": "Zile după mutare",
       "crateDaysHint": "{included} zile sunt incluse. Fiecare zi în plus: {rate} leu / ladă.",
       "extras": "Ambalaje speciale",
       "assembly": "Ce demontăm și montăm?",
@@ -296,11 +296,12 @@
       "none": "Nu, rămân la interval",
       "noneText": "Plătești după timpul real, la tarifele publicate. Poate costa mai mult dacă sunt mai multe lucruri.",
       "liability": "Pentru lucruri răspundem conform legii: dacă ceva se strică din vina noastră, reparăm sau plătim valoarea reală.",
-      "disabledByCrates": "Cu lăzi reutilizabile, specialistul aduce lăzile și evaluează în aceeași vizită.",
+      "disabledByCrates": "Cu lăzi reutilizabile, evaluarea e o vizită la tine acasă.",
       "disabledByAtSurvey": "Lucrurile se numără la evaluare, așa că e nevoie de una.",
-      "onlyOnsite": "Cu lăzi reutilizabile, evaluarea e o vizită: specialistul aduce lăzile și vede ce mutăm în aceeași vizită.",
+      "onlyOnsite": "Cu lăzi reutilizabile, evaluarea e o vizită la tine acasă. Lăzile le aducem separat, de obicei cu {days} zile înainte de mutare.",
       "changeCrates": "Schimbă lăzile",
-      "titleVisit": "Evaluarea: vizita specialistului"
+      "titleVisit": "Evaluarea: vizita specialistului",
+      "when": "Evaluarea o facem din timp, cel târziu cu {days} zile înainte de mutare, ca să ai timp să decizi."
     },
     "when": {
       "title": "Când?",
@@ -350,9 +351,9 @@
     },
     "tileHint": {
       "none": "sau nu merge",
-      "small": "4 pers. · bloc vechi",
-      "medium": "6–8 pers.",
-      "large": "13+ pers. · marfă",
+      "small": "până la 5 pers. · ≤ 400 kg",
+      "medium": "6–10 pers. · 450–800 kg",
+      "large": "11+ pers. · de la 900 kg · marfă",
       "unknown": "calculăm cu unul mic"
     }
   },
@@ -408,7 +409,7 @@
     },
     "containers": {
       "crates": "Lăzi reutilizabile de la noi",
-      "cratesText": "{rate} lei / ladă, {days} zile incluse. Vin cu vizita specialistului: {fee} lei, se scad din comandă.",
+      "cratesText": "{rate} lei / ladă, {days} zile incluse după mutare. Necesită vizita specialistului: {fee} lei, se scad din comandă.",
       "cardboard": "Cutii de carton",
       "cardboardText": "{rate} lei / buc., le aducem",
       "own": "Cutiile mele",
@@ -494,8 +495,8 @@
     "worst": "Cel mai mult, dacă totul e în cel mai rău caz: {worst}",
     "timeline": "Calendarul mutării",
     "timelineKind": {
-      "survey": "Evaluarea",
-      "cratesDelivery": "Aducem lăzile (și evaluăm)",
+      "survey": "Evaluarea, cel târziu",
+      "cratesDelivery": "Aducem lăzile",
       "packing": "Împachetăm",
       "move": "Mutarea",
       "cratesPickup": "Luăm lăzile"
@@ -544,7 +545,10 @@
     "passMaxLabel": "Maxim garantat · cu TVA",
     "passMaxFrom": "de la {low} · dacă evaluarea confirmă lista ta",
     "passNoMax": "Prețul maxim garantat îl afli după evaluare.",
-    "passListItems": "Listează obiectele mari ca să-l vezi acum"
+    "passListItems": "Listează obiectele mari ca să-l vezi acum",
+    "baseToMax": "{base} estimare + {pct} % = maxim {max}, dacă evaluarea confirmă lista ta.",
+    "rangeVsMaxRemote": "Dacă la evaluare găsim mai multe lucruri decât ai descris, îți spunem noul maxim înainte de mutare și poți renunța gratuit.",
+    "rounded": "Suma liniilor: {sum}, rotunjită în sus la 10 lei."
   },
   "priceBar": {
     "noPrice": "Prețul apare după primul pas",
@@ -567,7 +571,7 @@
     "comment": "Comentariu",
     "commentHint": "Orice ne ajută: cod de interfon, program, ce să știm despre bloc.",
     "addresses": "Adresele exacte",
-    "estimateTerms": "Înțeleg că, înainte de evaluare, prețul este un interval estimativ, iar prețul maxim garantat se confirmă după evaluare.",
+    "estimateTerms": "Înțeleg că, până la evaluare, prețul e estimativ, iar prețul maxim garantat se confirmă după evaluare.",
     "marketing": "Doresc să primesc oferte și noutăți prin e-mail/SMS. Mă pot dezabona oricând.",
     "privacy": "Prin trimiterea cererii ne transmiți datele de contact și detaliile mutării, pe care le folosim pentru a-ți pregăti oferta. Detalii în Politica de confidențialitate.",
     "submit": "Trimite cererea",
@@ -761,7 +765,7 @@
     "intercityDistanceAssumed": "Distanța până în alt oraș e presupusă: {km} km. Scrie distanța reală la „Acces”."
   },
   "rules": {
-    "cratesOnsiteOnly": "Cu lăzi reutilizabile evaluarea e doar la fața locului: specialistul aduce lăzile și evaluează într-o singură vizită.",
+    "cratesOnsiteOnly": "Cu lăzi reutilizabile evaluarea e o vizită la fața locului; lăzile le aducem separat, de obicei cu 3 zile înainte.",
     "atSurveyNeedsSurvey": "Dacă numărăm lucrurile la evaluare, avem nevoie de o evaluare foto/video sau de o vizită.",
     "officeSurveyRecommended": "Pentru birouri recomandăm o vizită de evaluare.",
     "houseSurveyRecommended": "Pentru case recomandăm o evaluare: volumul variază mult.",
@@ -866,7 +870,7 @@
     "masterPrice": "{rate} lei / deplasare",
     "includedTitle": "Inclus în orice mutare, fără cost",
     "rangeTitle": "De la interval la preț maxim garantat",
-    "range1": "Până vedem ce mutăm, îți arătăm un interval: cât ar costa în cazul cel mai bun și în cel mai rău.",
+    "range1": "Fără evaluare îți arătăm un interval: prețul depinde de câte lucruri ai. După evaluare, intervalul e înlocuit de un preț maxim garantat.",
     "range2": "După evaluare primești un preț maxim garantat: plata finală nu trece de estimarea confirmată cu mai mult de {remote} % după foto și video sau {onsite} % după vizita specialistului, dacă volumul și accesul sunt cele descrise.",
     "range3": "În pachetul „Ne ocupăm de tot” vizita e gratuită. Altfel costă {fee} lei și se scade din comandă.",
     "changesTitle": "Când se schimbă prețul",
@@ -879,7 +883,7 @@
     "promiseTitle": "Ce nu se întâmplă",
     "promise1": "Nimic nu se adaugă fără acordul tău.",
     "promise2": "Nu reținem lucrurile pentru o plată în plus.",
-    "promise3": "Nu negociem la ușă: prețul e cel calculat după aceste reguli.",
+    "promise3": "Nu negociem la ușă: prețul e cel calculat după tarifele publicate.",
     "note": "Toate prețurile sunt în lei și includ TVA 21 %. Valorile sunt în curs de verificare.",
     "cta": "Calculează prețul",
     "range4": "Dacă la evaluare găsim mai multe lucruri decât ai descris, îți spunem noul maxim înainte de mutare. Poți renunța gratuit, iar cei {fee} lei pentru vizită îi returnăm."

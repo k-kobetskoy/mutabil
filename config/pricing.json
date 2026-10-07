@@ -356,6 +356,13 @@
   },
   "includedFree": ["tape", "stretchFilm", "blankets", "dollies", "floorProtection", "doorProtection", "liftProtection", "basicTools"],
   "survey": {
+    "latestDaysBeforeMove": {
+      "value": 7,
+      "unit": "days",
+      "source": "owner 2026-10-07 (D44)",
+      "verified": false,
+      "note": "Оценка (визит или фото) не позже чем за N дней до переезда, чтобы при новом максимуме (D42) было время решить. Ящики отдельно, по умолчанию за crates.deliveryDaysBeforeMove."
+    },
     "onsite": {
       "priceLei": {
         "value": 150,

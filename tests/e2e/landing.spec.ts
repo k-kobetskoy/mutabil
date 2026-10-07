@@ -63,9 +63,17 @@ test.describe('landing (D30–D35)', () => {
     const panel = page.locator('section[aria-labelledby="search-title"]');
     const outside = await panel.evaluate((el) => {
       const edge = el.getBoundingClientRect().right;
-      return [...el.querySelectorAll('*')].filter((n) => n.getBoundingClientRect().right > edge + 1).length;
+      return (
+        [...el.querySelectorAll('*')]
+          // react-aria's hidden native <select> (aria-hidden, visually hidden) is not layout
+          .filter((n) => !n.closest('[aria-hidden="true"]') && n.getBoundingClientRect().right > edge + 1)
+          .map(
+            (n) =>
+              `<${n.tagName.toLowerCase()} class="${n.getAttribute('class') ?? ''}"> ${Math.round(n.getBoundingClientRect().right - edge)}px`,
+          )
+      );
     });
-    expect(outside).toBe(0);
+    expect(outside).toEqual([]);
   });
 
   test('English is there too', async ({ page }) => {

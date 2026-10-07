@@ -50,7 +50,13 @@ export function PriceExplainer({
           <p>{t('priceInfo.included', { list })}</p>
           <p>{cap}</p>
           {/* D42: what happens if the survey finds more, right next to the promised number */}
-          {withMax && <p>{t('estimate.rangeVsMax', { fee: P.survey.onsite.priceLei })}</p>}
+          {withMax && (
+            <p>
+              {t(est?.price.afterSurvey?.method === 'onsite' ? 'estimate.rangeVsMax' : 'estimate.rangeVsMaxRemote', {
+                fee: P.survey.onsite.priceLei,
+              })}
+            </p>
+          )}
           <p className={cx('font-semibold', onNight ? 'text-white' : 'text-ink')}>{t('priceInfo.consent')}</p>
           <Link
             href="/rates"

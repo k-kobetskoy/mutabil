@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
@@ -19,7 +20,17 @@ export async function generateMetadata({ params }: PageProps<'/[locale]/estimate
   return { title: def ? t(`steps.${def.id}.title`) : t('estimate.title'), robots: { index: false } };
 }
 
-export default async function StepPage({ params }: PageProps<'/[locale]/estimate/[step]'>) {
+// URL data (params) is read inside Suspense so the shared shell can render without it
+// (Next 16: "URL data outside of Suspense", docs/01-app/02-guides/adopting-partial-prefetching.md)
+export default function StepPage({ params }: PageProps<'/[locale]/estimate/[step]'>) {
+  return (
+    <Suspense>
+      <Step params={params} />
+    </Suspense>
+  );
+}
+
+async function Step({ params }: { params: PageProps<'/[locale]/estimate/[step]'>['params'] }) {
   const { locale, step } = await params;
   const def = stepBySlug(step, locale as Locale, getConfig().steps);
   if (!def) notFound();

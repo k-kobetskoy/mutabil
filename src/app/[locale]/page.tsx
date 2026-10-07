@@ -269,7 +269,7 @@ export default async function LandingPage() {
                     {f.q}
                     <Plus size={20} aria-hidden className="shrink-0 text-route transition-transform duration-200 group-open:rotate-45" />
                   </summary>
-                  <p className="mt-2 max-w-[62ch] text-ink-muted">{f.a}</p>
+                  <p className="mt-2 max-w-[40rem] text-ink-muted">{f.a}</p>
                 </details>
               ))}
             </div>
