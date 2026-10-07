@@ -11,6 +11,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "e2e": "playwright test",
+    "shots": "node scripts/screenshots.mjs",
     "format": "prettier --write .",
     "contract:gen": "tsx scripts/gen-contract.ts",
     "contract:check": "tsx scripts/gen-contract.ts --check",
