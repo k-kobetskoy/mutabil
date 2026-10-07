@@ -7,13 +7,13 @@
   "nav": {
     "rules": "How we calculate",
     "faq": "Questions",
-    "start": "Detailed estimate",
+    "start": "Calculate the price",
     "language": "Language",
     "skip": "Skip to content",
     "gets": "What you get",
     "care": "Care",
     "ways": "How to order",
-    "startShort": "Estimate"
+    "startShort": "Calculate"
   },
   "common": {
     "continue": "Continue",
@@ -54,14 +54,14 @@
       "unknown": "Not sure"
     },
     "cta": "See price and time",
-    "exact": "Or make a detailed estimate, ~3 minutes",
+    "exact": "Or make an exact estimate, 3–5 minutes",
     "passTitleLive": "Your estimate, approximate",
     "journey": {
       "title": "How it goes",
       "request": "Request",
       "requestText": "You configure and send. Free and with no obligation.",
       "survey": "Survey",
-      "surveyText": "Photos, video or a visit. Then you get the fixed price.",
+      "surveyText": "Photos, video or a visit. Then you get the guaranteed maximum price.",
       "crates": "Crates",
       "cratesText": "Arrive a few days before, if you chose them.",
       "move": "The move",
@@ -110,8 +110,8 @@
       "packing": "Packing",
       "packingText": "We pack the kitchen and the fragile things, or everything, the day before.",
       "visit": "A specialist visit",
-      "visitText": "They come to your home, see what moves and give you a fixed price. No surprises on moving day.",
-      "cta": "Estimate your move"
+      "visitText": "They come to your home, see what moves and give you a guaranteed maximum price. No surprises on moving day.",
+      "cta": "Calculate the price"
     },
     "care": {
       "title": "How we take care of your home and things",
@@ -136,16 +136,16 @@
       "flexTitle": "You configure it",
       "flexWho": "For those who want to decide and pay only for what they choose.",
       "flex1": "Choose the services and see the price right away",
-      "flex2": "A free survey from photos and video, or a specialist visit",
-      "flex3": "A fixed price after the survey",
+      "flex2": "A survey from photos and video (free) or at your home ({fee} lei, deducted from the order)",
+      "flex3": "After the survey, a guaranteed maximum price",
       "flexCta": "Calculate the price",
       "fullTitle": "We take care of everything",
       "fullWho": "For those who don't want to think about any of it.",
-      "full1": "A specialist visits your home and plans the move",
+      "full1": "A specialist visits your home, free, and plans the move",
       "full2": "We bring crates and boxes and pack everything",
       "full3": "We take furniture apart and put it back together",
       "full4": "Cleaning by our partner, if you want it",
-      "full5": "A fixed price, set after the visit",
+      "full5": "A guaranteed maximum price, set at the visit",
       "fromTitle": "Guide price",
       "from": "from {price}",
       "fullCta": "Book a visit"
@@ -282,18 +282,19 @@
       "noAssemblyItems": "First choose the large items in the “Baggage” step."
     },
     "protection": {
-      "title": "Do you want a fixed price?",
+      "title": "Do you want a guaranteed maximum price?",
       "question": "How should we survey the move?",
-      "lead": "Until the survey, the price is a range. After it, the price is fixed, and the final bill can exceed it only by the limit written below.",
+      "lead": "Until the survey, the price is a range. After it you get a guaranteed maximum price: you never pay more than the confirmed estimate plus the limit below.",
       "remote": "Yes, from photos and video",
-      "remoteText": "Free. Final bill: at most +{pct} %. The estimator may ask for more.",
+      "remoteText": "Free. Maximum: the confirmed estimate + {pct} %. The estimator may ask for more.",
       "onsite": "Yes, with a specialist visit",
-      "onsiteText": "{price} lei, deducted from the order. Final bill: at most +{pct} %.",
+      "onsiteText": "{price} lei, deducted from the order. Maximum: the confirmed estimate + {pct} %.",
       "none": "No, keep the range",
       "noneText": "You pay for the real time at the published rates. It can cost more if there are more things.",
       "liability": "We are liable for your things by law: if something breaks through our fault, we repair it or pay its real value.",
       "disabledByCrates": "With reusable crates, the specialist brings the crates and surveys in the same visit.",
-      "disabledByAtSurvey": "Your things are counted at the survey, so one is needed."
+      "disabledByAtSurvey": "Your things are counted at the survey, so one is needed.",
+      "onlyOnsite": "With reusable crates, the survey is a visit: the specialist brings the crates and sees what moves in the same visit."
     },
     "when": {
       "title": "When?",
@@ -401,7 +402,7 @@
     },
     "containers": {
       "crates": "Our reusable crates",
-      "cratesText": "We bring them before and collect them after",
+      "cratesText": "We bring them and collect them. They come with the specialist visit: {fee} lei, deducted from the order.",
       "cardboard": "Cardboard boxes",
       "cardboardText": "{rate} lei / pc, delivered",
       "own": "My own boxes",
@@ -468,8 +469,8 @@
     "passCrewValue": "{n} movers",
     "passTotal": "Total incl. VAT",
     "rangeLabel": "Range until the survey",
-    "afterSurvey": "After the survey you get a fixed price. The final price does not exceed the confirmed estimate by more than {pct} %, if volume and access are as described.",
-    "noSurvey": "Without a survey it stays a range: you pay for the real time at the rates below. Ask for a free photo survey to get a fixed price.",
+    "afterSurvey": "After the survey you get a guaranteed maximum price: the confirmed estimate + {pct} %, as long as the volume and access are as described.",
+    "noSurvey": "Without a survey it stays a range: you pay for the real time at the published rates. Ask for a free photo survey to get a guaranteed maximum price.",
     "vat": "of which 21 % VAT: {vat}",
     "breakdown": "Price details",
     "included": "Included free",
@@ -525,10 +526,13 @@
       "onsite": "The specialist visits at the agreed time and sees what moves.",
       "remote": "You send photos and video, and the estimator checks them.",
       "none": "Without a survey, the range above stays.",
-      "fixed": "You get the fixed price and confirm the date.",
+      "fixed": "You get the guaranteed maximum price and confirm the date.",
       "free": "You pay nothing now."
     },
-    "priceFixTitle": "How the price becomes fixed"
+    "priceFixTitle": "How the price becomes guaranteed",
+    "maxIfConfirmed": "If the survey confirms what you described, you never pay more than {max}.",
+    "baseTotal": "Base estimate",
+    "rangeNote": "The range {range} allows for what we haven't seen yet: the real volume and your “Not sure” answers."
   },
   "priceBar": {
     "noPrice": "The price appears after the first step",
@@ -551,14 +555,14 @@
     "comment": "Comment",
     "commentHint": "Anything that helps: intercom code, schedule, what to know about the building.",
     "addresses": "Exact addresses",
-    "estimateTerms": "I understand that before the survey the price is an estimated range and the fixed price is confirmed after the survey.",
+    "estimateTerms": "I understand that before the survey the price is an estimated range, and the guaranteed maximum price is confirmed after the survey.",
     "marketing": "I'd like to receive offers and news by e-mail/SMS. I can unsubscribe at any time.",
     "privacy": "By sending this request you share your contact and move details so we can prepare your quote. See our Privacy Policy.",
     "submit": "Send request (free, no obligation)",
     "sending": "Sending…",
     "successTitle": "We received your request",
     "successText": "Request number: {id}. We will contact you about the survey.",
-    "successTasks": "What we check before the fixed price:",
+    "successTasks": "What we check before the guaranteed maximum price:",
     "newEstimate": "New estimate",
     "summary": "What you are sending",
     "failed": "We could not send the request. Please try again in a minute."
@@ -730,11 +734,11 @@
   },
   "warn": {
     "noFitLift": {
-      "door": "{item} does not pass the lift door ({lift}) {end} → we carry it by the stairs.",
-      "cabin": "{item} does not fit the lift cabin ({lift}) {end} → we carry it by the stairs.",
+      "door": "{item} does not pass the lift door ({lift}) {end} → by the stairs.",
+      "cabin": "{item} does not fit the lift cabin ({lift}) {end} → by the stairs.",
       "notAllowed": "{item}: the building does not allow furniture in the lift {end} → by the stairs."
     },
-    "selfDisassembly": "{item} moves only taken apart. You do it, or choose the craftsman under “Services”.",
+    "selfDisassembly": "{item}: moves only taken apart. You do it, or choose the handyman under “Services”.",
     "parkedAway": "Zone {end}: vehicles over {maxT} t have limited access → the {vehicle} stops ~{meters} m away, the distance is priced in.",
     "exceedsWorkday": "The move does not fit in a working day (within {windowH} h, maximum {max} h). We recommend a survey visit or more movers.",
     "fullDayExceeded": "The move takes ~{hours} h, longer than a booked day. Extra hours are paid separately.",
@@ -811,13 +815,14 @@
     "toggle": "What's in this price?",
     "made": "The van and the crew, paid by the hour, plus the services you choose. We estimate the hours from volume, floors, lift and distance.",
     "included": "At no cost: {list}.",
-    "range": "It's a range because we haven't seen your things yet. After the survey you get a fixed price, and the final bill can't exceed it by more than {low}–{high} %.",
     "consent": "Nothing is added without your consent.",
-    "more": "How we calculate, in detail"
+    "more": "How we calculate, in detail",
+    "rangeFor": "It's a range because we haven't seen your things yet. After the survey you chose you get a guaranteed maximum price: the confirmed estimate + {pct} %.",
+    "rangeAny": "It's a range because we haven't seen your things yet. After a survey you get a guaranteed maximum price: the confirmed estimate + {onsite} % after a visit, or + {remote} % after photos and video."
   },
   "rates": {
     "title": "How we calculate the price",
-    "metaDescription": "Mutabil's hourly and per-item rates, what's included at no cost and how an estimate becomes a fixed price.",
+    "metaDescription": "Mutabil's hourly and per-item rates, what's included at no cost and how an estimate becomes a guaranteed maximum price.",
     "lead": "The same rates are behind every estimate on this site. There are no others, and no haggling on the spot.",
     "madeTitle": "What the total is made of",
     "made1": "The van and the crew, paid by the hour. We estimate the hours from volume, floors, lift and the distance from the door to the van.",
@@ -846,10 +851,10 @@
     "master": "Handyman on moving day",
     "masterPrice": "{rate} lei / visit",
     "includedTitle": "Included in every move, at no cost",
-    "rangeTitle": "From a range to a fixed price",
+    "rangeTitle": "From a range to a guaranteed maximum price",
     "range1": "Until we see what moves, we show a range: what it would cost in the best and in the worst case.",
-    "range2": "After the survey you get a fixed price. The final bill cannot exceed it by more than {remote} % after photos and video, or {onsite} % after a specialist visit, as long as the volume and access are as described.",
-    "range3": "A specialist visit costs {fee} lei and is deducted from the order.",
+    "range2": "After the survey you get a guaranteed maximum price: the final bill cannot exceed the confirmed estimate by more than {remote} % after photos and video, or {onsite} % after a specialist visit, as long as the volume and access are as described.",
+    "range3": "In the \"We take care of everything\" package the visit is free. Otherwise it costs {fee} lei and is deducted from the order.",
     "changesTitle": "When the price changes",
     "overtime": "One hour beyond the guaranteed window",
     "overtimeText": "van and crew at the same rates, billed per 30 minutes",
@@ -862,12 +867,12 @@
     "promise2": "We never hold your belongings for an extra payment.",
     "promise3": "No haggling at the door: the price is the one these rules give.",
     "note": "All prices are in lei and include 21 % VAT. The values are being verified.",
-    "cta": "Estimate your move"
+    "cta": "Calculate the price"
   },
   "visit": {
     "metaTitle": "Book a visit",
     "title": "We take care of everything",
-    "lead": "Tell us where you're moving from and to. We'll call to agree on a time; the specialist sees everything on site and gives you a fixed price.",
+    "lead": "Tell us where you're moving from and to. We'll call to agree on a time; the specialist sees everything on site and gives you a guaranteed maximum price.",
     "from": "From",
     "to": "To",
     "size": "What we move",
@@ -876,7 +881,7 @@
     "dateHint": "Roughly is fine. You can leave it empty.",
     "cleaning": "I also want cleaning after the move, by your partner",
     "cleaningNote": "Cleaning after the move: yes",
-    "terms": "I understand that the fixed price is set after the visit.",
+    "terms": "I understand that the guaranteed maximum price is set at the visit.",
     "submit": "Book the visit",
     "asideTitle": "What's included",
     "fromPrice": "Guide price for {size}: from {price}",

@@ -55,7 +55,7 @@ export function StepServices(_props: StepProps) {
           onChange={(v) => update('packing.containers', v)}
           columns={3}
           tiles={[
-            { value: 'crates', label: t('choices.containers.crates'), hint: t('choices.containers.cratesText') },
+            { value: 'crates', label: t('choices.containers.crates'), hint: t('choices.containers.cratesText', { fee: P.survey.onsite.priceLei }) },
             {
               value: 'cardboard',
               label: t('choices.containers.cardboard'),

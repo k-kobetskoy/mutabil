@@ -8,13 +8,18 @@ import { useTranslations } from 'next-intl';
 import { Button, Disclosure, DisclosurePanel } from 'react-aria-components';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { getConfig } from '@/config';
+import type { Estimate } from '@/contract/estimate';
 import { Link } from '@/i18n/navigation';
 import { cx } from '@/ui/cx';
 
-export function PriceExplainer({ onNight, className }: { onNight?: boolean; className?: string }) {
+export function PriceExplainer({ est, onNight, className }: { est?: Estimate; onNight?: boolean; className?: string }) {
   const t = useTranslations();
   const P = getConfig().pricing;
-  const caps = [P.survey.onsite.capTolerance, P.survey.remote.capTolerance].map((x) => Math.round(x * 100));
+  const pct = (x: number) => Math.round(x * 100);
+  // one cap: the one for the chosen survey; before a choice, each method with its own (D38)
+  const cap = est?.price.afterSurvey
+    ? t('priceInfo.rangeFor', { pct: pct(est.price.afterSurvey.capTolerance) })
+    : t('priceInfo.rangeAny', { onsite: pct(P.survey.onsite.capTolerance), remote: pct(P.survey.remote.capTolerance) });
   const list = P.includedFree.map((k) => t(`included.${k}`).toLowerCase()).join(', ');
 
   return (
@@ -33,7 +38,7 @@ export function PriceExplainer({ onNight, className }: { onNight?: boolean; clas
         <div className={cx('mt-1 flex flex-col gap-2 text-[0.9rem] leading-snug', onNight ? 'text-on-night-muted' : 'text-ink-muted')}>
           <p>{t('priceInfo.made')}</p>
           <p>{t('priceInfo.included', { list })}</p>
-          <p>{t('priceInfo.range', { low: Math.min(...caps), high: Math.max(...caps) })}</p>
+          <p>{cap}</p>
           <p className={cx('font-semibold', onNight ? 'text-white' : 'text-ink')}>{t('priceInfo.consent')}</p>
           <Link
             href="/rates"

@@ -132,11 +132,11 @@ function ItemList({ error }: { error?: string }) {
       </div>
       <div className="gap-x-8 md:columns-2">
         {groups.map((g) => (
-          <fieldset key={g.c} className="mb-6 flex break-inside-avoid flex-col">
-            <legend className="label-cap mb-1 text-ink-muted">{t(`steps.items.categories.${g.c}`)}</legend>
+          <fieldset key={g.c} className="mb-6 flex flex-col">
+            <legend className="label-cap mb-1 break-after-avoid text-ink-muted">{t(`steps.items.categories.${g.c}`)}</legend>
             <ul className="divide-y divide-line border-y border-line">
               {g.list.map((i) => (
-                <li key={i.id} className="py-1.5">
+                <li key={i.id} className="break-inside-avoid py-1.5">
                   <Stepper
                     compact
                     label={i.name[locale]}

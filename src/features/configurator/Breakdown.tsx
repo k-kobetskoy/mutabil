@@ -6,7 +6,7 @@ import type { Estimate } from '@/contract/estimate';
 import { getConfig } from '@/config';
 import { Link } from '@/i18n/navigation';
 import { useExplain } from '@/lib/explain';
-import { lei, type AppLocale } from '@/lib/format';
+import { lei, leiRange, type AppLocale } from '@/lib/format';
 import { Why } from '@/ui/Disclosure';
 
 export function Breakdown({ est, editable = true }: { est: Estimate; editable?: boolean }) {
@@ -79,6 +79,21 @@ export function Breakdown({ est, editable = true }: { est: Estimate; editable?: 
               </li>
             ))}
           </ul>
+        </li>
+        {/* exactly the sum of the lines above (the domain's base is the same sum rounded up to 10 lei) */}
+        <li className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 border-t-2 border-ink py-3">
+          <span className="font-[family-name:var(--font-display)] font-extrabold">{t('estimate.baseTotal')}</span>
+          <span className="tabular text-right font-[family-name:var(--font-display)] text-[1.1rem] font-extrabold">
+            {lei(
+              est.lines.reduce((s, l) => s + l.amount, 0),
+              locale,
+            )}
+          </span>
+          {est.price.low !== est.price.high && (
+            <span className="col-span-2 text-[0.9rem] text-ink-muted">
+              {t('estimate.rangeNote', { range: leiRange(est.price.low, est.price.high, locale) })}
+            </span>
+          )}
         </li>
       </ul>
       <p className="mt-2 text-[0.88rem] text-ink-muted">{t('estimate.vat', { vat: lei(est.price.vat, locale) })}</p>

@@ -92,7 +92,7 @@ export function PriceBar({ est }: { est: Estimate | null }) {
       </div>
       {est && (
         <Sheet isOpen={open} onOpenChange={setOpen} title={t('estimate.breakdown')} closeLabel={t('common.close')}>
-          <PriceExplainer className="-mt-1 mb-3 border-b border-line pb-2" />
+          <PriceExplainer est={est} className="-mt-1 mb-3 border-b border-line pb-2" />
           <Breakdown est={est} />
         </Sheet>
       )}

@@ -7,13 +7,13 @@
   "nav": {
     "rules": "Cum calculăm",
     "faq": "Întrebări",
-    "start": "Estimare exactă",
+    "start": "Calculează prețul",
     "language": "Limba",
     "skip": "Sari la conținut",
     "gets": "Ce primești",
     "care": "Grija",
     "ways": "Cum comanzi",
-    "startShort": "Estimare"
+    "startShort": "Calculează"
   },
   "common": {
     "continue": "Continuă",
@@ -54,14 +54,14 @@
       "unknown": "Nu știu"
     },
     "cta": "Vezi prețul și ora",
-    "exact": "Sau fă o estimare exactă, ~3 minute",
+    "exact": "Sau fă o estimare exactă, 3–5 minute",
     "passTitleLive": "Estimarea ta, orientativă",
     "journey": {
       "title": "Cum decurge",
       "request": "Cererea",
       "requestText": "Configurezi și trimiți. Gratuit și fără obligații.",
       "survey": "Evaluarea",
-      "surveyText": "Fotografii, video sau o vizită. Apoi primești prețul fix.",
+      "surveyText": "Fotografii, video sau o vizită. Apoi primești prețul maxim garantat.",
       "crates": "Lăzile",
       "cratesText": "Ajung cu câteva zile înainte, dacă le-ai ales.",
       "move": "Mutarea",
@@ -110,8 +110,8 @@
       "packing": "Împachetare",
       "packingText": "Împachetăm noi bucătăria și lucrurile fragile sau tot, cu o zi înainte.",
       "visit": "Vizita unui specialist",
-      "visitText": "Vine acasă, vede ce mutăm și îți dă un preț fix. Fără surprize în ziua mutării.",
-      "cta": "Calculează-ți mutarea"
+      "visitText": "Vine acasă, vede ce mutăm și îți dă un preț maxim garantat. Fără surprize în ziua mutării.",
+      "cta": "Calculează prețul"
     },
     "care": {
       "title": "Cum avem grijă de casă și de lucruri",
@@ -136,16 +136,16 @@
       "flexTitle": "Configurezi tu",
       "flexWho": "Pentru cine vrea să decidă singur și să plătească doar ce alege.",
       "flex1": "Alegi serviciile și vezi prețul pe loc",
-      "flex2": "Evaluare gratuită din fotografii și video sau vizita unui specialist",
-      "flex3": "După evaluare primești un preț fix",
+      "flex2": "Evaluare din fotografii și video (gratuită) sau acasă la tine ({fee} lei, se scad din comandă)",
+      "flex3": "După evaluare, un preț maxim garantat",
       "flexCta": "Calculează prețul",
       "fullTitle": "Ne ocupăm de tot",
       "fullWho": "Pentru cine nu vrea să se gândească la nimic.",
-      "full1": "Un specialist vine acasă și face planul mutării",
+      "full1": "Un specialist vine acasă, gratuit, și face planul mutării",
       "full2": "Aducem lăzi și cutii și împachetăm tot",
       "full3": "Demontăm și montăm mobila",
       "full4": "Curățenie prin partenerul nostru, dacă vrei",
-      "full5": "Preț fix, stabilit după vizită",
+      "full5": "Preț maxim garantat, stabilit la vizită",
       "fromTitle": "Orientativ",
       "from": "de la {price}",
       "fullCta": "Programează vizita"
@@ -282,18 +282,19 @@
       "noAssemblyItems": "Alege întâi obiectele mari la pasul „Bagaje”."
     },
     "protection": {
-      "title": "Vrei un preț fix?",
+      "title": "Vrei un preț maxim garantat?",
       "question": "Cum vrei să evaluăm mutarea?",
-      "lead": "Până la evaluare, prețul e un interval. După evaluare devine fix, iar plata finală nu trece de el decât cu limita scrisă mai jos.",
+      "lead": "Până la evaluare, prețul e un interval. După evaluare primești un preț maxim garantat: nu plătești peste estimarea confirmată plus limita de mai jos.",
       "remote": "Da, din fotografii și video",
-      "remoteText": "Gratuit. Plata finală: cel mult +{pct} %. Evaluatorul poate cere o completare.",
+      "remoteText": "Gratuit. Maximum: estimarea confirmată + {pct} %. Evaluatorul poate cere o completare.",
       "onsite": "Da, cu vizita unui specialist",
-      "onsiteText": "{price} lei, se scad din comandă. Plata finală: cel mult +{pct} %.",
+      "onsiteText": "{price} lei, se scad din comandă. Maximum: estimarea confirmată + {pct} %.",
       "none": "Nu, rămân la interval",
       "noneText": "Plătești după timpul real, la tarifele publicate. Poate costa mai mult dacă sunt mai multe lucruri.",
       "liability": "Pentru lucruri răspundem conform legii: dacă ceva se strică din vina noastră, reparăm sau plătim valoarea reală.",
       "disabledByCrates": "Cu lăzi reutilizabile, specialistul aduce lăzile și evaluează în aceeași vizită.",
-      "disabledByAtSurvey": "Lucrurile se numără la evaluare, așa că e nevoie de una."
+      "disabledByAtSurvey": "Lucrurile se numără la evaluare, așa că e nevoie de una.",
+      "onlyOnsite": "Cu lăzi reutilizabile, evaluarea e o vizită: specialistul aduce lăzile și vede ce mutăm în aceeași vizită."
     },
     "when": {
       "title": "Când?",
@@ -401,7 +402,7 @@
     },
     "containers": {
       "crates": "Lăzi reutilizabile de la noi",
-      "cratesText": "Le aducem înainte și le luăm înapoi după",
+      "cratesText": "Le aducem și le luăm înapoi. Vin cu vizita specialistului: {fee} lei, se scad din comandă.",
       "cardboard": "Cutii de carton",
       "cardboardText": "{rate} lei / buc., le aducem",
       "own": "Cutiile mele",
@@ -468,8 +469,8 @@
     "passCrewValue": "{n} oameni",
     "passTotal": "Total cu TVA",
     "rangeLabel": "Interval până la evaluare",
-    "afterSurvey": "După evaluare primești un preț fix. Finalul nu depășește estimarea confirmată cu mai mult de {pct} %, dacă volumul și accesul sunt cele descrise.",
-    "noSurvey": "Fără evaluare rămâne un interval: plătești după timpul real, la tarifele de mai jos. Cere o evaluare gratuită din fotografii pentru un preț fix.",
+    "afterSurvey": "După evaluare primești un preț maxim garantat: estimarea confirmată + {pct} %, dacă volumul și accesul sunt cele descrise.",
+    "noSurvey": "Fără evaluare rămâne un interval: plătești după timpul real, la tarifele publicate. Cere o evaluare gratuită din fotografii pentru un preț maxim garantat.",
     "vat": "din care TVA 21 %: {vat}",
     "breakdown": "Detalii preț",
     "included": "Inclus gratuit",
@@ -525,10 +526,13 @@
       "onsite": "Specialistul vine la tine la ora stabilită și vede ce mutăm.",
       "remote": "Ne trimiți fotografii și video, iar evaluatorul le verifică.",
       "none": "Fără evaluare, rămâne intervalul de mai sus.",
-      "fixed": "Primești prețul fix și confirmi data.",
+      "fixed": "Primești prețul maxim garantat și confirmi data.",
       "free": "Nu plătești nimic acum."
     },
-    "priceFixTitle": "Cum devine prețul fix"
+    "priceFixTitle": "Cum devine prețul garantat",
+    "maxIfConfirmed": "Dacă evaluarea confirmă ce ai descris, nu plătești peste {max}.",
+    "baseTotal": "Estimarea de bază",
+    "rangeNote": "Intervalul {range} ține cont de ce nu am văzut încă: volumul real și răspunsurile „Nu știu”."
   },
   "priceBar": {
     "noPrice": "Prețul apare după primul pas",
@@ -551,14 +555,14 @@
     "comment": "Comentariu",
     "commentHint": "Orice ne ajută: cod de interfon, program, ce să știm despre bloc.",
     "addresses": "Adresele exacte",
-    "estimateTerms": "Înțeleg că, înainte de evaluare, prețul este un interval estimativ, iar prețul fix se confirmă după evaluare.",
+    "estimateTerms": "Înțeleg că, înainte de evaluare, prețul este un interval estimativ, iar prețul maxim garantat se confirmă după evaluare.",
     "marketing": "Doresc să primesc oferte și noutăți prin e-mail/SMS. Mă pot dezabona oricând.",
     "privacy": "Prin trimiterea cererii ne transmiți datele de contact și detaliile mutării, pe care le folosim pentru a-ți pregăti oferta. Detalii în Politica de confidențialitate.",
     "submit": "Trimite cererea (gratuit, fără obligații)",
     "sending": "Se trimite…",
     "successTitle": "Am primit cererea",
     "successText": "Numărul cererii: {id}. Te contactăm pentru evaluare.",
-    "successTasks": "Ce verificăm înainte de prețul fix:",
+    "successTasks": "Ce verificăm înainte de prețul maxim garantat:",
     "newEstimate": "Estimare nouă",
     "summary": "Ce trimiți",
     "failed": "Nu am putut trimite cererea. Încearcă din nou peste un minut."
@@ -730,11 +734,11 @@
   },
   "warn": {
     "noFitLift": {
-      "door": "{item} nu trece prin ușa liftului ({lift}) {end} → îl urcăm pe scări.",
-      "cabin": "{item} nu încape în cabina liftului ({lift}) {end} → îl urcăm pe scări.",
+      "door": "{item} nu trece prin ușa liftului ({lift}) {end} → pe scări.",
+      "cabin": "{item} nu încape în cabina liftului ({lift}) {end} → pe scări.",
       "notAllowed": "{item}: asociația nu permite mobila în lift {end} → pe scări."
     },
-    "selfDisassembly": "{item} se mută doar demontat. Îl demontezi tu sau alegi meșterul la „Servicii”.",
+    "selfDisassembly": "{item}: se mută doar după demontare. O faci tu sau alegi meșterul la „Servicii”.",
     "parkedAway": "Zona {end}: accesul vehiculelor peste {maxT} t e limitat → {vehicle} oprește la ~{meters} m, am calculat distanța.",
     "exceedsWorkday": "Mutarea nu încape într-o zi de lucru (până la {windowH} h, maxim {max} h). Recomandăm o vizită de evaluare sau mai mulți oameni.",
     "fullDayExceeded": "Mutarea durează ~{hours} h, mai mult decât o zi rezervată. Orele în plus se plătesc separat.",
@@ -811,13 +815,14 @@
     "toggle": "Ce include prețul?",
     "made": "Duba și echipa, plătite pe oră, plus serviciile pe care le alegi. Orele le estimăm din volum, etaje, lift și distanță.",
     "included": "Fără cost: {list}.",
-    "range": "E un interval pentru că încă nu ți-am văzut lucrurile. După evaluare primești un preț fix, iar plata finală nu trece de el cu mai mult de {low}–{high} %.",
     "consent": "Nimic nu se adaugă fără acordul tău.",
-    "more": "Cum calculăm, în detaliu"
+    "more": "Cum calculăm, în detaliu",
+    "rangeFor": "E un interval pentru că încă nu ți-am văzut lucrurile. După evaluarea aleasă primești un preț maxim garantat: estimarea confirmată + {pct} %.",
+    "rangeAny": "E un interval pentru că încă nu ți-am văzut lucrurile. După evaluare primești un preț maxim garantat: estimarea confirmată + {onsite} % după vizită sau + {remote} % după fotografii și video."
   },
   "rates": {
     "title": "Cum calculăm prețul",
-    "metaDescription": "Tarifele Mutabil pe oră și la bucată, ce e inclus fără cost și cum devine estimarea un preț fix.",
+    "metaDescription": "Tarifele Mutabil pe oră și la bucată, ce e inclus fără cost și cum devine estimarea un preț maxim garantat.",
     "lead": "Aceleași tarife stau în spatele fiecărei estimări de pe site. Nu există altele și nu negociem la fața locului.",
     "madeTitle": "Din ce e făcută suma",
     "made1": "Duba și echipa, plătite pe oră. Orele le estimăm din volum, etaje, lift și distanța de la ușă la dubă.",
@@ -846,10 +851,10 @@
     "master": "Meșter în ziua mutării",
     "masterPrice": "{rate} lei / deplasare",
     "includedTitle": "Inclus în orice mutare, fără cost",
-    "rangeTitle": "De la interval la preț fix",
+    "rangeTitle": "De la interval la preț maxim garantat",
     "range1": "Până vedem ce mutăm, îți arătăm un interval: cât ar costa în cazul cel mai bun și în cel mai rău.",
-    "range2": "După evaluare primești un preț fix. Plata finală nu trece de el cu mai mult de {remote} % după foto și video sau {onsite} % după vizita specialistului, dacă volumul și accesul sunt cele descrise.",
-    "range3": "Vizita specialistului costă {fee} lei și se scade din comandă.",
+    "range2": "După evaluare primești un preț maxim garantat: plata finală nu trece de estimarea confirmată cu mai mult de {remote} % după foto și video sau {onsite} % după vizita specialistului, dacă volumul și accesul sunt cele descrise.",
+    "range3": "În pachetul „Ne ocupăm de tot” vizita e gratuită. Altfel costă {fee} lei și se scade din comandă.",
     "changesTitle": "Când se schimbă prețul",
     "overtime": "O oră peste fereastra garantată",
     "overtimeText": "duba și echipa, aceleași tarife, facturat la 30 de minute",
@@ -862,12 +867,12 @@
     "promise2": "Nu reținem lucrurile pentru o plată în plus.",
     "promise3": "Nu negociem la ușă: prețul e cel calculat după aceste reguli.",
     "note": "Toate prețurile sunt în lei și includ TVA 21 %. Valorile sunt în curs de verificare.",
-    "cta": "Calculează-ți mutarea"
+    "cta": "Calculează prețul"
   },
   "visit": {
     "metaTitle": "Programează vizita",
     "title": "Ne ocupăm de tot",
-    "lead": "Spune-ne de unde și unde te muți. Te sunăm să stabilim ora vizitei, iar specialistul vede totul la fața locului și îți dă un preț fix.",
+    "lead": "Spune-ne de unde și unde te muți. Te sunăm să stabilim ora vizitei, iar specialistul vede totul la fața locului și îți dă un preț maxim garantat.",
     "from": "De la",
     "to": "La",
     "size": "Ce mutăm",
@@ -876,7 +881,7 @@
     "dateHint": "Aproximativ e suficient. Poți lăsa gol.",
     "cleaning": "Vreau și curățenie după mutare, prin partenerul vostru",
     "cleaningNote": "Curățenie după mutare: da",
-    "terms": "Am înțeles că prețul fix se stabilește după vizită.",
+    "terms": "Am înțeles că prețul maxim garantat se stabilește la vizită.",
     "submit": "Programează vizita",
     "asideTitle": "Ce e inclus",
     "fromPrice": "Orientativ pentru {size}: de la {price}",

@@ -77,7 +77,7 @@ export function BoardingPass({
               <div className="mt-1 truncate text-[0.85rem] text-on-night-muted">{r.toName ?? t('common.to')}</div>
             </div>
           </div>
-          <dl className="grid grid-cols-3 gap-3 border-t border-white/15 pt-4 [&>div]:flex [&>div]:flex-col [&>div]:justify-between [&>div]:gap-1">
+          <dl className="grid grid-cols-[auto_auto_auto] justify-between gap-3 border-t border-white/15 pt-4 [&_dt]:whitespace-nowrap [&>div]:flex [&>div]:flex-col [&>div]:justify-between [&>div]:gap-1">
             <div>
               <dt className="label-cap text-on-night-muted">{t('estimate.passFrom')}</dt>
               <dd className="tabular font-[family-name:var(--font-display)] text-[1.5rem] font-extrabold">{start}</dd>
@@ -126,7 +126,7 @@ export function BoardingPass({
             <div className="tabular price-digits font-[family-name:var(--font-display)] text-[1.9rem] leading-tight font-extrabold">
               {variant === 'conditional' ? lei(est.price.base, locale) : leiRange(est.price.low, est.price.high, locale)}
             </div>
-            <PriceExplainer onNight />
+            <PriceExplainer est={est} onNight />
           </div>
         </div>
       </div>

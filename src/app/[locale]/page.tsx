@@ -5,7 +5,7 @@
  */
 import type { ReactNode } from 'react';
 import { getLocale, getTranslations } from 'next-intl/server';
-import { ArrowRight, Boxes, Check, DoorOpen, Layers, Plus, Sofa, Truck, Wrench } from 'lucide-react';
+import { ArrowRight, Check, Plus } from 'lucide-react';
 import { getConfig } from '@/config';
 import { fullServiceFrom } from '@/domain/fullService';
 import { SiteHeader } from '@/features/shell/SiteHeader';
@@ -14,7 +14,20 @@ import { QuickSearch } from '@/features/landing/QuickSearch';
 import { Link } from '@/i18n/navigation';
 import { lei } from '@/lib/format';
 import { cx } from '@/ui/cx';
-import { AssemblySketch, CrateSketch, MattressBagSketch, PackingSketch, VisitSketch, WardrobeBoxSketch } from '@/ui/Sketch';
+import {
+  AssemblySketch,
+  CrateSketch,
+  DollySketch,
+  DoorSketch,
+  FloorSketch,
+  LabelledCrateSketch,
+  MattressBagSketch,
+  PackingSketch,
+  SecuredLoadSketch,
+  VisitSketch,
+  WardrobeBoxSketch,
+  WrappedSofaSketch,
+} from '@/ui/Sketch';
 
 const H2 = 'text-[clamp(1.8rem,4.2vw,2.7rem)] leading-[1.05] font-extrabold';
 const CTA =
@@ -40,12 +53,12 @@ export default async function LandingPage() {
   ] as const;
 
   const care = [
-    { id: 'floor', Icon: Layers },
-    { id: 'doors', Icon: DoorOpen },
-    { id: 'furniture', Icon: Sofa },
-    { id: 'crates', Icon: Boxes },
-    { id: 'van', Icon: Truck },
-    { id: 'crew', Icon: Wrench },
+    { id: 'floor', Sketch: FloorSketch },
+    { id: 'doors', Sketch: DoorSketch },
+    { id: 'furniture', Sketch: WrappedSofaSketch },
+    { id: 'crates', Sketch: LabelledCrateSketch },
+    { id: 'van', Sketch: SecuredLoadSketch },
+    { id: 'crew', Sketch: DollySketch },
   ] as const;
 
   const guides = P.fullService.presets.map((id) => ({
@@ -115,30 +128,24 @@ export default async function LandingPage() {
           </div>
         </section>
 
-        {/* How we take care: photo slots until real photos arrive (D35) */}
+        {/* How we take care: drawings in the same hand as "what you get" until real photos arrive (D35, D40) */}
         <section id="grija" aria-labelledby="care-title" className="mx-auto max-w-6xl scroll-mt-4 px-4 py-16 sm:px-6">
           <h2 id="care-title" className={cx(H2, 'max-w-[20ch]')}>
             {t('landing.care.title')}
           </h2>
           <p className="mt-3 max-w-[58ch] text-[1.05rem] text-ink-muted">{t('landing.care.lead')}</p>
-          <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-3">
-            {care.map(({ id, Icon }) => (
-              <li key={id}>
-                <figure className="m-0">
-                  <div className="grid aspect-[4/3] place-items-center rounded-[var(--radius-field)] border border-dashed border-line-strong bg-paper text-line-strong">
-                    <Icon size={40} strokeWidth={1.4} aria-hidden />
-                  </div>
-                  <figcaption className="mt-3">
-                    <span className="block font-[family-name:var(--font-display)] text-[1.05rem] leading-tight font-bold">
-                      {t(`landing.care.${id}`)}
-                    </span>
-                    <span className="mt-1 block text-[0.95rem] leading-snug text-ink-muted">{t(`landing.care.${id}Text`)}</span>
-                  </figcaption>
-                </figure>
+          <ul className="mt-10 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
+            {care.map(({ id, Sketch }) => (
+              <li key={id} className="grid grid-cols-[72px_1fr] items-start gap-4 border-t border-line py-5">
+                <Sketch title="" className="text-ink" />
+                <div>
+                  <h3 className="text-[1.08rem] leading-tight font-extrabold">{t(`landing.care.${id}`)}</h3>
+                  <p className="mt-1 text-[0.95rem] leading-snug text-ink-muted">{t(`landing.care.${id}Text`)}</p>
+                </div>
               </li>
             ))}
           </ul>
-          <p className="mt-8 text-[0.9rem] text-ink-muted">{t('landing.care.note')}</p>
+          <p className="mt-4 text-[0.9rem] text-ink-muted">{t('landing.care.note')}</p>
         </section>
 
         {/* Two ways to order instead of three fares (D31) */}
@@ -151,7 +158,7 @@ export default async function LandingPage() {
             <Way
               title={t('landing.ways.flexTitle')}
               who={t('landing.ways.flexWho')}
-              items={[t('landing.ways.flex1'), t('landing.ways.flex2'), t('landing.ways.flex3')]}
+              items={[t('landing.ways.flex1'), t('landing.ways.flex2', { fee: P.survey.onsite.priceLei }), t('landing.ways.flex3')]}
               cta={
                 <Link href="/estimate" className={CTA}>
                   {t('landing.ways.flexCta')}

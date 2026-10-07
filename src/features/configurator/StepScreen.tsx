@@ -238,7 +238,7 @@ function BookingAside({ est }: { est: ReturnType<typeof useEstimate> }) {
               <span className="text-[0.92rem] text-ink-muted">{t('estimate.vat', { vat: lei(est.price.vat, locale) })}</span>
               <DeltaChip delta={delta} />
             </div>
-            <Disclosure title={t('estimate.breakdown')} className="mt-2 border-t border-line pt-1">
+            <Disclosure title={t('estimate.breakdown')} level={2} className="mt-2 border-t border-line pt-1">
               <Breakdown est={est} />
             </Disclosure>
           </div>

@@ -207,7 +207,7 @@ export function QuickSearch() {
             {endFields('to', to, setTo)}
           </fieldset>
           {tried && (!what || !from.zoneId || !to.zoneId) && (
-            <p role="alert" className="rounded-md bg-amber px-3 py-2 text-[0.92rem] font-semibold text-night">
+            <p role="alert" className="rounded-md border border-white/40 bg-white px-3 py-2 text-[0.92rem] font-semibold text-error">
               {!what ? t('validation.taskType.required') : t('validation.zone.required')}
             </p>
           )}

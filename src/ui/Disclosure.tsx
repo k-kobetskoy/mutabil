@@ -5,11 +5,29 @@ import { ChevronDown } from 'lucide-react';
 import { cx } from './cx';
 
 /** "De ce?" / details toggle: keyboard and screen-reader friendly (aria-expanded). */
-export function Disclosure({ title, children, defaultExpanded, className, titleClassName }: { title: ReactNode; children: ReactNode; defaultExpanded?: boolean; className?: string; titleClassName?: string }) {
+export function Disclosure({
+  title,
+  children,
+  defaultExpanded,
+  className,
+  titleClassName,
+  level = 3,
+}: {
+  title: ReactNode;
+  children: ReactNode;
+  defaultExpanded?: boolean;
+  className?: string;
+  titleClassName?: string;
+  /** heading level of the toggle, so the outline has no gaps (h1 → h2 in an aside) */
+  level?: 2 | 3 | 4;
+}) {
   return (
     <AriaDisclosure defaultExpanded={defaultExpanded} className={cx('group', className)}>
-      <Heading className="m-0 font-[family-name:var(--font-sans)] text-[inherit] font-normal tracking-normal">
-        <Button slot="trigger" className={cx('flex w-full cursor-pointer items-center justify-between gap-3 py-2 text-left font-semibold', titleClassName)}>
+      <Heading level={level} className="m-0 font-[family-name:var(--font-sans)] text-[inherit] font-normal tracking-normal">
+        <Button
+          slot="trigger"
+          className={cx('flex w-full cursor-pointer items-center justify-between gap-3 py-2 text-left font-semibold', titleClassName)}
+        >
           {title}
           <ChevronDown size={18} aria-hidden className="shrink-0 transition-transform duration-200 group-data-[expanded]:rotate-180" />
         </Button>
@@ -25,7 +43,10 @@ export function Disclosure({ title, children, defaultExpanded, className, titleC
 export function Why({ label, children }: { label: ReactNode; children: ReactNode }) {
   return (
     <AriaDisclosure className="group">
-      <Button slot="trigger" className="cursor-pointer text-[0.85rem] font-semibold text-route underline decoration-dotted underline-offset-4 hover:text-route-hover">
+      <Button
+        slot="trigger"
+        className="cursor-pointer text-[0.85rem] font-semibold text-route underline decoration-dotted underline-offset-4 hover:text-route-hover"
+      >
         {label}
       </Button>
       <DisclosurePanel className="overflow-clip">

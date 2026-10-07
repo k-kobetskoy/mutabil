@@ -5,6 +5,7 @@
  * a fixed price on site. Sent through the same OrderService with `service: 'full'`.
  */
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { useLocale, useTranslations } from 'next-intl';
 import { Form } from 'react-aria-components';
 import { ArrowRight, Check, CheckCircle2 } from 'lucide-react';
@@ -21,6 +22,13 @@ import { SelectField } from '@/ui/SelectField';
 import { useCfg, useServices } from '../configurator/providers';
 import { todayIso } from '../configurator/StepScreen';
 import { zoneGroups } from '../configurator/useRoute';
+
+// react-aria's date field reads the clock while rendering, which Next 16 rejects in a prerender:
+// it loads in the browser only, behind a box of the same height
+const DateInput = dynamic(() => import('@/ui/DateInput').then((m) => m.DateInput), {
+  ssr: false,
+  loading: () => <div aria-hidden className="h-[5.4rem]" />,
+});
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const INCLUDED = ['full1', 'full2', 'full3', 'full4', 'full5'] as const;
@@ -128,6 +136,7 @@ export function VisitScreen() {
           <p className="mt-3 max-w-[58ch] text-[1.05rem] text-ink-muted">{t('visit.lead')}</p>
           {errList.length > 0 && (
             <div role="alert" className="mt-5 rounded-[var(--radius-field)] border border-error bg-paper px-4 py-3">
+              <p className="font-bold">{t('flow.errorsTitle')}</p>
               <ul className="list-disc pl-5">
                 {errList.map((k) => (
                   <li key={k}>{t(k)}</li>
@@ -173,11 +182,11 @@ export function VisitScreen() {
                 isInvalid={!!errors.size}
                 errorMessage={errors.size && t(errors.size)}
               />
-              <TextInput
+              <DateInput
                 label={t('visit.date')}
-                type="date"
                 value={date}
                 onChange={setDate}
+                locale={locale}
                 description={t('visit.dateHint')}
                 isInvalid={!!errors.date}
                 errorMessage={errors.date && t(errors.date)}
@@ -227,6 +236,7 @@ export function VisitScreen() {
               </Checkbox>
               <p className="text-[0.85rem] text-ink-muted">{t('contact.privacy')}</p>
             </div>
+            <p className="text-[0.95rem] font-semibold lg:hidden">{t('visit.visitFree')}</p>
             <Button type="submit" size="lg" isDisabled={sending} className="self-start max-sm:w-full">
               {sending ? t('contact.sending') : t('visit.submit')}
             </Button>

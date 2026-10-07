@@ -104,6 +104,74 @@ export function VisitSketch({ title, className }: { title: string; className?: s
   );
 }
 
+/* ---------- care (decisions D40): what the crew does, until real photos replace them ---------- */
+
+export function FloorSketch({ title, className }: { title: string; className?: string }) {
+  return (
+    <Frame title={title} className={className}>
+      <path d="M8 62 h104" {...S} />
+      <path d="M14 62 l10 -14 h34 l-10 14 M50 62 l10 -14 h34 l-10 14" {...S} />
+      <path d="M30 55 h18 M66 55 h18" {...S} strokeDasharray="2 3" />
+      <path d="M98 40 a6 6 0 1 1 0.1 0 M98 34 v-14 h-10" {...S} />
+    </Frame>
+  );
+}
+
+export function DoorSketch({ title, className }: { title: string; className?: string }) {
+  return (
+    <Frame title={title} className={className}>
+      <path d="M40 72 V10 h40 v62" {...S} />
+      <path d="M46 72 V16 h28 v56" {...S} strokeDasharray="3 3" />
+      <path d="M36 72 V22 M84 72 V22 M36 22 l4 -4 M84 22 l-4 -4" {...S} strokeWidth={3} />
+      <path d="M70 44 h-4" {...S} />
+    </Frame>
+  );
+}
+
+export function WrappedSofaSketch({ title, className }: { title: string; className?: string }) {
+  return (
+    <Frame title={title} className={className}>
+      <path d="M18 36 q0 -10 10 -10 h64 q10 0 10 10 v24 h-84 z" {...S} />
+      <path d="M18 60 v6 M102 60 v6" {...S} />
+      {[30, 46, 62, 78, 94].map((x) => (
+        <path key={x} d={`M${x - 8} 60 L${x + 6} 28`} {...S} strokeWidth={1} />
+      ))}
+    </Frame>
+  );
+}
+
+export function LabelledCrateSketch({ title, className }: { title: string; className?: string }) {
+  return (
+    <Frame title={title} className={className}>
+      <path d="M24 34 h72 v32 h-72 z M20 34 h80" {...S} />
+      <path d="M46 26 h28 l4 8 h-36 z" {...S} />
+      <path d="M40 44 h24 v14 h-24 z" {...S} />
+      <path d="M44 49 h16 M44 54 h10" {...S} strokeWidth={1.2} />
+    </Frame>
+  );
+}
+
+export function SecuredLoadSketch({ title, className }: { title: string; className?: string }) {
+  return (
+    <Frame title={title} className={className}>
+      <path d="M12 14 h96 v52 h-96 z" {...S} />
+      <path d="M22 66 V40 h24 v26 M50 66 V30 h22 v36 M76 66 V46 h22 v20" {...S} />
+      <path d="M12 26 L108 54 M12 54 L108 26" {...S} strokeDasharray="5 3" />
+    </Frame>
+  );
+}
+
+export function DollySketch({ title, className }: { title: string; className?: string }) {
+  return (
+    <Frame title={title} className={className}>
+      <path d="M44 8 l8 4 v54 h26" {...S} />
+      <path d="M58 30 h22 v18 h-22 z M58 48 h24 v18 h-24 z" {...S} />
+      <circle cx="54" cy="70" r="5" {...S} />
+      <path d="M86 70 h18" {...S} />
+    </Frame>
+  );
+}
+
 export function VanSketch({ className, title }: { className?: string; title: string }) {
   return (
     <svg viewBox="0 0 48 24" role="img" aria-label={title} className={className}>

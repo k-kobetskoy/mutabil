@@ -96,27 +96,46 @@ export function ResultScreen() {
       {/* The one total is on the pass, with "what's in this price?" right under it (D37) */}
       <BoardingPass order={order} est={est} variant={variant} className="mt-6" />
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start">
-        <div className="flex flex-col gap-8">
-          <PriceBlock est={est} variant={variant} />
-          <Card title={t('estimate.breakdown')}>
-            <Breakdown est={est} />
-            <p className="mt-3 border-t border-line pt-3 text-[0.92rem]">
-              <Overtime est={est} />
-            </p>
-          </Card>
-          <TimeBlock est={est} order={order} />
-          <NextSteps order={order} />
+      {/* Phones read one column in the order a client asks: how sure is it, what to know, what it is
+          made of, how long, alternatives, dates, and the page ends on what happens next. On desktop
+          the two columns come back (`contents` lets the cards reorder across them). */}
+      <div className="mt-8 flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start">
+        <div className="contents lg:flex lg:flex-col lg:gap-8">
+          <div className="order-1 lg:order-none">
+            <PriceBlock est={est} variant={variant} />
+          </div>
+          <div className="order-3 lg:order-none">
+            <Card title={t('estimate.breakdown')}>
+              <Breakdown est={est} />
+              <p className="mt-3 border-t border-line pt-3 text-[0.92rem]">
+                <Overtime est={est} />
+              </p>
+            </Card>
+          </div>
+          <div className="order-4 lg:order-none">
+            <TimeBlock est={est} order={order} />
+          </div>
+          <div className="order-8 lg:order-none">
+            <NextSteps order={order} />
+          </div>
         </div>
-        <div className="flex flex-col gap-6">
-          <Actions order={order} />
-          <CrewOptions est={est} />
-          <Timeline est={est} />
-          <Checks est={est} />
+        <div className="contents lg:flex lg:flex-col lg:gap-6">
+          <div className="order-7 lg:order-none">
+            <Actions order={order} />
+          </div>
+          <div className="order-5 empty:hidden lg:order-none">
+            <CrewOptions est={est} />
+          </div>
+          <div className="order-6 empty:hidden lg:order-none">
+            <Timeline est={est} />
+          </div>
+          <div className="order-2 empty:hidden lg:order-none">
+            <Checks est={est} />
+          </div>
         </div>
       </div>
       <div className="on-night fixed inset-x-0 bottom-0 z-30 border-t border-white/10 bg-night px-4 py-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] lg:hidden">
-        <SendLink className="w-full" />
+        <SendLink className="inline-flex w-full" />
       </div>
     </main>
   );
@@ -172,6 +191,9 @@ function PriceBlock({ est, variant }: { est: Estimate; variant: Variant }) {
   const cfg = useCfg();
   const conds = conditions(est.scenarios, cfg.app.ui.maxConditionalLines);
   const pct = est.price.afterSurvey ? Math.round(est.price.afterSurvey.capTolerance * 100) : 0;
+  // D38: if the survey confirms the answers, the confirmed estimate is the base; the cap is on top
+  const step = cfg.pricing.rounding.totalLei * 100;
+  const maxIfConfirmed = Math.ceil((est.price.base * (1 + (est.price.afterSurvey?.capTolerance ?? 0))) / step) * step;
   const value = (v: unknown) => explain({ key: 'estimate.scenarioIf', params: { value: v as string } });
 
   // The total itself is on the pass; this card says how it can move and how it becomes fixed (D37)
@@ -188,7 +210,11 @@ function PriceBlock({ est, variant }: { est: Estimate; variant: Variant }) {
       >
         {est.price.afterSurvey ? t('estimate.afterSurvey', { pct }) : t('estimate.noSurvey')}
       </p>
-      <p className="mt-3 text-[0.92rem] text-ink-muted">{t('estimate.worst', { worst: lei(est.price.worst, locale) })}</p>
+      {est.price.afterSurvey && <p className="mt-3 font-semibold">{t('estimate.maxIfConfirmed', { max: lei(maxIfConfirmed, locale) })}</p>}
+      {/* with a survey the guaranteed maximum is the number to remember; the worst case only without one */}
+      {!est.price.afterSurvey && (
+        <p className="mt-3 text-[0.92rem] text-ink-muted">{t('estimate.worst', { worst: lei(est.price.worst, locale) })}</p>
+      )}
       {variant === 'conditional' && (
         <>
           <p className="mt-4 text-[0.95rem] text-ink-muted">{t('estimate.conditionalLead')}</p>
@@ -291,6 +317,8 @@ function CrewOptions({ est }: { est: Estimate }) {
   const locale = useLocaleTyped();
   const update = useOrderStore((s) => s.update);
   if (est.crew.alternatives.length < 2) return null;
+  // differences, not totals: an absolute "2.910 lei" next to the range reads as a third price
+  const current = est.crew.alternatives.find((a) => a.size === est.crew.size)?.total ?? est.price.base;
   return (
     <Card title={t('estimate.crewAlternatives')}>
       <ul className="flex flex-col gap-2">
@@ -308,7 +336,9 @@ function CrewOptions({ est }: { est: Estimate }) {
                 <span className="font-semibold">{t('estimate.passCrewValue', { n: a.size })}</span>
                 <span className="text-[0.85rem] text-ink-muted">{t('estimate.crewWindow', { window: num(a.windowH, locale) })}</span>
               </span>
-              <span className="tabular font-[family-name:var(--font-display)] font-bold whitespace-nowrap">{lei(a.total, locale)}</span>
+              <span className="tabular font-[family-name:var(--font-display)] font-bold whitespace-nowrap">
+                {chosen ? '' : a.total === current ? '±0 lei' : signedLei(a.total - current, locale)}
+              </span>
               {chosen ? (
                 <span className="flex items-center gap-1 text-[0.85rem] font-bold text-route">
                   <Check size={16} aria-hidden /> {t('estimate.crewChosen')}
@@ -412,7 +442,8 @@ function SendLink({ className }: { className?: string }) {
     <Link
       href="/estimate/contact"
       className={cx(
-        'inline-flex min-h-14 flex-col items-center justify-center rounded-[var(--radius-field)] bg-route px-6 py-1.5 text-white no-underline shadow-[var(--shadow-lift)] hover:bg-route-hover',
+        // no display utility here: each caller sets it, so hidden is never overridden
+        'min-h-14 flex-col items-center justify-center rounded-[var(--radius-field)] bg-route px-6 py-1.5 text-white no-underline shadow-[var(--shadow-lift)] hover:bg-route-hover',
         className,
       )}
     >
@@ -499,7 +530,7 @@ function Actions({ order }: { order: OrderInput }) {
         </div>
       )}
       <div className="grid grid-cols-2 gap-2">
-        <Button variant="onNight" onPress={() => void share()}>
+        <Button variant="onNight" onPress={() => void share()} className="!px-3 whitespace-nowrap">
           <Share2 size={18} aria-hidden /> {t('estimate.shareShort')}
         </Button>
         {firstStep && (

@@ -58,9 +58,11 @@ export function Stepper({
         {/* An unanswered value shows a dash, not an empty gap between − and + */}
         <Input
           placeholder="–"
+          // react-aria picks inputMode by platform, so server and Android disagree; our values are whole numbers
+          inputMode="numeric"
           className={cx(
             'tabular w-12 bg-transparent text-center font-[family-name:var(--font-display)] text-[1.15rem] font-bold outline-none',
-            onNight ? 'text-white placeholder:text-white/45' : 'text-ink placeholder:text-ink-muted',
+            onNight ? 'text-white placeholder:text-white/65' : 'text-ink placeholder:text-ink-muted',
           )}
         />
         <Button slot="increment" className={btn}>

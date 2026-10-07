@@ -4,7 +4,7 @@
  * Each answer shows the range it leads to, so the cheaper choice is as visible as the safer one.
  * Liability is by law and always included; full protection is out of the MVP (owner, 2026-10-07).
  */
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import type { OrderInput } from '@/contract/order';
 import { estimate } from '@/domain/estimate';
@@ -45,6 +45,34 @@ export function StepProtection({ errors }: StepProps) {
     onsite: t('steps.protection.onsiteText', { price: P.survey.onsite.priceLei, pct: pct(P.survey.onsite.capTolerance) }),
     none: t('steps.protection.noneText'),
   };
+
+  // With crates only a visit is possible: confirm it in one line instead of a three-tile "choice" (D39)
+  const only = allowed && allowed.length === 1 ? (allowed[0] as Survey) : null;
+  useEffect(() => {
+    if (only && order.survey?.method !== only) patch((o) => ({ ...o, survey: { method: only }, protection: { level: 'basic' } }));
+  }, [only, order.survey?.method, patch]);
+
+  if (only) {
+    return (
+      <>
+        <section
+          aria-labelledby="survey-only"
+          className="flex flex-col gap-2 rounded-[var(--radius-panel)] border border-line bg-paper p-5"
+        >
+          <h2 id="survey-only" className="font-[family-name:var(--font-display)] text-[1.15rem] font-extrabold">
+            {t(`steps.protection.${only}`)}
+          </h2>
+          {flow.blockedBy(
+            'survey.method',
+            METHODS.find((m) => m !== only)!,
+          ) === 'crates-onsite-survey' && <p className="text-ink-muted">{t('steps.protection.onlyOnsite')}</p>}
+          <p>{text[only]}</p>
+          {ranges && <p className="tabular font-[family-name:var(--font-display)] text-[1.2rem] font-extrabold">{ranges[only]}</p>}
+        </section>
+        <p className="max-w-[62ch] text-[0.95rem] text-ink-muted">{t('steps.protection.liability')}</p>
+      </>
+    );
+  }
 
   return (
     <>
