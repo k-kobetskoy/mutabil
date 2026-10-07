@@ -80,7 +80,8 @@ export function ChoiceTiles<V extends string>({
                   ? 'border-route bg-route-soft shadow-[inset_0_0_0_1px_var(--color-route)]'
                   : 'border-line hover:border-line-strong',
                 isFocusVisible && 'outline-3 outline-offset-2 outline-route',
-                isDisabled && 'cursor-not-allowed opacity-45',
+                // disabled stays readable: a dashed outline and muted text instead of fading to 45 %
+                isDisabled && 'cursor-not-allowed border-dashed bg-transparent shadow-none [&_*]:text-ink-muted',
               )
             }
           >

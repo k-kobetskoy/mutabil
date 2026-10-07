@@ -8,11 +8,12 @@ import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Plus, Trash2 } from 'lucide-react';
 import type { OrderInput } from '@/contract/order';
-import { presetFor } from '@/domain/volume';
+import { inventoryMode, presetFor } from '@/domain/volume';
 import type { AppLocale } from '@/lib/format';
 import { useOrderStore } from '@/state/order-store';
 import { Button } from '@/ui/Button';
 import { ChoiceTiles } from '@/ui/ChoiceTiles';
+import { Disclosure } from '@/ui/Disclosure';
 import { Switch, TextInput } from '@/ui/Fields';
 import { Stepper } from '@/ui/Stepper';
 import { MediaBlock } from '../../media/MediaBlock';
@@ -28,9 +29,14 @@ export function StepItems({ errors }: StepProps) {
   const cfg = useCfg();
   const order = useOrderStore((s) => s.order);
   const update = useOrderStore((s) => s.update);
-  const mode = order.inventory?.mode;
+  // No answer = by rooms, exactly as the estimate counts it (domain/volume inventoryMode)
+  const mode = inventoryMode(order);
   const onlyList = order.taskType === 'items';
   const preset = presetFor(order, cfg);
+  const items = order.inventory?.items ?? {};
+  // Kallax inserts only matter when a Kallax shelf is on the list
+  const hasKallax = Object.entries(items).some(([id, n]) => id.startsWith('kallax') && n > 0) || !!order.inventory?.kallaxInserts;
+  const unusual = (order.inventory?.custom?.length ?? 0) + (order.special?.length ?? 0);
 
   return (
     <>
@@ -43,8 +49,8 @@ export function StepItems({ errors }: StepProps) {
           isInvalid={!!errors['inventory.mode']}
           errorMessage={errors['inventory.mode'] && t(errors['inventory.mode'])}
           tiles={[
-            { value: 'list', label: t('steps.items.modeList'), hint: t('steps.items.modeListText') },
             { value: 'preset', label: t('steps.items.modePreset'), hint: t('steps.items.modePresetText') },
+            { value: 'list', label: t('steps.items.modeList'), hint: t('steps.items.modeListText') },
             { value: 'atSurvey', label: t('steps.items.modeSurvey'), hint: t('steps.items.modeSurveyText') },
           ]}
         />
@@ -63,20 +69,38 @@ export function StepItems({ errors }: StepProps) {
             onChange={(v) => update('inventory.boxes', v)}
             description={preset ? t('steps.items.boxesHint', { preset: preset.name[locale], typical: preset.boxes.typical }) : undefined}
           />
-          <Stepper
-            label={t('steps.items.kallax')}
-            value={order.inventory?.kallaxInserts ?? 0}
-            min={0}
-            max={400}
-            onChange={(v) => update('inventory.kallaxInserts', v || undefined)}
-            description={t('steps.items.kallaxHint')}
-          />
+          {mode === 'list' && hasKallax && (
+            <Stepper
+              label={t('steps.items.kallax')}
+              value={order.inventory?.kallaxInserts ?? 0}
+              min={0}
+              max={400}
+              onChange={(v) => update('inventory.kallaxInserts', v || undefined)}
+              description={t('steps.items.kallaxHint')}
+            />
+          )}
         </div>
       )}
 
-      {mode === 'list' && <CustomItems />}
-      {mode && <SpecialItems />}
-      {mode && <MediaBlock />}
+      <Disclosure
+        title={
+          <span className="flex flex-col">
+            <span className="font-[family-name:var(--font-display)] text-[1.05rem] font-bold">
+              {t('steps.items.unusual')}
+              {unusual > 0 && <span className="tabular font-normal text-ink-muted"> · {unusual}</span>}
+            </span>
+            <span className="text-[0.9rem] font-normal text-ink-muted">{t('steps.items.unusualText')}</span>
+          </span>
+        }
+        defaultExpanded={unusual > 0}
+        className="border-y border-line"
+      >
+        <div className="flex flex-col gap-5 pt-2">
+          {mode === 'list' && <CustomItems />}
+          <SpecialItems />
+        </div>
+      </Disclosure>
+      <MediaBlock />
     </>
   );
 }
@@ -106,9 +130,9 @@ function ItemList({ error }: { error?: string }) {
           {t('flow.chosenCount', { count: chosen })}
         </p>
       </div>
-      <div className="grid gap-x-8 gap-y-6 md:grid-cols-2">
+      <div className="gap-x-8 md:columns-2">
         {groups.map((g) => (
-          <fieldset key={g.c} className="flex flex-col">
+          <fieldset key={g.c} className="mb-6 flex break-inside-avoid flex-col">
             <legend className="label-cap mb-1 text-ink-muted">{t(`steps.items.categories.${g.c}`)}</legend>
             <ul className="divide-y divide-line border-y border-line">
               {g.list.map((i) => (
@@ -159,7 +183,14 @@ function CustomItems() {
                   {c.wCm}×{c.dCm}×{c.hCm} cm · × {c.qty}
                 </span>
               </span>
-              <Button variant="ghost" aria-label={`${t('common.remove')}: ${c.label || t('steps.items.custom')}`} className="!min-h-10 !px-2" onPress={() => update('inventory.custom', custom.filter((_, j) => j !== i).length ? custom.filter((_, j) => j !== i) : undefined)}>
+              <Button
+                variant="ghost"
+                aria-label={`${t('common.remove')}: ${c.label || t('steps.items.custom')}`}
+                className="!min-h-10 !px-2"
+                onPress={() =>
+                  update('inventory.custom', custom.filter((_, j) => j !== i).length ? custom.filter((_, j) => j !== i) : undefined)
+                }
+              >
                 <Trash2 size={16} aria-hidden />
               </Button>
             </li>
@@ -167,7 +198,12 @@ function CustomItems() {
         </ul>
       )}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        <TextInput className="col-span-2 sm:col-span-4" label={t('steps.items.customLabel')} value={draft.label} onChange={(label) => setDraft({ ...draft, label: label.slice(0, 60) })} />
+        <TextInput
+          className="col-span-2 sm:col-span-4"
+          label={t('steps.items.customLabel')}
+          value={draft.label}
+          onChange={(label) => setDraft({ ...draft, label: label.slice(0, 60) })}
+        />
         <Stepper label={t('steps.items.customW')} value={draft.w} min={1} max={400} step={5} onChange={(w) => setDraft({ ...draft, w })} />
         <Stepper label={t('steps.items.customD')} value={draft.d} min={1} max={400} step={5} onChange={(d) => setDraft({ ...draft, d })} />
         <Stepper label={t('steps.items.customH')} value={draft.h} min={1} max={400} step={5} onChange={(h) => setDraft({ ...draft, h })} />
@@ -178,7 +214,10 @@ function CustomItems() {
         className="self-start"
         isDisabled={custom.length >= 20}
         onPress={() => {
-          update('inventory.custom', [...custom, { ...(draft.label.trim() ? { label: draft.label.trim() } : {}), wCm: draft.w, dCm: draft.d, hCm: draft.h, qty: draft.qty }]);
+          update('inventory.custom', [
+            ...custom,
+            { ...(draft.label.trim() ? { label: draft.label.trim() } : {}), wCm: draft.w, dCm: draft.d, hCm: draft.h, qty: draft.qty },
+          ]);
           setDraft({ ...draft, label: '' });
         }}
       >
@@ -216,7 +255,12 @@ function SpecialItems() {
                 <span className="font-semibold">{t(`steps.items.specialKind.${s.kind}`)}</span>
                 {s.label && <span className="text-ink-muted"> · {s.label}</span>}
               </span>
-              <Button variant="ghost" aria-label={`${t('common.remove')}: ${s.label || t(`steps.items.specialKind.${s.kind}`)}`} className="!min-h-10 !px-2" onPress={() => update('special', special.length > 1 ? special.filter((_, j) => j !== i) : undefined)}>
+              <Button
+                variant="ghost"
+                aria-label={`${t('common.remove')}: ${s.label || t(`steps.items.specialKind.${s.kind}`)}`}
+                className="!min-h-10 !px-2"
+                onPress={() => update('special', special.length > 1 ? special.filter((_, j) => j !== i) : undefined)}
+              >
                 <Trash2 size={16} aria-hidden />
               </Button>
             </li>
@@ -229,18 +273,30 @@ function SpecialItems() {
         onChange={setKind}
         columns={4}
         size="sm"
-        tiles={(['fragile', 'valuable', 'pristine', 'piano'] as const).map((k) => ({ value: k, label: t(`steps.items.specialKind.${k}`), hint: `${rates[k]} lei` }))}
+        tiles={(['fragile', 'valuable', 'pristine', 'piano'] as const).map((k) => ({
+          value: k,
+          label: t(`steps.items.specialKind.${k}`),
+          hint: `${rates[k]} lei`,
+        }))}
       />
       <div className="grid gap-4 sm:grid-cols-2">
         <TextInput label={t('steps.items.specialLabel')} value={label} onChange={(v) => setLabel(v.slice(0, 60))} />
-        <TextInput label={t('steps.items.specialValue')} value={value} onChange={(v) => setValue(v.replace(/\D/g, '').slice(0, 8))} inputMode="numeric" />
+        <TextInput
+          label={t('steps.items.specialValue')}
+          value={value}
+          onChange={(v) => setValue(v.replace(/\D/g, '').slice(0, 8))}
+          inputMode="numeric"
+        />
       </div>
       <Button
         variant="secondary"
         className="self-start"
         isDisabled={special.length >= 20}
         onPress={() => {
-          update('special', [...special, { kind, ...(label.trim() ? { label: label.trim() } : {}), ...(value ? { declaredValueLei: Number(value) } : {}) }]);
+          update('special', [
+            ...special,
+            { kind, ...(label.trim() ? { label: label.trim() } : {}), ...(value ? { declaredValueLei: Number(value) } : {}) },
+          ]);
           setLabel('');
           setValue('');
         }}

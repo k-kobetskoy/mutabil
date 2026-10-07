@@ -1,5 +1,7 @@
 'use client';
 /** Choose quick (3 questions → range) or detailed; offer to continue a saved draft. */
+import { useEffect, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { ArrowRight, History, Timer, ListChecks } from 'lucide-react';
 import { firstIncomplete, visibleSteps } from '@/domain/flow/steps';
@@ -37,7 +39,18 @@ export function StartScreen() {
     go(mode, useOrderStore.getState().order);
   };
 
-  const card = 'group flex flex-col gap-4 rounded-[var(--radius-panel)] border border-line bg-paper p-6 text-left transition-[border-color,box-shadow] hover:border-route hover:shadow-[var(--shadow-lift)] cursor-pointer focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-route';
+  // The landing's "exact estimate" link already chose the mode: don't ask again (critique, P2).
+  // With a saved draft the screen still offers to continue or start over.
+  const preset = useSearchParams().get('mode');
+  const started = useRef(false);
+  useEffect(() => {
+    if (started.current || !hydrated || hasProgress(order) || (preset !== 'quick' && preset !== 'detailed')) return;
+    started.current = true;
+    choose(preset);
+  });
+
+  const card =
+    'group flex flex-col gap-4 rounded-[var(--radius-panel)] border border-line bg-paper p-6 text-left transition-[border-color,box-shadow] hover:border-route hover:shadow-[var(--shadow-lift)] cursor-pointer focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-route';
 
   return (
     <main id="main" className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-16">

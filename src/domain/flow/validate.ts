@@ -15,7 +15,6 @@ const MESSAGE: Record<string, string> = {
   'from.floor': 'validation.floor.required',
   'to.floor': 'validation.floor.required',
   'inventory.mode': 'validation.inventory.required',
-  'protection.level': 'validation.protection.required',
   'survey.method': 'validation.survey.required',
   'schedule.date': 'validation.date.required',
   route: 'validation.route.required',

@@ -48,7 +48,9 @@ export const useOrderStore = create<OrderState>()(
       merge: (persisted, current) => {
         const p = persisted as Partial<OrderState> | undefined;
         if (!p?.order || !p.savedAt || Date.now() - p.savedAt > TTL_MS) return { ...current, hydrated: true };
-        return { ...current, order: p.order, savedAt: p.savedAt, hydrated: true };
+        // Full protection is out of the MVP (decisions D36): older drafts fall back to liability by law
+        const order = p.order.protection?.level === 'full' ? { ...p.order, protection: { level: 'basic' as const } } : p.order;
+        return { ...current, order, savedAt: p.savedAt, hydrated: true };
       },
       onRehydrateStorage: () => (state) => {
         if (state && !state.hydrated) useOrderStore.setState({ hydrated: true });

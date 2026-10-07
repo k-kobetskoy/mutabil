@@ -11,7 +11,6 @@ import { getConfig } from '@/config';
 import { addClock, lei, leiRange, longDate, num, type AppLocale } from '@/lib/format';
 import { VanSketch } from '@/ui/Sketch';
 import { cx } from '@/ui/cx';
-import { fareOf } from './fares';
 import { PriceExplainer } from './PriceExplainer';
 import { useRouteLabels } from './useRoute';
 
@@ -35,15 +34,16 @@ export function BoardingPass({
   const r = useRouteLabels(order);
   const slot = getConfig().app.slots.find((s) => s.id === (order.schedule?.slot ?? 'morning'))!;
   const start = slot.start;
-  const fare = fareOf(order);
-  const fareName =
-    fare === 'estimate'
-      ? t('estimate.fareEstimate')
-      : fare === 'fixed'
-        ? t('estimate.fareFixed')
-        : fare === 'complete'
-          ? t('estimate.fareComplete')
-          : t('estimate.rangeLabel');
+  const method = order.survey?.method;
+  const surveyName = t(
+    method === 'onsite'
+      ? 'estimate.passSurveyOnsite'
+      : method === 'remote'
+        ? 'estimate.passSurveyRemote'
+        : method === 'none'
+          ? 'estimate.passSurveyNone'
+          : 'estimate.passSurveyUnset',
+  );
 
   return (
     <article
@@ -118,8 +118,8 @@ export function BoardingPass({
             </dd>
             <dt className="text-on-night-muted">{t('estimate.passCrew')}</dt>
             <dd className="text-right font-semibold">{t('estimate.passCrewValue', { n: est.crew.size })}</dd>
-            <dt className="text-on-night-muted">{t('estimate.passFare')}</dt>
-            <dd className="text-right font-semibold">{fareName}</dd>
+            <dt className="text-on-night-muted">{t('estimate.passSurvey')}</dt>
+            <dd className="text-right font-semibold">{surveyName}</dd>
           </dl>
           <div className="mt-auto">
             <div className="label-cap text-on-night-muted">{t('estimate.passTotal')}</div>

@@ -94,7 +94,7 @@
       "contact": "Telefon și e-mail: în curând",
       "legal": "Politica de confidențialitate · Condițiile serviciului · Condițiile de protecție · Politica de anulare",
       "anpc": "ANPC — Soluționarea alternativă a litigiilor",
-      "vat": "Toate prețurile sunt în lei și includ TVA 21 %."
+      "vat": "Toate prețurile sunt în lei și includ TVA 21 %."
     },
     "gets": {
       "title": "Ce primești cu Mutabil",
@@ -171,7 +171,7 @@
     "route": "Traseu",
     "items": "Bagaje",
     "services": "Servicii",
-    "protection": "Tarif",
+    "protection": "Evaluare",
     "when": "Data"
   },
   "steps": {
@@ -263,7 +263,9 @@
       "customD": "Adâncime, cm",
       "customH": "Înălțime, cm",
       "addCustom": "Adaugă obiectul",
-      "specialKindLabel": "Ce fel de lucru"
+      "specialKindLabel": "Ce fel de lucru",
+      "unusual": "Adaugă ceva neobișnuit",
+      "unusualText": "Un obiect cu dimensiuni neobișnuite sau lucruri fragile și de valoare."
     },
     "services": {
       "title": "Ce facem noi?",
@@ -280,30 +282,18 @@
       "noAssemblyItems": "Alege întâi obiectele mari la pasul „Bagaje”."
     },
     "protection": {
-      "title": "Cât de sigur vrei să fie?",
-      "fares": "Alege un tarif sau setează separat mai jos",
-      "difference": "{delta} față de acum",
-      "compare": "Compară tarifele",
-      "level": "Protecția lucrurilor",
-      "basic": "De bază, inclusă",
-      "basicText": "Răspundem conform legii: despăgubire la valoarea reală, ținând cont de uzură.",
-      "full": "Completă",
-      "fullText": "Reparăm, înlocuim sau plătim valoarea declarată, fără discuții despre uzură. {rate} % din valoarea declarată, minimum {min} lei.",
-      "declared": "Valoarea declarată a lucrurilor, lei",
-      "declaredHint": "Minim {min} lei sau {perM3} lei / m³. Obiectele peste {item} lei se trec în inventar.",
-      "deductible": "Cu franșiză de {amount} lei (tarif {rate} %)",
-      "survey": "Evaluarea",
-      "onsite": "Vizită a specialistului",
-      "onsiteText": "{price} lei, se scad din comandă dacă te muți în {days} zile. Plafon: +{pct} %.",
-      "onsiteRisk": "Cel mai sigur preț.",
-      "remote": "Fotografii și video de la tine",
-      "remoteText": "Gratuit. Plafon: +{pct} %. Evaluatorul poate cere completări.",
-      "remoteRisk": "Dacă ceva nu se vede, poate cere un video sau o vizită.",
-      "none": "Fără evaluare",
-      "noneText": "Rămâne un interval. Plătești după timpul real, la tarifele publicate.",
-      "noneRisk": "Prețul poate fi mai mare dacă sunt mai multe lucruri.",
-      "disabledByCrates": "Indisponibil cu lăzi reutilizabile",
-      "disabledByAtSurvey": "Indisponibil: lucrurile se numără la evaluare"
+      "title": "Vrei un preț fix?",
+      "question": "Cum vrei să evaluăm mutarea?",
+      "lead": "Până la evaluare, prețul e un interval. După evaluare devine fix, iar plata finală nu trece de el decât cu limita scrisă mai jos.",
+      "remote": "Da, din fotografii și video",
+      "remoteText": "Gratuit. Plata finală: cel mult +{pct} %. Evaluatorul poate cere o completare.",
+      "onsite": "Da, cu vizita unui specialist",
+      "onsiteText": "{price} lei, se scad din comandă. Plata finală: cel mult +{pct} %.",
+      "none": "Nu, rămân la interval",
+      "noneText": "Plătești după timpul real, la tarifele publicate. Poate costa mai mult dacă sunt mai multe lucruri.",
+      "liability": "Pentru lucruri răspundem conform legii: dacă ceva se strică din vina noastră, reparăm sau plătim valoarea reală.",
+      "disabledByCrates": "Cu lăzi reutilizabile, specialistul aduce lăzile și evaluează în aceeași vizită.",
+      "disabledByAtSurvey": "Lucrurile se numără la evaluare, așa că e nevoie de una."
     },
     "when": {
       "title": "Când?",
@@ -318,8 +308,8 @@
       "busy": "ocupat",
       "tooLate": "nu încape în zi",
       "fullDay": "Rezervă duba și echipa toată ziua",
-      "fullDayText": "{hours} ore, cu {pct} % reducere. Peste ele — ora suplimentară.",
-      "weekend": "Sâmbătă și duminică +{pct} % la transport și echipă.",
+      "fullDayText": "{hours} ore, cu {pct} % reducere. Peste ele — ora suplimentară.",
+      "weekend": "Sâmbătă și duminică +{pct} % la transport și echipă.",
       "pickDate": "Alege întâi data, apoi ora de sosire."
     }
   },
@@ -476,15 +466,11 @@
     "passVehicle": "Duba",
     "passCrew": "Echipa",
     "passCrewValue": "{n} oameni",
-    "passFare": "Tarif",
     "passTotal": "Total cu TVA",
-    "fareEstimate": "Estimare",
-    "fareFixed": "Preț fix după evaluare",
-    "fareComplete": "Complet",
     "rangeLabel": "Interval până la evaluare",
-    "afterSurvey": "După evaluare primești un preț fix. Finalul nu depășește estimarea confirmată cu mai mult de {pct} %, dacă volumul și accesul sunt cele descrise.",
+    "afterSurvey": "După evaluare primești un preț fix. Finalul nu depășește estimarea confirmată cu mai mult de {pct} %, dacă volumul și accesul sunt cele descrise.",
     "noSurvey": "Fără evaluare rămâne un interval: plătești după timpul real, la tarifele de mai jos. Cere o evaluare gratuită din fotografii pentru un preț fix.",
-    "vat": "din care TVA 21 %: {vat}",
+    "vat": "din care TVA 21 %: {vat}",
     "breakdown": "Detalii preț",
     "included": "Inclus gratuit",
     "overtime": "Fiecare oră peste fereastra garantată: {perHour} (se facturează la {step} minute). Doar dacă lucrurile sau accesul diferă de cele descrise și doar cu acordul tău.",
@@ -528,7 +514,12 @@
     "daysAfter": "{n, plural, one {a doua zi} few {după # zile} other {după # de zile}}",
     "shareShort": "Trimite linkul",
     "shareNote": "Linkul nu conține nume, telefon sau adrese.",
-    "editShort": "Schimbă"
+    "editShort": "Schimbă",
+    "passSurvey": "Evaluare",
+    "passSurveyOnsite": "vizită",
+    "passSurveyRemote": "foto și video",
+    "passSurveyNone": "fără, interval",
+    "passSurveyUnset": "de ales"
   },
   "priceBar": {
     "noPrice": "Prețul apare după primul pas",
@@ -630,9 +621,6 @@
       "required": "Alege cum numărăm lucrurile",
       "emptyItems": "Adaugă cel puțin un obiect"
     },
-    "protection": {
-      "required": "Alege protecția"
-    },
     "survey": {
       "required": "Alege evaluarea"
     },
@@ -658,8 +646,8 @@
   "lines": {
     "transport": "Transport · {vehicle}{count, plural, =1 {} other { × #}} · {hours} h × {rate} lei",
     "crew": "Echipă · {crew} oameni · {hours} h × {rate} lei",
-    "fullDayDiscount": "Toată ziua · {hours} h, −{pct} %",
-    "weekend": "Weekend · +{pct} % la transport și echipă",
+    "fullDayDiscount": "Toată ziua · {hours} h, −{pct} %",
+    "weekend": "Weekend · +{pct} % la transport și echipă",
     "dispatch": "Deplasare · {zoneClass}",
     "intercity": "Drum între orașe · {km} km × {rate} lei",
     "packing": "Împachetare · {boxes} cutii × {rate} lei",
@@ -667,7 +655,7 @@
     "crates": "Lăzi reutilizabile · {crates} × {rate} lei, {includedDays} zile incluse{extraDays, plural, =0 {} other { + # zile × {extraRate} leu}}",
     "assembly": "Demontare și montare · {items} obiecte",
     "special": "Lucruri speciale · {qty} buc., ambalare întărită",
-    "protection": "Protecție completă · {ratePct} % din {declared} lei",
+    "protection": "Protecție completă · {ratePct} % din {declared} lei",
     "survey": {
       "onsite": "Vizita specialistului",
       "remote": "Evaluare foto / video",
@@ -708,9 +696,9 @@
   "range": {
     "volumePreset": "Volumul e estimat după numărul de camere: {min}–{max} m³.",
     "volumeList": {
-      "none": "Fără evaluare, volumul poate varia cu −{lowPct} % / +{highPct} %.",
-      "remote": "Până la evaluarea foto/video: −{lowPct} % / +{highPct} %.",
-      "onsite": "Până la vizită: −{lowPct} % / +{highPct} %."
+      "none": "Fără evaluare, volumul poate varia cu −{lowPct} % / +{highPct} %.",
+      "remote": "Până la evaluarea foto/video: −{lowPct} % / +{highPct} %.",
+      "onsite": "Până la vizită: −{lowPct} % / +{highPct} %."
     },
     "assumption": "{path}: am presupus „{assumed}”, poate schimba prețul cu până la {spreadLei} lei."
   },
@@ -723,9 +711,9 @@
     "furnitureInLift": "{path}: am presupus că mobila e permisă în lift."
   },
   "vehicle": {
-    "reasonVolume": "{m3} m³ cu rezervă încap în {vehicle} ({usable} m³) · ocupare {fill} %{trips, plural, =1 {} other {, # curse}}{count, plural, =1 {} other {, # dube}}.",
+    "reasonVolume": "{m3} m³ cu rezervă încap în {vehicle} ({usable} m³) · ocupare {fill} %{trips, plural, =1 {} other {, # curse}}{count, plural, =1 {} other {, # dube}}.",
     "reasonWeight": "Greutatea, ~{kg} kg, decide: {vehicle} duce {payload} kg{trips, plural, =1 {} other {, # curse}}{count, plural, =1 {} other {, # dube}}.",
-    "reasonAccess": "{vehicle}: {m3} m³, ocupare {fill} %. La una dintre adrese accesul e limitat, vezi mai jos."
+    "reasonAccess": "{vehicle}: {m3} m³, ocupare {fill} %. La una dintre adrese accesul e limitat, vezi mai jos."
   },
   "crew": {
     "reason": "{crew} oameni: cel mai bun preț la care mutarea încape în zi (garantat până la {windowH} h). Minimum pentru lucrurile tale: {min}.",
@@ -814,7 +802,7 @@
     "toggle": "Ce include prețul?",
     "made": "Duba și echipa, plătite pe oră, plus serviciile pe care le alegi. Orele le estimăm din volum, etaje, lift și distanță.",
     "included": "Fără cost: {list}.",
-    "range": "E un interval pentru că încă nu ți-am văzut lucrurile. După evaluare primești un preț fix, iar plata finală nu trece de el cu mai mult de {low}–{high} %.",
+    "range": "E un interval pentru că încă nu ți-am văzut lucrurile. După evaluare primești un preț fix, iar plata finală nu trece de el cu mai mult de {low}–{high} %.",
     "consent": "Nimic nu se adaugă fără acordul tău.",
     "more": "Cum calculăm, în detaliu"
   },
@@ -851,20 +839,20 @@
     "includedTitle": "Inclus în orice mutare, fără cost",
     "rangeTitle": "De la interval la preț fix",
     "range1": "Până vedem ce mutăm, îți arătăm un interval: cât ar costa în cazul cel mai bun și în cel mai rău.",
-    "range2": "După evaluare primești un preț fix. Plata finală nu trece de el cu mai mult de {remote} % după foto și video sau {onsite} % după vizita specialistului, dacă volumul și accesul sunt cele descrise.",
+    "range2": "După evaluare primești un preț fix. Plata finală nu trece de el cu mai mult de {remote} % după foto și video sau {onsite} % după vizita specialistului, dacă volumul și accesul sunt cele descrise.",
     "range3": "Vizita specialistului costă {fee} lei și se scade din comandă.",
     "changesTitle": "Când se schimbă prețul",
     "overtime": "O oră peste fereastra garantată",
     "overtimeText": "duba și echipa, aceleași tarife, facturat la 30 de minute",
     "weekend": "Sâmbătă și duminică",
-    "weekendText": "+{pct} %, rând separat în estimare",
+    "weekendText": "+{pct} %, rând separat în estimare",
     "minimum": "Comanda minimă",
     "minimumText": "{min} lei · cel puțin {hours} ore",
     "promiseTitle": "Ce nu se întâmplă",
     "promise1": "Nimic nu se adaugă fără acordul tău.",
     "promise2": "Nu reținem lucrurile pentru o plată în plus.",
     "promise3": "Nu negociem la ușă: prețul e cel calculat după aceste reguli.",
-    "note": "Toate prețurile sunt în lei și includ TVA 21 %. Valorile sunt în curs de verificare.",
+    "note": "Toate prețurile sunt în lei și includ TVA 21 %. Valorile sunt în curs de verificare.",
     "cta": "Calculează-ți mutarea"
   },
   "visit": {

@@ -216,7 +216,7 @@ export function QuickSearch() {
             <ArrowRight size={20} aria-hidden />
           </Button>
           <Link
-            href="/estimate"
+            href={{ pathname: '/estimate', query: { mode: 'detailed' } }}
             className="text-center text-[0.95rem] font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
           >
             {t('landing.exact')}

@@ -94,7 +94,7 @@
       "contact": "Phone and e-mail: coming soon",
       "legal": "Privacy policy · Service terms · Protection terms · Cancellation policy",
       "anpc": "ANPC — Alternative dispute resolution",
-      "vat": "All prices are in lei and include 21 % VAT."
+      "vat": "All prices are in lei and include 21 % VAT."
     },
     "gets": {
       "title": "What you get with Mutabil",
@@ -171,7 +171,7 @@
     "route": "Distance",
     "items": "Baggage",
     "services": "Services",
-    "protection": "Fare",
+    "protection": "Survey",
     "when": "Date"
   },
   "steps": {
@@ -263,7 +263,9 @@
       "customD": "Depth, cm",
       "customH": "Height, cm",
       "addCustom": "Add the item",
-      "specialKindLabel": "What kind"
+      "specialKindLabel": "What kind",
+      "unusual": "Add something unusual",
+      "unusualText": "An item with unusual dimensions, or fragile and valuable things."
     },
     "services": {
       "title": "What do we do?",
@@ -280,30 +282,18 @@
       "noAssemblyItems": "First choose the large items in the “Baggage” step."
     },
     "protection": {
-      "title": "How certain do you want it?",
-      "fares": "Choose a fare or set each option below",
-      "difference": "{delta} compared to now",
-      "compare": "Compare fares",
-      "level": "Protection of your things",
-      "basic": "Basic, included",
-      "basicText": "We are liable as the law provides: compensation at actual value, allowing for wear.",
-      "full": "Complete",
-      "fullText": "We repair, replace or pay the declared value, with no discussion about wear. {rate} % of the declared value, at least {min} lei.",
-      "declared": "Declared value of your things, lei",
-      "declaredHint": "At least {min} lei or {perM3} lei / m³. Items above {item} lei go on the inventory.",
-      "deductible": "With a {amount} lei excess (rate {rate} %)",
-      "survey": "Survey",
-      "onsite": "Specialist visit",
-      "onsiteText": "{price} lei, deducted from the order if you move within {days} days. Cap: +{pct} %.",
-      "onsiteRisk": "The most certain price.",
-      "remote": "Your photos and video",
-      "remoteText": "Free. Cap: +{pct} %. The estimator may ask for more.",
-      "remoteRisk": "If something is not visible, they may ask for a video or a visit.",
-      "none": "No survey",
-      "noneText": "It stays a range. You pay for the real time at the published rates.",
-      "noneRisk": "The price may be higher if there are more things.",
-      "disabledByCrates": "Not available with reusable crates",
-      "disabledByAtSurvey": "Unavailable: the items are counted at the survey"
+      "title": "Do you want a fixed price?",
+      "question": "How should we survey the move?",
+      "lead": "Until the survey, the price is a range. After it, the price is fixed, and the final bill can exceed it only by the limit written below.",
+      "remote": "Yes, from photos and video",
+      "remoteText": "Free. Final bill: at most +{pct} %. The estimator may ask for more.",
+      "onsite": "Yes, with a specialist visit",
+      "onsiteText": "{price} lei, deducted from the order. Final bill: at most +{pct} %.",
+      "none": "No, keep the range",
+      "noneText": "You pay for the real time at the published rates. It can cost more if there are more things.",
+      "liability": "We are liable for your things by law: if something breaks through our fault, we repair it or pay its real value.",
+      "disabledByCrates": "With reusable crates, the specialist brings the crates and surveys in the same visit.",
+      "disabledByAtSurvey": "Your things are counted at the survey, so one is needed."
     },
     "when": {
       "title": "When?",
@@ -318,8 +308,8 @@
       "busy": "booked",
       "tooLate": "doesn't fit the day",
       "fullDay": "Book the van and crew for the whole day",
-      "fullDayText": "{hours} hours, {pct} % off. Beyond that — the extra hour rate.",
-      "weekend": "Saturday and Sunday +{pct} % on transport and crew.",
+      "fullDayText": "{hours} hours, {pct} % off. Beyond that — the extra hour rate.",
+      "weekend": "Saturday and Sunday +{pct} % on transport and crew.",
       "pickDate": "Pick the date first, then the arrival time."
     }
   },
@@ -476,15 +466,11 @@
     "passVehicle": "Van",
     "passCrew": "Crew",
     "passCrewValue": "{n} movers",
-    "passFare": "Fare",
     "passTotal": "Total incl. VAT",
-    "fareEstimate": "Estimate",
-    "fareFixed": "Fixed price after survey",
-    "fareComplete": "Complete",
     "rangeLabel": "Range until the survey",
-    "afterSurvey": "After the survey you get a fixed price. The final price does not exceed the confirmed estimate by more than {pct} %, if volume and access are as described.",
+    "afterSurvey": "After the survey you get a fixed price. The final price does not exceed the confirmed estimate by more than {pct} %, if volume and access are as described.",
     "noSurvey": "Without a survey it stays a range: you pay for the real time at the rates below. Ask for a free photo survey to get a fixed price.",
-    "vat": "of which 21 % VAT: {vat}",
+    "vat": "of which 21 % VAT: {vat}",
     "breakdown": "Price details",
     "included": "Included free",
     "overtime": "Each hour beyond the guaranteed window: {perHour} (billed per {step} minutes). Only if your things or access differ from what you described, and only with your consent.",
@@ -528,7 +514,12 @@
     "daysAfter": "{n, plural, one {the day after} other {# days after}}",
     "shareShort": "Share link",
     "shareNote": "The link has no name, phone or addresses.",
-    "editShort": "Edit"
+    "editShort": "Edit",
+    "passSurvey": "Survey",
+    "passSurveyOnsite": "visit",
+    "passSurveyRemote": "photos and video",
+    "passSurveyNone": "none, range",
+    "passSurveyUnset": "to choose"
   },
   "priceBar": {
     "noPrice": "The price appears after the first step",
@@ -630,9 +621,6 @@
       "required": "Choose how we count your things",
       "emptyItems": "Add at least one item"
     },
-    "protection": {
-      "required": "Choose the protection"
-    },
     "survey": {
       "required": "Choose the survey"
     },
@@ -658,8 +646,8 @@
   "lines": {
     "transport": "Transport · {vehicle}{count, plural, =1 {} other { × #}} · {hours} h × {rate} lei",
     "crew": "Crew · {crew} movers · {hours} h × {rate} lei",
-    "fullDayDiscount": "Whole day · {hours} h, −{pct} %",
-    "weekend": "Weekend · +{pct} % on transport and crew",
+    "fullDayDiscount": "Whole day · {hours} h, −{pct} %",
+    "weekend": "Weekend · +{pct} % on transport and crew",
     "dispatch": "Dispatch · {zoneClass}",
     "intercity": "Intercity road · {km} km × {rate} lei",
     "packing": "Packing · {boxes} boxes × {rate} lei",
@@ -667,7 +655,7 @@
     "crates": "Reusable crates · {crates} × {rate} lei, {includedDays} days included{extraDays, plural, =0 {} other { + # days × {extraRate} leu}}",
     "assembly": "Disassembly and assembly · {items} items",
     "special": "Special things · {qty} pcs, reinforced packing",
-    "protection": "Complete protection · {ratePct} % of {declared} lei",
+    "protection": "Complete protection · {ratePct} % of {declared} lei",
     "survey": {
       "onsite": "Specialist visit",
       "remote": "Photo / video survey",
@@ -708,9 +696,9 @@
   "range": {
     "volumePreset": "The volume is estimated from the number of rooms: {min}–{max} m³.",
     "volumeList": {
-      "none": "Without a survey the volume may vary by −{lowPct} % / +{highPct} %.",
-      "remote": "Until the photo/video survey: −{lowPct} % / +{highPct} %.",
-      "onsite": "Until the visit: −{lowPct} % / +{highPct} %."
+      "none": "Without a survey the volume may vary by −{lowPct} % / +{highPct} %.",
+      "remote": "Until the photo/video survey: −{lowPct} % / +{highPct} %.",
+      "onsite": "Until the visit: −{lowPct} % / +{highPct} %."
     },
     "assumption": "{path}: we assumed “{assumed}”, it can change the price by up to {spreadLei} lei."
   },
@@ -723,9 +711,9 @@
     "furnitureInLift": "{path}: we assumed furniture is allowed in the lift."
   },
   "vehicle": {
-    "reasonVolume": "{m3} m³ with margin fit into a {vehicle} ({usable} m³) · {fill} % full{trips, plural, =1 {} other {, # trips}}{count, plural, =1 {} other {, # vans}}.",
+    "reasonVolume": "{m3} m³ with margin fit into a {vehicle} ({usable} m³) · {fill} % full{trips, plural, =1 {} other {, # trips}}{count, plural, =1 {} other {, # vans}}.",
     "reasonWeight": "Weight decides, ~{kg} kg: a {vehicle} carries {payload} kg{trips, plural, =1 {} other {, # trips}}{count, plural, =1 {} other {, # vans}}.",
-    "reasonAccess": "{vehicle}: {m3} m³, {fill} % full. Access is limited at one of the addresses, see below."
+    "reasonAccess": "{vehicle}: {m3} m³, {fill} % full. Access is limited at one of the addresses, see below."
   },
   "crew": {
     "reason": "{crew} movers: the best price at which the move fits in a day (guaranteed within {windowH} h). Minimum for your things: {min}.",
@@ -814,7 +802,7 @@
     "toggle": "What's in this price?",
     "made": "The van and the crew, paid by the hour, plus the services you choose. We estimate the hours from volume, floors, lift and distance.",
     "included": "At no cost: {list}.",
-    "range": "It's a range because we haven't seen your things yet. After the survey you get a fixed price, and the final bill can't exceed it by more than {low}–{high} %.",
+    "range": "It's a range because we haven't seen your things yet. After the survey you get a fixed price, and the final bill can't exceed it by more than {low}–{high} %.",
     "consent": "Nothing is added without your consent.",
     "more": "How we calculate, in detail"
   },
@@ -851,20 +839,20 @@
     "includedTitle": "Included in every move, at no cost",
     "rangeTitle": "From a range to a fixed price",
     "range1": "Until we see what moves, we show a range: what it would cost in the best and in the worst case.",
-    "range2": "After the survey you get a fixed price. The final bill cannot exceed it by more than {remote} % after photos and video, or {onsite} % after a specialist visit, as long as the volume and access are as described.",
+    "range2": "After the survey you get a fixed price. The final bill cannot exceed it by more than {remote} % after photos and video, or {onsite} % after a specialist visit, as long as the volume and access are as described.",
     "range3": "A specialist visit costs {fee} lei and is deducted from the order.",
     "changesTitle": "When the price changes",
     "overtime": "One hour beyond the guaranteed window",
     "overtimeText": "van and crew at the same rates, billed per 30 minutes",
     "weekend": "Saturday and Sunday",
-    "weekendText": "+{pct} %, a separate line in the estimate",
+    "weekendText": "+{pct} %, a separate line in the estimate",
     "minimum": "Minimum order",
     "minimumText": "{min} lei · at least {hours} hours",
     "promiseTitle": "What won't happen",
     "promise1": "Nothing is added without your consent.",
     "promise2": "We never hold your belongings for an extra payment.",
     "promise3": "No haggling at the door: the price is the one these rules give.",
-    "note": "All prices are in lei and include 21 % VAT. The values are being verified.",
+    "note": "All prices are in lei and include 21 % VAT. The values are being verified.",
     "cta": "Estimate your move"
   },
   "visit": {
