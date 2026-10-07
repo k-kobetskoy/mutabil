@@ -119,16 +119,16 @@ function ItemList({ error }: { error?: string }) {
     c,
     list: shown.filter((i) => (CATEGORY_ORDER.includes(i.category) ? i.category : 'misc') === c),
   })).filter((g) => g.list.length);
-  // fill the left column with whole categories until it holds about half of the rows
-  const rows = groups.reduce((s, g) => s + g.list.length + 1, 0);
+  // whole categories into two columns of nearly equal height: biggest first into the shorter one,
+  // then each column back in the usual order (bedroom, living, …)
   const columns: (typeof groups)[] = [[], []];
-  let leftRows = 0;
-  for (const g of groups) {
-    if (leftRows < rows / 2) {
-      columns[0].push(g);
-      leftRows += g.list.length + 1;
-    } else columns[1].push(g);
+  const heights = [0, 0];
+  for (const g of [...groups].sort((a, b) => b.list.length - a.list.length)) {
+    const col = heights[0] <= heights[1] ? 0 : 1;
+    columns[col].push(g);
+    heights[col] += g.list.length + 1;
   }
+  for (const col of columns) col.sort((a, b) => CATEGORY_ORDER.indexOf(a.c) - CATEGORY_ORDER.indexOf(b.c));
 
   return (
     <section aria-labelledby="items-list" className="flex flex-col gap-4">

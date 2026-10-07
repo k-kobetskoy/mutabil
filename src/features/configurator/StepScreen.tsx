@@ -92,6 +92,9 @@ export function StepScreen({ stepId }: { stepId: string }) {
   };
 
   const Body = BODIES[stepId];
+  // with crates the survey is a visit, not a question (D39): the title states it
+  const titleKey =
+    stepId === 'protection' && flow.allowed('survey.method')?.length === 1 ? 'steps.protection.titleVisit' : `steps.${stepId}.title`;
 
   if (!hydrated || flow.index < 0) {
     return (
@@ -106,7 +109,7 @@ export function StepScreen({ stepId }: { stepId: string }) {
       <StageStrip flow={flow} />
       <div className="grid gap-10 pt-6 lg:grid-cols-[minmax(0,1fr)_400px] lg:items-start">
         <main id="main" className="min-w-0">
-          <h1 className="text-[clamp(1.9rem,5vw,2.6rem)] leading-[1.05] font-extrabold">{t(`steps.${stepId}.title`)}</h1>
+          <h1 className="text-[clamp(1.9rem,5vw,2.6rem)] leading-[1.05] font-extrabold">{t(titleKey)}</h1>
 
           {errorList.length > 0 && (
             <div

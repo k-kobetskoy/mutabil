@@ -75,7 +75,7 @@
     "faq": {
       "title": "What happens if…",
       "q1": "…there are more things than I said?",
-      "a1": "The crew lead shows you what changed and what it costs before any extra work starts. Nothing is added without your consent.",
+      "a1": "If the survey finds more, we tell you the new maximum before the move: you can cancel for free and we refund the visit. On moving day, the crew leader shows you any change and its cost before starting. Nothing is added without your consent.",
       "q2": "…the lift is smaller or out of order?",
       "a2": "If you chose “Not sure”, we have already priced a small lift. If there is no working lift at all, we carry by the stairs under the same rules as in the estimate.",
       "q3": "…something does not fit the lift?",
@@ -156,7 +156,8 @@
     },
     "never": {
       "title": "What never happens"
-    }
+    },
+    "sampleNote": "An approximate example: the price depends on how many things you have and is set at the survey."
   },
   "start": {
     "title": "How would you like to price it?",
@@ -227,7 +228,7 @@
       "title": "What are we carrying?",
       "mode": "How should we count your things?",
       "modeList": "I'll pick the large items",
-      "modeListText": "The most precise estimate",
+      "modeListText": "The most precise: you also see the guaranteed maximum",
       "modePreset": "By number of rooms",
       "modePresetText": "Quick, wider range",
       "modeSurvey": "Count them at the survey",
@@ -298,7 +299,8 @@
       "disabledByCrates": "With reusable crates, the specialist brings the crates and surveys in the same visit.",
       "disabledByAtSurvey": "Your things are counted at the survey, so one is needed.",
       "onlyOnsite": "With reusable crates, the survey is a visit: the specialist brings the crates and sees what moves in the same visit.",
-      "changeCrates": "Change the crates"
+      "changeCrates": "Change the crates",
+      "titleVisit": "The survey: a specialist visit"
     },
     "when": {
       "title": "When?",
@@ -537,9 +539,12 @@
     "maxIfConfirmed": "If the survey confirms what you described, you never pay more than {max}.",
     "baseTotal": "Base estimate",
     "rangeNote": "The range {range} allows for what we haven't seen yet: the real volume and your “Not sure” answers.",
-    "passMax": "At most {max} if the survey confirms",
     "passMoving": "Moving",
-    "rangeVsMax": "The range on the pass holds until we see your things. If the survey finds more, we set a new maximum before the move, only with your consent."
+    "rangeVsMax": "If the survey finds more things than you described, we tell you the new maximum before the move. You can cancel for free, and we refund the {fee} lei for the visit.",
+    "passMaxLabel": "Guaranteed maximum · incl. VAT",
+    "passMaxFrom": "from {low} · if the survey confirms your list",
+    "passNoMax": "You get the guaranteed maximum after the survey.",
+    "passListItems": "List the big items to see it now"
   },
   "priceBar": {
     "noPrice": "The price appears after the first step",
@@ -572,7 +577,8 @@
     "successTasks": "What we check before the guaranteed maximum price:",
     "newEstimate": "New estimate",
     "summary": "What you are sending",
-    "failed": "We could not send the request. Please try again in a minute."
+    "failed": "We could not send the request. Please try again in a minute.",
+    "contactHint": "Phone or e-mail: at least one."
   },
   "media": {
     "add": "Add photos or video",
@@ -660,7 +666,8 @@
     "invalid": "Invalid value",
     "visit": {
       "size": "Choose what we move",
-      "datePast": "Choose a date from today on"
+      "datePast": "Choose a date from today on",
+      "terms": "Confirm you understand the maximum price is set at the visit"
     }
   },
   "lines": {
@@ -874,7 +881,8 @@
     "promise2": "We never hold your belongings for an extra payment.",
     "promise3": "No haggling at the door: the price is the one these rules give.",
     "note": "All prices are in lei and include 21 % VAT. The values are being verified.",
-    "cta": "Calculate the price"
+    "cta": "Calculate the price",
+    "range4": "If the survey finds more things than you described, we tell you the new maximum before the move. You can cancel for free, and we refund the {fee} lei for the visit."
   },
   "visit": {
     "metaTitle": "Book a visit",

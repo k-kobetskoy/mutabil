@@ -211,7 +211,9 @@ function PriceBlock({ est, order, variant }: { est: Estimate; order: OrderInput;
         </p>
       )}
       <p className="mt-3 text-[0.95rem]">{est.price.afterSurvey ? t('estimate.afterSurvey', { pct }) : t('estimate.noSurvey')}</p>
-      {max !== null && max < est.price.high && <p className="mt-2 text-[0.92rem] text-ink-muted">{t('estimate.rangeVsMax')}</p>}
+      {max !== null && (
+        <p className="mt-2 text-[0.92rem] text-ink-muted">{t('estimate.rangeVsMax', { fee: cfg.pricing.survey.onsite.priceLei })}</p>
+      )}
       {/* with a survey the guaranteed maximum is the number to remember; the worst case only without one */}
       {!est.price.afterSurvey && (
         <p className="mt-3 text-[0.92rem] text-ink-muted">{t('estimate.worst', { worst: lei(est.price.worst, locale) })}</p>

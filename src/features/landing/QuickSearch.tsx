@@ -230,6 +230,8 @@ export function QuickSearch() {
           {touched ? t('landing.passTitleLive') : ''}
         </p>
         {est && <BoardingPass order={shown} est={est} sample={!touched} compact />}
+        {/* D43: the sample counts by rooms, so its range is wide; say so plainly */}
+        {!touched && <p className="text-[0.88rem] text-ink-muted">{t('landing.sampleNote')}</p>}
       </div>
     </div>
   );

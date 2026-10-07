@@ -48,7 +48,8 @@ test.describe('detailed estimate (D1–D3, D36–D38)', () => {
     await expect(page).toHaveURL(/\/ro\/estimare\/rezultat/);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Estimarea ta');
     await expect(page.getByText('foto și video').first()).toBeVisible();
-    await expect(page.getByText(/Cel mult .* dacă evaluarea confirmă/)).toHaveCount(0);
+    await expect(page.getByText('Maxim garantat · cu TVA')).toHaveCount(0);
+    await expect(page.getByText('Prețul maxim garantat îl afli după evaluare.').first()).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Ce urmează după ce trimiți' })).toBeVisible();
 
     // send
@@ -61,16 +62,24 @@ test.describe('detailed estimate (D1–D3, D36–D38)', () => {
     await expect(page.getByRole('heading', { name: 'Am primit cererea' })).toBeVisible();
   });
 
-  test('items listed one by one give a guaranteed maximum right under the range', async ({ page }) => {
+  test('items listed one by one make the guaranteed maximum the headline (D41)', async ({ page }) => {
     await seedDraft(page, FULL_ORDER);
     await page.goto('/ro/estimare/rezultat');
-    await expect(page.getByText(/^Cel mult [\d.]+ lei, dacă evaluarea confirmă$/)).toBeVisible();
+    await expect(page.getByText('Maxim garantat · cu TVA').locator('visible=true').first()).toBeVisible();
+    await expect(
+      page
+        .getByText(/^de la [\d.]+ lei · dacă evaluarea confirmă lista ta$/)
+        .locator('visible=true')
+        .first(),
+    ).toBeVisible();
+    await expect(page.getByText(/poți renunța gratuit|Poți renunța gratuit/).first()).toBeAttached();
     await expect(page.getByText(/nu plătești peste [\d.]+ lei/)).toBeVisible();
   });
 
   test('crates turn the survey into one confirmed visit with a way back', async ({ page }) => {
     await seedDraft(page, { ...FULL_ORDER, packing: { who: 'self', containers: 'crates' }, survey: { method: 'onsite' } });
     await page.goto('/ro/estimare/evaluare');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Evaluarea: vizita specialistului');
     await expect(page.getByRole('heading', { name: 'Da, cu vizita unui specialist' })).toBeVisible();
     await expect(page.getByRole('radio')).toHaveCount(0);
     await page.getByRole('link', { name: 'Schimbă lăzile' }).click();

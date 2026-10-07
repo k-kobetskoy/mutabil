@@ -7,9 +7,10 @@
 import { useEffect, useMemo } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import type { OrderInput } from '@/contract/order';
+import { guaranteedMax } from '@/domain/cap';
 import { estimate } from '@/domain/estimate';
 import { canEstimate } from '@/domain/volume';
-import { leiRange, type AppLocale } from '@/lib/format';
+import { lei, leiRange, type AppLocale } from '@/lib/format';
 import { useOrderStore } from '@/state/order-store';
 import { Link } from '@/i18n/navigation';
 import { ChoiceTiles } from '@/ui/ChoiceTiles';
@@ -50,6 +51,9 @@ export function StepProtection({ errors }: StepProps) {
   // With crates only a visit is possible: confirm it in one line instead of a three-tile "choice" (D39)
   const only = allowed && allowed.length === 1 ? (allowed[0] as Survey) : null;
   const services = cfg.steps.steps.find((s) => s.id === 'services');
+  // the concrete promise for the one possible survey (only when items are listed, see domain/cap)
+  const onlyOrder = only ? { ...order, survey: { method: only } } : null;
+  const onlyMax = onlyOrder && canEstimate(onlyOrder, cfg) ? guaranteedMax(estimate(onlyOrder, cfg), onlyOrder, cfg) : null;
   useEffect(() => {
     if (only && order.survey?.method !== only) patch((o) => ({ ...o, survey: { method: only }, protection: { level: 'basic' } }));
   }, [only, order.survey?.method, patch]);
@@ -69,6 +73,11 @@ export function StepProtection({ errors }: StepProps) {
             METHODS.find((m) => m !== only)!,
           ) === 'crates-onsite-survey' && <p className="text-ink-muted">{t('steps.protection.onlyOnsite')}</p>}
           <p>{text[only]}</p>
+          {onlyMax !== null && (
+            <p className="tabular self-start rounded-[var(--radius-field)] bg-amber-soft px-3 py-2 font-semibold">
+              {t('estimate.maxIfConfirmed', { max: lei(onlyMax, locale) })}
+            </p>
+          )}
           {services && (
             <Link
               href={{ pathname: '/estimate/[step]', params: { step: services.slug[locale] } }}

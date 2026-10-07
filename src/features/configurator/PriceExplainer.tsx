@@ -12,7 +12,17 @@ import type { Estimate } from '@/contract/estimate';
 import { Link } from '@/i18n/navigation';
 import { cx } from '@/ui/cx';
 
-export function PriceExplainer({ est, onNight, className }: { est?: Estimate; onNight?: boolean; className?: string }) {
+export function PriceExplainer({
+  est,
+  withMax,
+  onNight,
+  className,
+}: {
+  est?: Estimate;
+  withMax?: boolean;
+  onNight?: boolean;
+  className?: string;
+}) {
   const t = useTranslations();
   const P = getConfig().pricing;
   const pct = (x: number) => Math.round(x * 100);
@@ -39,6 +49,8 @@ export function PriceExplainer({ est, onNight, className }: { est?: Estimate; on
           <p>{t('priceInfo.made')}</p>
           <p>{t('priceInfo.included', { list })}</p>
           <p>{cap}</p>
+          {/* D42: what happens if the survey finds more, right next to the promised number */}
+          {withMax && <p>{t('estimate.rangeVsMax', { fee: P.survey.onsite.priceLei })}</p>}
           <p className={cx('font-semibold', onNight ? 'text-white' : 'text-ink')}>{t('priceInfo.consent')}</p>
           <Link
             href="/rates"

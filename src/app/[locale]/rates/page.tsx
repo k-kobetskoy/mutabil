@@ -101,6 +101,7 @@ export default async function RatesPage() {
             {P.survey.onsite.deductibleFromOrder && (
               <p className="text-ink-muted">{t('rates.range3', { fee: P.survey.onsite.priceLei })}</p>
             )}
+            <p>{t('rates.range4', { fee: P.survey.onsite.priceLei })}</p>
           </div>
         </Section>
 

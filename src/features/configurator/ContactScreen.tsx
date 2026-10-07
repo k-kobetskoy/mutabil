@@ -108,7 +108,9 @@ export function ContactScreen() {
       contact,
       addresses: { ...(p.addresses.from ? { from: p.addresses.from } : {}), ...(p.addresses.to ? { to: p.addresses.to } : {}) },
       ...(comment ? { comment: comment.slice(0, 2000) } : {}),
-      ...(media.length ? { media: media.slice(0, 30).map((m) => ({ id: m.id, kind: m.kind, ...(m.annotation ? { annotation: m.annotation } : {}) })) } : {}),
+      ...(media.length
+        ? { media: media.slice(0, 30).map((m) => ({ id: m.id, kind: m.kind, ...(m.annotation ? { annotation: m.annotation } : {}) })) }
+        : {}),
       consents: { estimateTerms: true, marketing: p.marketing },
       locale,
     };
@@ -126,7 +128,10 @@ export function ContactScreen() {
 
   return (
     <main id="main" className="mx-auto max-w-6xl px-4 pt-6 pb-20 sm:px-6">
-      <Link href="/estimate/result" className="inline-flex min-h-11 items-center gap-2 font-[family-name:var(--font-display)] font-bold text-ink no-underline">
+      <Link
+        href="/estimate/result"
+        className="inline-flex min-h-11 items-center gap-2 font-[family-name:var(--font-display)] font-bold text-ink no-underline"
+      >
         <ArrowLeft size={18} aria-hidden /> {t('flow.toResult')}
       </Link>
       <div className="mt-4 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1fr)_400px] lg:items-start">
@@ -150,10 +155,37 @@ export function ContactScreen() {
               void submit();
             }}
           >
-            <TextInput label={t('contact.name')} value={c.name} onChange={(name) => p.setContact({ name })} autoComplete="name" isRequired isInvalid={!!errors.name} errorMessage={errors.name && t(errors.name)} />
+            <TextInput
+              label={t('contact.name')}
+              value={c.name}
+              onChange={(name) => p.setContact({ name })}
+              autoComplete="name"
+              isRequired
+              isInvalid={!!errors.name}
+              errorMessage={errors.name && t(errors.name)}
+            />
+            <p className="-mb-3 text-[0.9rem] text-ink-muted">{t('contact.contactHint')}</p>
             <div className="grid gap-6 sm:grid-cols-2">
-              <TextInput label={t('contact.phone')} type="tel" inputMode="tel" value={c.phone} onChange={(phone) => p.setContact({ phone })} autoComplete="tel" isInvalid={!!errors.phone} errorMessage={errors.phone && t(errors.phone)} />
-              <TextInput label={t('contact.email')} type="email" inputMode="email" value={c.email} onChange={(email) => p.setContact({ email })} autoComplete="email" isInvalid={!!errors.email} errorMessage={errors.email && t(errors.email)} />
+              <TextInput
+                label={t('contact.phone')}
+                type="tel"
+                inputMode="tel"
+                value={c.phone}
+                onChange={(phone) => p.setContact({ phone })}
+                autoComplete="tel"
+                isInvalid={!!errors.phone}
+                errorMessage={errors.phone && t(errors.phone)}
+              />
+              <TextInput
+                label={t('contact.email')}
+                type="email"
+                inputMode="email"
+                value={c.email}
+                onChange={(email) => p.setContact({ email })}
+                autoComplete="email"
+                isInvalid={!!errors.email}
+                errorMessage={errors.email && t(errors.email)}
+              />
             </div>
             <ChoiceTiles
               label={t('contact.channel')}
@@ -163,11 +195,18 @@ export function ContactScreen() {
               size="sm"
               tiles={(['phone', 'whatsapp', 'email'] as const).map((v) => ({ value: v, label: t(`contact.channels.${v}`) }))}
             />
-            <TextInput label={t('contact.comment')} value={p.comment} onChange={p.setComment} multiline description={t('contact.commentHint')} />
+            <TextInput
+              label={t('contact.comment')}
+              value={p.comment}
+              onChange={p.setComment}
+              multiline
+              description={t('contact.commentHint')}
+            />
             <div className="flex flex-col gap-4 rounded-[var(--radius-panel)] border border-line bg-paper p-5">
               <Checkbox isSelected={p.estimateTerms} onChange={(v) => p.setConsent('estimateTerms', v)} isInvalid={!!errors.terms}>
                 {t('contact.estimateTerms')}
               </Checkbox>
+              {errors.terms && <p className="-mt-2 text-[0.92rem] font-semibold text-error">{t(errors.terms)}</p>}
               <Checkbox isSelected={p.marketing} onChange={(v) => p.setConsent('marketing', v)}>
                 {t('contact.marketing')} <span className="text-ink-muted">({t('common.optional')})</span>
               </Checkbox>
@@ -190,7 +229,8 @@ export function ContactScreen() {
           <BoardingPass order={order} est={est} compact />
           {media.length > 0 && (
             <p className="text-[0.9rem] text-ink-muted">
-              {t('media.photos', { count: media.filter((m) => m.kind === 'photo').length })} · {t('media.videos', { count: media.filter((m) => m.kind === 'video').length })}
+              {t('media.photos', { count: media.filter((m) => m.kind === 'photo').length })} ·{' '}
+              {t('media.videos', { count: media.filter((m) => m.kind === 'video').length })}
             </p>
           )}
           {/* the promises again, at the moment the phone number is handed over */}

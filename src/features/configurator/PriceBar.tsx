@@ -8,7 +8,10 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { ChevronUp } from 'lucide-react';
 import type { Estimate } from '@/contract/estimate';
-import { leiRange, num, signedLei, type AppLocale } from '@/lib/format';
+import { getConfig } from '@/config';
+import { guaranteedMax } from '@/domain/cap';
+import { lei, leiRange, num, signedLei, type AppLocale } from '@/lib/format';
+import { useOrderStore } from '@/state/order-store';
 import { Sheet } from '@/ui/Sheet';
 import { cx } from '@/ui/cx';
 import { Breakdown } from './Breakdown';
@@ -54,6 +57,8 @@ export function PriceBar({ est }: { est: Estimate | null }) {
   const locale = useLocale() as AppLocale;
   const [open, setOpen] = useState(false);
   const delta = usePriceDelta(est);
+  const order = useOrderStore((s) => s.order);
+  const max = est ? guaranteedMax(est, order, getConfig()) : null;
 
   return (
     <>
@@ -66,17 +71,30 @@ export function PriceBar({ est }: { est: Estimate | null }) {
               className="flex min-h-12 flex-1 cursor-pointer items-center justify-between gap-3 text-left"
               aria-haspopup="dialog"
             >
-              <span className="flex flex-col">
-                <span className="label-cap text-on-night-muted">
-                  {t('flow.priceLabel')} · {t('common.vatIncluded')}
+              {max !== null ? (
+                // the same headline as the pass (D41): the promise first, the low end under it
+                <span className="flex flex-col">
+                  <span className="label-cap text-amber">{t('estimate.passMaxLabel')}</span>
+                  <span className="tabular self-start rounded bg-amber px-1.5 font-[family-name:var(--font-display)] text-[1.2rem] leading-tight font-extrabold text-night">
+                    {lei(max, locale)}
+                  </span>
+                  <span className="text-[0.78rem] text-on-night-muted">
+                    {t('estimate.passMaxFrom', { low: lei(est.price.low, locale) })}
+                  </span>
                 </span>
-                <span className="tabular font-[family-name:var(--font-display)] text-[1.2rem] leading-tight font-extrabold text-white">
-                  {leiRange(est.price.low, est.price.high, locale)}
+              ) : (
+                <span className="flex flex-col">
+                  <span className="label-cap text-on-night-muted">
+                    {t('flow.priceLabel')} · {t('common.vatIncluded')}
+                  </span>
+                  <span className="tabular font-[family-name:var(--font-display)] text-[1.2rem] leading-tight font-extrabold text-white">
+                    {leiRange(est.price.low, est.price.high, locale)}
+                  </span>
+                  <span className="text-[0.78rem] text-on-night-muted">
+                    {t('flow.priceMeta', { crew: est.crew.size, window: num(est.time.windowH, locale) })}
+                  </span>
                 </span>
-                <span className="text-[0.78rem] text-on-night-muted">
-                  {t('flow.priceMeta', { crew: est.crew.size, window: num(est.time.windowH, locale) })}
-                </span>
-              </span>
+              )}
               <span className="flex items-center gap-2">
                 <DeltaChip delta={delta} onNight />
                 <span className="flex items-center gap-1 text-[0.85rem] font-semibold text-white">

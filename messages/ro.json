@@ -75,7 +75,7 @@
     "faq": {
       "title": "Ce se întâmplă dacă…",
       "q1": "…sunt mai multe lucruri decât am spus?",
-      "a1": "Șeful echipei îți arată ce s-a schimbat și cât costă, înainte să înceapă munca în plus. Fără acordul tău nu se adaugă nimic.",
+      "a1": "Dacă evaluarea găsește mai multe, îți spunem noul maxim înainte de mutare: poți renunța gratuit și îți returnăm vizita. În ziua mutării, șeful echipei îți arată orice schimbare și cât costă înainte să înceapă. Fără acordul tău nu se adaugă nimic.",
       "q2": "…liftul e mai mic sau nu merge?",
       "a2": "Dacă ai ales „Nu știu”, am calculat deja cu un lift mic. Dacă liftul nu merge deloc, urcăm pe scări după aceleași reguli din estimare.",
       "q3": "…ceva nu încape în lift?",
@@ -156,7 +156,8 @@
     },
     "never": {
       "title": "Ce nu se întâmplă niciodată"
-    }
+    },
+    "sampleNote": "Exemplu orientativ: prețul depinde de câte lucruri ai și se precizează la evaluare."
   },
   "start": {
     "title": "Cum vrei să calculezi?",
@@ -227,7 +228,7 @@
       "title": "Ce transportăm?",
       "mode": "Cum vrei să numărăm lucrurile?",
       "modeList": "Aleg obiectele mari",
-      "modeListText": "Cea mai precisă estimare",
+      "modeListText": "Cea mai precisă: vezi și prețul maxim garantat",
       "modePreset": "După numărul de camere",
       "modePresetText": "Rapid, interval mai larg",
       "modeSurvey": "Le numărăm la evaluare",
@@ -298,7 +299,8 @@
       "disabledByCrates": "Cu lăzi reutilizabile, specialistul aduce lăzile și evaluează în aceeași vizită.",
       "disabledByAtSurvey": "Lucrurile se numără la evaluare, așa că e nevoie de una.",
       "onlyOnsite": "Cu lăzi reutilizabile, evaluarea e o vizită: specialistul aduce lăzile și vede ce mutăm în aceeași vizită.",
-      "changeCrates": "Schimbă lăzile"
+      "changeCrates": "Schimbă lăzile",
+      "titleVisit": "Evaluarea: vizita specialistului"
     },
     "when": {
       "title": "Când?",
@@ -537,9 +539,12 @@
     "maxIfConfirmed": "Dacă evaluarea confirmă ce ai descris, nu plătești peste {max}.",
     "baseTotal": "Estimarea de bază",
     "rangeNote": "Intervalul {range} ține cont de ce nu am văzut încă: volumul real și răspunsurile „Nu știu”.",
-    "passMax": "Cel mult {max}, dacă evaluarea confirmă",
     "passMoving": "Mutăm",
-    "rangeVsMax": "Intervalul de pe bilet e până vedem lucrurile. Dacă evaluarea găsește mai multe, stabilim un nou maxim înainte de mutare, doar cu acordul tău."
+    "rangeVsMax": "Dacă la evaluare găsim mai multe lucruri decât ai descris, îți spunem noul maxim înainte de mutare. Poți renunța gratuit, iar cei {fee} lei pentru vizită îi returnăm.",
+    "passMaxLabel": "Maxim garantat · cu TVA",
+    "passMaxFrom": "de la {low} · dacă evaluarea confirmă lista ta",
+    "passNoMax": "Prețul maxim garantat îl afli după evaluare.",
+    "passListItems": "Listează obiectele mari ca să-l vezi acum"
   },
   "priceBar": {
     "noPrice": "Prețul apare după primul pas",
@@ -572,7 +577,8 @@
     "successTasks": "Ce verificăm înainte de prețul maxim garantat:",
     "newEstimate": "Estimare nouă",
     "summary": "Ce trimiți",
-    "failed": "Nu am putut trimite cererea. Încearcă din nou peste un minut."
+    "failed": "Nu am putut trimite cererea. Încearcă din nou peste un minut.",
+    "contactHint": "Telefon sau e-mail: măcar unul."
   },
   "media": {
     "add": "Adaugă fotografii sau video",
@@ -660,7 +666,8 @@
     "invalid": "Valoare nevalidă",
     "visit": {
       "size": "Alege ce mutăm",
-      "datePast": "Alege o dată de azi încolo"
+      "datePast": "Alege o dată de azi încolo",
+      "terms": "Bifează că ai înțeles că prețul maxim se stabilește la vizită"
     }
   },
   "lines": {
@@ -874,7 +881,8 @@
     "promise2": "Nu reținem lucrurile pentru o plată în plus.",
     "promise3": "Nu negociem la ușă: prețul e cel calculat după aceste reguli.",
     "note": "Toate prețurile sunt în lei și includ TVA 21 %. Valorile sunt în curs de verificare.",
-    "cta": "Calculează prețul"
+    "cta": "Calculează prețul",
+    "range4": "Dacă la evaluare găsim mai multe lucruri decât ai descris, îți spunem noul maxim înainte de mutare. Poți renunța gratuit, iar cei {fee} lei pentru vizită îi returnăm."
   },
   "visit": {
     "metaTitle": "Programează vizita",

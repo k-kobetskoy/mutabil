@@ -9,6 +9,7 @@ import type { Estimate } from '@/contract/estimate';
 import type { OrderInput } from '@/contract/order';
 import { getConfig } from '@/config';
 import { guaranteedMax } from '@/domain/cap';
+import { Link } from '@/i18n/navigation';
 import { addClock, lei, leiRange, longDate, num, type AppLocale } from '@/lib/format';
 import { VanSketch } from '@/ui/Sketch';
 import { cx } from '@/ui/cx';
@@ -36,6 +37,8 @@ export function BoardingPass({
   const cfg = getConfig();
   const slot = cfg.app.slots.find((s) => s.id === (order.schedule?.slot ?? 'morning'))!;
   const max = guaranteedMax(est, order, cfg);
+  const leadWithMax = max !== null && variant === 'range';
+  const itemsStep = order.taskType === 'items' ? undefined : cfg.steps.steps.find((s) => s.id === 'items');
   const preset = cfg.catalog.presets.find((p) => p.id === order.size?.presetId);
   const moving = preset ? preset.name[locale] : order.taskType ? t(`fields.taskType.${order.taskType}`) : null;
   const start = slot.start;
@@ -133,17 +136,39 @@ export function BoardingPass({
             <dd className="text-right font-semibold">{surveyName}</dd>
           </dl>
           <div className="mt-auto">
-            <div className="label-cap text-on-night-muted">{t('estimate.passTotal')}</div>
-            <div className="tabular price-digits font-[family-name:var(--font-display)] text-[1.9rem] leading-tight font-extrabold">
-              {variant === 'conditional' ? lei(est.price.base, locale) : leiRange(est.price.low, est.price.high, locale)}
-            </div>
-            {/* amber = promise: the concrete ceiling, right under the range it bounds (D38) */}
-            {max !== null && (
-              <p className="tabular mt-1.5 inline-block rounded-md bg-amber px-2 py-0.5 text-[0.9rem] font-bold text-night">
-                {t('estimate.passMax', { max: lei(max, locale) })}
-              </p>
+            {leadWithMax ? (
+              // D41: the promise is the headline, in amber like the guaranteed time; the range's top is
+              // not shown, so there is no "maximum below the worst case"
+              <>
+                <div className="label-cap text-amber">{t('estimate.passMaxLabel')}</div>
+                <div className="tabular price-digits mt-0.5 inline-block rounded-md bg-amber px-2 font-[family-name:var(--font-display)] text-[1.9rem] leading-tight font-extrabold text-night">
+                  {lei(max, locale)}
+                </div>
+                <p className="mt-1 text-[0.85rem] text-on-night-muted">{t('estimate.passMaxFrom', { low: lei(est.price.low, locale) })}</p>
+              </>
+            ) : (
+              <>
+                <div className="label-cap text-on-night-muted">{t('estimate.passTotal')}</div>
+                <div className="tabular price-digits font-[family-name:var(--font-display)] text-[1.9rem] leading-tight font-extrabold">
+                  {variant === 'conditional' ? lei(est.price.base, locale) : leiRange(est.price.low, est.price.high, locale)}
+                </div>
+                {/* counted by rooms with a survey chosen: say where the maximum comes from and how to see it now */}
+                {!sample && max === null && method && method !== 'none' && (
+                  <p className="mt-1 text-[0.85rem] text-on-night-muted">
+                    {t('estimate.passNoMax')}{' '}
+                    {itemsStep && (
+                      <Link
+                        href={{ pathname: '/estimate/[step]', params: { step: itemsStep.slug[locale] } }}
+                        className="font-semibold text-white underline decoration-white/45 underline-offset-4"
+                      >
+                        {t('estimate.passListItems')}
+                      </Link>
+                    )}
+                  </p>
+                )}
+              </>
             )}
-            <PriceExplainer est={est} onNight />
+            <PriceExplainer est={est} withMax={leadWithMax} onNight />
           </div>
         </div>
       </div>

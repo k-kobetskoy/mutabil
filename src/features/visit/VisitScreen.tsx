@@ -80,7 +80,7 @@ export function VisitScreen() {
     if (!c.name?.trim()) e.name = 'validation.contact.name';
     if (!c.phone?.trim() && !c.email?.trim()) e.phone = 'validation.contact.phoneOrEmail';
     if (c.email?.trim() && !EMAIL.test(c.email.trim())) e.email = 'validation.contact.email';
-    if (!terms) e.terms = 'validation.terms';
+    if (!terms) e.terms = 'validation.visit.terms';
     return e;
   };
 
@@ -204,6 +204,7 @@ export function VisitScreen() {
               isInvalid={!!errors.name}
               errorMessage={errors.name && t(errors.name)}
             />
+            <p className="-mb-3 text-[0.9rem] text-ink-muted">{t('contact.contactHint')}</p>
             <div className="grid gap-6 sm:grid-cols-2">
               <TextInput
                 label={t('contact.phone')}
@@ -231,6 +232,7 @@ export function VisitScreen() {
               <Checkbox isSelected={terms} onChange={setTerms} isInvalid={!!errors.terms}>
                 {t('visit.terms')}
               </Checkbox>
+              {errors.terms && <p className="-mt-2 text-[0.92rem] font-semibold text-error">{t(errors.terms)}</p>}
               <Checkbox isSelected={p.marketing} onChange={(v) => p.setConsent('marketing', v)}>
                 {t('contact.marketing')} <span className="text-ink-muted">({t('common.optional')})</span>
               </Checkbox>
