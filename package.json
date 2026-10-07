@@ -10,6 +10,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "e2e": "playwright test",
     "format": "prettier --write .",
     "contract:gen": "tsx scripts/gen-contract.ts",
     "contract:check": "tsx scripts/gen-contract.ts --check",

@@ -5,6 +5,9 @@
 import type { ReactNode } from 'react';
 import { cx } from './cx';
 
+/** A titled drawing is an image; an untitled one sits next to its own text and is decoration. */
+const imgProps = (title: string) => (title ? { role: 'img' as const, 'aria-label': title } : { 'aria-hidden': true as const });
+
 const S = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round' } as const;
 
 function Frame({
@@ -19,8 +22,8 @@ function Frame({
   title: string;
 }) {
   return (
-    <svg viewBox={viewBox} role="img" aria-label={title} className={cx('h-auto w-full', className)}>
-      <title>{title}</title>
+    <svg viewBox={viewBox} {...imgProps(title)} className={cx('h-auto w-full', className)}>
+      {title && <title>{title}</title>}
       {children}
     </svg>
   );
@@ -174,8 +177,8 @@ export function DollySketch({ title, className }: { title: string; className?: s
 
 export function VanSketch({ className, title }: { className?: string; title: string }) {
   return (
-    <svg viewBox="0 0 48 24" role="img" aria-label={title} className={className}>
-      <title>{title}</title>
+    <svg viewBox="0 0 48 24" {...imgProps(title)} className={className}>
+      {title && <title>{title}</title>}
       <path d="M2 18 V6 h28 v12 M30 9 h8 l6 6 v3 h-14" {...S} strokeWidth={1.6} />
       <circle cx="11" cy="19" r="3" {...S} strokeWidth={1.6} />
       <circle cx="36" cy="19" r="3" {...S} strokeWidth={1.6} />
@@ -203,8 +206,8 @@ export function LiftPlan({
   const x = (100 - w) / 2;
   const y = 6;
   return (
-    <svg viewBox="0 0 100 108" role="img" aria-label={title} className={cx('h-auto w-full', className)}>
-      <title>{title}</title>
+    <svg viewBox="0 0 100 108" {...imgProps(title)} className={cx('h-auto w-full', className)}>
+      {title && <title>{title}</title>}
       {kind === 'none' ? (
         <g>
           {[0, 1, 2, 3, 4, 5].map((i) => (
