@@ -117,27 +117,31 @@ export function QuickSearch() {
     else router.push('/estimate/result');
   };
 
+  // One column per end: the floor, then the lift under it at full width. Side by side, the lift
+  // select pushed into the other end's column and out of the panel (owner's screenshots, EN).
   const endFields = (end: 'from' | 'to', state: EndState, set: (s: EndState) => void) => (
-    <div className="grid grid-cols-[auto_1fr] items-end gap-3">
-      <Stepper
-        onNight
-        label={end === 'from' ? t('landing.floorFrom') : t('landing.floorTo')}
-        value={state.floor}
-        min={0}
-        max={30}
-        onChange={(floor) => set({ ...state, floor })}
-      />
-      {(state.floor ?? 0) > 0 ? (
+    <div className="flex min-w-0 flex-col gap-3">
+      <div className="flex items-end gap-3">
+        <Stepper
+          onNight
+          label={end === 'from' ? t('landing.floorFrom') : t('landing.floorTo')}
+          value={state.floor}
+          min={0}
+          max={30}
+          onChange={(floor) => set({ ...state, floor })}
+        />
+        {(state.floor ?? 0) === 0 && <p className="pb-3 text-[0.85rem] text-on-night-muted">{t('steps.access.floorHint')}</p>}
+      </div>
+      {(state.floor ?? 0) > 0 && (
         <SelectField
           onNight
+          className="min-w-0"
           label={end === 'from' ? t('landing.liftFrom') : t('landing.liftTo')}
           value={state.elevator}
           onChange={(v) => set({ ...state, elevator: v as ElevatorChoice })}
           groups={liftGroups}
           placeholder={t('steps.access.zonePlaceholder')}
         />
-      ) : (
-        <p className="pb-3 text-[0.85rem] text-on-night-muted">{t('steps.access.floorHint')}</p>
       )}
     </div>
   );
@@ -201,7 +205,7 @@ export function QuickSearch() {
             isInvalid={tried && !what}
             errorMessage={t('validation.taskType.required')}
           />
-          <fieldset className="grid gap-4 border-t border-white/15 pt-4 sm:grid-cols-2">
+          <fieldset className="grid gap-4 border-t border-white/15 pt-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
             <legend className="sr-only">{t('landing.floors')}</legend>
             {endFields('from', from, setFrom)}
             {endFields('to', to, setTo)}

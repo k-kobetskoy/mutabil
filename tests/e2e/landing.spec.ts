@@ -51,6 +51,23 @@ test.describe('landing (D30–D35)', () => {
     await expect(page).toHaveURL(/\/ro$/);
   });
 
+  test('floors and lifts stay inside the search panel (owner screenshots, EN)', async ({ page }) => {
+    await page.goto('/en');
+    await page.getByRole('textbox', { name: 'Floor at departure' }).fill('1');
+    await page.getByRole('textbox', { name: 'Floor at arrival' }).fill('4');
+    await page.getByRole('textbox', { name: 'Floor at arrival' }).blur();
+    for (const label of ['Lift at departure', 'Lift at arrival']) {
+      await page.getByRole('button', { name: new RegExp(`${label}$`) }).click();
+      await page.getByRole('option', { name: /^Large/ }).click();
+    }
+    const panel = page.locator('section[aria-labelledby="search-title"]');
+    const outside = await panel.evaluate((el) => {
+      const edge = el.getBoundingClientRect().right;
+      return [...el.querySelectorAll('*')].filter((n) => n.getBoundingClientRect().right > edge + 1).length;
+    });
+    expect(outside).toBe(0);
+  });
+
   test('English is there too', async ({ page }) => {
     await page.goto('/en');
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Book your move like a flight');

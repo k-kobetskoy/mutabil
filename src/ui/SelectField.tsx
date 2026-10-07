@@ -1,6 +1,17 @@
 'use client';
 import type { ReactNode } from 'react';
-import { Button, FieldError, Header, Label, ListBox, ListBoxItem, ListBoxSection, Popover, Select, SelectValue } from 'react-aria-components';
+import {
+  Button,
+  FieldError,
+  Header,
+  Label,
+  ListBox,
+  ListBoxItem,
+  ListBoxSection,
+  Popover,
+  Select,
+  SelectValue,
+} from 'react-aria-components';
 import { ChevronDown } from 'lucide-react';
 import { cx } from './cx';
 
@@ -42,10 +53,12 @@ export function SelectField({
       <Button
         className={cx(
           'flex min-h-12 w-full cursor-pointer items-center justify-between gap-2 rounded-[var(--radius-field)] border px-4 text-left transition-colors',
-          onNight ? 'border-white/25 bg-white/8 text-white hover:border-white/50' : 'border-line bg-paper text-ink hover:border-line-strong',
+          onNight
+            ? 'border-white/25 bg-white/8 text-white hover:border-white/50'
+            : 'border-line bg-paper text-ink hover:border-line-strong',
         )}
       >
-        <SelectValue className="truncate font-[family-name:var(--font-display)] text-[1.02rem] font-semibold data-[placeholder]:font-normal data-[placeholder]:opacity-70">
+        <SelectValue className="min-w-0 truncate font-[family-name:var(--font-display)] text-[1.02rem] font-semibold data-[placeholder]:font-normal data-[placeholder]:opacity-70">
           {({ selectedText, isPlaceholder, defaultChildren }) => (isPlaceholder ? defaultChildren : selectedText)}
         </SelectValue>
         <ChevronDown size={18} aria-hidden className="shrink-0 opacity-70" />
