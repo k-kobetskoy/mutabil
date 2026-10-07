@@ -478,7 +478,6 @@
     "timeLead": "Estimăm ≈ {expected} h. Garantăm finalul în cel mult {window} h.",
     "vehicleWhy": "De ce această dubă",
     "crewAlternatives": "Altă echipă",
-    "crewAlt": "{n} oameni · până la {window} h · {total}",
     "crewChosen": "aleasă",
     "crewPick": "Alege",
     "warnings": "De știut",
@@ -486,10 +485,7 @@
     "scenariosTitle": "Ce poate schimba prețul",
     "scenarioIf": "dacă e {value}",
     "worst": "Cel mai mult, dacă totul e în cel mai rău caz: {worst}",
-    "variantRange": "Interval",
-    "variantConditional": "Sumă + condiții",
-    "variantLabel": "Cum afișăm prețul",
-    "timeline": "Ce urmează",
+    "timeline": "Calendarul mutării",
     "timelineKind": {
       "survey": "Evaluarea",
       "cratesDelivery": "Aducem lăzile (și evaluăm)",
@@ -499,7 +495,7 @@
     },
     "share": "Trimite estimarea cuiva",
     "shareCopied": "Link copiat. Linkul nu conține date personale.",
-    "send": "Trimite cererea (gratuit, fără obligații)",
+    "send": "Trimite cererea",
     "editAnswers": "Schimbă răspunsurile",
     "refine": "Fă estimarea exactă · ~3 min",
     "refineText": "Răspunsurile tale sunt deja completate.",
@@ -519,7 +515,20 @@
     "passSurveyOnsite": "vizită",
     "passSurveyRemote": "foto și video",
     "passSurveyNone": "fără, interval",
-    "passSurveyUnset": "de ales"
+    "passSurveyUnset": "de ales",
+    "sendNote": "Gratuit și fără obligații.",
+    "crewWindow": "gata în cel mult {window} h",
+    "timeHow": "Cum am calculat timpul",
+    "next": {
+      "title": "Ce urmează după ce trimiți",
+      "contact": "Te contactăm ca să confirmăm detaliile.",
+      "onsite": "Specialistul vine la tine la ora stabilită și vede ce mutăm.",
+      "remote": "Ne trimiți fotografii și video, iar evaluatorul le verifică.",
+      "none": "Fără evaluare, rămâne intervalul de mai sus.",
+      "fixed": "Primești prețul fix și confirmi data.",
+      "free": "Nu plătești nimic acum."
+    },
+    "priceFixTitle": "Cum devine prețul fix"
   },
   "priceBar": {
     "noPrice": "Prețul apare după primul pas",
@@ -777,7 +786,7 @@
     "special": "Lucruri speciale",
     "protection": "Protecție completă",
     "survey": "Evaluare",
-    "surveyCredit": "Evaluare scăzută",
+    "surveyCredit": "Vizita se scade din comandă",
     "minimumOrder": "Comandă minimă"
   },
   "flow": {

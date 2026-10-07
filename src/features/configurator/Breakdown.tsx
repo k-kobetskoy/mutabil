@@ -20,12 +20,20 @@ export function Breakdown({ est, editable = true }: { est: Estimate; editable?: 
       <ul className="divide-y divide-line">
         {est.lines.map((l) => {
           const step = steps.find((s) => s.id === l.step);
+          const label = t(`lineLabel.${l.id}`);
+          // the formula line starts with the label ("Transport · van 12 m³ · …"): show only the rest
+          const formula = explain(l.explain);
+          const sub = formula === label ? '' : formula.startsWith(`${label} · `) ? formula.slice(label.length + 3) : formula;
+          // "Why?" only where there is a real reason to read, not just an edit link
+          const why = !!l.details?.length || l.id === 'transport' || l.id === 'crew';
           return (
             <li key={l.id} className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 py-3">
-              <span className="font-[family-name:var(--font-display)] font-bold">{t(`lineLabel.${l.id}`)}</span>
-              <span className="tabular text-right font-[family-name:var(--font-display)] text-[1.05rem] font-extrabold">{lei(l.amount, locale)}</span>
-              <span className="col-span-2 text-[0.9rem] text-ink-muted">{explain(l.explain)}</span>
-              {(l.details?.length || (editable && step)) && (
+              <span className="font-[family-name:var(--font-display)] font-bold">{label}</span>
+              <span className="tabular text-right font-[family-name:var(--font-display)] text-[1.05rem] font-extrabold">
+                {lei(l.amount, locale)}
+              </span>
+              {sub && <span className="col-span-2 text-[0.9rem] text-ink-muted first-letter:uppercase">{sub}</span>}
+              {why && (
                 <div className="col-span-2">
                   <Why label={t('common.why')}>
                     {l.details && (

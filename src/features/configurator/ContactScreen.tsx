@@ -10,7 +10,7 @@ import { ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { Form } from 'react-aria-components';
 import type { Contact, OrderRequest, SubmitResult } from '@/contract/api';
 import { Link } from '@/i18n/navigation';
-import { leiRange, type AppLocale } from '@/lib/format';
+import type { AppLocale } from '@/lib/format';
 import { ValidationProblem } from '@/services/types';
 import { useOrderStore } from '@/state/order-store';
 import { useMediaStore, usePrivateStore } from '@/state/private-store';
@@ -179,10 +179,10 @@ export function ContactScreen() {
           </Form>
         </div>
         <aside aria-label={t('contact.summary')} className="flex flex-col gap-3 lg:sticky lg:top-6">
-          <p className="label-cap text-ink-muted">{t('contact.summary')}</p>
+          <h2 className="text-[1.1rem] font-extrabold">{t('contact.summary')}</h2>
           <BoardingPass order={order} est={est} compact />
           <p className="text-[0.9rem] text-ink-muted">
-            {t('media.photos', { count: media.filter((m) => m.kind === 'photo').length })} · {t('media.videos', { count: media.filter((m) => m.kind === 'video').length })} · {leiRange(est.price.low, est.price.high, locale)}
+            {t('media.photos', { count: media.filter((m) => m.kind === 'photo').length })} · {t('media.videos', { count: media.filter((m) => m.kind === 'video').length })}
           </p>
         </aside>
       </div>

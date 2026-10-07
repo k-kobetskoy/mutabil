@@ -6,8 +6,7 @@
  */
 import { useEffect, useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { ArrowRight, Check, Info, PencilLine, Share2, TriangleAlert } from 'lucide-react';
-import { Radio, RadioGroup, Label } from 'react-aria-components';
+import { AlertCircle, ArrowRight, Check, Info, PencilLine, Share2 } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import type { Estimate, Scenario } from '@/contract/estimate';
 import type { OrderInput } from '@/contract/order';
@@ -16,26 +15,24 @@ import { applyRules } from '@/domain/rules/engine';
 import { decodeShare, encodeShare } from '@/domain/share';
 import { Link, useRouter } from '@/i18n/navigation';
 import { useExplain } from '@/lib/explain';
-import { addClock, lei, leiRange, longDate, num, signedLei, type AppLocale } from '@/lib/format';
+import { addClock, lei, longDate, num, signedLei, type AppLocale } from '@/lib/format';
 import { useOrderStore } from '@/state/order-store';
 import { Button } from '@/ui/Button';
 import { cx } from '@/ui/cx';
+import { Why } from '@/ui/Disclosure';
 import { BoardingPass } from './BoardingPass';
 import { Breakdown } from './Breakdown';
 import { useCfg, useEstimate } from './providers';
 
 type Variant = 'range' | 'conditional';
 
-/** ?pricing=range|conditional — the URL is the state, so a compared variant can be shared. */
-function useVariant(defaultVariant: Variant): [Variant, (v: Variant) => void] {
+/**
+ * ?pricing=range|conditional (D10-alt). The switch is no longer on screen (D37): the variant is
+ * compared through the link only, so clients never see an internal toggle.
+ */
+function useVariant(defaultVariant: Variant): Variant {
   const q = useSearchParams().get('pricing');
-  const v: Variant = q === 'range' || q === 'conditional' ? q : defaultVariant;
-  const set = (next: Variant) => {
-    const url = new URL(window.location.href);
-    url.searchParams.set('pricing', next);
-    window.history.replaceState(window.history.state, '', url);
-  };
-  return [v, set];
+  return q === 'range' || q === 'conditional' ? q : defaultVariant;
 }
 
 /** Applies a shared estimate from the URL fragment once the local draft has been restored. */
@@ -64,7 +61,7 @@ export function ResultScreen() {
   const order = useOrderStore((s) => s.order);
   const shared = useSharedLink();
   const est = useEstimate();
-  const [variant, setVariant] = useVariant(cfg.app.ui.pricingPresentation);
+  const variant = useVariant(cfg.app.ui.pricingPresentation);
 
   if (!hydrated) {
     return (
@@ -80,7 +77,10 @@ export function ResultScreen() {
         {shared === 'invalid' && <Notice tone="warn">{t('estimate.linkInvalid')}</Notice>}
         <h1 className="text-[2.2rem] font-extrabold">{t('estimate.title')}</h1>
         <p className="mt-3 text-ink-muted">{t('estimate.empty')}</p>
-        <Link href="/estimate" className="mt-6 inline-flex min-h-12 items-center gap-2 rounded-[var(--radius-field)] bg-route px-6 font-[family-name:var(--font-display)] font-bold text-white no-underline hover:bg-route-hover">
+        <Link
+          href="/estimate"
+          className="mt-6 inline-flex min-h-12 items-center gap-2 rounded-[var(--radius-field)] bg-route px-6 font-[family-name:var(--font-display)] font-bold text-white no-underline hover:bg-route-hover"
+        >
           {t('estimate.emptyCta')} <ArrowRight size={18} aria-hidden />
         </Link>
       </main>
@@ -91,14 +91,9 @@ export function ResultScreen() {
     <main id="main" className="mx-auto max-w-6xl px-4 pt-6 pb-32 sm:px-6 lg:pb-20">
       {shared === 'loaded' && <Notice tone="info">{t('estimate.linkLoaded')}</Notice>}
       {shared === 'invalid' && <Notice tone="warn">{t('estimate.linkInvalid')}</Notice>}
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="label-cap text-ink-muted">{t(order.mode === 'quick' ? 'flow.modeQuick' : 'flow.modeDetailed')}</p>
-          <h1 className="mt-1 text-[clamp(2rem,5vw,2.8rem)] leading-[1.05] font-extrabold">{t('estimate.title')}</h1>
-        </div>
-        <VariantSwitch value={variant} onChange={setVariant} />
-      </div>
+      <h1 className="text-[clamp(2rem,5vw,2.8rem)] leading-[1.05] font-extrabold">{t('estimate.title')}</h1>
 
+      {/* The one total is on the pass, with "what's in this price?" right under it (D37) */}
       <BoardingPass order={order} est={est} variant={variant} className="mt-6" />
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start">
@@ -111,6 +106,7 @@ export function ResultScreen() {
             </p>
           </Card>
           <TimeBlock est={est} order={order} />
+          <NextSteps order={order} />
         </div>
         <div className="flex flex-col gap-6">
           <Actions order={order} />
@@ -138,7 +134,10 @@ function useLocaleTyped() {
 
 function Notice({ tone, children }: { tone: 'info' | 'warn'; children: React.ReactNode }) {
   return (
-    <p role="status" className={cx('mb-5 flex items-start gap-2 rounded-lg px-4 py-3 text-[0.95rem]', tone === 'info' ? 'bg-route-soft' : 'bg-amber-soft')}>
+    <p
+      role="status"
+      className={cx('mb-5 flex items-start gap-2 rounded-lg px-4 py-3 text-[0.95rem]', tone === 'info' ? 'bg-route-soft' : 'bg-amber-soft')}
+    >
       <Info size={18} aria-hidden className="mt-0.5 shrink-0" />
       {children}
     </p>
@@ -151,32 +150,6 @@ function Card({ title, children, className }: { title: React.ReactNode; children
       <h2 className="mb-3 text-[1.2rem] font-extrabold">{title}</h2>
       {children}
     </section>
-  );
-}
-
-function VariantSwitch({ value, onChange }: { value: Variant; onChange: (v: Variant) => void }) {
-  const t = useTranslations();
-  return (
-    <RadioGroup value={value} onChange={(v) => onChange(v as Variant)} orientation="horizontal" className="flex flex-col gap-1">
-      <Label className="label-cap text-[0.65rem] text-ink-muted">{t('estimate.variantLabel')}</Label>
-      <div className="flex rounded-[var(--radius-field)] border border-line bg-paper p-1">
-        {(['range', 'conditional'] as const).map((v) => (
-          <Radio
-            key={v}
-            value={v}
-            className={({ isSelected, isFocusVisible }) =>
-              cx(
-                'min-h-10 cursor-pointer rounded-[calc(var(--radius-field)-3px)] px-3 py-2 font-[family-name:var(--font-display)] text-[0.88rem] font-bold',
-                isSelected ? 'bg-night text-white' : 'text-ink-muted hover:text-ink',
-                isFocusVisible && 'outline-3 outline-offset-2 outline-route',
-              )
-            }
-          >
-            {t(v === 'range' ? 'estimate.variantRange' : 'estimate.variantConditional')}
-          </Radio>
-        ))}
-      </div>
-    </RadioGroup>
   );
 }
 
@@ -201,35 +174,31 @@ function PriceBlock({ est, variant }: { est: Estimate; variant: Variant }) {
   const pct = est.price.afterSurvey ? Math.round(est.price.afterSurvey.capTolerance * 100) : 0;
   const value = (v: unknown) => explain({ key: 'estimate.scenarioIf', params: { value: v as string } });
 
+  // The total itself is on the pass; this card says how it can move and how it becomes fixed (D37)
   return (
     <section aria-labelledby="price-title" className="rounded-[var(--radius-panel)] border border-line bg-paper p-5 sm:p-6">
-      <h2 id="price-title" className="label-cap text-ink-muted">
-        {t('estimate.passTotal')}
+      <h2 id="price-title" className="text-[1.2rem] font-extrabold">
+        {t(est.scenarios.length || variant === 'conditional' ? 'estimate.scenariosTitle' : 'estimate.priceFixTitle')}
       </h2>
-      {variant === 'range' ? (
+      <p
+        className={cx(
+          'mt-3 rounded-[var(--radius-field)] px-4 py-3 text-[0.95rem]',
+          est.price.afterSurvey ? 'bg-amber-soft' : 'border border-line',
+        )}
+      >
+        {est.price.afterSurvey ? t('estimate.afterSurvey', { pct }) : t('estimate.noSurvey')}
+      </p>
+      <p className="mt-3 text-[0.92rem] text-ink-muted">{t('estimate.worst', { worst: lei(est.price.worst, locale) })}</p>
+      {variant === 'conditional' && (
         <>
-          <p className="tabular mt-1 font-[family-name:var(--font-display)] text-[clamp(2rem,6vw,2.8rem)] leading-tight font-extrabold">{leiRange(est.price.low, est.price.high, locale)}</p>
-          {est.price.reasons.length > 0 && (
-            <ul className="mt-3 flex flex-col gap-1.5 text-[0.95rem] text-ink-muted">
-              {est.price.reasons.map((r, i) => (
-                <li key={i} className="flex gap-2">
-                  <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-line-strong" />
-                  {explain(r)}
-                </li>
-              ))}
-            </ul>
-          )}
-        </>
-      ) : (
-        <>
-          <p className="tabular mt-1 font-[family-name:var(--font-display)] text-[clamp(2rem,6vw,2.8rem)] leading-tight font-extrabold">{lei(est.price.base, locale)}</p>
-          <p className="text-[0.95rem] text-ink-muted">{t('estimate.conditionalLead')}</p>
+          <p className="mt-4 text-[0.95rem] text-ink-muted">{t('estimate.conditionalLead')}</p>
           {conds.length > 0 && (
             <ul className="mt-3 divide-y divide-line border-y border-line">
               {conds.map((c) => (
                 <li key={c.path} className="flex items-baseline justify-between gap-4 py-2.5">
                   <span>
-                    <span className="font-semibold">{explain({ key: 'estimate.conditionPath', params: { path: c.path } })}</span> <span className="text-ink-muted">{value(c.value)}</span>
+                    <span className="font-semibold">{explain({ key: 'estimate.conditionPath', params: { path: c.path } })}</span>{' '}
+                    <span className="text-ink-muted">{value(c.value)}</span>
                   </span>
                   <span className="tabular font-[family-name:var(--font-display)] font-extrabold">{signedLei(c.delta, locale)}</span>
                 </li>
@@ -238,10 +207,6 @@ function PriceBlock({ est, variant }: { est: Estimate; variant: Variant }) {
           )}
         </>
       )}
-      <p className="mt-3 text-[0.92rem] text-ink-muted">{t('estimate.worst', { worst: lei(est.price.worst, locale) })}</p>
-      <p className={cx('mt-4 rounded-lg px-4 py-3 text-[0.95rem]', est.price.afterSurvey ? 'border-l-4 border-amber bg-amber-soft' : 'bg-cloud')}>
-        {est.price.afterSurvey ? t('estimate.afterSurvey', { pct }) : t('estimate.noSurvey')}
-      </p>
       {variant === 'range' && est.scenarios.length > 0 && <Scenarios est={est} />}
     </section>
   );
@@ -255,8 +220,7 @@ function Scenarios({ est }: { est: Estimate }) {
   const stepFor = (path: string) => steps.find((s) => s.id === (path.startsWith('survey') ? 'protection' : 'access'));
   return (
     <div className="mt-5 border-t border-line pt-4">
-      <h3 className="text-[1.05rem] font-extrabold">{t('estimate.scenariosTitle')}</h3>
-      <ul className="mt-2 flex flex-col gap-4">
+      <ul className="flex flex-col gap-4">
         {est.scenarios.map((s) => {
           const step = stepFor(s.path);
           return (
@@ -264,15 +228,25 @@ function Scenarios({ est }: { est: Estimate }) {
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <span className="font-semibold">{explain({ key: 'estimate.conditionPath', params: { path: s.path } })}</span>
                 {step && (
-                  <Link href={{ pathname: '/estimate/[step]', params: { step: step.slug[locale] } }} className="text-[0.88rem] font-semibold text-route underline">
+                  <Link
+                    href={{ pathname: '/estimate/[step]', params: { step: step.slug[locale] } }}
+                    className="text-[0.88rem] font-semibold text-route underline"
+                  >
                     {t('common.edit')}
                   </Link>
                 )}
               </div>
               <ul className="mt-1.5 flex flex-wrap gap-2">
                 {s.options.map((o) => (
-                  <li key={String(o.value)} className={cx('tabular rounded-full border px-3 py-1 text-[0.85rem]', o.value === s.assumed ? 'border-route bg-route-soft font-bold' : 'border-line')}>
-                    {explain({ key: 'estimate.optionValue', params: { value: o.value as string } })} · {o.delta === 0 ? lei(o.total, locale) : signedLei(o.delta, locale)}
+                  <li
+                    key={String(o.value)}
+                    className={cx(
+                      'tabular rounded-full border px-3 py-1 text-[0.85rem]',
+                      o.value === s.assumed ? 'border-route bg-route-soft font-bold' : 'border-line',
+                    )}
+                  >
+                    {explain({ key: 'estimate.optionValue', params: { value: o.value as string } })} ·{' '}
+                    {o.delta === 0 ? lei(o.total, locale) : signedLei(o.delta, locale)}
                   </li>
                 ))}
               </ul>
@@ -292,21 +266,22 @@ function TimeBlock({ est, order }: { est: Estimate; order: OrderInput }) {
   return (
     <Card title={t('estimate.time')}>
       <p>{t('estimate.timeLead', { expected: num(est.time.expectedH, locale), window: num(est.time.windowH, locale) })}</p>
-      <ul className="mt-3 flex flex-col gap-1.5 text-[0.92rem] text-ink-muted">
-        {est.time.breakdown.map((b, i) => (
-          <li key={i} className="flex gap-2">
-            <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-line-strong" />
-            {explain(b)}
-          </li>
-        ))}
-      </ul>
-      <h3 className="mt-5 text-[1.05rem] font-extrabold">{t('estimate.vehicleWhy')}</h3>
-      <p className="mt-1 text-[0.95rem]">{explain(est.vehicle.explain)}</p>
       {slot && (
-        <p className="mt-3 text-[0.92rem] text-ink-muted">
+        <p className="mt-1 text-[0.92rem] text-ink-muted">
           {t(`steps.when.slots.${slot.id}`)} · {slot.start}–{addClock(slot.start, est.time.windowH)}
         </p>
       )}
+      {/* the formulas stay available, but behind a question the client chooses to ask */}
+      <div className="mt-3 flex flex-col gap-1">
+        <Why label={t('estimate.timeHow')}>
+          <ul className="flex flex-col gap-1">
+            {est.time.breakdown.map((b, i) => (
+              <li key={i}>{explain(b)}</li>
+            ))}
+          </ul>
+        </Why>
+        <Why label={t('estimate.vehicleWhy')}>{explain(est.vehicle.explain)}</Why>
+      </div>
     </Card>
   );
 }
@@ -322,8 +297,18 @@ function CrewOptions({ est }: { est: Estimate }) {
         {est.crew.alternatives.map((a) => {
           const chosen = a.size === est.crew.size;
           return (
-            <li key={a.size} className={cx('flex items-center justify-between gap-3 rounded-[var(--radius-field)] border px-3 py-2', chosen ? 'border-route bg-route-soft' : 'border-line')}>
-              <span className="tabular text-[0.95rem]">{t('estimate.crewAlt', { n: a.size, window: num(a.windowH, locale), total: lei(a.total, locale) })}</span>
+            <li
+              key={a.size}
+              className={cx(
+                'grid grid-cols-[1fr_auto_auto] items-center gap-3 rounded-[var(--radius-field)] border px-3 py-2',
+                chosen ? 'border-route bg-route-soft' : 'border-line',
+              )}
+            >
+              <span className="flex flex-col leading-tight">
+                <span className="font-semibold">{t('estimate.passCrewValue', { n: a.size })}</span>
+                <span className="text-[0.85rem] text-ink-muted">{t('estimate.crewWindow', { window: num(a.windowH, locale) })}</span>
+              </span>
+              <span className="tabular font-[family-name:var(--font-display)] font-bold whitespace-nowrap">{lei(a.total, locale)}</span>
               {chosen ? (
                 <span className="flex items-center gap-1 text-[0.85rem] font-bold text-route">
                   <Check size={16} aria-hidden /> {t('estimate.crewChosen')}
@@ -345,13 +330,26 @@ function Timeline({ est }: { est: Estimate }) {
   const t = useTranslations();
   const locale = useLocaleTyped();
   if (!est.timeline.length) return null;
-  const when = (d: number, date?: string) => (date ? longDate(date, locale) : d === 0 ? t('estimate.moveDay') : d < 0 ? t('estimate.daysBefore', { n: -d }) : t('estimate.daysAfter', { n: d }));
+  const when = (d: number, date?: string) =>
+    date
+      ? longDate(date, locale)
+      : d === 0
+        ? t('estimate.moveDay')
+        : d < 0
+          ? t('estimate.daysBefore', { n: -d })
+          : t('estimate.daysAfter', { n: d });
   return (
     <Card title={t('estimate.timeline')}>
       <ol className="relative flex flex-col gap-4 border-l-2 border-dashed border-line-strong pl-5">
         {est.timeline.map((e, i) => (
           <li key={i} className="relative">
-            <span aria-hidden className={cx('absolute top-1.5 -left-[27px] size-3 rounded-full border-2 border-paper', e.kind === 'move' ? 'bg-route' : 'bg-line-strong')} />
+            <span
+              aria-hidden
+              className={cx(
+                'absolute top-1.5 -left-[27px] size-3 rounded-full border-2 border-paper',
+                e.kind === 'move' ? 'bg-route' : 'bg-line-strong',
+              )}
+            />
             <p className="font-semibold">{t(`estimate.timelineKind.${e.kind}`)}</p>
             <p className="text-[0.88rem] text-ink-muted">{when(e.dayOffset, e.date)}</p>
           </li>
@@ -370,7 +368,7 @@ function Checks({ est }: { est: Estimate }) {
       <ul className="flex flex-col gap-2.5 text-[0.95rem]">
         {est.warnings.map((w, i) => (
           <li key={`w${i}`} className="flex gap-2">
-            <TriangleAlert size={18} aria-hidden className="mt-0.5 shrink-0 text-amber" />
+            <AlertCircle size={18} aria-hidden className="mt-0.5 shrink-0 text-ink-muted" />
             {explain(w)}
           </li>
         ))}
@@ -413,10 +411,48 @@ function SendLink({ className }: { className?: string }) {
   return (
     <Link
       href="/estimate/contact"
-      className={cx('inline-flex min-h-14 items-center justify-center gap-2 rounded-[var(--radius-field)] bg-route px-6 font-[family-name:var(--font-display)] text-[1.02rem] font-bold text-white no-underline shadow-[var(--shadow-lift)] hover:bg-route-hover', className)}
+      className={cx(
+        'inline-flex min-h-14 flex-col items-center justify-center rounded-[var(--radius-field)] bg-route px-6 py-1.5 text-white no-underline shadow-[var(--shadow-lift)] hover:bg-route-hover',
+        className,
+      )}
     >
-      {t('estimate.send')} <ArrowRight size={20} aria-hidden />
+      <span className="inline-flex items-center gap-2 font-[family-name:var(--font-display)] text-[1.02rem] font-bold">
+        {t('estimate.send')} <ArrowRight size={20} aria-hidden />
+      </span>
+      <span className="text-[0.8rem] text-white/85">{t('estimate.sendNote')}</span>
     </Link>
+  );
+}
+
+/** The page ends on what happens next and the main action, not on warnings (D37, critique). */
+function NextSteps({ order }: { order: OrderInput }) {
+  const t = useTranslations();
+  const method = order.survey?.method ?? 'none';
+  const steps = [t('estimate.next.contact'), t(`estimate.next.${method}`), ...(method === 'none' ? [] : [t('estimate.next.fixed')])];
+  return (
+    <section aria-labelledby="next-title" className="rounded-[var(--radius-panel)] border border-line bg-paper p-5 sm:p-6">
+      <h2 id="next-title" className="text-[1.2rem] font-extrabold">
+        {t('estimate.next.title')}
+      </h2>
+      <ol className="mt-4 flex flex-col gap-3">
+        {steps.map((s, i) => (
+          <li key={s} className="grid grid-cols-[28px_1fr] items-baseline gap-3">
+            <span
+              aria-hidden
+              className="tabular grid size-7 place-items-center rounded-full bg-cloud font-[family-name:var(--font-display)] text-[0.9rem] font-bold"
+            >
+              {i + 1}
+            </span>
+            {s}
+          </li>
+        ))}
+      </ol>
+      <p className="mt-4 flex items-center gap-2 font-semibold">
+        <Check size={18} aria-hidden className="text-ok" />
+        {t('estimate.next.free')}
+      </p>
+      <SendLink className="mt-5 hidden w-full sm:w-auto lg:inline-flex" />
+    </section>
   );
 }
 

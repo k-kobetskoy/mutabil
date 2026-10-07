@@ -478,7 +478,6 @@
     "timeLead": "We estimate ≈ {expected} h. We guarantee to finish within {window} h.",
     "vehicleWhy": "Why this van",
     "crewAlternatives": "Another crew",
-    "crewAlt": "{n} movers · within {window} h · {total}",
     "crewChosen": "chosen",
     "crewPick": "Choose",
     "warnings": "Good to know",
@@ -486,10 +485,7 @@
     "scenariosTitle": "What can change the price",
     "scenarioIf": "if it's {value}",
     "worst": "At most, if everything is at its worst: {worst}",
-    "variantRange": "Range",
-    "variantConditional": "Sum + conditions",
-    "variantLabel": "How we show the price",
-    "timeline": "What happens next",
+    "timeline": "Moving calendar",
     "timelineKind": {
       "survey": "Survey",
       "cratesDelivery": "We bring the crates (and survey)",
@@ -499,7 +495,7 @@
     },
     "share": "Send this estimate to someone",
     "shareCopied": "Link copied. The link contains no personal data.",
-    "send": "Send request (free, no obligation)",
+    "send": "Send the request",
     "editAnswers": "Change answers",
     "refine": "Make the detailed estimate · ~3 min",
     "refineText": "Your answers are already filled in.",
@@ -519,7 +515,20 @@
     "passSurveyOnsite": "visit",
     "passSurveyRemote": "photos and video",
     "passSurveyNone": "none, range",
-    "passSurveyUnset": "to choose"
+    "passSurveyUnset": "to choose",
+    "sendNote": "Free, with no obligation.",
+    "crewWindow": "done within {window} h",
+    "timeHow": "How we calculated the time",
+    "next": {
+      "title": "What happens after you send it",
+      "contact": "We contact you to confirm the details.",
+      "onsite": "The specialist visits at the agreed time and sees what moves.",
+      "remote": "You send photos and video, and the estimator checks them.",
+      "none": "Without a survey, the range above stays.",
+      "fixed": "You get the fixed price and confirm the date.",
+      "free": "You pay nothing now."
+    },
+    "priceFixTitle": "How the price becomes fixed"
   },
   "priceBar": {
     "noPrice": "The price appears after the first step",
@@ -777,7 +786,7 @@
     "special": "Special things",
     "protection": "Complete protection",
     "survey": "Survey",
-    "surveyCredit": "Survey deducted",
+    "surveyCredit": "Visit deducted from the order",
     "minimumOrder": "Minimum order"
   },
   "flow": {
